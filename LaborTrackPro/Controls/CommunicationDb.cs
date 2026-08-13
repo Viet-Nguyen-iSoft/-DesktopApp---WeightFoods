@@ -9,7 +9,7 @@ using static HelperManager.EnumData;
 using static iSoft.Database.EnumData;
 using Connection = iSoft.Database.Models.Connection;
 using Department = iSoft.Database.Models.Department;
-using Machine = iSoft.Database.Models.Machine;
+using Station = iSoft.Database.Models.Station;
 namespace LaborTrackPro.Controls
 {
   public partial class AppCore
@@ -61,26 +61,6 @@ namespace LaborTrackPro.Controls
         {
           return new AppConfig();
         }
-      }
-    }
-
-    public async Task<Machine> GetMachineAsync()
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Machine, PostgresDbContext>(context);
-        var rs = await repo.GetAllAsync();
-        return rs?.FirstOrDefault(x => x.EnableFlag == true && x.DeletedFlag == false) ?? new Machine();
-      }
-    }
-
-    public async Task<List<SettingLabel>?> GetSettingLabelsAsync()
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<SettingLabel, PostgresDbContext>(context);
-        var rs = await repo.GetAllAsync();
-        return rs?.Where(x => x.DeletedFlag == false).ToList() ?? new List<SettingLabel>();
       }
     }
 
@@ -139,20 +119,20 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task AddRangeMaterialGroupAsync(List<MaterialGroup> materialGroups)
+    public async Task AddRangeMaterialGroupAsync(List<ProductGroup> materialGroups)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<MaterialGroup, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<ProductGroup, PostgresDbContext>(context);
         await repo.AddRangeAsync(materialGroups);
       }
     }
 
-    public async Task AddRangeMachinesAsync(List<Machine> machines)
+    public async Task AddRangeMachinesAsync(List<Station> machines)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Machine, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Station, PostgresDbContext>(context);
         await repo.AddRangeAsync(machines);
       }
     }
@@ -185,11 +165,11 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<MaterialGroup>> GetMaterialGroupsAsync(bool isContainDelete = false)
+    public async Task<List<ProductGroup>> GetMaterialGroupsAsync(bool isContainDelete = false)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new MaterialGroupRepository(context);
+        var repo = new ProductGroupRepository(context);
         return await repo.GetAllAsync(isContainDelete);
       }
     }
@@ -203,15 +183,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task RemoveSettingLabel(long id)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new SettingLabelRepository(context);
-        await repo.RemoveByIdAsync(id);
-      }
-    }
-    public async Task AddRangeMaterialsAsync(List<Material> materials)
+    public async Task AddRangeMaterialsAsync(List<Product> materials)
     {
       //using (var context = new PostgresDbContext())
       //{
@@ -238,441 +210,184 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task UpdateRangeMaterialsAsync(List<Material> materials)
+    public async Task UpdateRangeMaterialsAsync(List<Product> materials)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Material, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Product, PostgresDbContext>(context);
         await repo.UpdateRangeAsync(materials);
       }
     }
 
 
-    public async Task UpdateRangeMaterialsAsync(Material material, List<CategoryTare>? categoryTares)
+    public async Task UpdateRangeMaterialsAsync(Product material, List<CategoryTare>? categoryTares)
     {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<Material, PostgresDbContext>(context);
+      //try
+      //{
+      //  using (var context = new PostgresDbContext())
+      //  {
+      //    var repo = new iSoft.Database.Repositorys.GenericRepository<Product, PostgresDbContext>(context);
 
-          // Load entity cũ từ DB kèm quan hệ
-          var existingMaterial = await context.Materials
-              .Include(po => po.CategoryTares) // nếu có CategoryTares
-              .FirstOrDefaultAsync(po => po.Id == material.Id);
+      //    // Load entity cũ từ DB kèm quan hệ
+      //    var existingMaterial = await context.Materials
+      //        .Include(po => po.CategoryTares) // nếu có CategoryTares
+      //        .FirstOrDefaultAsync(po => po.Id == material.Id);
 
-          if (existingMaterial == null)
-            throw new Exception($"Material {material.Id} not found");
+      //    if (existingMaterial == null)
+      //      throw new Exception($"Material {material.Id} not found");
 
-          // Update các field cơ bản
-          existingMaterial.Group = material.Group;
-          existingMaterial.Name = material.Name;
-          existingMaterial.Grade = material.Grade;
-          existingMaterial.Code = material.Code;
-          existingMaterial.Unit = material.Unit;
-          existingMaterial.LOT = material.LOT;
-          existingMaterial.Supplier = material.Supplier;
-          existingMaterial.Supplier = material.Unit;
-          existingMaterial.ExpiredDate = material.ExpiredDate;
-          existingMaterial.Note = material.Note;
-          existingMaterial.LossPercent = material.LossPercent;
-          existingMaterial.CodeLoss = material.CodeLoss;
-          existingMaterial.WeightConversion = material.WeightConversion;
-          existingMaterial.UnitConversion = material.UnitConversion;
-          existingMaterial.StockTaking = material.StockTaking;
-          existingMaterial.TareFlag = material.TareFlag;
-          existingMaterial.ValueTare = material.ValueTare;
-          existingMaterial.Description = material.Description;
-          existingMaterial.TargetUnit = material.TargetUnit;
-          existingMaterial.PathImage = material.PathImage;
-          existingMaterial.MaterialType = material.MaterialType;
-          existingMaterial.DeletedFlag = material.DeletedFlag;
-          existingMaterial.CreatedAt = material.CreatedAt;
-          existingMaterial.UpdatedAt = material.UpdatedAt;
-          existingMaterial.IdSrc = material.IdSrc;
-          existingMaterial.MaterialGroupId = material.MaterialGroupId;
+      //    // Update các field cơ bản
+      //    existingMaterial.Group = material.Group;
+      //    existingMaterial.Name = material.Name;
+      //    existingMaterial.Grade = material.Grade;
+      //    existingMaterial.Code = material.Code;
+      //    existingMaterial.Unit = material.Unit;
+      //    existingMaterial.LOT = material.LOT;
+      //    existingMaterial.Supplier = material.Supplier;
+      //    existingMaterial.Supplier = material.Unit;
+      //    existingMaterial.ExpiredDate = material.ExpiredDate;
+      //    existingMaterial.Note = material.Note;
+      //    existingMaterial.LossPercent = material.LossPercent;
+      //    existingMaterial.CodeLoss = material.CodeLoss;
+      //    existingMaterial.WeightConversion = material.WeightConversion;
+      //    existingMaterial.UnitConversion = material.UnitConversion;
+      //    existingMaterial.StockTaking = material.StockTaking;
+      //    existingMaterial.TareFlag = material.TareFlag;
+      //    existingMaterial.ValueTare = material.ValueTare;
+      //    existingMaterial.Description = material.Description;
+      //    existingMaterial.TargetUnit = material.TargetUnit;
+      //    existingMaterial.PathImage = material.PathImage;
+      //    existingMaterial.MaterialType = material.MaterialType;
+      //    existingMaterial.DeletedFlag = material.DeletedFlag;
+      //    existingMaterial.CreatedAt = material.CreatedAt;
+      //    existingMaterial.UpdatedAt = material.UpdatedAt;
+      //    existingMaterial.IdSrc = material.IdSrc;
+      //    existingMaterial.MaterialGroupId = material.MaterialGroupId;
 
-          // ====== CategoryTares (N-N) ======
-          existingMaterial.CategoryTares.Clear();
-          if (categoryTares?.Count() > 0)
-          {
-            var ids = categoryTares.Select(m => m.Id).ToList();
-            var matsFromDb = await context.CategoryTares
-                .Where(m => ids.Contains(m.Id))
-                .ToListAsync();
+      //    // ====== CategoryTares (N-N) ======
+      //    existingMaterial.CategoryTares.Clear();
+      //    if (categoryTares?.Count() > 0)
+      //    {
+      //      var ids = categoryTares.Select(m => m.Id).ToList();
+      //      var matsFromDb = await context.CategoryTares
+      //          .Where(m => ids.Contains(m.Id))
+      //          .ToListAsync();
 
-            foreach (var m in matsFromDb)
-              existingMaterial.CategoryTares.Add(m);
-          }
+      //      foreach (var m in matsFromDb)
+      //        existingMaterial.CategoryTares.Add(m);
+      //    }
 
-          await repo.UpdateAsync(existingMaterial);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
+      //    await repo.UpdateAsync(existingMaterial);
+      //  }
+      //}
+      //catch (Exception)
+      //{
+      //  throw;
+      //}
     }
 
-    public async Task AddRangeProductionOrdersAsync(List<ProductionOrder> productionOrders)
-    {
-      try
-      {
-        foreach (var po in productionOrders)
-        {
-          using (var context = new PostgresDbContext())
-          {
-            foreach (var rm in po.Materials)
-              context.Entry(rm).State = EntityState.Unchanged;
-
-            foreach (var rm in po.Productions)
-              context.Entry(rm).State = EntityState.Unchanged;
-
-            foreach (var rm in po.MaterialSettings)
-              context.Entry(rm).State = EntityState.Unchanged;
-            await context.AddAsync(po);
-            await context.SaveChangesAsync();
-          }
-        }
-      }
-      catch (Exception ex)
-      {
-        throw;
-      }
-    }
+    
 
    
-    public async Task UpdateProductionOrdersAsync(ProductionOrder productionOrder, List<Material>? materials, List<Production> productions)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<ProductionOrder, PostgresDbContext>(context);
+   
 
-          // Load entity cũ từ DB kèm quan hệ
-          var existingOrder = await context.ProductionOrders
-              .Include(po => po.Materials) // nếu có Materials
-              .Include(po => po.Productions) // nếu có Productions
-              .FirstOrDefaultAsync(po => po.Id == productionOrder.Id);
-
-          if (existingOrder == null)
-            throw new Exception($"ProductionOrder {productionOrder.Id} not found");
-
-          // Update các field cơ bản
-          existingOrder.Name = productionOrder.Name;
-          existingOrder.Code = productionOrder.Code;
-          existingOrder.Description = productionOrder.Description;
-          existingOrder.ProductionOrderType = productionOrder.ProductionOrderType;
-          existingOrder.ProductionOrderCategory = productionOrder.ProductionOrderCategory;
-          existingOrder.EnumProcessing = productionOrder.EnumProcessing;
-          existingOrder.EffectiveFrom = productionOrder.EffectiveFrom;
-          existingOrder.EffectiveTo = productionOrder.EffectiveTo;
-          existingOrder.EffectiveFromExternal = productionOrder.EffectiveFromExternal;
-          existingOrder.EffectiveToExternal = productionOrder.EffectiveToExternal;
-          existingOrder.ApproveStatus = productionOrder.ApproveStatus;
-          existingOrder.WarningStatus = productionOrder.WarningStatus;
-          existingOrder.DeletedFlag = productionOrder.DeletedFlag;
-          existingOrder.CreatedAt = productionOrder.CreatedAt;
-          existingOrder.UpdatedAt = productionOrder.UpdatedAt;
-          existingOrder.IdSrc = productionOrder.IdSrc;
-
-          // ====== Materials (N-N) ======
-          existingOrder.Materials.Clear();
-          if (materials?.Count() > 0)
-          {
-            var ids = materials.Select(m => m.Id).ToList();
-            var matsFromDb = await context.Materials
-                .Where(m => ids.Contains(m.Id))
-                .ToListAsync();
-
-            foreach (var m in matsFromDb)
-              existingOrder.Materials.Add(m);
-          }
-
-          // ====== Productions (N-N) ======
-          existingOrder.Productions.Clear();
-          if (productions?.Count() > 0)
-          {
-            var ids = productions.Select(m => m.Id).ToList();
-            var matsFromDb = await context.Productions
-                .Where(m => ids.Contains(m.Id))
-                .ToListAsync();
-
-            foreach (var m in matsFromDb)
-              existingOrder.Productions.Add(m);
-          }
-
-          await repo.UpdateAsync(existingOrder);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
-
-    public async Task UpdateProductionOrdersAsync(List<ProductionOrder> productionOrders)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<ProductionOrder, PostgresDbContext>(context);
-          await repo.UpdateRangeAsync(productionOrders);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
-
-    public async Task UpdateProductionAsync(Production production, List<Material>? materials)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<Production, PostgresDbContext>(context);
-
-          // Load entity cũ từ DB kèm quan hệ
-          var existingOrder = await context.Productions
-              .Include(po => po.Materials) // nếu có Materials
-              .FirstOrDefaultAsync(po => po.Id == production.Id);
-
-          if (existingOrder == null)
-            throw new Exception($"ProductionOrder {production.Id} not found");
-
-          // Update các field cơ bản
-          existingOrder.Name = production.Name;
-          existingOrder.Code = production.Code;
-          existingOrder.Description = production.Description;
-          existingOrder.DeletedFlag = production.DeletedFlag;
-          existingOrder.CreatedAt = production.CreatedAt;
-          existingOrder.UpdatedAt = production.UpdatedAt;
-          existingOrder.IdSrc = production.IdSrc;
-
-          // ====== Materials (N-N) ======
-          existingOrder.Materials.Clear();
-          if (materials != null && materials.Count > 0)
-          {
-            var ids = materials.Select(m => m.Id).ToList();
-            var matsFromDb = await context.Materials
-                .Where(m => ids.Contains(m.Id))
-                .ToListAsync();
-
-            foreach (var m in matsFromDb)
-              existingOrder.Materials.Add(m);
-          }
-
-          await repo.UpdateAsync(existingOrder);
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
-
-    public async Task UpdateRangeProductionsAsync(List<Production> productions)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<Production, PostgresDbContext>(context);
-          await repo.UpdateRangeAsync(productions);
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
-
-    public async Task AddRangeFactoryiesAsync(List<Factory> factories)
+  
+  
+    public async Task<List<Product>> GetMaterialsAsync(bool isContainDelete = false)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Factory, PostgresDbContext>(context);
-        foreach (var po in factories)
-        {
-          foreach (var rm in po.Machines)
-          {
-            context.Attach(rm);
-          }
-        }
-        await repo.AddRangeAsync(factories);
-      }
-    }
-
-    public async Task AddProductionOrdersAsync(ProductionOrder productionOrder)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<ProductionOrder, PostgresDbContext>(context);
-        await repo.AddAsync(productionOrder);
-      }
-    }
-
-    public async Task<List<Material>> GetMaterialsAsync(bool isContainDelete = false)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new MaterialRepository(context);
+        var repo = new ProductRepository(context);
         return await repo.GetAllAsync(isContainDelete);
       }
     }
 
-    public async Task<List<Material>> GetMaterialTaresAsync()
+    public async Task<List<Product>> GetMaterialTaresAsync()
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new MaterialRepository(context);
+        var repo = new ProductRepository(context);
         return await repo.GetMaterialTaresAsync();
       }
     }
 
-    public async Task UpdateMaterial(Material material)
+    public async Task UpdateMaterial(Product material)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new MaterialRepository(context);
+        var repo = new ProductRepository(context);
         await repo.UpdateMaterial(material);
       }
     }
 
-    public async Task UpdateMaterials(List<Material> materials)
+    public async Task UpdateMaterials(List<Product> materials)
     {
       if (materials is null || materials.Count == 0)
         return;
 
       await using var context = new PostgresDbContext();
-      var repo = new MaterialRepository(context);
+      var repo = new ProductRepository(context);
 
       await repo.UpdateMaterials(materials);
     }
 
-    public async Task<List<MaterialSetting>> GetMaterialSettingsAsync(bool isContainDelete = false)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new MaterialSettingRepository(context);
-        return await repo.GetAllAsync(isContainDelete);
-      }
-    }
+  
 
-    public async Task<Material?> GetMaterialsByIdAsync(long? id)
+    public async Task<Product?> GetMaterialsByIdAsync(long? id)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new MaterialRepository(context);
+        var repo = new ProductRepository(context);
         return await repo.GetMaterialsByIdAsync(id);
       }
     }
 
-    public async Task<List<Material>> GetMaterialsAsync(EnumMaterialType eMaterialType)
+    public async Task<List<Product>> GetMaterialsAsync(EnumMaterialType eMaterialType)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new MaterialRepository(context);
+        var repo = new ProductRepository(context);
         return await repo.GetAllAsync(eMaterialType);
       }
     }
 
-    public async Task<List<Material>> GetMaterialsDefectAsync(Material material, EnumMaterialType eMaterialType = EnumMaterialType.MRsDefect)
+    public async Task<List<Product>> GetMaterialsDefectAsync(Product material, EnumMaterialType eMaterialType = EnumMaterialType.MRsDefect)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new MaterialRepository(context);
+        var repo = new ProductRepository(context);
         return await repo.GetMaterialsDefectAsync(material, (int)eMaterialType);
       }
     }
-    public async Task<Material?> GetMaterialsByIdSrcAsync(Guid? guid)
+    public async Task<Product?> GetMaterialsByIdSrcAsync(Guid? guid)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new MaterialRepository(context);
+        var repo = new ProductRepository(context);
         return await repo.GetMaterialsByIdSrcAsync(guid);
       }
     }
 
 
-    public async Task<List<Production>> GetProductionsAsync(bool isContainDelete = false)
+  
+    public async Task UpdateMaterials(Product material)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new ProductionRepository(context);
-        return await repo.GetAllAsync(isContainDelete);
-      }
-    }
-    public async Task<Production?> GetProductionByIdSrcAsync(Guid? guid)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductionRepository(context);
-        return await repo.GetProductionByIdSrcAsync(guid);
-      }
-    }
-
-    public async Task<List<MaterialSetting>> GetProductionWeightsAsync(bool isContainDelete = false)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductionWeightRepository(context);
-        return await repo.GetAllAsync(isContainDelete);
-      }
-    }
-
-    public async Task UpdateMaterials(Material material)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Material, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Product, PostgresDbContext>(context);
         await repo.UpdateAsync(material);
       }
     }
 
-    public async Task UpdateMaterialSetting(MaterialSetting productionWeight)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<MaterialSetting, PostgresDbContext>(context);
-          await repo.UpdateAsync(productionWeight);
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
+ 
 
-    public async Task UpdateRangeMaterialSetting(List<MaterialSetting> materialSettings)
+    public async Task<RecordFoods> AddRecordAsync(RecordFoods laborProductivityRecognition)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<MaterialSetting, PostgresDbContext>(context);
-          await repo.UpdateRangeAsync(materialSettings);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
-
-    public async Task<DatalogWeight> AddRecordAsync(DatalogWeight laborProductivityRecognition)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<DatalogWeight, PostgresDbContext>(context);
+          var repo = new iSoft.Database.Repositorys.GenericRepository<RecordFoods, PostgresDbContext>(context);
           return await repo.AddAsync(laborProductivityRecognition);
         }
       }
@@ -682,13 +397,13 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<DatalogWeight>> GetRecordByTime(DateTime start, DateTime end, eTypeData eTypeData)
+    public async Task<List<RecordFoods>> GetRecordByTime(DateTime start, DateTime end, eTypeData eTypeData)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.GetAllDataByTime(start, end, eTypeData);
         }
       }
@@ -698,45 +413,16 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<DatalogDelivery>> GetDeliveryByTime(DateTime start, DateTime end)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new DatalogDeliveryRepository(context);
-          return await repo.GetHistoricalAsync(start, end);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
+    
 
-    public async Task<List<DatalogWeight>?> GetAllDataLTPNotSynchronized()
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new DatalogWeightRepository(context);
-          return await repo.GetAllNotSynchronized();
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
 
-    public async Task<List<DatalogWeight>> GetAllDataLTPNotIncludeSynchronized_Fixbug()
+    public async Task<List<RecordFoods>> GetAllDataLTPNotIncludeSynchronized_Fixbug()
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.GetAllNotIncludeSynchronized_Fixbug();
         }
       }
@@ -747,21 +433,6 @@ namespace LaborTrackPro.Controls
     }
 
 
-    public async Task<bool> UpdateRecordSyncSuccess(List<DatalogWeight> record)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<DatalogWeight, PostgresDbContext>(context);
-          return await repo.UpdateRangeAsync(record);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
 
 
     public async Task<List<Department>> GetDepartmentsAsync(bool isContainDelete = false)
@@ -780,100 +451,20 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<DeliverySchedule>> GetDeliveryScheduleAsync(bool isContainDelete = false)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new DeliveryScheduleRepository(context);
-          return await repo.GetAllDeliverySchedule(isContainDelete);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
+   
+  
 
-    public async Task<List<DeliverySchedule>> GetDataDeliveryScheduleAsync(
-                                                                        long? materialId,
-                                                                        long? productionOrderId,
-                                                                        EnumExportImport? enumExportImport
-                                                                        )
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new DeliveryScheduleRepository(context);
-          return await repo.GetDataDeliverySchedulesAsync(materialId, productionOrderId, enumExportImport);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
+  
+  
 
-    public async Task<List<DeliverySchedule>> GetDataDeliveryScheduleAsync(
-                                                                            long? productionOrderId,
-                                                                            EnumExportImport? enumExportImport
-                                                                           )
+  
+    public async Task<List<Station>> GetMachinesAsync(bool isContainDelete = false)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new DeliveryScheduleRepository(context);
-          return await repo.GetDataDeliverySchedulesAsync(productionOrderId, enumExportImport);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
-
-    public async Task<List<DeliveryScheduleMaterial>> GetDeliveryScheduleMaterialAsync(bool isContainDelete = false)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new DeliveryScheduleMaterialRepository(context);
-          return await repo.GetAllDeliveryScheduleMaterial(isContainDelete);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
-
-    public async Task<List<Factory>> GetFactoriesAsync(bool isContainDelete = false)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new FactoryRepository(context);
-          return await repo.GetAllAsync(isContainDelete);
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
-
-    public async Task<List<Machine>> GetMachinesAsync(bool isContainDelete = false)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new MachineRepository(context);
+          var repo = new StationRepository(context);
           return await repo.GetAllAsync(isContainDelete);
         }
       }
@@ -942,53 +533,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<ProductionOrder>> GetProductionOrdersAsync(bool isContainDelete = false)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductionOrderRepository(context);
-        return await repo.GetProductionOrdersAsync(isContainDelete);
-      }
-    }
-
-    public async Task<List<ProductionOrder>> GetProductionOrdersShowUIAsync()
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductionOrderRepository(context);
-        return await repo.GetProductionOrdersShowUIAsync();
-      }
-    }
-
-    public async Task<List<ProductionOrder>> GetAllProductionOrdersAsync()
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductionOrderRepository(context);
-        return await repo.GetProductionOrdersAsync();
-      }
-    }
-
-    public async Task<List<Production>> GetProductionAsync(bool isContainDelete = false)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductionRepository(context);
-        return await repo.GetAllAsync(isContainDelete);
-      }
-    }
-
-    public async Task<List<MaterialSetting>> GetMaterialSettingAsync(bool isContainDelete = false)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductionWeightRepository(context);
-        return await repo.GetAllAsync(isContainDelete);
-      }
-    }
-
-
-
+   
     public async Task<Department> AddDepartmentAsync(Department department)
     {
       using (var context = new PostgresDbContext())
@@ -1026,24 +571,7 @@ namespace LaborTrackPro.Controls
       //}
     }
 
-    public async Task AddRangeDeliveryScheduleAsync(List<DeliverySchedule> deliverySchedules)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<DeliverySchedule, PostgresDbContext>(context);
-        await repo.AddRangeAsync(deliverySchedules);
-      }
-    }
-
-    public async Task AddRangeDeliveryScheduleMaterialAsync(List<DeliveryScheduleMaterial> deliveryScheduleMaterials)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<DeliveryScheduleMaterial, PostgresDbContext>(context);
-        await repo.AddRangeAsync(deliveryScheduleMaterials);
-      }
-    }
-
+ 
     public async Task<Department> RemoveDepartment_Async(long id)
     {
       using (var context = new PostgresDbContext())
@@ -1113,23 +641,7 @@ namespace LaborTrackPro.Controls
       //}
     }
 
-    public async Task UpdateRangeDeliveryScheduleAsync(List<DeliverySchedule> deliverySchedules)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<DeliverySchedule, PostgresDbContext>(context);
-        await repo.UpdateRangeAsync(deliverySchedules);
-      }
-    }
-
-    public async Task UpdateRangeDeliveryScheduleMaterialAsync(List<DeliveryScheduleMaterial> deliveryScheduleMaterials)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<DeliveryScheduleMaterial, PostgresDbContext>(context);
-        await repo.UpdateRangeAsync(deliveryScheduleMaterials);
-      }
-    }
+    
 
     public async Task<bool> UpdateRangeEmployeeAsync(List<Employee> employees)
     {
@@ -1207,11 +719,11 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<bool> UpdateRangeMaterialGroupAsync(List<MaterialGroup> materialGroups)
+    public async Task<bool> UpdateRangeMaterialGroupAsync(List<ProductGroup> materialGroups)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<MaterialGroup, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<ProductGroup, PostgresDbContext>(context);
         return await repo.UpdateRangeAsync(materialGroups);
       }
     }
@@ -1244,14 +756,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<DeliverySchedule?> GetDeliveryScheduleByIdAsync(long? id)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new DeliveryScheduleRepository(context);
-        return await repo.GetByIdAsync(id);
-      }
-    }
+   
 
     public async Task<bool> UpdateEmployee_Async(Employee employee)
     {
@@ -1261,30 +766,23 @@ namespace LaborTrackPro.Controls
         return await repo.UpdateAsync(employee);
       }
     }
-    public async Task<bool> UpdateRangeMachineAsync(List<Machine> machines)
+    public async Task<bool> UpdateRangeMachineAsync(List<Station> machines)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Machine, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Station, PostgresDbContext>(context);
         return await repo.UpdateRangeAsync(machines);
       }
     }
-    public async Task<bool> UpdateRangeFactoryAsync(List<Factory> factories)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Factory, PostgresDbContext>(context);
-        return await repo.UpdateRangeAsync(factories);
-      }
-    }
+  
 
-    public async Task<DatalogWeight> RemoveDatalog_Async(long id, long idEmloyee)
+    public async Task<RecordFoods> RemoveDatalog_Async(long id, long idEmloyee)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.UpdateFlagDeleteAsync(id, idEmloyee);
         }
       }
@@ -1310,22 +808,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task UpdateRangeWarningAsync(List<Warning> warnings)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.DatabaseServer.Repositorys.GenericRepository<Warning, PostgresDbContext>(context);
-          await repo.UpdateRangeAsync(warnings);
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
-
+ 
     public async Task<List<Connection>> GetConnectionWeightLocalAsync()
     {
       try
@@ -1372,30 +855,16 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<Warning>> GetWarningLocalAsync()
+ 
+
+
+    public async Task<List<RecordFoods>?> GetRecordByPOAsync(long idPO, DateTime dt, EnumInternalExternalStatus enumInternalExternalStatus, EnumExportImport enumExportImport)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new WarningRepository(context);
-          return await repo.GetAllWarningAsync();
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
-
-
-    public async Task<List<DatalogWeight>?> GetRecordByPOAsync(long idPO, DateTime dt, EnumInternalExternalStatus enumInternalExternalStatus, EnumExportImport enumExportImport)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.GetRecordByPOAsync(idPO, dt, enumInternalExternalStatus, enumExportImport);
         }
       }
@@ -1405,13 +874,13 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<DatalogWeight>?> GetRecordByRequestOtherAsync(long? employeeId, DateTime dt, EnumInternalExternalStatus enumInternalExternalStatus)
+    public async Task<List<RecordFoods>?> GetRecordByRequestOtherAsync(long? employeeId, DateTime dt, EnumInternalExternalStatus enumInternalExternalStatus)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.GetRecordByRequestOtherAsync(employeeId, dt, enumInternalExternalStatus);
         }
       }
@@ -1421,13 +890,13 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<DatalogWeight>> GetDataExpire(DateTime dt)
+    public async Task<List<RecordFoods>> GetDataExpire(DateTime dt)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.GetRecordExpireAsync(dt);
         }
       }
@@ -1437,13 +906,13 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<DatalogWeight?> GetDatalogWeightByAsync(long? id)
+    public async Task<RecordFoods?> GetDatalogWeightByAsync(long? id)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.GetDatalogWeightByAsync(id);
         }
       }
@@ -1454,13 +923,13 @@ namespace LaborTrackPro.Controls
     }
 
 
-    public async Task<bool> UpdateRecordAsync(List<DatalogWeight> datalogWeights)
+    public async Task<bool> UpdateRecordAsync(List<RecordFoods> datalogWeights)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.UpdateRangeAsync(datalogWeights);
         }
       }
@@ -1470,29 +939,14 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<DatalogDelivery> AddDelivery(DatalogDelivery datalogDelivery)
+ 
+    public async Task<bool> UpdateRecordAsync(long idRecordDelivery, RecordFoods laborProductivityRecognition)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<DatalogDelivery, PostgresDbContext>(context);
-          return await repo.AddAsync(datalogDelivery);
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
-
-    public async Task<bool> UpdateRecordAsync(long idRecordDelivery, DatalogWeight laborProductivityRecognition)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new DatalogWeightRepository(context);
+          var repo = new RecordFoodsRepository(context);
           return await repo.UpdateData(laborProductivityRecognition, idRecordDelivery);
         }
       }
@@ -1502,131 +956,10 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<DatalogDelivery>?> GetAllDataDeliveryNotSynchronized()
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new DatalogDeliveryRepository(context);
-          return await repo.GetAllNotSynchronized();
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
+  
 
-    public async Task<bool> UpdateDatalogDeliverySyncSuccess(DatalogDelivery datalogDeliveries)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<DatalogDelivery, PostgresDbContext>(context);
-          return await repo.UpdateAsync(datalogDeliveries);
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
 
-    public async Task<bool> UpdateRangeDatalogDeliverySyncSuccess(List<DatalogDelivery> datalogDeliveries)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<DatalogDelivery, PostgresDbContext>(context);
-          return await repo.UpdateRangeAsync(datalogDeliveries);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
-
-    public async Task AddRangeProductionsAsync(List<Production> productions)
-    {
-      foreach (var po in productions)
-      {
-        using (var context = new PostgresDbContext())
-        {
-          foreach (var rm in po.Materials)
-            context.Entry(rm).State = EntityState.Unchanged;
-
-          context.Add(po);
-          await context.SaveChangesAsync();
-        }
-      }
-    }
-
-    public async Task AddRangeProductionWeightsAsync(List<MaterialSetting> productionWeights)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<MaterialSetting, PostgresDbContext>(context);
-        await repo.AddRangeAsync(productionWeights);
-      }
-    }
-
-    public async Task<ProductionOrder?> GetProductionOrdersByIdSrcAsync(Guid? id)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductionOrderRepository(context);
-        return await repo.GetPOByIdSrcAsync(id);
-      }
-    }
-
-    public async Task<ProductionOrder?> GetPOByIdAsync(long? poId)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          //Lấy thông tin PO
-          var repo = new ProductionOrderRepository(context);
-          return await repo.GetPOByIdAsync(poId);
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
-
-    public async Task<SettingLabel> AddSettingLabelAsync(SettingLabel department)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new SettingLabelRepository(context);
-        return await repo.AddAsync(department);
-      }
-    }
-
-    public async Task<bool> UpdateSettingLabelAsync(SettingLabel department)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new SettingLabelRepository(context);
-        return await repo.UpdateAsync(department);
-      }
-    }
-
-    public async Task<List<SettingLabel>> GetAllSettingLabelAsync(eTypeLabel eTypeLabel, bool isContainDelete = false)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new SettingLabelRepository(context);
-        return await repo.GetAllAsync(eTypeLabel, isContainDelete);
-      }
-    }
-
+  
     public async Task<List<CategoryTare>> GetAllCategoryTareByMaterialIdAsync(long? id)
     {
       using (var context = new PostgresDbContext())
@@ -1637,41 +970,16 @@ namespace LaborTrackPro.Controls
     }
 
 
-    public async Task<Material?> GetAllCategoryTareByMaterialAsync(Material material)
+    public async Task<Product?> GetAllCategoryTareByMaterialAsync(Product material)
     {
       using (var context = new PostgresDbContext())
       {
-        var repo = new MaterialRepository(context);
+        var repo = new ProductRepository(context);
         return await repo.GetAllCategoryTareByMaterialAsync(material);
       }
     }
 
-    public async Task AddRangeMaterialTareAsync(List<MaterialTare> materialTares)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<MaterialTare, PostgresDbContext>(context);
-        await repo.AddRangeAsync(materialTares);
-      }
-    }
-
-    public async Task UpdateMaterialTareAsync(List<MaterialTare> materialTares)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<MaterialTare, PostgresDbContext>(context);
-        await repo.UpdateRangeAsync(materialTares);
-      }
-    }
-
-    public async Task<MaterialTare?> GetMaterialTareByIdSrcAsync(Guid? id)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new MaterialTareRepository(context);
-        return await repo.GetMaterialTareByIdSrcAsync(id);
-      }
-    }
+   
 
     
   }

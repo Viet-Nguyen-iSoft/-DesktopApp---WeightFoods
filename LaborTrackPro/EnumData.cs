@@ -12,7 +12,11 @@ namespace LaborTrackPro
     public enum AppModulSupport
     {
       Waiting,
-      Background,
+      Operation,
+
+      Home,
+      MasterData,
+      Employee,
 
       OpChooseModeFunction,
       OpTypePO,
@@ -37,8 +41,6 @@ namespace LaborTrackPro
       SettingMachine,
 
 
-      MasterData,
-      Employee,
       Department,
       ProductionOrder,
       Material,

@@ -96,8 +96,8 @@ namespace LaborTrackPro
         case AppModulSupport.Waiting:
           OpenChildForm(appModulSupport, FrmWaiting.Instance);
           break;
-        case AppModulSupport.Background:
-          OpenChildForm(appModulSupport, FrmPageOperation.Instance);
+        case AppModulSupport.Operation:
+          OpenChildForm(appModulSupport, FrmOperation.Instance);
           break;
       }
     }
@@ -176,7 +176,6 @@ namespace LaborTrackPro
     {
       CheckOpenMulApp();
       ChangePage(AppModulSupport.Waiting);
-      AppCore.Ins.InitIdle();
     }
 
     private void CheckOpenMulApp()
@@ -215,9 +214,9 @@ namespace LaborTrackPro
         AppCore.Ins.InitRfidUsb();
       }
 
-      AppCore.Ins.CheckConnectServer();
+      //AppCore.Ins.CheckConnectServer();
 
-      await AppCore.Ins.StartData();
+      //await AppCore.Ins.StartData();
     }
 
     public void CallEvent(eTypeDataRefresh eTypeDataRefresh)

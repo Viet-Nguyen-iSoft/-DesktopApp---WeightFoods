@@ -8,7 +8,7 @@ using static iSoft.Database.EnumData;
 using static LaborTrackPro.EnumData;
 using Connection = iSoft.Database.Models.Connection;
 using Control = System.Windows.Forms.Control;
-using Machine = iSoft.Database.Models.Machine;
+using Station = iSoft.Database.Models.Station;
 
 namespace LaborTrackPro.Controls
 {
@@ -46,7 +46,7 @@ namespace LaborTrackPro.Controls
 
     public event EventHandler<bool>? OnSendStatusConnectHID;
     public event EventHandler<EnumStatusConnectTcp>? OnSendStatusConnectWeight;
-    public event EventHandler<List<Material>>? OnSendChangeTare;
+    public event EventHandler<List<Product>>? OnSendChangeTare;
     #endregion
 
     public ManagerData _dataManager = new ManagerData();
@@ -61,85 +61,44 @@ namespace LaborTrackPro.Controls
     public string _inforLine { get; set; }
     public IdleMonitor _idle = new IdleMonitor();
 
-
-    public List<DeliverySchedule> _deliverySchedulesRealtime = new List<DeliverySchedule>();
-    public List<DeliveryScheduleMaterial> _deliveryScheduleMaterialsRealtime = new List<DeliveryScheduleMaterial>();
-
     public S7NetService _s7NetService { get; set; }
-    public void EndOfWeighingCycle()
-    {
-      AppCore.Ins._dataManager.EnumInternalExternalStatus = EnumInternalExternalStatus.None;
-      AppCore.Ins._dataManager.EnumExportImport = EnumExportImport.None;
-      AppCore.Ins._dataManager.EnumProductionOrderType = EnumProductionOrderType.None;
-      AppCore.Ins._dataManager.EnumModeFunction = EnumModeFunction.None;
-
-      AppCore.Ins._dataManager.DataLogPrintLabel.TypeTare = EnumTypeTare.None;
-
-      AppCore.Ins._dataManager.ProductionOrder = null;
-      AppCore.Ins._dataManager.DataLogPrintLabel.Material = null;
-      AppCore.Ins._dataManager.DataLogPrintLabel.MaterialDefect = null;
-      AppCore.Ins._dataManager.DataLogPrintLabel.MaterialForTare = null;
-      AppCore.Ins._dataManager.DataLogDelivery.IsDelivery = false;
-
-      OnSendEndOfWeighingCycle?.Invoke();
-    }
-
-    public void EndOfWeighingDeliveryCycle()
-    {
-      AppCore.Ins._dataManager.EnumInternalExternalStatus = EnumInternalExternalStatus.None;
-      AppCore.Ins._dataManager.EnumExportImport = EnumExportImport.None;
-      AppCore.Ins._dataManager.EnumProductionOrderType = EnumProductionOrderType.None;
-      AppCore.Ins._dataManager.EnumModeFunction = EnumModeFunction.None;
-
-      AppCore.Ins._dataManager.ProductionOrder = null;
-
-      AppCore.Ins._dataManager.DataLogDelivery.EmployeeQC = null;
-      AppCore.Ins._dataManager.DataLogDelivery.EmployeeDelivery = null;
-      AppCore.Ins._dataManager.DataLogDelivery.EmployeeReceiving = null;
-      AppCore.Ins._dataManager.DataLogDelivery.IsDelivery = false;
-      AppCore.Ins._dataManager.DeliverySchedule = null;
-
-      OnSendEndOfWeighingDeliveryCycle?.Invoke();
-    }
-
+   
     public void Init()
     {
       try
       {
-        LoadDataConfig().Wait();
+        // LoadDataConfig().Wait();
 
-        _enableRabbit = (Environment.GetEnvironmentVariable("IS_ENABLE_RABBITMQ").ToLower() == "true");
+        // _enableRabbit = (Environment.GetEnvironmentVariable("IS_ENABLE_RABBITMQ").ToLower() == "true");
 
-        _hostAPI = Environment.GetEnvironmentVariable("HOST_API");
-        _baseAPI = Environment.GetEnvironmentVariable("URL_API");
-        _apiKey = Environment.GetEnvironmentVariable("API_KEY");
+        // _hostAPI = Environment.GetEnvironmentVariable("HOST_API");
+        // _baseAPI = Environment.GetEnvironmentVariable("URL_API");
+        // _apiKey = Environment.GetEnvironmentVariable("API_KEY");
 
-        _isPrinterLabel = (Environment.GetEnvironmentVariable("IS_PRINTER_LABEL").ToLower() == "true");
-        _delivery_permit_hour = int.Parse(Environment.GetEnvironmentVariable("HOUR_DELIVERY"));
-        _isAdmin = (Environment.GetEnvironmentVariable("IS_ADMIN").ToLower() == "true");
+        // _isPrinterLabel = (Environment.GetEnvironmentVariable("IS_PRINTER_LABEL").ToLower() == "true");
+        // _delivery_permit_hour = int.Parse(Environment.GetEnvironmentVariable("HOUR_DELIVERY"));
+        // _isAdmin = (Environment.GetEnvironmentVariable("IS_ADMIN").ToLower() == "true");
 
-        _timeout_backhome_minute = int.Parse(Environment.GetEnvironmentVariable("TIME_OUT_BACKHOME"));
-        _alarm = (Environment.GetEnvironmentVariable("ALARM").ToLower() == "true");
+        // _timeout_backhome_minute = int.Parse(Environment.GetEnvironmentVariable("TIME_OUT_BACKHOME"));
+        // _alarm = (Environment.GetEnvironmentVariable("ALARM").ToLower() == "true");
 
         if (!Directory.Exists(_folderFileLog))
           Directory.CreateDirectory(_folderFileLog);
 
-        _isTopMost = !_isAdmin;
+        // _isTopMost = !_isAdmin;
 
-        _dataManager.DataLogPrintLabel = new DataLogPrintLabel();
-        _dataManager.DataLogDelivery = new DataLogDeliveryManager();
-        _dataManager.DataLogPrintLabel.SettingLabels = _settingLabels?.Where(x => x.eTypeLabel == eTypeLabel.Weight).ToList();
-        _dataManager.DataLogDelivery.SettingLabels = _settingLabels?.Where(x => x.eTypeLabel == eTypeLabel.Delivery).ToList();
-        _dataManager.Machine = _machineCurrent;
+        // _dataManager.DataLogPrintLabel = new DataLogPrintLabel();
+        // _dataManager.DataLogDelivery = new DataLogDeliveryManager();
+        //_dataManager.Machine = _machineCurrent;
 
-        _inforLine = _appConfig.Version + " - " + _machineCurrent?.Name ?? string.Empty;
-        _ipPrintLabel = _appConfig?.NamePrinter ?? string.Empty;
+        // _inforLine = _appConfig.Version + " - " + _machineCurrent?.Name ?? string.Empty;
+        // _ipPrintLabel = _appConfig?.NamePrinter ?? string.Empty;
 
-        if (_alarm)
-        {
-          _s7NetService = new S7NetService();
-          _s7NetService.Connect("192.168.3.202", 1000, 500, 1);
-        }  
+        // if (_alarm)
+        // {
+        //   _s7NetService = new S7NetService();
+        //   _s7NetService.Connect("192.168.3.202", 1000, 500, 1);
+        // }  
 
         StartShowUI();
       }
@@ -171,8 +130,6 @@ namespace LaborTrackPro.Controls
       if (AppCore.Ins._dataManager.EnumStepOperation != EnumStepOperation.Waiting)
       {
         AppCore.Ins._dataManager.EnumStepOperation = EnumStepOperation.Waiting;
-        AppCore.Ins.EndOfWeighingCycle();
-        AppCore.Ins.EndOfWeighingDeliveryCycle();
         FrmMain.Instance.ChangePage(AppModulSupport.Waiting);
       }
     }
@@ -185,24 +142,20 @@ namespace LaborTrackPro.Controls
     }
 
 
-    public List<MaterialGroup> _materialGroups = new List<MaterialGroup>();
-    public List<Material> _materials = new List<Material>();
-    public List<Material> _materialTares = new List<Material>();
-    public List<Production> _productions = new List<Production>();
-    public List<MaterialSetting> _materialSettings = new List<MaterialSetting>();
-    public List<ProductionOrder> _productionOrders = new List<ProductionOrder>();
+    public List<ProductGroup> _materialGroups = new List<ProductGroup>();
+    public List<Product> _materials = new List<Product>();
+    public List<Product> _materialTares = new List<Product>();
 
     public List<Department> _departments = new List<Department>();
     public List<Employee> _employees = new List<Employee>();
 
-    public List<Machine> _machines = new List<Machine>();
-    public Machine? _machineCurrent { get; set; }
+    public List<Station> _machines = new List<Station>();
+    public Station? _machineCurrent { get; set; }
     //public List<Factory> _factories = new List<Factory>();
 
     public Connection? _connectionsWeight { get; set; }
     public Connection? _connectionsHID { get; set; }
 
-    public List<SettingLabel>? _settingLabels = new List<SettingLabel>();
 
     public AppConfig _appConfig = new AppConfig();
     //public string _pathFileTemplate = Application.StartupPath + "Template\\TemplateDeliveryHtml.html";
@@ -219,7 +172,6 @@ namespace LaborTrackPro.Controls
 
         _materialGroups = await GetMaterialGroupsAsync();
         _materials = await AppCore.Ins.GetMaterialsAsync();
-        _productionOrders = await GetProductionOrdersShowUIAsync();
         _materialTares = await GetMaterialTaresAsync();
 
         _departments = await AppCore.Ins.GetDepartmentsAsync();
@@ -234,9 +186,6 @@ namespace LaborTrackPro.Controls
         var connection = await AppCore.Ins.GetConnectionAsync();
         _connectionsWeight = connection?.Where(x => x.eDevice == eDevice.WeightTcp).FirstOrDefault();
         _connectionsHID = connection?.Where(x => x.eDevice == eDevice.HidTcp).FirstOrDefault();
-
-        //Setting nhãn
-        await ReloadSettingLabels();
 
         //Thông tin đồng bộ dữ liệu
         _isSyncDataLocal = _appConfig?.IsAutoSyncData ?? false;
@@ -258,28 +207,6 @@ namespace LaborTrackPro.Controls
       _departments = await AppCore.Ins.GetDepartmentsAsync();
     }
 
-    public async Task ReloadDeliverySchedule()
-    {
-      _deliverySchedulesRealtime = await AppCore.Ins.GetDeliveryScheduleAsync(isContainDelete: false);
-    }
-
-    public async Task ReloadDeliveryScheduleMateriale()
-    {
-      _deliveryScheduleMaterialsRealtime = await AppCore.Ins.GetDeliveryScheduleMaterialAsync(isContainDelete: false);
-    }
-
-    public async Task ReloadSettingLabels()
-    {
-      _settingLabels = await AppCore.Ins.GetSettingLabelsAsync();
-      _dataManager.DataLogPrintLabel.SettingLabels = _settingLabels?.Where(x => x.eTypeLabel == eTypeLabel.Weight).ToList();
-      _dataManager.DataLogDelivery.SettingLabels = _settingLabels?.Where(x => x.eTypeLabel == eTypeLabel.Delivery).ToList();
-    }
-
-    public async Task ReloadProductionOrders()
-    {
-      _productionOrders = await GetProductionOrdersShowUIAsync();
-    }
-
     public async Task ReloadMaterialGroups()
     {
       _materialGroups = await GetMaterialGroupsAsync();
@@ -294,15 +221,6 @@ namespace LaborTrackPro.Controls
       OnSendChangeTare?.Invoke(this, _materialTares);
     }
 
-    public async Task ReloadProductions()
-    {
-      _productions = await AppCore.Ins.GetProductionsAsync();
-    }
-
-    public async Task ReloadProductionWeights()
-    {
-      _materialSettings = await AppCore.Ins.GetProductionWeightsAsync();
-    }
     public async Task ReloadMachines()
     {
       _machines = await AppCore.Ins.GetMachinesAsync();
@@ -437,10 +355,7 @@ namespace LaborTrackPro.Controls
     public DataLogPrintLabel DataLogPrintLabel = new DataLogPrintLabel();
 
     public DataLogDeliveryManager DataLogDelivery = new DataLogDeliveryManager();
-
-    public ProductionOrder? ProductionOrder { get; set; }
-    public DeliverySchedule? DeliverySchedule { get; set; }
-    public Machine? Machine { get; set; }
+    public Station? Machine { get; set; }
   }
 
 
@@ -450,13 +365,12 @@ namespace LaborTrackPro.Controls
     public double Net { get; set; } = 0;
     public double Tare { get; set; } = 0;
     public Employee? Employee { get; set; }
-    public Material? Material { get; set; }
-    public Material? MaterialDefect { get; set; }
-    public List<SettingLabel>? SettingLabels { get; set; }
-    public List<Material?>? Materials { get; set; } = new List<Material?>();
+    public Product? Material { get; set; }
+    public Product? MaterialDefect { get; set; }
+    public List<Product?>? Materials { get; set; } = new List<Product?>();
 
     public EnumTypeTare TypeTare { get; set; } = EnumTypeTare.None;
-    public Material? MaterialForTare { get; set; }
+    public Product? MaterialForTare { get; set; }
   }
 
   public class DataLogDeliveryManager
@@ -465,8 +379,7 @@ namespace LaborTrackPro.Controls
     public Employee? EmployeeReceiving { get; set; }
     public Employee? EmployeeReceivingFirst { get; set; }
     public Employee? EmployeeQC { get; set; }
-    public List<SettingLabel>? SettingLabels { get; set; }
-    public List<DatalogWeight>? DatalogWeights { get; set; } = new List<DatalogWeight>();
+    public List<RecordFoods>? DatalogWeights { get; set; } = new List<RecordFoods>();
     public List<MaterialDeliveryDTO>? MaterialDelivaryDTOs { get; set; } = new List<MaterialDeliveryDTO>();
     public bool IsDelivery { get; set; }
   }

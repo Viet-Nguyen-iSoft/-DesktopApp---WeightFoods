@@ -114,10 +114,10 @@ namespace LaborTrackPro.UserControls
     }
 
 
-    public void UpdateProductionOrder(ProductionOrder? productionOrder)
-    {
-      UpdateValueOnLabel(eTagData.ProductionOrder, $"{productionOrder?.Name ?? "N/A"}");
-    }
+    //public void UpdateProductionOrder(ProductionOrder? productionOrder)
+    //{
+    //  UpdateValueOnLabel(eTagData.ProductionOrder, $"{productionOrder?.Name ?? "N/A"}");
+    //}
     public void UpdateEmployee(Employee? employee)
     {
       UpdateValueOnLabel(eTagData.Operator, $"{employee?.FullName ?? "N/A"}");

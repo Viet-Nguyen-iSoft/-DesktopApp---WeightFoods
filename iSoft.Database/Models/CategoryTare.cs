@@ -17,8 +17,8 @@ namespace iSoft.Database.Models
     public int? TareGroup { get; set; }
 
     #region Mapping
-    public ICollection<DatalogWeight>?  DatalogWeights { get; set; } = new HashSet<DatalogWeight>();
-    public ICollection<Material>?  Materials { get; set; } = new HashSet<Material>();
+    public ICollection<RecordFoods>?  DatalogWeights { get; set; } = new HashSet<RecordFoods>();
+    public ICollection<Product>?  Materials { get; set; } = new HashSet<Product>();
     #endregion
   }
 }

@@ -17,7 +17,7 @@ namespace LaborTrackPro.Printer
     public EnumExportImport? EnumExportImport { get;set; }
     public EnumInternalExternalStatus? EnumInternalExternal { get; set; }
     [JsonIgnore]
-    public ProductionOrder? ProductionOrder { get;set; }
+    //public ProductionOrder? ProductionOrder { get;set; }
     public string? PO { get;set; }
     public DateTime Datetime { get;set; }
     [JsonIgnore]
@@ -29,15 +29,15 @@ namespace LaborTrackPro.Printer
     public string[]? DepartmentList { get; set; }
 
     [JsonIgnore]
-    public List<DatalogWeight>? LaborProductivityRecognitions { get; set; }
+    public List<RecordFoods>? LaborProductivityRecognitions { get; set; }
     [JsonIgnore]
     public List<MaterialDeliveryDTO>? MaterialDelivaryDTOs { get; set; }
     [JsonIgnore]
-    public Machine? Machine { get; set; }
+    public Station? Machine { get; set; }
 
 
     [JsonIgnore]
-    public Material? Material { get; set; }
+    public Product? Material { get; set; }
 
     //[JsonIgnore]
     //public MaxValueCheckAlarm? MaxValueCheckAlarm { get; set; }

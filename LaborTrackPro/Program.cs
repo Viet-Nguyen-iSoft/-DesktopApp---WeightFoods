@@ -20,10 +20,10 @@ namespace LaborTrackPro
       ApplicationConfiguration.Initialize();
 
       //Khởi tạo Db
-      InitDb().GetAwaiter().GetResult();
+      //InitDb().GetAwaiter().GetResult();
 
       //Log Start App
-      AppCore.Ins.LogAction("Start App", eAction.StartApp);
+      //AppCore.Ins.LogAction("Start App", eAction.StartApp);
 #if RELEASE
       PdfHelper.InitAsync().GetAwaiter().GetResult();
 #endif

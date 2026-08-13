@@ -38,14 +38,14 @@
       panelMain.Location = new Point(0, 0);
       panelMain.Margin = new Padding(0);
       panelMain.Name = "panelMain";
-      panelMain.Size = new Size(1924, 1041);
-      panelMain.TabIndex = 3;
+      panelMain.Size = new Size(1163, 458);
+      panelMain.TabIndex = 4;
       // 
       // FrmMain
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(1924, 1041);
+      ClientSize = new Size(1163, 458);
       Controls.Add(panelMain);
       Margin = new Padding(3, 2, 3, 2);
       Name = "FrmMain";

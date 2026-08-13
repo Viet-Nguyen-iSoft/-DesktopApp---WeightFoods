@@ -1,9 +1,4 @@
 using LaborTrackPro.Custom;
-using LaborTrackPro.Forms;
-using LaborTrackPro.Forms.Settings;
-using LaborTrackPro.FrmChild.Operation;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static LaborTrackPro.EnumData;
 
 namespace LaborTrackPro
@@ -36,12 +31,12 @@ namespace LaborTrackPro
 
     private async void btnSetting_Click(object sender, EventArgs e)
     {
-      await FrmPageOperation.Instance.ChangePage(AppModulSupport.Setting);
+      //await FrmPageOperation.Instance.ChangePage(AppModulSupport.Setting);
     }
 
     private async void btnMasterData_Click(object sender, EventArgs e)
     {
-      await FrmPageOperation.Instance.ChangePage(AppModulSupport.MasterData);
+      //await FrmPageOperation.Instance.ChangePage(AppModulSupport.MasterData);
     }
 
   }

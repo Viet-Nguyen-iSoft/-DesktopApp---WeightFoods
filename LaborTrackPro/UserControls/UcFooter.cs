@@ -44,7 +44,7 @@ namespace LaborTrackPro.UserControls
 
     private void picMenu_Click(object sender, EventArgs e)
     {
-      FrmPageOperation.Instance.ChangePage(AppModulSupport.Menu);
+      //FrmPageOperation.Instance.ChangePage(AppModulSupport.Menu);
     }
 
     public void SetStatusServer(EnumStatusConnectTcp enumStatusConnectTcp)

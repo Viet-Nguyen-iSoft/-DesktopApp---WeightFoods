@@ -23,14 +23,9 @@ namespace iSoft.Database.Models
 
     #region Mapping
     [Browsable(false)]
-    public ICollection<DatalogWeight>? Recognitions { get; set; }
-
-
-    public ICollection<DatalogDelivery> DatalogDeliveries { get; set; } = new List<DatalogDelivery>();
-    public ICollection<DatalogDelivery> DatalogReceives { get; set; } = new List<DatalogDelivery>();
-    public ICollection<DatalogDelivery> DatalogQCes { get; set; } = new List<DatalogDelivery>();
+    public ICollection<RecordFoods>? Recognitions { get; set; }
     public ICollection<Department> Departments { get; set; } = new List<Department>();
-    public ICollection<Machine> Machines { get; set; } = new List<Machine>();
+    public ICollection<Station> Machines { get; set; } = new List<Station>();
 
     #endregion
   }

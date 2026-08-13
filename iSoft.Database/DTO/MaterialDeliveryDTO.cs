@@ -9,7 +9,7 @@ namespace iSoft.Database.DTO
   public class MaterialDeliveryDTO
   {
     [Browsable(false)]
-    public DatalogWeight? DatalogWeight { get; set; }
+    public RecordFoods? DatalogWeight { get; set; }
 
     [Browsable(false)]
     public string? Operator { get; set; }
@@ -19,9 +19,9 @@ namespace iSoft.Database.DTO
     public string? ProductionOrder { get; set; }
 
     [Browsable(false)]
-    public Material? Material { get; set; }
+    public Product? Material { get; set; }
     [Browsable(false)]
-    public Material? MaterialDefect { get; set; }
+    public Product? MaterialDefect { get; set; }
 
     [Browsable(false)]
     public string? MaterialType { get; set; }
@@ -83,8 +83,8 @@ namespace iSoft.Database.DTO
 
   public class MaterialSummaryDTO
   {
-    public Material? Material { get; set; }
-    public Material? MaterialDefect { get; set; }
+    public Product? Material { get; set; }
+    public Product? MaterialDefect { get; set; }
     public string? Code { get; set; }
     public string? Name { get; set; }
     public double TotalWeight { get; set; }
@@ -111,9 +111,9 @@ namespace iSoft.Database.DTO
 
 
     [Browsable(false)]
-    public Material? Material { get; set; }
+    public Product? Material { get; set; }
     [Browsable(false)]
-    public Material? MaterialDefect { get; set; }
+    public Product? MaterialDefect { get; set; }
     [Browsable(false)]
     public double Target { get; set; }
     [Browsable(false)]

@@ -18,6 +18,6 @@ namespace iSoft.Database.DTO
   public class GroupMaterialDTO
   {
     public string? GroupStr { get; set; }
-    public List<Material>? Materials { get; set; }
+    public List<Product>? Materials { get; set; }
   }
 }

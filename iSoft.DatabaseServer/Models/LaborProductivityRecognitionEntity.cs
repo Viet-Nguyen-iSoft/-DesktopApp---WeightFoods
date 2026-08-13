@@ -13,7 +13,6 @@ namespace HSF.Database.Entities
     public float Net { get; set; }
     public float Tare { get; set; }
     public EnumMaterialType eTypeMaterial { get; set; }
-    public eTypeRecord? eTypeProduct { get; set; }
     public EnumCheckData CheckData { get; set; }
     public int? ImportExportStatus { get; set; }
     public bool WasteFlag { get; set; }

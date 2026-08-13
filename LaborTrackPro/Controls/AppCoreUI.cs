@@ -11,8 +11,7 @@ namespace LaborTrackPro.Controls
   {
     private void StartShowUI()
     {
-      //Application.Run(FrmMain.Instance);
-      Application.Run(FrmTestRFID.Instance);
+      Application.Run(FrmMain.Instance);
     }
 
 

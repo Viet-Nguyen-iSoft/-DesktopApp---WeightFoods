@@ -14,10 +14,10 @@ namespace LaborTrackPro.UserControls
 {
   public partial class UcSettingTare : UserControl
   {
-    public delegate void SendSendOKClicked(Material material);
+    public delegate void SendSendOKClicked(Product material);
     public event SendSendOKClicked OnSendOKClicked;
 
-    public Material _materialForTare { get; set; } 
+    public Product _materialForTare { get; set; } 
     public UcSettingTare()
     {
       InitializeComponent();

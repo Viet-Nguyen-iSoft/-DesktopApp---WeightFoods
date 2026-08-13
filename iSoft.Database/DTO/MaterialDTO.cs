@@ -67,7 +67,7 @@ namespace iSoft.Database.DTO
 
 
     [Browsable(false)]
-    public Material? MaterialSrc { get; set; } = new Material();
+    public Product? MaterialSrc { get; set; } = new Product();
   }
 
   public class MaterialWeightDTO

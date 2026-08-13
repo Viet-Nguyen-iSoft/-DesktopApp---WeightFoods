@@ -20,12 +20,6 @@ namespace LaborTrackPro.Helper
       public List<Object>? Obj { get; set; }
     }
 
-    public class ItemMaterial
-    {
-      public Material? Material { get; set; }
-      public List<Production>? Productions { get; set; }
-    }
-
     public class MaxValueCheckAlarm
     {
       public EnumStatusCheckAlarm? Status { get; set; } = EnumStatusCheckAlarm.NoneCheck;

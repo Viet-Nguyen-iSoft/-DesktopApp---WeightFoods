@@ -18,36 +18,7 @@ namespace LaborTrackPro.Controls
       };
     }
 
-    public static InformationDelivery ConvertManagerDataToInformationDelivery(ManagerData? managerData, string[] listDepartment)
-    {
-      try
-      {
-        if (managerData != null)
-        {
-          return new InformationDelivery
-          {
-            EnumExportImport = managerData?.EnumExportImport,
-            EnumInternalExternal = managerData?.EnumInternalExternalStatus,
-            ProductionOrder = managerData?.ProductionOrder,
-            PO = managerData?.ProductionOrder?.Name ?? "Yêu cầu khác",
-            Datetime = DateTime.Now,
-            DeliveryEmployee = managerData?.DataLogDelivery?.EmployeeDelivery,
-            ReceivingEmployee = managerData?.DataLogDelivery?.EmployeeReceiving,
-            QCEmployee = managerData?.DataLogDelivery?.EmployeeQC,
-            DepartmentList = listDepartment,
-            LaborProductivityRecognitions = managerData?.DataLogDelivery?.DatalogWeights,
-            MaterialDelivaryDTOs = managerData?.DataLogDelivery?.MaterialDelivaryDTOs,
-            Machine = managerData?.Machine,
-            Material = managerData?.DataLogDelivery?.DatalogWeights?.FirstOrDefault()?.Material ?? null
-          };
-        }
-        return new InformationDelivery();
-      }
-      catch (Exception)
-      {
-        throw;
-      }
-    }
+   
 
   }
 }

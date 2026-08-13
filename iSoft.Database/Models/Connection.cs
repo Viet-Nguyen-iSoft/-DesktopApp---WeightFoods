@@ -13,7 +13,7 @@ namespace iSoft.Database.Models
 
     #region Mapping
     public long? MachineId { get; set; }
-    public Machine? Machine { get; set; }
+    public Station? Machine { get; set; }
     #endregion
   }
 }
