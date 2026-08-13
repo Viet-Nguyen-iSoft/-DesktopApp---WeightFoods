@@ -1,0 +1,105 @@
+﻿namespace LaborTrackPro.UserControls
+{
+  partial class UcOrderProduction
+  {
+    /// <summary> 
+    /// Required designer variable.
+    /// </summary>
+    private System.ComponentModel.IContainer components = null;
+
+    /// <summary> 
+    /// Clean up any resources being used.
+    /// </summary>
+    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+    protected override void Dispose(bool disposing)
+    {
+      if (disposing && (components != null))
+      {
+        components.Dispose();
+      }
+      base.Dispose(disposing);
+    }
+
+    #region Component Designer generated code
+
+    /// <summary> 
+    /// Required method for Designer support - do not modify 
+    /// the contents of this method with the code editor.
+    /// </summary>
+    private void InitializeComponent()
+    {
+      tableLayoutPanel1 = new TableLayoutPanel();
+      label1 = new Label();
+      lbTitle = new Label();
+      tableLayoutPanel1.SuspendLayout();
+      SuspendLayout();
+      // 
+      // tableLayoutPanel1
+      // 
+      tableLayoutPanel1.BackColor = Color.White;
+      tableLayoutPanel1.ColumnCount = 3;
+      tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel1.Controls.Add(label1, 0, 0);
+      tableLayoutPanel1.Controls.Add(lbTitle, 2, 0);
+      tableLayoutPanel1.Dock = DockStyle.Fill;
+      tableLayoutPanel1.Location = new Point(0, 0);
+      tableLayoutPanel1.Margin = new Padding(0);
+      tableLayoutPanel1.Name = "tableLayoutPanel1";
+      tableLayoutPanel1.RowCount = 1;
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel1.Size = new Size(868, 244);
+      tableLayoutPanel1.TabIndex = 0;
+      // 
+      // label1
+      // 
+      label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label1.AutoSize = true;
+      label1.BackColor = Color.FromArgb(228, 148, 1);
+      label1.Font = new Font("Microsoft Sans Serif", 20.25F);
+      label1.ForeColor = Color.White;
+      label1.Location = new Point(0, 0);
+      label1.Margin = new Padding(0);
+      label1.Name = "label1";
+      label1.Padding = new Padding(3, 0, 0, 0);
+      label1.Size = new Size(20, 244);
+      label1.TabIndex = 17;
+      label1.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // lbTitle
+      // 
+      lbTitle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbTitle.AutoSize = true;
+      lbTitle.BackColor = Color.Transparent;
+      lbTitle.Font = new Font("Microsoft Sans Serif", 45F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      lbTitle.ForeColor = Color.Black;
+      lbTitle.Location = new Point(40, 0);
+      lbTitle.Margin = new Padding(0);
+      lbTitle.Name = "lbTitle";
+      lbTitle.Padding = new Padding(3, 0, 0, 0);
+      lbTitle.Size = new Size(828, 244);
+      lbTitle.TabIndex = 18;
+      lbTitle.Text = "N/A";
+      lbTitle.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // UcOrderProduction
+      // 
+      AutoScaleDimensions = new SizeF(7F, 15F);
+      AutoScaleMode = AutoScaleMode.Font;
+      Controls.Add(tableLayoutPanel1);
+      Name = "UcOrderProduction";
+      Size = new Size(868, 244);
+      tableLayoutPanel1.ResumeLayout(false);
+      tableLayoutPanel1.PerformLayout();
+      ResumeLayout(false);
+    }
+
+    #endregion
+
+    private TableLayoutPanel tableLayoutPanel1;
+    private Label label1;
+    private TableLayoutPanel tableLayoutPanel2;
+    private Label lbTitle;
+  }
+}

@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static HelperManager.EnumData;
+
+namespace LaborTrackPro.Communication
+{
+  public class MessageDataOutput
+  {
+    public string? Source { get; set; }
+    public Guid? MachineId { get; set; }
+    public string? NameDevice { get; set; }
+
+    public double ValueWeight { get; set; } = 0;
+    public double ValueTare { get; set; } = 0;
+
+    public eValueWeightType eValueWeight { get; set; }
+
+    public UnitOfWeight unitOfWeight { get; set; }
+
+    public ActiveWeighingStatus activeWeighingStatus { get; set; }
+
+    public DateTime SourceDateTime { get; set; }
+
+
+    public byte[]? DataAsBytes { get; set; }
+
+    public string? DataAsString { get; set; }
+  }
+}
