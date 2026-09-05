@@ -1,9 +1,13 @@
 ﻿using HelperManager;
+using iSoft.Communication.Communication;
+using iSoft.Communication.Interface;
+using iSoft.Communication.JsonPayload;
 using LaborTrackPro.Communication;
 using LaborTrackPro.Controls;
 using LaborTrackPro.Custom;
 using LaborTrackPro.Forms;
 using System.Diagnostics;
+using static iSoft.Communication.EnumCommunication;
 using static LaborTrackPro.EnumData;
 using Message = System.Windows.Forms.Message;
 
@@ -172,10 +176,62 @@ namespace LaborTrackPro
       }
     }
 
+    private const string ScaleId = "SCALE_01";
+
+    private readonly ICommunicationService _communication =
+        new CommunicationService();
     private void FrmMain_Load(object sender, EventArgs e)
     {
       CheckOpenMulApp();
       ChangePage(AppModulSupport.Waiting);
+
+
+      //_communication.DataReceived += Communication_DataReceived;
+      //_communication.ConnectionStatusChanged += Communication_StatusChanged;
+
+      //var config = new ConfigTcpClient
+      //{
+      //  Code = ScaleId,
+      //  NameDevice = "Cân TCP",
+      //  Host = "192.168.1.15",
+      //  Port = 8000,
+      //  eModeCommunication = eModeCommunication.SICS,
+      //  AutoConnect = true,
+      //  TimeoutMs = 5000,
+      //  Request = true,
+      //  TimeRequest = 200
+      //};
+
+      //_communication.AddConnection(
+      //    config,
+      //    machineId: null,
+      //    device: eDevice.Weight);
+
+      //_communication.Connect(ScaleId);
+
+    }
+
+    private void Communication_DataReceived(
+       object? sender,
+       iSoft.Communication.Interface.MessageDataOutput data)
+    {
+      BeginInvoke(() =>
+      {
+        var a = data.ValueWeight.ToString();
+        //txtWeight.Text = data.ValueWeight.ToString();
+      });
+    }
+
+    private void Communication_StatusChanged(
+        object? sender,
+        CommunicationStatusChangedEventArgs e)
+    {
+      BeginInvoke(() =>
+      {
+        //lblStatus.Text = e.IsConnected
+        //    ? $"{e.ConnectionId}: Connected"
+        //    : $"{e.ConnectionId}: Disconnected";
+      });
     }
 
     private void CheckOpenMulApp()

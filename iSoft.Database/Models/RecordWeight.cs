@@ -9,7 +9,7 @@ using static iSoft.Database.EnumData;
 
 namespace iSoft.Database.Models
 {
-  public class RecordFoods:BaseModel
+  public class RecordWeight : BaseModel
   {
     public double Net { get; set; }
     public double Tare { get; set; }

@@ -94,18 +94,7 @@
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
       tableLayoutPanel3.Size = new Size(566, 70);
       tableLayoutPanel3.TabIndex = 0;
-      // 
-      // pictureBox1
-      // 
-      pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      pictureBox1.Image = Properties.Resources.Printer;
-      pictureBox1.Location = new Point(0, 0);
-      pictureBox1.Margin = new Padding(0);
-      pictureBox1.Name = "pictureBox1";
-      pictureBox1.Size = new Size(70, 70);
-      pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-      pictureBox1.TabIndex = 0;
-      pictureBox1.TabStop = false;
+
       // 
       // label1
       // 

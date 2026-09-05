@@ -179,18 +179,7 @@
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.Size = new Size(693, 78);
       tableLayoutPanel3.TabIndex = 4;
-      // 
-      // pictureBoxLogo
-      // 
-      pictureBoxLogo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      pictureBoxLogo.Image = Properties.Resources.HSFLogo;
-      pictureBoxLogo.Location = new Point(0, 0);
-      pictureBoxLogo.Margin = new Padding(0);
-      pictureBoxLogo.Name = "pictureBoxLogo";
-      pictureBoxLogo.Size = new Size(222, 78);
-      pictureBoxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
-      pictureBoxLogo.TabIndex = 1;
-      pictureBoxLogo.TabStop = false;
+
       // 
       // UcIdCard
       // 

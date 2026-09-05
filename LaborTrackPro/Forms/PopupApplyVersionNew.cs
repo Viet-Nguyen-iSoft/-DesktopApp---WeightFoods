@@ -1,5 +1,4 @@
-﻿using API;
-using LaborTrackPro.Controls;
+﻿using LaborTrackPro.Controls;
 
 namespace LaborTrackPro.Forms
 {
@@ -19,59 +18,59 @@ namespace LaborTrackPro.Forms
       lbVersionCurrent.Text = AppCore.Ins._appConfig.Version;
     }
 
-    private GitHubReleaseDTO? GitHubReleaseDTO { get; set; }
+    //private GitHubReleaseDTO? GitHubReleaseDTO { get; set; }
     private async void PopupApplyVersionNew_Shown(object? sender, EventArgs e)
     {
-      GitHubReleaseDTO = await ApiGetRelease.GetLatestReleaseAsync();
-      if (GitHubReleaseDTO != null)
-      {
-        LoadInforVersion(GitHubReleaseDTO);
-        CheckNewVersion();
-      }
+      //GitHubReleaseDTO = await ApiGetRelease.GetLatestReleaseAsync();
+      //if (GitHubReleaseDTO != null)
+      //{
+      //  LoadInforVersion(GitHubReleaseDTO);
+      //  CheckNewVersion();
+      //}
     }
 
     private async void btnDownload_Click(object sender, EventArgs e)
     {
-      try
-      {
-        LockByDownload(true);
-        string versionUpdate = GitHubReleaseDTO?.TagName.Replace(".", "_") ?? string.Empty;
-        if (!string.IsNullOrEmpty(versionUpdate))
-        {
-          string folder = Path.Combine(Application.StartupPath, "Versions");
+      //try
+      //{
+      //  LockByDownload(true);
+      //  string versionUpdate = GitHubReleaseDTO?.TagName.Replace(".", "_") ?? string.Empty;
+      //  if (!string.IsNullOrEmpty(versionUpdate))
+      //  {
+      //    string folder = Path.Combine(Application.StartupPath, "Versions");
 
-          if (!Directory.Exists(folder))
-          {
-            Directory.CreateDirectory(folder);
-          }
+      //    if (!Directory.Exists(folder))
+      //    {
+      //      Directory.CreateDirectory(folder);
+      //    }
 
-          string pathFileZip = Path.Combine(folder, $"update_{versionUpdate}.zip");
-          var ok = await ApiGetRelease.DownloadReleaseAsync(GitHubReleaseDTO, pathFileZip);
-          if (ok)
-          {
-            btnApply.Visible = true;
-            btnDownload.Visible = false;
-          }
-        }
-        else
-        {
-          MessageBox.Show("Version lỗi");
-        }
-      }
-      catch (Exception)
-      {
+      //    string pathFileZip = Path.Combine(folder, $"update_{versionUpdate}.zip");
+      //    var ok = await ApiGetRelease.DownloadReleaseAsync(GitHubReleaseDTO, pathFileZip);
+      //    if (ok)
+      //    {
+      //      btnApply.Visible = true;
+      //      btnDownload.Visible = false;
+      //    }
+      //  }
+      //  else
+      //  {
+      //    MessageBox.Show("Version lỗi");
+      //  }
+      //}
+      //catch (Exception)
+      //{
 
-      }
-      finally
-      {
-        LockByDownload(false);
-      }
+      //}
+      //finally
+      //{
+      //  LockByDownload(false);
+      //}
     }
 
     private void btnApply_Click(object sender, EventArgs e)
     {
-      OnSendApply?.Invoke(this, GitHubReleaseDTO?.TagName ?? string.Empty);
-      this.Close();
+      //OnSendApply?.Invoke(this, GitHubReleaseDTO?.TagName ?? string.Empty);
+      //this.Close();
     }
 
     private void btnCancel_Click(object sender, EventArgs e)
@@ -80,20 +79,20 @@ namespace LaborTrackPro.Forms
     }
 
 
-    public void LoadInforVersion(GitHubReleaseDTO gitHubRelease)
-    {
-      if (this.InvokeRequired)
-      {
-        this.Invoke(new Action(() =>
-        {
-          LoadInforVersion(gitHubRelease);
-        }));
-        return;
-      }
+    //public void LoadInforVersion(GitHubReleaseDTO gitHubRelease)
+    //{
+    //  if (this.InvokeRequired)
+    //  {
+    //    this.Invoke(new Action(() =>
+    //    {
+    //      LoadInforVersion(gitHubRelease);
+    //    }));
+    //    return;
+    //  }
 
-      lbVersion.Text = gitHubRelease.TagName;
-      txtCommit.Text = gitHubRelease.CommitMessage;
-    }
+    //  lbVersion.Text = gitHubRelease.TagName;
+    //  txtCommit.Text = gitHubRelease.CommitMessage;
+    //}
 
     public void CheckNewVersion()
     {

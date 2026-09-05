@@ -1,10 +1,7 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using iSoft.Database.DbContexts;
+﻿using iSoft.Database.DbContexts;
 using iSoft.Database.Models;
 using iSoft.Database.Repositorys;
-using iSoft.DatabaseServer.Repositorys;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using static HelperManager.EnumData;
 using static iSoft.Database.EnumData;
 using Connection = iSoft.Database.Models.Connection;
@@ -191,23 +188,23 @@ namespace LaborTrackPro.Controls
       //  await repo.AddRangeAsync(materials);
       //}
 
-      try
-      {
-        foreach (var mr in materials)
-        {
-          using (var context = new PostgresDbContext())
-          {
-            foreach (var rm in mr.CategoryTares)
-              context.Entry(rm).State = EntityState.Unchanged;
-            await context.AddAsync(mr);
-            await context.SaveChangesAsync();
-          }
-        }
-      }
-      catch (Exception)
-      {
-        throw;
-      }
+      //try
+      //{
+      //  foreach (var mr in materials)
+      //  {
+      //    using (var context = new PostgresDbContext())
+      //    {
+      //      foreach (var rm in mr.CategoryTares)
+      //        context.Entry(rm).State = EntityState.Unchanged;
+      //      await context.AddAsync(mr);
+      //      await context.SaveChangesAsync();
+      //    }
+      //  }
+      //}
+      //catch (Exception)
+      //{
+      //  throw;
+      //}
     }
 
     public async Task UpdateRangeMaterialsAsync(List<Product> materials)
@@ -286,13 +283,13 @@ namespace LaborTrackPro.Controls
       //}
     }
 
-    
 
-   
-   
 
-  
-  
+
+
+
+
+
     public async Task<List<Product>> GetMaterialsAsync(bool isContainDelete = false)
     {
       using (var context = new PostgresDbContext())
@@ -304,20 +301,22 @@ namespace LaborTrackPro.Controls
 
     public async Task<List<Product>> GetMaterialTaresAsync()
     {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductRepository(context);
-        return await repo.GetMaterialTaresAsync();
-      }
+      //using (var context = new PostgresDbContext())
+      //{
+      //  var repo = new ProductRepository(context);
+      //  return await repo.GetMaterialTaresAsync();
+      //}
+
+      return new List<Product>();
     }
 
     public async Task UpdateMaterial(Product material)
     {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductRepository(context);
-        await repo.UpdateMaterial(material);
-      }
+      //using (var context = new PostgresDbContext())
+      //{
+      //  var repo = new ProductRepository(context);
+      //  await repo.UpdateMaterial(material);
+      //}
     }
 
     public async Task UpdateMaterials(List<Product> materials)
@@ -331,7 +330,7 @@ namespace LaborTrackPro.Controls
       await repo.UpdateMaterials(materials);
     }
 
-  
+
 
     public async Task<Product?> GetMaterialsByIdAsync(long? id)
     {
@@ -369,7 +368,7 @@ namespace LaborTrackPro.Controls
     }
 
 
-  
+
     public async Task UpdateMaterials(Product material)
     {
       using (var context = new PostgresDbContext())
@@ -379,15 +378,15 @@ namespace LaborTrackPro.Controls
       }
     }
 
- 
 
-    public async Task<RecordFoods> AddRecordAsync(RecordFoods laborProductivityRecognition)
+
+    public async Task<RecordWeight> AddRecordAsync(RecordWeight laborProductivityRecognition)
     {
       try
       {
         using (var context = new PostgresDbContext())
         {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<RecordFoods, PostgresDbContext>(context);
+          var repo = new iSoft.Database.Repositorys.GenericRepository<RecordWeight, PostgresDbContext>(context);
           return await repo.AddAsync(laborProductivityRecognition);
         }
       }
@@ -397,7 +396,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<RecordFoods>> GetRecordByTime(DateTime start, DateTime end, eTypeData eTypeData)
+    public async Task<List<RecordWeight>> GetRecordByTime(DateTime start, DateTime end, eTypeData eTypeData)
     {
       try
       {
@@ -413,10 +412,10 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    
 
 
-    public async Task<List<RecordFoods>> GetAllDataLTPNotIncludeSynchronized_Fixbug()
+
+    public async Task<List<RecordWeight>> GetAllDataLTPNotIncludeSynchronized_Fixbug()
     {
       try
       {
@@ -451,13 +450,13 @@ namespace LaborTrackPro.Controls
       }
     }
 
-   
-  
 
-  
-  
 
-  
+
+
+
+
+
     public async Task<List<Station>> GetMachinesAsync(bool isContainDelete = false)
     {
       try
@@ -533,7 +532,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-   
+
     public async Task<Department> AddDepartmentAsync(Department department)
     {
       using (var context = new PostgresDbContext())
@@ -571,7 +570,7 @@ namespace LaborTrackPro.Controls
       //}
     }
 
- 
+
     public async Task<Department> RemoveDepartment_Async(long id)
     {
       using (var context = new PostgresDbContext())
@@ -641,7 +640,7 @@ namespace LaborTrackPro.Controls
       //}
     }
 
-    
+
 
     public async Task<bool> UpdateRangeEmployeeAsync(List<Employee> employees)
     {
@@ -663,46 +662,46 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, PostgresDbContext>(context);
+        //using (var context = new PostgresDbContext())
+        //{
+        //  var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, PostgresDbContext>(context);
 
-          // Load entity cũ từ DB kèm quan hệ
-          var existingEmployee = await context.Employees
-              .Include(po => po.Departments) // nếu có Departments
-              .FirstOrDefaultAsync(po => po.Id == employee.Id);
+        //  // Load entity cũ từ DB kèm quan hệ
+        //  var existingEmployee = await context.Employees
+        //      .Include(po => po.Departments) // nếu có Departments
+        //      .FirstOrDefaultAsync(po => po.Id == employee.Id);
 
-          if (existingEmployee == null)
-            throw new Exception($"Department {employee.Id} not found");
+        //  if (existingEmployee == null)
+        //    throw new Exception($"Department {employee.Id} not found");
 
-          // Update các field cơ bản
-          existingEmployee.FullName = employee.FullName;
-          existingEmployee.Account = employee.Account;
-          existingEmployee.Passwords = employee.Passwords;
-          existingEmployee.Code = employee.Code;
-          existingEmployee.IdCardCode = employee.IdCardCode;
-          existingEmployee.IdCardName = employee.IdCardName;
-          existingEmployee.IsAllowOverWeight = employee.IsAllowOverWeight;
-          existingEmployee.DeletedFlag = employee.DeletedFlag;
-          existingEmployee.CreatedAt = employee.CreatedAt;
-          existingEmployee.UpdatedAt = employee.UpdatedAt;
-          existingEmployee.IdSrc = employee.IdSrc;
+        //  // Update các field cơ bản
+        //  existingEmployee.FullName = employee.FullName;
+        //  existingEmployee.Account = employee.Account;
+        //  existingEmployee.Passwords = employee.Passwords;
+        //  existingEmployee.Code = employee.Code;
+        //  existingEmployee.IdCardCode = employee.IdCardCode;
+        //  existingEmployee.IdCardName = employee.IdCardName;
+        //  existingEmployee.IsAllowOverWeight = employee.IsAllowOverWeight;
+        //  existingEmployee.DeletedFlag = employee.DeletedFlag;
+        //  existingEmployee.CreatedAt = employee.CreatedAt;
+        //  existingEmployee.UpdatedAt = employee.UpdatedAt;
+        //  existingEmployee.IdSrc = employee.IdSrc;
 
-          // ====== Departments (N-N) ======
-          existingEmployee?.Departments?.Clear();
-          if (departments?.Count() > 0)
-          {
-            var ids = departments.Select(m => m.Id).ToList();
-            var empFromDb = await context?.Departments?
-                .Where(m => ids.Contains(m.Id))?
-                .ToListAsync();
+        //  // ====== Departments (N-N) ======
+        //  existingEmployee?.Departments?.Clear();
+        //  if (departments?.Count() > 0)
+        //  {
+        //    var ids = departments.Select(m => m.Id).ToList();
+        //    var empFromDb = await context?.Departments?
+        //        .Where(m => ids.Contains(m.Id))?
+        //        .ToListAsync();
 
-            foreach (var m in empFromDb)
-              existingEmployee?.Departments?.Add(m);
-          }
+        //    foreach (var m in empFromDb)
+        //      existingEmployee?.Departments?.Add(m);
+        //  }
 
-          await repo.UpdateAsync(existingEmployee);
-        }
+        //  await repo.UpdateAsync(existingEmployee);
+        //}
       }
       catch (Exception)
       {
@@ -756,7 +755,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-   
+
 
     public async Task<bool> UpdateEmployee_Async(Employee employee)
     {
@@ -774,9 +773,9 @@ namespace LaborTrackPro.Controls
         return await repo.UpdateRangeAsync(machines);
       }
     }
-  
 
-    public async Task<RecordFoods> RemoveDatalog_Async(long id, long idEmloyee)
+
+    public async Task<RecordWeight> RemoveDatalog_Async(long id, long idEmloyee)
     {
       try
       {
@@ -792,38 +791,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task UpdateRangeConnectionAsync(List<Connection> connections)
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new iSoft.DatabaseServer.Repositorys.GenericRepository<Connection, PostgresDbContext>(context);
-          await repo.UpdateRangeAsync(connections);
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
-
- 
-    public async Task<List<Connection>> GetConnectionWeightLocalAsync()
-    {
-      try
-      {
-        using (var context = new PostgresDbContext())
-        {
-          var repo = new ConnectionRepository(context);
-          return await repo.GetAllConnectionWeightAsync_SyncData();
-        }
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
+   
     public async Task<List<Connection>> GetConnectionAsync()
     {
       try
@@ -855,10 +823,10 @@ namespace LaborTrackPro.Controls
       }
     }
 
- 
 
 
-    public async Task<List<RecordFoods>?> GetRecordByPOAsync(long idPO, DateTime dt, EnumInternalExternalStatus enumInternalExternalStatus, EnumExportImport enumExportImport)
+
+    public async Task<List<RecordWeight>?> GetRecordByPOAsync(long idPO, DateTime dt, EnumInternalExternalStatus enumInternalExternalStatus, EnumExportImport enumExportImport)
     {
       try
       {
@@ -874,7 +842,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<RecordFoods>?> GetRecordByRequestOtherAsync(long? employeeId, DateTime dt, EnumInternalExternalStatus enumInternalExternalStatus)
+    public async Task<List<RecordWeight>?> GetRecordByRequestOtherAsync(long? employeeId, DateTime dt, EnumInternalExternalStatus enumInternalExternalStatus)
     {
       try
       {
@@ -890,7 +858,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<List<RecordFoods>> GetDataExpire(DateTime dt)
+    public async Task<List<RecordWeight>> GetDataExpire(DateTime dt)
     {
       try
       {
@@ -906,7 +874,7 @@ namespace LaborTrackPro.Controls
       }
     }
 
-    public async Task<RecordFoods?> GetDatalogWeightByAsync(long? id)
+    public async Task<RecordWeight?> GetDatalogWeightByAsync(long? id)
     {
       try
       {
@@ -923,7 +891,7 @@ namespace LaborTrackPro.Controls
     }
 
 
-    public async Task<bool> UpdateRecordAsync(List<RecordFoods> datalogWeights)
+    public async Task<bool> UpdateRecordAsync(List<RecordWeight> datalogWeights)
     {
       try
       {
@@ -939,8 +907,8 @@ namespace LaborTrackPro.Controls
       }
     }
 
- 
-    public async Task<bool> UpdateRecordAsync(long idRecordDelivery, RecordFoods laborProductivityRecognition)
+
+    public async Task<bool> UpdateRecordAsync(long idRecordDelivery, RecordWeight laborProductivityRecognition)
     {
       try
       {
@@ -956,10 +924,10 @@ namespace LaborTrackPro.Controls
       }
     }
 
-  
 
 
-  
+
+
     public async Task<List<CategoryTare>> GetAllCategoryTareByMaterialIdAsync(long? id)
     {
       using (var context = new PostgresDbContext())
@@ -970,17 +938,10 @@ namespace LaborTrackPro.Controls
     }
 
 
-    public async Task<Product?> GetAllCategoryTareByMaterialAsync(Product material)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductRepository(context);
-        return await repo.GetAllCategoryTareByMaterialAsync(material);
-      }
-    }
 
-   
 
-    
+
+
+
   }
 }

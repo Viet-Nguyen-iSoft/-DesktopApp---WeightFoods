@@ -9,7 +9,7 @@ namespace iSoft.Database.DTO
   public class MaterialDeliveryDTO
   {
     [Browsable(false)]
-    public RecordFoods? DatalogWeight { get; set; }
+    public RecordWeight? DatalogWeight { get; set; }
 
     [Browsable(false)]
     public string? Operator { get; set; }

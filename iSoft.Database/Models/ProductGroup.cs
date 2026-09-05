@@ -8,18 +8,12 @@ namespace iSoft.Database.Models
 {
   public class ProductGroup : BaseModel
   {
+    public string? Code { get; set; }
     public string? Name { get; set; }
-    public int? MaterialType { get; set; }
-    public string? TypeName { get; set; }
-    public long? MaterialGroupParentId { get; set; }
+    public string? Description { get; set; }
 
     #region Mapping
-    public ProductGroup? MaterialGroupParent { get; set; }
-    public ICollection<ProductGroup> MaterialGroupChildren { get; set; }
-        = new List<ProductGroup>();
-
-
-    public ICollection<Product> Materials { get; set; } = new List<Product>();
+    public ICollection<Product> Products { get; set; } = new List<Product>();
     #endregion
   }
 }

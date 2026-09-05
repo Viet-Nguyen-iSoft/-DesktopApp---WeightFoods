@@ -13,21 +13,24 @@ namespace iSoft.Database.DbContexts
 {
   public class CommonDbContext : DbContext
   {
-    public virtual DbSet<ProductGroup>? MaterialGroups { get; set; }
-    public virtual DbSet<Product>? Products { get; set; }
-    public virtual DbSet<CategoryTare>? CategoryTares { get; set; }
-
-
-    public virtual DbSet<Employee>? Employees { get; set; }
-    public virtual DbSet<Department>? Departments { get; set; }
-
-
-    public virtual DbSet<RecordFoods>?  RecordFoods { get; set; }
-    
     public virtual DbSet<Station>? Machines { get; set; }
     public virtual DbSet<Connection>? Connections { get; set; }
     public virtual DbSet<AppConfig>? AppConfigs { get; set; }
     public virtual DbSet<LogAction>? LogActions { get; set; }
+    public virtual DbSet<ProductGroup>? ProductGroups { get; set; }
+    public virtual DbSet<Product>? Products { get; set; }
+    public virtual DbSet<CategoryTare>? CategoryTares { get; set; }
+    public virtual DbSet<Warehouse>? Warehouses { get; set; }
+    public virtual DbSet<TypeGoods>? TypeGoods { get; set; }
+    public virtual DbSet<Client>? Clients { get; set; }
+    public virtual DbSet<RecordTruck>? RecordTrucks { get; set; }
+    public virtual DbSet<RecordWeight>? RecordWeights { get; set; }
+    
+
+
+    //public virtual DbSet<Employee>? Employees { get; set; }
+    //public virtual DbSet<Department>? Departments { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

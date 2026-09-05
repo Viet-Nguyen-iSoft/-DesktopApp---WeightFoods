@@ -13,12 +13,10 @@ namespace iSoft.Database.Models
     public string? Code { get; set; }
     public string? Name { get; set; }
     public string? Description { get; set; }
-    public double? Value { get; set; } = 0;
-    public int? TareGroup { get; set; }
+    public double? Value { get; set; } = 0.0;
 
     #region Mapping
-    public ICollection<RecordFoods>?  DatalogWeights { get; set; } = new HashSet<RecordFoods>();
-    public ICollection<Product>?  Materials { get; set; } = new HashSet<Product>();
+    
     #endregion
   }
 }

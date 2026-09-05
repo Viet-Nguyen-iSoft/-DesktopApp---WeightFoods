@@ -29,7 +29,7 @@ namespace LaborTrackPro.Printer
     public string[]? DepartmentList { get; set; }
 
     [JsonIgnore]
-    public List<RecordFoods>? LaborProductivityRecognitions { get; set; }
+    public List<RecordWeight>? LaborProductivityRecognitions { get; set; }
     [JsonIgnore]
     public List<MaterialDeliveryDTO>? MaterialDelivaryDTOs { get; set; }
     [JsonIgnore]

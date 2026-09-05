@@ -20,7 +20,7 @@ namespace LaborTrackPro
       ApplicationConfiguration.Initialize();
 
       //Khởi tạo Db
-      //InitDb().GetAwaiter().GetResult();
+      InitDb().GetAwaiter().GetResult();
 
       //Log Start App
       //AppCore.Ins.LogAction("Start App", eAction.StartApp);
@@ -80,7 +80,7 @@ namespace LaborTrackPro
               });
             }
 
-            if (db?.Connections?.Any(x => x.eDevice == eDevice.WeightTcp) == false)
+            if (db?.Connections?.Any(x => x.EnumDevice == EnumDevice.WeightTcp) == false)
             {
               TcpClientJson tcpClientJson = new TcpClientJson();
               tcpClientJson.IP = "192.168.3.100";
@@ -90,8 +90,8 @@ namespace LaborTrackPro
               {
                 Name = "Cân 1.5 tấn",
                 Code = "IS0001",
-                eCommunicationType = eCommunicationType.TcpClient,
-                eDevice = eDevice.WeightTcp,
+                EnumCommunicationType = EnumCommunicationType.TcpClient,
+                EnumDevice = EnumDevice.WeightTcp,
                 JsonStrConfig = JsonHelper.ToJson(tcpClientJson),
                 DeletedFlag = false,
                 EnableFlag = true,
@@ -101,7 +101,7 @@ namespace LaborTrackPro
               });
             }
 
-            if (db?.Connections?.Any(x => x.eDevice == eDevice.HidTcp) == false)
+            if (db?.Connections?.Any(x => x.EnumDevice == EnumDevice.HidTcp) == false)
             {
               TcpClientJson tcpClientJson = new TcpClientJson();
               tcpClientJson.IP = "192.168.3.201";
@@ -111,8 +111,8 @@ namespace LaborTrackPro
               {
                 Name = "HID",
                 Code = "IS0002",
-                eCommunicationType = eCommunicationType.TcpClient,
-                eDevice = eDevice.HidTcp,
+                EnumCommunicationType = EnumCommunicationType.TcpClient,
+                EnumDevice = EnumDevice.HidTcp,
                 JsonStrConfig = JsonHelper.ToJson(tcpClientJson),
                 DeletedFlag = false,
                 EnableFlag = true,

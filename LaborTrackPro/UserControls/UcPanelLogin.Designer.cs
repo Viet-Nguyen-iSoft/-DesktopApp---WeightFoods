@@ -200,7 +200,7 @@
       btnLogin.BorderSize = 0;
       btnLogin.FlatAppearance.BorderSize = 0;
       btnLogin.FlatStyle = FlatStyle.Flat;
-      btnLogin.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnLogin.Font = new Font("Roboto", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
       btnLogin.ForeColor = Color.White;
       btnLogin.Location = new Point(33, 433);
       btnLogin.Name = "btnLogin";

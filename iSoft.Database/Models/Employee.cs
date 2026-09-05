@@ -23,7 +23,7 @@ namespace iSoft.Database.Models
 
     #region Mapping
     [Browsable(false)]
-    public ICollection<RecordFoods>? Recognitions { get; set; }
+    public ICollection<RecordWeight>? Recognitions { get; set; }
     public ICollection<Department> Departments { get; set; } = new List<Department>();
     public ICollection<Station> Machines { get; set; } = new List<Station>();
 

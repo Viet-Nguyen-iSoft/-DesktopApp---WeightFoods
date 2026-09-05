@@ -63,16 +63,6 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Barcode {
-            get {
-                object obj = ResourceManager.GetObject("Barcode", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap BtnHome {
             get {
                 object obj = ResourceManager.GetObject("BtnHome", resourceCulture);
@@ -93,9 +83,9 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HSFBackGround {
+        internal static System.Drawing.Bitmap icon_add {
             get {
-                object obj = ResourceManager.GetObject("HSFBackGround", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_add", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,29 +93,9 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap HSFBG {
+        internal static System.Drawing.Bitmap icon_add_white {
             get {
-                object obj = ResourceManager.GetObject("HSFBG", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap HSFBG1 {
-            get {
-                object obj = ResourceManager.GetObject("HSFBG1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap HSFLogo {
-            get {
-                object obj = ResourceManager.GetObject("HSFLogo", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_add_white", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,26 +113,6 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_app_mini {
-            get {
-                object obj = ResourceManager.GetObject("icon_app_mini", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_app_restart {
-            get {
-                object obj = ResourceManager.GetObject("icon_app_restart", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_back {
             get {
                 object obj = ResourceManager.GetObject("icon_back", resourceCulture);
@@ -173,9 +123,9 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_ban_thanh_pham {
+        internal static System.Drawing.Bitmap icon_btn_home {
             get {
-                object obj = ResourceManager.GetObject("icon_ban_thanh_pham", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_btn_home", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +133,9 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_button_confirm {
+        internal static System.Drawing.Bitmap icon_btn_masterdata {
             get {
-                object obj = ResourceManager.GetObject("icon_button_confirm", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_btn_masterdata", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,29 +143,9 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_CCDC {
+        internal static System.Drawing.Bitmap icon_btn_user {
             get {
-                object obj = ResourceManager.GetObject("icon_CCDC", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_check {
-            get {
-                object obj = ResourceManager.GetObject("icon_check", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_chemicals {
-            get {
-                object obj = ResourceManager.GetObject("icon_chemicals", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_btn_user", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,26 +183,6 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_delivered {
-            get {
-                object obj = ResourceManager.GetObject("icon_delivered", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_delivery_note {
-            get {
-                object obj = ResourceManager.GetObject("icon_delivery_note", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_disconnected {
             get {
                 object obj = ResourceManager.GetObject("icon_disconnected", resourceCulture);
@@ -296,56 +206,6 @@ namespace LaborTrackPro.Properties {
         internal static System.Drawing.Bitmap icon_Fgs {
             get {
                 object obj = ResourceManager.GetObject("icon_Fgs", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_Fgs_color {
-            get {
-                object obj = ResourceManager.GetObject("icon_Fgs_color", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_function {
-            get {
-                object obj = ResourceManager.GetObject("icon_function", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_giao_hang {
-            get {
-                object obj = ResourceManager.GetObject("icon_giao_hang", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_historical_1 {
-            get {
-                object obj = ResourceManager.GetObject("icon_historical_1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_info {
-            get {
-                object obj = ResourceManager.GetObject("icon_info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,66 +243,6 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_material {
-            get {
-                object obj = ResourceManager.GetObject("icon_material", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_material_color {
-            get {
-                object obj = ResourceManager.GetObject("icon_material_color", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_material_raw_color {
-            get {
-                object obj = ResourceManager.GetObject("icon_material_raw_color", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_material_raws {
-            get {
-                object obj = ResourceManager.GetObject("icon_material_raws", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_materials {
-            get {
-                object obj = ResourceManager.GetObject("icon_materials", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_menu_app {
-            get {
-                object obj = ResourceManager.GetObject("icon_menu_app", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_next {
             get {
                 object obj = ResourceManager.GetObject("icon_next", resourceCulture);
@@ -453,59 +253,9 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_nhap {
-            get {
-                object obj = ResourceManager.GetObject("icon_nhap", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_order_product {
-            get {
-                object obj = ResourceManager.GetObject("icon_order_product", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_order_product_another {
-            get {
-                object obj = ResourceManager.GetObject("icon_order_product_another", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_PO {
-            get {
-                object obj = ResourceManager.GetObject("icon_PO", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_printer {
             get {
                 object obj = ResourceManager.GetObject("icon_printer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_product {
-            get {
-                object obj = ResourceManager.GetObject("icon_product", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -543,16 +293,6 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_request_other {
-            get {
-                object obj = ResourceManager.GetObject("icon_request_other", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_rfid {
             get {
                 object obj = ResourceManager.GetObject("icon_rfid", resourceCulture);
@@ -583,29 +323,19 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_setting {
+            get {
+                object obj = ResourceManager.GetObject("icon_setting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_settings {
             get {
                 object obj = ResourceManager.GetObject("icon_settings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_spice {
-            get {
-                object obj = ResourceManager.GetObject("icon_spice", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_test_machine {
-            get {
-                object obj = ResourceManager.GetObject("icon_test_machine", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -626,16 +356,6 @@ namespace LaborTrackPro.Properties {
         internal static System.Drawing.Bitmap icon_toggle_on {
             get {
                 object obj = ResourceManager.GetObject("icon_toggle_on", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_tra_hang {
-            get {
-                object obj = ResourceManager.GetObject("icon_tra_hang", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -693,69 +413,19 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_weighing {
-            get {
-                object obj = ResourceManager.GetObject("icon_weighing", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_xuat {
-            get {
-                object obj = ResourceManager.GetObject("icon_xuat", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap iconExternal {
-            get {
-                object obj = ResourceManager.GetObject("iconExternal", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap IconInPhieuCan {
-            get {
-                object obj = ResourceManager.GetObject("IconInPhieuCan", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap IconInPhieuGiaoNhan {
-            get {
-                object obj = ResourceManager.GetObject("IconInPhieuGiaoNhan", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap iconInternal {
-            get {
-                object obj = ResourceManager.GetObject("iconInternal", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap IDcard {
             get {
                 object obj = ResourceManager.GetObject("IDcard", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Info {
+            get {
+                object obj = ResourceManager.GetObject("Info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -793,6 +463,26 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap logo_bosch {
+            get {
+                object obj = ResourceManager.GetObject("logo_bosch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logo_isoft {
+            get {
+                object obj = ResourceManager.GetObject("logo_isoft", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Logo512 {
             get {
                 object obj = ResourceManager.GetObject("Logo512", resourceCulture);
@@ -803,79 +493,9 @@ namespace LaborTrackPro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Mask_group {
+        internal static System.Drawing.Bitmap Question {
             get {
-                object obj = ResourceManager.GetObject("Mask group", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Menu1 {
-            get {
-                object obj = ResourceManager.GetObject("Menu1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Menu2 {
-            get {
-                object obj = ResourceManager.GetObject("Menu2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Menu3 {
-            get {
-                object obj = ResourceManager.GetObject("Menu3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Picture {
-            get {
-                object obj = ResourceManager.GetObject("Picture", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Printer {
-            get {
-                object obj = ResourceManager.GetObject("Printer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap printer_A4_bl {
-            get {
-                object obj = ResourceManager.GetObject("printer_A4_bl", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap RFID_OK {
-            get {
-                object obj = ResourceManager.GetObject("RFID_OK", resourceCulture);
+                object obj = ResourceManager.GetObject("Question", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

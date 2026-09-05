@@ -71,17 +71,17 @@ namespace LaborTrackPro.UC
       }
     }
 
-    public void SetIconDevice(eDevice eDevice)
+    public void SetIconDevice(EnumDevice eDevice)
     {
       switch (eDevice)
       {
-        case eDevice.Weight:
+        case EnumDevice.Weight:
           IconStatus = Properties.Resources.icon_scale;
           break;
-        case eDevice.Rfid:
+        case EnumDevice.Rfid:
           IconStatus = Properties.Resources.icon_rfid; ;
           break;
-        case eDevice.Server:
+        case EnumDevice.Server:
           IconStatus = Properties.Resources.icon_server;
           break;
       }

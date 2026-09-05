@@ -11,77 +11,27 @@ namespace iSoft.Database
 {
   public static class DTOHelper
   {
-    public static List<EmployeeDTO>? ConvertEmployeeToDTO(List<Employee>? employees)
+    public static List<ClientDTO>? ConvertClientDTO(List<Client>? clients)
     {
-      var rsDto = new List<EmployeeDTO>();
-      if (employees?.Count()>0)
+      var rsDto = new List<ClientDTO>();
+      if (clients?.Count()>0)
       {
-        rsDto = employees
-          .Select((e, index) => new EmployeeDTO
+        clients = clients.OrderBy(e => e.Name).ToList();
+        rsDto = clients
+          .Select((e, index) => new ClientDTO
           {
-            Id = e.Id,
+            Client = e,
             No = index + 1, // STT bắt đầu từ 1
-            FullName = e.FullName,
-            Code = e.Code,
-            Department = e?.Departments?.Where(x => x.DeletedFlag == false)?.FirstOrDefault()?.Name ?? "N/A",
-            IdCardCode = e?.IdCardCode,
-            CreatedAt = e?.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "N/A",
-            UpdatedAt = e?.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "N/A",
+            Name = e.Name,
+            Description = e.Description,
           })
-          .OrderBy(e => e.Department).ThenBy(x => x.FullName)
+          .OrderBy(e => e.Name)
           .ToList();
-
-        if (rsDto?.Count() > 0)
-        {
-          for (int i = 0; i < rsDto.Count; i++)
-          {
-            rsDto[i].No = i + 1;
-          }
-        }
       }  
       return rsDto;
     }
     
-    public static List<MaterialDTO> ConvertMaterialToDTO(List<Product>? materials)
-    {
-      var result = new List<MaterialDTO>();
-      if (materials == null) return result;
-      if (materials?.Count > 0)
-      {
-        materials = materials.OrderBy(x => x.MaterialType).ThenBy(x => x.Group).ToList();
-
-        int stt = 1;
-        foreach (var material in materials)
-        {
-          string typeMaterial = EnumHelper.GetEnumDescription((EnumMaterialType)(material?.MaterialType));
-
-          var dto = new MaterialDTO
-          {
-            Id = material?.Id,
-            No = stt.ToString(),
-            Code = material?.Code,
-            TypeMaterial = typeMaterial,
-            Type = $"{material?.Name}",
-            Grade = material?.Grade ?? "",
-            Unit = material?.Unit ?? "",
-            LOT = material?.LOT ?? "",
-            LossPercent = material?.LossPercent ?? "",
-            ExpiredDate = material?.ExpiredDate ?? "",
-            Note = material?.Note ?? "",
-            Supplier = material?.Supplier ?? "",
-
-            WeightConversion = Math.Round(material?.WeightConversion??0.0,5),
-
-            CreatedAt = material?.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "",
-            UpdatedAt = material?.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "",
-            MaterialSrc = material,
-          };
-          result.Add(dto);
-          stt++;
-        }
-      }
-      return result;
-    }
+    
 
     public static List<DepartmentDTO> ConvertDepartmentToDTO(List<Department> departments)
     {
@@ -110,7 +60,7 @@ namespace iSoft.Database
 
 
     public static List<DatalogOperationGroupDTO> ConvertDatalogOperationGroup
-    (List<RecordFoods> laborProductivityRecognitions, string textSearch = "")
+    (List<RecordWeight> laborProductivityRecognitions, string textSearch = "")
     {
       textSearch = TextHelper.RemoveDiacritics(textSearch).Trim().ToLower();
 

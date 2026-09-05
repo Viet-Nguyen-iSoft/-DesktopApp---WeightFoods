@@ -8,20 +8,20 @@ using static iSoft.Database.EnumData;
 
 namespace iSoft.Database.Repositorys
 {
-  public class RecordFoodsRepository : GenericRepository<RecordFoods, CommonDbContext>
+  public class RecordFoodsRepository : GenericRepository<RecordWeight, CommonDbContext>
   {
     public RecordFoodsRepository(DbContext context) : base(context)
     {
 
     }
 
-    public async Task<List<RecordFoods>> GetAllDataByTime(DateTime start, DateTime end, eTypeData eTypeData = eTypeData.All) // getall
+    public async Task<List<RecordWeight>> GetAllDataByTime(DateTime start, DateTime end, eTypeData eTypeData = eTypeData.All) // getall
     {
       if (eTypeData== eTypeData.OnlyNotDelete)
       {
         var startTimeOnlyNotDelete = start.Date + new TimeSpan(0, 0, 0);
         var endTimeOnlyNotDelete = end.Date + new TimeSpan(23, 59, 59);
-        return await this.Context.Set<RecordFoods>()
+        return await this.Context.Set<RecordWeight>()
                                   .Where(x => !x.DeletedFlag &&
                                   ((DateTime)(x.CreatedAt)) >= startTimeOnlyNotDelete &&
                                   ((DateTime)(x.CreatedAt)) <= endTimeOnlyNotDelete)
@@ -35,7 +35,7 @@ namespace iSoft.Database.Repositorys
       {
         var startTimeOnlyDelete = start.Date + new TimeSpan(0, 0, 0);
         var endTimeOnlyDelete = end.Date + new TimeSpan(23, 59, 59);
-        return await this.Context.Set<RecordFoods>()
+        return await this.Context.Set<RecordWeight>()
                                   //.Where(x => x.DeletedFlag &&
                                   //((DateTime)(x.CreatedAt)) >= startTimeOnlyDelete &&
                                   //((DateTime)(x.CreatedAt)) <= endTimeOnlyDelete)
@@ -49,7 +49,7 @@ namespace iSoft.Database.Repositorys
       {
         var startTime = start.Date + new TimeSpan(0, 0, 0);
         var endTime = end.Date + new TimeSpan(23, 59, 59);
-        return await this.Context.Set<RecordFoods>()
+        return await this.Context.Set<RecordWeight>()
                                   //.Where(x =>
                                   //((DateTime)(x.CreatedAt)) >= startTime &&
                                   //((DateTime)(x.CreatedAt)) <= endTime)
@@ -63,10 +63,10 @@ namespace iSoft.Database.Repositorys
 
 
     //Data is not synchronized
-    public async Task<List<RecordFoods>> GetAllNotSynchronized()
+    public async Task<List<RecordWeight>> GetAllNotSynchronized()
     {
 
-      return await this.Context.Set<RecordFoods>()
+      return await this.Context.Set<RecordWeight>()
                                 // .Where(x => x.SyncFlag == false)
                                 //.Include(x => x.ProductionOrder)
                                 //.Include(x => x.Production)
@@ -80,30 +80,30 @@ namespace iSoft.Database.Repositorys
                                 .ToListAsync();
     }
 
-    public async Task<List<RecordFoods>> GetAllNotIncludeSynchronized_Fixbug()
+    public async Task<List<RecordWeight>> GetAllNotIncludeSynchronized_Fixbug()
     {
 
-      return await this.Context.Set<RecordFoods>()
+      return await this.Context.Set<RecordWeight>()
                                  //.Where(x => x.DeletedFlag == false && x.DatalogDeliveryId!=null)
                                  //.Include(x => x.Machine)
                                  //.Include(x => x.DatalogDelivery)
                                 .ToListAsync();
     }
 
-    public async Task<List<RecordFoods>> GetAllSynchronized()
+    public async Task<List<RecordWeight>> GetAllSynchronized()
     {
 
-      return await this.Context.Set<RecordFoods>()
+      return await this.Context.Set<RecordWeight>()
                                  .Where(x => x.SyncFlag == false)
                                 .ToListAsync();
     }
-    public async Task<RecordFoods> UpdateFlagDeleteAsync(long id, long idEmloyee)
+    public async Task<RecordWeight> UpdateFlagDeleteAsync(long id, long idEmloyee)
     {
       try
       {
         await this.Context.Database.EnsureCreatedAsync();
         await this.Context.Database.BeginTransactionAsync();
-        var rs = await this.Context.Set<RecordFoods>()
+        var rs = await this.Context.Set<RecordWeight>()
               .FirstOrDefaultAsync(x => x.Id == id);
 
         if (rs != null)
@@ -112,7 +112,7 @@ namespace iSoft.Database.Repositorys
           rs.UpdatedBy = idEmloyee;
           rs.DeletedFlag = true;
           rs.SyncFlag = false;
-          this.Context.Set<RecordFoods>().Update(rs);
+          this.Context.Set<RecordWeight>().Update(rs);
           await this.Context.SaveChangesAsync();
           this.Context.Database.CommitTransaction();
         }
@@ -126,11 +126,11 @@ namespace iSoft.Database.Repositorys
     }
 
 
-    public async Task<List<RecordFoods>> GetRecordByPOAsync(long idPO)
+    public async Task<List<RecordWeight>> GetRecordByPOAsync(long idPO)
     {
       try
       {
-        return await this.Context.Set<RecordFoods>()
+        return await this.Context.Set<RecordWeight>()
                                    // .Where(x => x.ProductionOrderId == idPO && x.DeletedFlag == false)
                                    //.Include(x => x.ProductionOrder)
                                    //.Include(x => x.Material)
@@ -143,11 +143,11 @@ namespace iSoft.Database.Repositorys
         throw;
       }
     }
-    public async Task<List<RecordFoods>> GetRecordByPOAsync(long idPO, DateTime dateTime, EnumInternalExternalStatus enumInternalExternal,EnumExportImport enumExportImport)
+    public async Task<List<RecordWeight>> GetRecordByPOAsync(long idPO, DateTime dateTime, EnumInternalExternalStatus enumInternalExternal,EnumExportImport enumExportImport)
     {
       try
       {
-        return await this.Context.Set<RecordFoods>()
+        return await this.Context.Set<RecordWeight>()
                                    // .Where(x => x.ProductionOrderId == idPO && 
                                    // x.DeletedFlag == false && 
                                    // x.CreatedAt > dateTime && 
@@ -168,11 +168,11 @@ namespace iSoft.Database.Repositorys
       }
     }
 
-    public async Task<List<RecordFoods>> GetRecordByRequestOtherAsync(long? employeeId, DateTime dateTime, EnumInternalExternalStatus enumInternalExternalStatus)
+    public async Task<List<RecordWeight>> GetRecordByRequestOtherAsync(long? employeeId, DateTime dateTime, EnumInternalExternalStatus enumInternalExternalStatus)
     {
       try
       {
-        return await this.Context.Set<RecordFoods>()
+        return await this.Context.Set<RecordWeight>()
                                     .Where(x => x.EmployeeId == employeeId &&
                                     x.DeletedFlag == false && 
                                     x.CreatedAt > dateTime //&&
@@ -189,11 +189,11 @@ namespace iSoft.Database.Repositorys
         throw;
       }
     }
-    public async Task<List<RecordFoods>> GetRecordExpireAsync(DateTime dateTime)
+    public async Task<List<RecordWeight>> GetRecordExpireAsync(DateTime dateTime)
     {
       try
       {
-        return new List<RecordFoods>();
+        return new List<RecordWeight>();
         //return await this.Context.Set<RecordFoods>()
         //                            .Where(x => x.DeletedFlag == false && x.CreatedAt < dateTime && x.DatalogDeliveryId == null)
         //                           .ToListAsync();
@@ -204,11 +204,11 @@ namespace iSoft.Database.Repositorys
       }
     }
 
-    public async Task<RecordFoods?> GetDatalogWeightByAsync(long? id)
+    public async Task<RecordWeight?> GetDatalogWeightByAsync(long? id)
     {
       try
       {
-        return await this.Context.Set<RecordFoods>()
+        return await this.Context.Set<RecordWeight>()
                                    //.Where(x => x.Id == id)
                                    //.Include (x => x.ProductionOrder)
                                    //.Include(x => x.Material)
@@ -221,11 +221,11 @@ namespace iSoft.Database.Repositorys
       }
     }
 
-    public async Task<bool> UpdateData(RecordFoods record,long idDelivery)
+    public async Task<bool> UpdateData(RecordWeight record,long idDelivery)
     {
       try
       {
-        var rs = await this.Context.Set<RecordFoods>()
+        var rs = await this.Context.Set<RecordWeight>()
                                     .FirstOrDefaultAsync(x => x.Id == record.Id);
         //if (rs != null)
         //{

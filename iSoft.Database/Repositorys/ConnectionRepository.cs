@@ -17,7 +17,7 @@ namespace iSoft.Database.Repositorys
       try
       {
         return await this.Context.Set<Connection>()
-        .Where(x => x.eDevice == eDevice.Weight && !x.DeletedFlag && !x.SyncFlag)
+        .Where(x => x.EnumDevice == EnumDevice.Weight && !x.DeletedFlag && !x.SyncFlag)
         //.Include(x=>x.Machine)
         .ToListAsync();
       }

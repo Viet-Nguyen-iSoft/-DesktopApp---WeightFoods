@@ -6,14 +6,14 @@ namespace iSoft.Database.Models
   {
     public string? Name { get; set; }
     public string? Code { get; set; }
-    public eDevice? eDevice { get; set; }
-    public eCommunicationType? eCommunicationType { get; set; }
+    public EnumDevice? EnumDevice { get; set; }
+    public EnumCommunicationType?  EnumCommunicationType { get; set; }
     public string? JsonStrConfig { get; set; }
 
 
     #region Mapping
-    public long? MachineId { get; set; }
-    public Station? Machine { get; set; }
+    public long? StationId { get; set; }
+    public Station? Station { get; set; }
     #endregion
   }
 }

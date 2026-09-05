@@ -12,6 +12,7 @@ namespace iSoft.Communication.Interface
   {
     string Id { get; }
     bool IsConnected { get; }
+    bool IsRequestGetData { get; set; }
     bool AutoConnect { get; set; }
     int Timeout { get; set; }
     eModeCommunication EModeCommunication { get; set; }

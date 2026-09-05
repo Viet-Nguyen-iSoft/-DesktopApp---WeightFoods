@@ -1,13 +1,7 @@
 ﻿using iSoft.Database.DTO;
-using iSoft.Database.Models;
-using LaborTrackPro.Controls;
-using Org.BouncyCastle.Math.Field;
 using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Runtime.InteropServices;
-using static HelperManager.EnumData;
-using static iSoft.Database.EnumData;
-using static LaborTrackPro.Helper.DTO;
 using Path = System.IO.Path;
 
 namespace LaborTrackPro.Printer

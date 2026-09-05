@@ -37,15 +37,13 @@
     <PackageReference Include="PDFsharp" Version="6.2.2" />
     <PackageReference Include="S7netplus" Version="0.20.0" />
     <PackageReference Include="Select.HtmlToPdf" Version="26.3.0" />
-    <PackageReference Include="SSH.NET" Version="2025.0.0" />
     <PackageReference Include="SuperSimpleTcp" Version="3.1.0" />
     <PackageReference Include="System.Management" Version="10.0.4" />
     <PackageReference Include="UglyToad.MakeMe" Version="0.2.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API\API.csproj" />
-    <ProjectReference Include="..\iSoft.DatabaseServer\iSoft.DatabaseServer.csproj" />
+    <ProjectReference Include="..\iSoft.Communication\iSoft.Communication.csproj" />
     <ProjectReference Include="..\iSoft.Database\iSoft.Database.csproj" />
     <ProjectReference Include="..\iSoft.RabbitMq\iSoft.RabbitMq.csproj" />
   </ItemGroup>

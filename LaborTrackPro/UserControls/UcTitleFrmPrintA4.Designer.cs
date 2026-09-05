@@ -125,18 +125,7 @@
       label1.TabIndex = 11;
       label1.Text = "Trạng thái máy in:";
       label1.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // picIcon
-      // 
-      picIcon.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      picIcon.Image = Properties.Resources.icon_delivery_note;
-      picIcon.Location = new Point(13, 10);
-      picIcon.Margin = new Padding(10);
-      picIcon.Name = "picIcon";
-      picIcon.Size = new Size(30, 52);
-      picIcon.SizeMode = PictureBoxSizeMode.StretchImage;
-      picIcon.TabIndex = 10;
-      picIcon.TabStop = false;
+
       // 
       // btn
       // 

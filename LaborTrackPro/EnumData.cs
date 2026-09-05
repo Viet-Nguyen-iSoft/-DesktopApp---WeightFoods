@@ -17,28 +17,8 @@ namespace LaborTrackPro
       Home,
       MasterData,
       Employee,
-
-      OpChooseModeFunction,
-      OpTypePO,
-      OpShowListPO,
-      OpChooseExportImport,
-      OpTypeMR,
-      OpDetailMRs,
-      OpRMs_BTP_Defect,
-
-      OpTypeForPoOther,
-
-      OperationPrint,
-
-      Menu,
-      LogInSussess,
-
-
       Setting,
-      SettingDevice,
-      SettingServer,
-      SettingPrinter,
-      SettingMachine,
+
 
 
       Department,

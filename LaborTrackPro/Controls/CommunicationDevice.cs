@@ -23,25 +23,25 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        _timerCheckConnectServer.Stop();
+        //_timerCheckConnectServer.Stop();
 
-        EnumStatusConnectTcp enumStatusConnectCurrent = EnumStatusConnectTcp.Disconnect;
-        if (_appConfig != null)
-        {
-          Ping ping = new Ping();
-          PingReply findIpDevice = ping.Send(_ipServer ?? "", 1000);
-          var rsPing = findIpDevice.Status.ToString().Equals("Success");
-          if (rsPing)
-          {
-            enumStatusConnectCurrent = EnumStatusConnectTcp.Connect;
-          }
-          else
-          {
-            enumStatusConnectCurrent = EnumStatusConnectTcp.Disconnect;
-          }
-        }
+        //EnumStatusConnectTcp enumStatusConnectCurrent = EnumStatusConnectTcp.Disconnect;
+        //if (_appConfig != null)
+        //{
+        //  Ping ping = new Ping();
+        //  PingReply findIpDevice = ping.Send(_ipServer ?? "", 1000);
+        //  var rsPing = findIpDevice.Status.ToString().Equals("Success");
+        //  if (rsPing)
+        //  {
+        //    enumStatusConnectCurrent = EnumStatusConnectTcp.Connect;
+        //  }
+        //  else
+        //  {
+        //    enumStatusConnectCurrent = EnumStatusConnectTcp.Disconnect;
+        //  }
+        //}
 
-        OnSendStatusConnectServer?.Invoke(enumStatusConnectCurrent);
+        //OnSendStatusConnectServer?.Invoke(enumStatusConnectCurrent);
       }
       catch (Exception ex)
       {

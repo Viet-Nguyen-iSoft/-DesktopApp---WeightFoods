@@ -79,19 +79,7 @@
       btn.TextColor = Color.White;
       btn.UseVisualStyleBackColor = false;
       btn.Click += btnSearch_Click;
-      // 
-      // picIcon
-      // 
-      picIcon.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      picIcon.Image = Properties.Resources.icon_order_product;
-      picIcon.Location = new Point(13, 10);
-      picIcon.Margin = new Padding(10);
-      picIcon.Name = "picIcon";
-      picIcon.Size = new Size(63, 60);
-      picIcon.SizeMode = PictureBoxSizeMode.StretchImage;
-      picIcon.TabIndex = 10;
-      picIcon.TabStop = false;
-      // 
+
       // lbTitle
       // 
       lbTitle.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;

@@ -9,7 +9,7 @@ namespace iSoft.Database.DTO
     public long Id { get; set; }
 
     [Browsable(false)]
-    public RecordFoods? DatalogWeight{ get; set; }
+    public RecordWeight? DatalogWeight{ get; set; }
 
 
     [DisplayName("Stt")]

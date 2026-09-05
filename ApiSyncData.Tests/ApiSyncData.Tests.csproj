@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../ApiSyncData/ServerSnapshot.cs" Link="ServerSnapshot.cs" />
+    <Compile Include="../ApiSyncData/Resp/IServerRecord.cs" Link="IServerRecord.cs" />
+    <Compile Include="../iSoft.Database/Models/BaseModel.cs" Link="BaseModel.cs" />
+  </ItemGroup>
+</Project>

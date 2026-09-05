@@ -41,6 +41,9 @@ namespace iSoft.Communication.Interface
       this.ETypeInput = eTypeInput;
       this.IsRequestGetData = requestGetData;
       this.IntervalRequestGetData = intervalRequestGetData;
+
+      TimerAutoConnect.Elapsed += TimerAutoConnect_Elapsed;
+      TimeRequestGetData.Elapsed += TimeRequestGetData_Elapsed;
     }
 
     public abstract void Connect();
@@ -59,12 +62,12 @@ namespace iSoft.Communication.Interface
     public virtual void Start()
     {
       TimerAutoConnect.Interval = Timeout;
-      TimerAutoConnect.Elapsed += TimerAutoConnect_Elapsed;
       TimerAutoConnect.Start();
     }
     public virtual void Stop()
     {
-      //TimerAutoConnect.Stop();
+      TimerAutoConnect.Stop();
+      TimeRequestGetData.Stop();
     }
 
     private void TimerAutoConnect_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
@@ -95,7 +98,6 @@ namespace iSoft.Communication.Interface
       if (IsRequestGetData)
       {
         TimeRequestGetData.Interval = IntervalRequestGetData;
-        TimeRequestGetData.Elapsed += TimeRequestGetData_Elapsed;
         TimeRequestGetData.Start();
       }
     }

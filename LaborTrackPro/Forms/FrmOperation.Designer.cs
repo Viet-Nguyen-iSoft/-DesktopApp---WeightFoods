@@ -31,12 +31,16 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOperation));
       tableLayoutPanel1 = new TableLayoutPanel();
       panelMenu = new TableLayoutPanel();
+      tableLayoutPanel5 = new TableLayoutPanel();
+      btnMenu = new PictureBox();
+      tableLayoutPanel6 = new TableLayoutPanel();
       flowLayoutPanel1 = new FlowLayoutPanel();
       btnHome = new LaborTrackPro.Custom.RJButton();
       btnMasterData = new LaborTrackPro.Custom.RJButton();
       btnEmployee = new LaborTrackPro.Custom.RJButton();
-      tableLayoutPanel5 = new TableLayoutPanel();
-      btnMenu = new PictureBox();
+      tableLayoutPanel7 = new TableLayoutPanel();
+      label3 = new Label();
+      pictureBox1 = new PictureBox();
       tableLayoutPanel2 = new TableLayoutPanel();
       tableLayoutPanel4 = new TableLayoutPanel();
       btnClose = new PictureBox();
@@ -44,11 +48,15 @@
       label1 = new Label();
       label2 = new Label();
       panelMain = new Panel();
+      btnSetting = new LaborTrackPro.Custom.RJButton();
       tableLayoutPanel1.SuspendLayout();
       panelMenu.SuspendLayout();
-      flowLayoutPanel1.SuspendLayout();
       tableLayoutPanel5.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)btnMenu).BeginInit();
+      tableLayoutPanel6.SuspendLayout();
+      flowLayoutPanel1.SuspendLayout();
+      tableLayoutPanel7.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel4.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)btnClose).BeginInit();
@@ -69,7 +77,7 @@
       tableLayoutPanel1.Name = "tableLayoutPanel1";
       tableLayoutPanel1.RowCount = 1;
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel1.Size = new Size(982, 495);
+      tableLayoutPanel1.Size = new Size(1110, 635);
       tableLayoutPanel1.TabIndex = 2;
       // 
       // panelMenu
@@ -78,8 +86,8 @@
       panelMenu.BackColor = Color.White;
       panelMenu.ColumnCount = 1;
       panelMenu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      panelMenu.Controls.Add(flowLayoutPanel1, 0, 2);
       panelMenu.Controls.Add(tableLayoutPanel5, 0, 0);
+      panelMenu.Controls.Add(tableLayoutPanel6, 0, 2);
       panelMenu.Location = new Point(0, 0);
       panelMenu.Margin = new Padding(0);
       panelMenu.Name = "panelMenu";
@@ -87,8 +95,54 @@
       panelMenu.RowStyles.Add(new RowStyle(SizeType.Absolute, 80F));
       panelMenu.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
       panelMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      panelMenu.Size = new Size(250, 495);
+      panelMenu.Size = new Size(250, 635);
       panelMenu.TabIndex = 1;
+      // 
+      // tableLayoutPanel5
+      // 
+      tableLayoutPanel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel5.BackColor = Color.FromArgb(236, 236, 236);
+      tableLayoutPanel5.ColumnCount = 2;
+      tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
+      tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel5.Controls.Add(btnMenu, 0, 0);
+      tableLayoutPanel5.Location = new Point(0, 0);
+      tableLayoutPanel5.Margin = new Padding(0);
+      tableLayoutPanel5.Name = "tableLayoutPanel5";
+      tableLayoutPanel5.RowCount = 1;
+      tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel5.Size = new Size(250, 80);
+      tableLayoutPanel5.TabIndex = 1;
+      // 
+      // btnMenu
+      // 
+      btnMenu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnMenu.Image = (Image)resources.GetObject("btnMenu.Image");
+      btnMenu.Location = new Point(5, 5);
+      btnMenu.Margin = new Padding(5);
+      btnMenu.Name = "btnMenu";
+      btnMenu.Size = new Size(70, 70);
+      btnMenu.SizeMode = PictureBoxSizeMode.StretchImage;
+      btnMenu.TabIndex = 0;
+      btnMenu.TabStop = false;
+      btnMenu.Click += btnMenu_Click;
+      // 
+      // tableLayoutPanel6
+      // 
+      tableLayoutPanel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel6.BackColor = Color.FromArgb(236, 236, 236);
+      tableLayoutPanel6.ColumnCount = 1;
+      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel6.Controls.Add(flowLayoutPanel1, 0, 0);
+      tableLayoutPanel6.Controls.Add(tableLayoutPanel7, 0, 1);
+      tableLayoutPanel6.Location = new Point(0, 85);
+      tableLayoutPanel6.Margin = new Padding(0);
+      tableLayoutPanel6.Name = "tableLayoutPanel6";
+      tableLayoutPanel6.RowCount = 2;
+      tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel6.RowStyles.Add(new RowStyle());
+      tableLayoutPanel6.Size = new Size(250, 550);
+      tableLayoutPanel6.TabIndex = 2;
       // 
       // flowLayoutPanel1
       // 
@@ -97,10 +151,11 @@
       flowLayoutPanel1.Controls.Add(btnHome);
       flowLayoutPanel1.Controls.Add(btnMasterData);
       flowLayoutPanel1.Controls.Add(btnEmployee);
-      flowLayoutPanel1.Location = new Point(0, 85);
+      flowLayoutPanel1.Controls.Add(btnSetting);
+      flowLayoutPanel1.Location = new Point(0, 0);
       flowLayoutPanel1.Margin = new Padding(0);
       flowLayoutPanel1.Name = "flowLayoutPanel1";
-      flowLayoutPanel1.Size = new Size(250, 410);
+      flowLayoutPanel1.Size = new Size(250, 453);
       flowLayoutPanel1.TabIndex = 0;
       // 
       // btnHome
@@ -175,34 +230,46 @@
       btnEmployee.TextColor = Color.Black;
       btnEmployee.UseVisualStyleBackColor = false;
       // 
-      // tableLayoutPanel5
+      // tableLayoutPanel7
       // 
-      tableLayoutPanel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel5.BackColor = Color.FromArgb(236, 236, 236);
-      tableLayoutPanel5.ColumnCount = 2;
-      tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
-      tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel5.Controls.Add(btnMenu, 0, 0);
-      tableLayoutPanel5.Location = new Point(0, 0);
-      tableLayoutPanel5.Margin = new Padding(0);
-      tableLayoutPanel5.Name = "tableLayoutPanel5";
-      tableLayoutPanel5.RowCount = 1;
-      tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel5.Size = new Size(250, 80);
-      tableLayoutPanel5.TabIndex = 1;
+      tableLayoutPanel7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel7.ColumnCount = 1;
+      tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel7.Controls.Add(label3, 0, 1);
+      tableLayoutPanel7.Controls.Add(pictureBox1, 0, 0);
+      tableLayoutPanel7.Location = new Point(3, 456);
+      tableLayoutPanel7.Name = "tableLayoutPanel7";
+      tableLayoutPanel7.RowCount = 3;
+      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel7.RowStyles.Add(new RowStyle());
+      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel7.Size = new Size(244, 91);
+      tableLayoutPanel7.TabIndex = 1;
       // 
-      // btnMenu
+      // label3
       // 
-      btnMenu.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      btnMenu.Image = (Image)resources.GetObject("btnMenu.Image");
-      btnMenu.Location = new Point(5, 5);
-      btnMenu.Margin = new Padding(5);
-      btnMenu.Name = "btnMenu";
-      btnMenu.Size = new Size(70, 70);
-      btnMenu.SizeMode = PictureBoxSizeMode.StretchImage;
-      btnMenu.TabIndex = 0;
-      btnMenu.TabStop = false;
-      btnMenu.Click += btnMenu_Click;
+      label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label3.AutoSize = true;
+      label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      label3.Location = new Point(0, 56);
+      label3.Margin = new Padding(0);
+      label3.Name = "label3";
+      label3.Size = new Size(244, 30);
+      label3.TabIndex = 4;
+      label3.Text = "Version: 1.0.0";
+      label3.TextAlign = ContentAlignment.MiddleCenter;
+      // 
+      // pictureBox1
+      // 
+      pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+      pictureBox1.Location = new Point(10, 0);
+      pictureBox1.Margin = new Padding(10, 0, 10, 0);
+      pictureBox1.Name = "pictureBox1";
+      pictureBox1.Size = new Size(224, 56);
+      pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+      pictureBox1.TabIndex = 0;
+      pictureBox1.TabStop = false;
       // 
       // tableLayoutPanel2
       // 
@@ -219,7 +286,7 @@
       tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 80F));
       tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
       tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel2.Size = new Size(727, 495);
+      tableLayoutPanel2.Size = new Size(855, 635);
       tableLayoutPanel2.TabIndex = 0;
       // 
       // tableLayoutPanel4
@@ -236,14 +303,14 @@
       tableLayoutPanel4.Name = "tableLayoutPanel4";
       tableLayoutPanel4.RowCount = 1;
       tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel4.Size = new Size(727, 80);
+      tableLayoutPanel4.Size = new Size(855, 80);
       tableLayoutPanel4.TabIndex = 2;
       // 
       // btnClose
       // 
       btnClose.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       btnClose.Image = (Image)resources.GetObject("btnClose.Image");
-      btnClose.Location = new Point(657, 10);
+      btnClose.Location = new Point(785, 10);
       btnClose.Margin = new Padding(10);
       btnClose.Name = "btnClose";
       btnClose.Size = new Size(60, 60);
@@ -264,7 +331,7 @@
       tableLayoutPanel3.RowCount = 2;
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle());
-      tableLayoutPanel3.Size = new Size(641, 74);
+      tableLayoutPanel3.Size = new Size(769, 74);
       tableLayoutPanel3.TabIndex = 22;
       // 
       // label1
@@ -275,7 +342,7 @@
       label1.Location = new Point(5, 44);
       label1.Margin = new Padding(5, 0, 0, 0);
       label1.Name = "label1";
-      label1.Size = new Size(636, 30);
+      label1.Size = new Size(764, 30);
       label1.TabIndex = 4;
       label1.Text = "Trang chính";
       label1.TextAlign = ContentAlignment.MiddleLeft;
@@ -288,7 +355,7 @@
       label2.Location = new Point(0, 0);
       label2.Margin = new Padding(0);
       label2.Name = "label2";
-      label2.Size = new Size(641, 44);
+      label2.Size = new Size(769, 44);
       label2.TabIndex = 3;
       label2.Text = "HỆ THỐNG CÂN HÀNG";
       label2.TextAlign = ContentAlignment.MiddleLeft;
@@ -300,23 +367,52 @@
       panelMain.Location = new Point(0, 85);
       panelMain.Margin = new Padding(0);
       panelMain.Name = "panelMain";
-      panelMain.Size = new Size(727, 410);
+      panelMain.Size = new Size(855, 550);
       panelMain.TabIndex = 3;
+      // 
+      // btnSetting
+      // 
+      btnSetting.BackColor = Color.Silver;
+      btnSetting.BackgroundColor = Color.Silver;
+      btnSetting.BorderColor = Color.PaleVioletRed;
+      btnSetting.BorderRadius = 5;
+      btnSetting.BorderSize = 0;
+      btnSetting.Dock = DockStyle.Top;
+      btnSetting.FlatAppearance.BorderSize = 0;
+      btnSetting.FlatStyle = FlatStyle.Flat;
+      btnSetting.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
+      btnSetting.ForeColor = Color.Black;
+      btnSetting.Image = Properties.Resources.icon_setting;
+      btnSetting.ImageAlign = ContentAlignment.MiddleLeft;
+      btnSetting.Location = new Point(3, 231);
+      btnSetting.Name = "btnSetting";
+      btnSetting.Padding = new Padding(15, 0, 0, 0);
+      btnSetting.Size = new Size(242, 70);
+      btnSetting.TabIndex = 5;
+      btnSetting.Text = "       CÀI ĐẶT";
+      btnSetting.TextAlign = ContentAlignment.MiddleLeft;
+      btnSetting.TextColor = Color.Black;
+      btnSetting.UseVisualStyleBackColor = false;
+      btnSetting.Click += btnSetting_Click;
       // 
       // FrmOperation
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.White;
-      ClientSize = new Size(982, 495);
+      ClientSize = new Size(1110, 635);
       Controls.Add(tableLayoutPanel1);
       Name = "FrmOperation";
       Text = "FrmOperation";
       tableLayoutPanel1.ResumeLayout(false);
       panelMenu.ResumeLayout(false);
-      flowLayoutPanel1.ResumeLayout(false);
       tableLayoutPanel5.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)btnMenu).EndInit();
+      tableLayoutPanel6.ResumeLayout(false);
+      flowLayoutPanel1.ResumeLayout(false);
+      tableLayoutPanel7.ResumeLayout(false);
+      tableLayoutPanel7.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
       tableLayoutPanel2.ResumeLayout(false);
       tableLayoutPanel4.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)btnClose).EndInit();
@@ -342,5 +438,10 @@
     private Label label1;
     private Label label2;
     private Panel panelMain;
+    private TableLayoutPanel tableLayoutPanel6;
+    private TableLayoutPanel tableLayoutPanel7;
+    private Label label3;
+    private PictureBox pictureBox1;
+    private Custom.RJButton btnSetting;
   }
 }

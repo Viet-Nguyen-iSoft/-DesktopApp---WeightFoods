@@ -1,6 +1,5 @@
 ﻿using iSoft.Communication.Interface;
 using SuperSimpleTcp;
-using System.Net.NetworkInformation;
 using System.Text;
 using static iSoft.Communication.EnumCommunication;
 using static System.Net.Mime.MediaTypeNames;
@@ -14,7 +13,7 @@ namespace iSoft.Communication.Communication
     bool _Ssl;
     string ConnectionId;
     public string Name;
-    SimpleTcpClient _Client;
+    SimpleTcpClient? _Client;
     public bool Connected => _Client != null && _Client.IsConnected;
     public event EventHandler<ConnectionEventArgs> OnConnectionEventRaise;
     public event EventHandler<DataReceivedEventArgs> OnDataReceive;
@@ -24,7 +23,7 @@ namespace iSoft.Communication.Communication
                               int timeout = 5000, bool autoConnect = true
                               ) : base(id, machineId, eModeCommunication, eDevice, nameDevice, timeout, autoConnect, requestGetData, intervalRequestGetData)
     {
-      Init(host, port, nameDevice);
+      Init(host, port, nameDevice, ssl);
 
       this.EModeCommunication = eModeCommunication;
       this.ConnectionId = id;
@@ -40,7 +39,7 @@ namespace iSoft.Communication.Communication
 
       _Client.Events.Connected += ConnectedHandler;
       _Client.Events.Disconnected += Disconnected;
-      _Client.Events.DataReceived += DataReceived;
+      _Client.Events.DataReceived += Client_DataReceived;
       _Client.Events.DataSent += DataSent;
       _Client.Keepalive.EnableTcpKeepAlives = true;
       _Client.Settings.MutuallyAuthenticate = false;
@@ -48,20 +47,14 @@ namespace iSoft.Communication.Communication
       _Client.Settings.ConnectTimeoutMs = 300;
       _Client.Settings.NoDelay = true;
     }
-    private bool PingIp
-    {
-      get
-      {
-        Ping ping = new Ping();
-        PingReply FindPLC = ping.Send(_ServerIp, 1000);
-        return FindPLC.Status.ToString().Equals("Success");
-      }
-    }
     public override void Connect()
     {
       try
       {
-        if (PingIp)
+        if (_Client is null)
+          Init(_ServerIp, _ServerPort, Name, _Ssl);
+
+        if (!_Client.IsConnected)
           _Client.Connect();
         this.AutoConnect = true;
         IsConnected = _Client.IsConnected;
@@ -79,7 +72,9 @@ namespace iSoft.Communication.Communication
       {
         _Client.Disconnect();
         _Client.Dispose();
+        _Client = null;
       }  
+      OnConnectionStatusChanged(false);
     }
 
     public override async void SendData(string data)
@@ -93,18 +88,20 @@ namespace iSoft.Communication.Communication
     private void ConnectedHandler(object? sender, ConnectionEventArgs e)
     {
       Console.WriteLine("*** Server " + e.IpPort + " connected");
+      OnConnectionStatusChanged(true);
       OnConnectionEventRaise?.Invoke(sender, e);
     }
 
     public void Disconnected(object? sender, ConnectionEventArgs e)
     {
       Console.WriteLine("*** Server " + e.IpPort + " disconnected");
+      OnConnectionStatusChanged(false);
       OnConnectionEventRaise?.Invoke(sender, e);
     }
 
 
     private StringBuilder _receiveBuffer = new StringBuilder();
-    public void DataReceived(object? sender, DataReceivedEventArgs e)
+    private void Client_DataReceived(object? sender, DataReceivedEventArgs e)
     {
       string chunk = Encoding.UTF8.GetString(e.Data);
       _receiveBuffer.Append(chunk);

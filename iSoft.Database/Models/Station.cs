@@ -11,7 +11,7 @@ namespace iSoft.Database.Models
 
 
     #region Mapping
-    public ICollection<RecordFoods>? RecordFoods { get; set; }
+    public ICollection<RecordWeight>? RecordFoods { get; set; }
     #endregion
   }
 }

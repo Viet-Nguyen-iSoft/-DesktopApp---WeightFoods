@@ -135,19 +135,7 @@
       btnBack.TextColor = Color.White;
       btnBack.UseVisualStyleBackColor = false;
       btnBack.Click += btnBack_Click;
-      // 
-      // pictureBox2
-      // 
-      pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      pictureBox2.BackColor = Color.Transparent;
-      pictureBox2.Image = Properties.Resources.HSFLogo;
-      pictureBox2.Location = new Point(876, 10);
-      pictureBox2.Margin = new Padding(3, 10, 10, 10);
-      pictureBox2.Name = "pictureBox2";
-      pictureBox2.Size = new Size(237, 75);
-      pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-      pictureBox2.TabIndex = 1;
-      pictureBox2.TabStop = false;
+
       // 
       // UcHeader
       // 

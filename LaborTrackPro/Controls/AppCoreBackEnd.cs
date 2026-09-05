@@ -1,6 +1,7 @@
 ﻿using HelperManager;
 using iSoft.Database.DTO;
 using iSoft.Database.Models;
+using iSoft.Database.Service;
 using LaborTrackPro.Communication;
 using LaborTrackPro.Service;
 using static HelperManager.EnumData;
@@ -57,12 +58,16 @@ namespace LaborTrackPro.Controls
     public int _delivery_permit_hour = 2;
     public int _timeout_backhome_minute = 1;
     public string _ipPrintLabel = "";
-    public bool _isTopMost = true;
+    public bool _isTopMost = false;
     public string _inforLine { get; set; }
     public IdleMonitor _idle = new IdleMonitor();
 
     public S7NetService _s7NetService { get; set; }
-   
+
+
+
+    
+
     public void Init()
     {
       try
@@ -136,8 +141,6 @@ namespace LaborTrackPro.Controls
 
     public async Task StartData()
     {
-      InitSyncDataServer();
-      await LoadDataFirst();
       await StartPollingRemoveRecordExpiredAsync();
     }
 
@@ -184,12 +187,8 @@ namespace LaborTrackPro.Controls
 
         //Kết nối thiết bị
         var connection = await AppCore.Ins.GetConnectionAsync();
-        _connectionsWeight = connection?.Where(x => x.eDevice == eDevice.WeightTcp).FirstOrDefault();
-        _connectionsHID = connection?.Where(x => x.eDevice == eDevice.HidTcp).FirstOrDefault();
-
-        //Thông tin đồng bộ dữ liệu
-        _isSyncDataLocal = _appConfig?.IsAutoSyncData ?? false;
-        _ipServer = Environment.GetEnvironmentVariable("DB_CONFIG_ADDRESS_SERVER");
+        _connectionsWeight = connection?.Where(x => x.EnumDevice == EnumDevice.WeightTcp).FirstOrDefault();
+        _connectionsHID = connection?.Where(x => x.EnumDevice == EnumDevice.HidTcp).FirstOrDefault();
       }
       catch (Exception)
       {
@@ -295,129 +294,77 @@ namespace LaborTrackPro.Controls
     }
 
 
-    public (string Name, string Code) ProcessingDataForDirectItem(DataLogPrintLabel? dataLogPrintLabel)
+
+
+    public class ManagerData
     {
-      EnumMaterialType eMaterialType = (EnumMaterialType)(dataLogPrintLabel?.EnumMaterialType ?? 0);
-      string code = "";
-      string name = eMaterialType switch
-      {
-        EnumMaterialType.RawMaterial => "Nguyên liệu: ",
-        EnumMaterialType.Material => "Vật tư: ",
-        EnumMaterialType.FinshGoods => "Thành phẩm: ",
-        EnumMaterialType.SemiFinishedGoods => "Bán thành phẩm: ",
-        EnumMaterialType.Spice => "Gia vị:",
-        EnumMaterialType.Chemical => "Hóa chất: ",
-        EnumMaterialType.MRsDefect => "Phế phẩm: ",
-        _ => "N/A"
-      };
+      public EnumStepOperation EnumStepOperation { get; set; } = EnumStepOperation.Waiting;
+      public EnumModeFunction EnumModeFunction { get; set; } = EnumModeFunction.None;
+      public EnumProductionOrderType EnumProductionOrderType { get; set; } = EnumProductionOrderType.None;
+      public EnumProductionOrderCategory EnumProductionOrderCategory { get; set; } = EnumProductionOrderCategory.None;
 
-      if (eMaterialType == EnumMaterialType.MRsDefect)
-      {
-        name += (dataLogPrintLabel?.MaterialDefect?.Name ?? "N/A") + " " + (dataLogPrintLabel?.MaterialDefect?.Grade ?? "");
-        code = $"Mã phế phẩm: {dataLogPrintLabel?.MaterialDefect?.Code ?? "N/A"}";
-      }
-      else if (eMaterialType == EnumMaterialType.RawMaterial)
-      {
-        name += (dataLogPrintLabel?.Material?.Name ?? "N/A") + " " + (dataLogPrintLabel?.Material?.Grade ?? "");
-        code = $"Mã nguyên liệu: {dataLogPrintLabel?.Material?.Code ?? "N/A"}";
-      }
-      else if (eMaterialType == EnumMaterialType.Material)
-      {
-        name += (dataLogPrintLabel?.Material?.Name ?? "N/A") + " " + (dataLogPrintLabel?.Material?.Grade ?? "");
-        code = $"Mã vật tư: {dataLogPrintLabel?.Material?.Code ?? "N/A"}";
-      }
-      else if (eMaterialType == EnumMaterialType.SemiFinishedGoods)
-      {
-        name += (dataLogPrintLabel?.Material?.Name ?? "N/A") + " " + (dataLogPrintLabel?.Material?.Grade ?? "");
-        code = $"Mã bán thành phẩm: {dataLogPrintLabel?.Material?.Code ?? "N/A"}";
-      }
-      else if (eMaterialType == EnumMaterialType.FinshGoods)
-      {
-        name += (dataLogPrintLabel?.Material?.Name ?? "N/A") + " " + (dataLogPrintLabel?.Material?.Grade ?? "");
-        code = $"Mã thành phẩm: {dataLogPrintLabel?.Material?.Code ?? "N/A"}";
-      }
+      public EnumInternalExternalStatus EnumInternalExternalStatus { get; set; } = EnumInternalExternalStatus.None;
+      public EnumExportImport EnumExportImport { get; set; }
 
-      return (name, code);
+
+      public DataLogPrintLabel DataLogPrintLabel = new DataLogPrintLabel();
+
+      public DataLogDeliveryManager DataLogDelivery = new DataLogDeliveryManager();
+      public Station? Machine { get; set; }
+    }
+
+
+    public class DataLogPrintLabel
+    {
+      public EnumMaterialType EnumMaterialType { get; set; }
+      public double Net { get; set; } = 0;
+      public double Tare { get; set; } = 0;
+      public Employee? Employee { get; set; }
+      public Product? Material { get; set; }
+      public Product? MaterialDefect { get; set; }
+      public List<Product?>? Materials { get; set; } = new List<Product?>();
+
+      public EnumTypeTare TypeTare { get; set; } = EnumTypeTare.None;
+      public Product? MaterialForTare { get; set; }
+    }
+
+    public class DataLogDeliveryManager
+    {
+      public Employee? EmployeeDelivery { get; set; }
+      public Employee? EmployeeReceiving { get; set; }
+      public Employee? EmployeeReceivingFirst { get; set; }
+      public Employee? EmployeeQC { get; set; }
+      public List<RecordWeight>? DatalogWeights { get; set; } = new List<RecordWeight>();
+      public List<MaterialDeliveryDTO>? MaterialDelivaryDTOs { get; set; } = new List<MaterialDeliveryDTO>();
+      public bool IsDelivery { get; set; }
+    }
+
+    public class MessageDataEvent
+    {
+      public long? ConnectionId { get; set; }
+      public string? NameDevice { get; set; }
+      public bool IsConnect { get; set; }
+
+    }
+
+    public class InforPrinter
+    {
+      public string? TitleLabel { get; set; }
+      public double Net { get; set; } = 0;
+      public double Tare { get; set; } = 0;
+      public string? ProductionOrder { get; set; }
+      public string? Operator { get; set; }
+      public string? Department { get; set; }
+      public string? Datetime { get; set; }
+      public string? NameMR { get; set; }
+
+      public bool IsDefect { get; set; } = false;
+      public string? CodeMR { get; set; }
+      public int NumberCopy { get; set; }
+      public string? TareName { get; set; }
+
+      public string? InternalExternal { get; set; }
+
     }
   }
-
-  public class ManagerData
-  {
-    public EnumStepOperation EnumStepOperation { get; set; } = EnumStepOperation.Waiting;
-    public EnumModeFunction EnumModeFunction { get; set; } = EnumModeFunction.None;
-    public EnumProductionOrderType EnumProductionOrderType { get; set; } = EnumProductionOrderType.None;
-    public EnumProductionOrderCategory EnumProductionOrderCategory { get; set; } = EnumProductionOrderCategory.None;
-
-    public EnumInternalExternalStatus EnumInternalExternalStatus { get; set; } = EnumInternalExternalStatus.None;
-    public EnumExportImport EnumExportImport { get; set; }
-
-
-    public DataLogPrintLabel DataLogPrintLabel = new DataLogPrintLabel();
-
-    public DataLogDeliveryManager DataLogDelivery = new DataLogDeliveryManager();
-    public Station? Machine { get; set; }
-  }
-
-
-  public class DataLogPrintLabel
-  {
-    public EnumMaterialType EnumMaterialType { get; set; }
-    public double Net { get; set; } = 0;
-    public double Tare { get; set; } = 0;
-    public Employee? Employee { get; set; }
-    public Product? Material { get; set; }
-    public Product? MaterialDefect { get; set; }
-    public List<Product?>? Materials { get; set; } = new List<Product?>();
-
-    public EnumTypeTare TypeTare { get; set; } = EnumTypeTare.None;
-    public Product? MaterialForTare { get; set; }
-  }
-
-  public class DataLogDeliveryManager
-  {
-    public Employee? EmployeeDelivery { get; set; }
-    public Employee? EmployeeReceiving { get; set; }
-    public Employee? EmployeeReceivingFirst { get; set; }
-    public Employee? EmployeeQC { get; set; }
-    public List<RecordFoods>? DatalogWeights { get; set; } = new List<RecordFoods>();
-    public List<MaterialDeliveryDTO>? MaterialDelivaryDTOs { get; set; } = new List<MaterialDeliveryDTO>();
-    public bool IsDelivery { get; set; }
-  }
-
-  public class MessageDataEvent
-  {
-    public long? ConnectionId { get; set; }
-    public string? NameDevice { get; set; }
-    public bool IsConnect { get; set; }
-
-  }
-
-  public class InforPrinter
-  {
-    public string? TitleLabel { get; set; }
-    public double Net { get; set; } = 0;
-    public double Tare { get; set; } = 0;
-    public string? ProductionOrder { get; set; }
-    public string? Operator { get; set; }
-    public string? Department { get; set; }
-    public string? Datetime { get; set; }
-    public string? NameMR { get; set; }
-
-    public bool IsDefect { get; set; } = false;
-    public string? CodeMR { get; set; }
-    public int NumberCopy { get; set; }
-    public string? TareName { get; set; }
-
-    public string? InternalExternal { get; set; }
-
-  }
-
-
-
-
-
-
-
-
-
 }

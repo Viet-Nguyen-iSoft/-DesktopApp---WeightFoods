@@ -104,7 +104,7 @@ namespace HelperManager
 
     }
 
-    public enum eCommunicationType
+    public enum EnumCommunicationType
     {
       None,
 
@@ -121,7 +121,7 @@ namespace HelperManager
       TcpClient,
     }
 
-    public enum eDevice
+    public enum EnumDevice
     {
       [Description("None")]
       None,

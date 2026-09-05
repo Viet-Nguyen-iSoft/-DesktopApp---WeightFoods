@@ -124,35 +124,14 @@
   <data name="Home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_order_product" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_order_product.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_scale" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_scale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Menu2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Menu2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_button_confirm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_button_confirm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_server" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_server.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_information" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_information.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Picture" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Picture.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RFID_OK" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\RFID_OK.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Menu3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Menu3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_order_product_another" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_order_product_another.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="IDcard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\IDcard.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -165,9 +144,6 @@
   </data>
   <data name="serverdisconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\serverdisconnect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Barcode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Barcode.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BtnHome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BtnHome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,26 +181,11 @@
   <data name="icon_question" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_question.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Menu1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Menu1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="weightdisconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\weightdisconnect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HSFBackGround" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HSFBackGround.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HSFBG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HSFBG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HSFBG1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HSFBG1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_toggle_on" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_toggle_off.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HSFLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HSFLogo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -235,17 +196,8 @@
   <data name="weightconnect" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\weightconnect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Mask group" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Mask group.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_historical_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_historical_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Printer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_confirm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_confirm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -259,74 +211,14 @@
   <data name="iSOFT_LOGO" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iSOFT_LOGO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="IconInPhieuGiaoNhan" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconInPhieuGiaoNhan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="IconInPhieuCan" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\IconInPhieuCan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_weighing" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_weighing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_function" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_function.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="printer_A4_bl" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\printer_A4_bl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_material" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_material.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_PO" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_PO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_type" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_type.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_product" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_product.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_delivered" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_delivered.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_delivery_note" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_delivery_note.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_chemicals" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_chemicals.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_spice" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_spice.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_CCDC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_CCDC.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_material_raws" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_material_raw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_Fgs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_Fgs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_materials" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_materials.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_Fgs_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_thanh_pham.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_material_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_vat_tu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_material_raw_color" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_nguyen_lieu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_radio_uncheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_radio_uncheck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -334,32 +226,8 @@
   <data name="icon_radio_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_radio_check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_app_restart" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_app_restart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_app_mini" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_app_mini.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_app_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_app_close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_menu_app" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_menu_app.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_xuat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_xuat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_nhap" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_nhap.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_ban_thanh_pham" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_ban_thanh_pham.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_test_machine" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_test_machine.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_request_other" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_request_other.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -367,16 +235,28 @@
   <data name="icon_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconExternal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconExternal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logo_isoft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_isoft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconInternal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconInternal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="logo_bosch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo_bosch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_giao_hang" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_giao_hang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_btn_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_btn_user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_tra_hang" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_tra_hang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon_btn_masterdata" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_btn_masterdata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_btn_home" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_btn_home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_setting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_add_white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_add_white.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
