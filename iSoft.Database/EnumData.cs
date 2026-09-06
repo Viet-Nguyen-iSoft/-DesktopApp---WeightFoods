@@ -46,5 +46,14 @@ namespace iSoft.Database
       OnlyNotDelete,
       OnlyDelete,
     }
+
+    public enum EnumTypeDataTruck
+    {
+      None,
+      WeightedTime01,
+      DoneTime01,
+      WeightedTime02,
+      DoneTime02,
+    }
   }
 }

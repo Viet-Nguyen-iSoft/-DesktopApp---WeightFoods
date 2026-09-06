@@ -2,12 +2,14 @@ using ApiSyncData;
 using HelperManager;
 using iSoft.Database.Models;
 using iSoft.Database.Service;
+using LaborTrackPro.Controls;
 using LTP.Truck.Controls;
 using LTP.Truck.Custom;
 using LTP.Truck.Forms;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using static LTP.Truck.EnumData;
+using AppCore = LTP.Truck.Controls.AppCore;
 
 namespace LTP.Truck
 {
@@ -147,17 +149,12 @@ namespace LTP.Truck
     // Khai báo trong class FrmMain
     private readonly CancellationTokenSource _syncCts = new();
     private Task? _syncTask;
-    private async void FrmMain_Load(object? sender, EventArgs e)
+    private void FrmMain_Load(object? sender, EventArgs e)
     {
       try
       {
-        //var a = await _apiService.Station();
-        //var a = await _apiService.Warehouse();
-        //var a = await _apiService.TypeGoods();
-        //var a = await _apiService.ProductGroup();
-        //var a = await _apiService.Product();
-        //var a = await _apiService.CategoryTare();
         _syncTask ??= PeriodicRunner.RunEvery5SecondsAsync(_syncCts.Token);
+        AppCore.Ins.ConnectWeight();
         CheckOpenMulApp();
         ChangePage(EnumScreen.Waiting);
       }

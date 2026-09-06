@@ -28,33 +28,40 @@
     /// </summary>
     private void InitializeComponent()
     {
+      DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+      DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+      DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
       tableLayoutPanel1 = new TableLayoutPanel();
       tableLayoutPanel2 = new TableLayoutPanel();
       tableLayoutPanel3 = new TableLayoutPanel();
-      label5 = new Label();
-      tableLayoutPanel5 = new TableLayoutPanel();
-      label3 = new Label();
+      tableLayoutPanel12 = new TableLayoutPanel();
+      tableLayoutPanel17 = new TableLayoutPanel();
+      lbWeightTrigger = new Label();
       label2 = new Label();
+      tableLayoutPanel18 = new TableLayoutPanel();
+      label3 = new Label();
+      lbWeightValue = new Label();
+      label5 = new Label();
       label1 = new Label();
       tableLayoutPanel6 = new TableLayoutPanel();
-      rjButton9 = new LaborTrackPro.Custom.RJButton();
-      rjButton8 = new LaborTrackPro.Custom.RJButton();
-      rjButton7 = new LaborTrackPro.Custom.RJButton();
-      rjButton6 = new LaborTrackPro.Custom.RJButton();
-      rjButton5 = new LaborTrackPro.Custom.RJButton();
-      rjButton1 = new LaborTrackPro.Custom.RJButton();
+      btnZero = new LaborTrackPro.Custom.RJButton();
+      btnBack = new LaborTrackPro.Custom.RJButton();
+      btnPrint = new LaborTrackPro.Custom.RJButton();
+      btnWeightTime02 = new LaborTrackPro.Custom.RJButton();
+      btnWeightTime01 = new LaborTrackPro.Custom.RJButton();
+      btnTriggerWeight = new LaborTrackPro.Custom.RJButton();
       tableLayoutPanel4 = new TableLayoutPanel();
       tableLayoutPanel8 = new TableLayoutPanel();
       rjTextBox11 = new LTP.Truck.Custom.RJTextBox();
-      rjTextBox9 = new LTP.Truck.Custom.RJTextBox();
-      rjTextBox10 = new LTP.Truck.Custom.RJTextBox();
+      txtNameDriver = new LTP.Truck.Custom.RJTextBox();
+      txtDocument = new LTP.Truck.Custom.RJTextBox();
       label19 = new Label();
       tableLayoutPanel15 = new TableLayoutPanel();
-      rjTextBox6 = new LTP.Truck.Custom.RJTextBox();
-      rjButton4 = new LaborTrackPro.Custom.RJButton();
+      txtWareHouse = new LTP.Truck.Custom.RJTextBox();
+      btnLoadWarehouse = new LaborTrackPro.Custom.RJButton();
       tableLayoutPanel14 = new TableLayoutPanel();
-      rjTextBox5 = new LTP.Truck.Custom.RJTextBox();
-      rjButton3 = new LaborTrackPro.Custom.RJButton();
+      txtTypeGoods = new LTP.Truck.Custom.RJTextBox();
+      btnLoadTypeGoods = new LaborTrackPro.Custom.RJButton();
       tableLayoutPanel13 = new TableLayoutPanel();
       txtClient = new LTP.Truck.Custom.RJTextBox();
       btnLoadClient = new LaborTrackPro.Custom.RJButton();
@@ -64,15 +71,15 @@
       label11 = new Label();
       tableLayoutPanel11 = new TableLayoutPanel();
       label12 = new Label();
-      rjTextBox1 = new LTP.Truck.Custom.RJTextBox();
-      rjTextBox2 = new LTP.Truck.Custom.RJTextBox();
+      txtNoLabelAuto = new LTP.Truck.Custom.RJTextBox();
+      txtNoLabel = new LTP.Truck.Custom.RJTextBox();
       label15 = new Label();
       label16 = new Label();
       label7 = new Label();
       tableLayoutPanel16 = new TableLayoutPanel();
-      rjTextBox7 = new LTP.Truck.Custom.RJTextBox();
+      txtLicensePlate = new LTP.Truck.Custom.RJTextBox();
       label13 = new Label();
-      rjTextBox8 = new LTP.Truck.Custom.RJTextBox();
+      txtIdCard = new LTP.Truck.Custom.RJTextBox();
       label10 = new Label();
       tableLayoutPanel9 = new TableLayoutPanel();
       label14 = new Label();
@@ -80,6 +87,7 @@
       ucItemWeight02 = new LTP.Truck.UserControls.UcItem();
       ucItemWeightGoods = new LTP.Truck.UserControls.UcItem();
       tableLayoutPanel7 = new TableLayoutPanel();
+      dgv = new DataGridView();
       tableLayoutPanel10 = new TableLayoutPanel();
       comboBox1 = new ComboBox();
       label4 = new Label();
@@ -91,13 +99,14 @@
       label20 = new Label();
       label21 = new Label();
       comboBox2 = new ComboBox();
-      rjButton10 = new LaborTrackPro.Custom.RJButton();
+      btnSearchHistorical = new LaborTrackPro.Custom.RJButton();
       label27 = new Label();
-      dataGridView1 = new DataGridView();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel3.SuspendLayout();
-      tableLayoutPanel5.SuspendLayout();
+      tableLayoutPanel12.SuspendLayout();
+      tableLayoutPanel17.SuspendLayout();
+      tableLayoutPanel18.SuspendLayout();
       tableLayoutPanel6.SuspendLayout();
       tableLayoutPanel4.SuspendLayout();
       tableLayoutPanel8.SuspendLayout();
@@ -108,8 +117,8 @@
       tableLayoutPanel16.SuspendLayout();
       tableLayoutPanel9.SuspendLayout();
       tableLayoutPanel7.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
       tableLayoutPanel10.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
       SuspendLayout();
       // 
       // tableLayoutPanel1
@@ -157,8 +166,8 @@
       tableLayoutPanel3.BackColor = Color.FromArgb(236, 236, 236);
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel3.Controls.Add(tableLayoutPanel12, 0, 2);
       tableLayoutPanel3.Controls.Add(label5, 0, 1);
-      tableLayoutPanel3.Controls.Add(tableLayoutPanel5, 0, 2);
       tableLayoutPanel3.Controls.Add(label1, 0, 0);
       tableLayoutPanel3.Controls.Add(tableLayoutPanel6, 0, 4);
       tableLayoutPanel3.Location = new Point(0, 0);
@@ -168,11 +177,115 @@
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 120F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
       tableLayoutPanel3.Size = new Size(657, 414);
       tableLayoutPanel3.TabIndex = 0;
+      // 
+      // tableLayoutPanel12
+      // 
+      tableLayoutPanel12.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel12.ColumnCount = 1;
+      tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel12.Controls.Add(tableLayoutPanel17, 0, 1);
+      tableLayoutPanel12.Controls.Add(tableLayoutPanel18, 0, 0);
+      tableLayoutPanel12.Location = new Point(0, 100);
+      tableLayoutPanel12.Margin = new Padding(0);
+      tableLayoutPanel12.Name = "tableLayoutPanel12";
+      tableLayoutPanel12.RowCount = 2;
+      tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+      tableLayoutPanel12.Size = new Size(657, 184);
+      tableLayoutPanel12.TabIndex = 4;
+      // 
+      // tableLayoutPanel17
+      // 
+      tableLayoutPanel17.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel17.ColumnCount = 2;
+      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel17.Controls.Add(lbWeightTrigger, 1, 0);
+      tableLayoutPanel17.Controls.Add(label2, 0, 0);
+      tableLayoutPanel17.Location = new Point(0, 134);
+      tableLayoutPanel17.Margin = new Padding(0);
+      tableLayoutPanel17.Name = "tableLayoutPanel17";
+      tableLayoutPanel17.RowCount = 1;
+      tableLayoutPanel17.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel17.Size = new Size(657, 50);
+      tableLayoutPanel17.TabIndex = 3;
+      // 
+      // lbWeightTrigger
+      // 
+      lbWeightTrigger.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbWeightTrigger.AutoSize = true;
+      lbWeightTrigger.BackColor = Color.Transparent;
+      lbWeightTrigger.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      lbWeightTrigger.Location = new Point(257, 0);
+      lbWeightTrigger.Margin = new Padding(0);
+      lbWeightTrigger.Name = "lbWeightTrigger";
+      lbWeightTrigger.Size = new Size(400, 50);
+      lbWeightTrigger.TabIndex = 4;
+      lbWeightTrigger.Text = "0.000";
+      lbWeightTrigger.TextAlign = ContentAlignment.BottomLeft;
+      // 
+      // label2
+      // 
+      label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label2.AutoSize = true;
+      label2.BackColor = Color.Transparent;
+      label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      label2.Location = new Point(0, 0);
+      label2.Margin = new Padding(0);
+      label2.Name = "label2";
+      label2.Size = new Size(257, 50);
+      label2.TabIndex = 3;
+      label2.Text = "Giá trị cân xác nhận(Kg):";
+      label2.TextAlign = ContentAlignment.BottomLeft;
+      // 
+      // tableLayoutPanel18
+      // 
+      tableLayoutPanel18.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel18.ColumnCount = 2;
+      tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel18.Controls.Add(label3, 1, 0);
+      tableLayoutPanel18.Controls.Add(lbWeightValue, 0, 0);
+      tableLayoutPanel18.Location = new Point(0, 0);
+      tableLayoutPanel18.Margin = new Padding(0);
+      tableLayoutPanel18.Name = "tableLayoutPanel18";
+      tableLayoutPanel18.RowCount = 1;
+      tableLayoutPanel18.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel18.Size = new Size(657, 134);
+      tableLayoutPanel18.TabIndex = 4;
+      // 
+      // label3
+      // 
+      label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label3.AutoSize = true;
+      label3.BackColor = Color.Transparent;
+      label3.Font = new Font("Segoe UI", 39.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      label3.Location = new Point(561, 0);
+      label3.Margin = new Padding(0);
+      label3.Name = "label3";
+      label3.Size = new Size(96, 134);
+      label3.TabIndex = 3;
+      label3.Text = "Kg";
+      label3.TextAlign = ContentAlignment.BottomLeft;
+      // 
+      // lbWeightValue
+      // 
+      lbWeightValue.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbWeightValue.AutoSize = true;
+      lbWeightValue.BackColor = Color.Transparent;
+      lbWeightValue.Font = new Font("Segoe UI", 90F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      lbWeightValue.Location = new Point(0, 0);
+      lbWeightValue.Margin = new Padding(0);
+      lbWeightValue.Name = "lbWeightValue";
+      lbWeightValue.Size = new Size(561, 134);
+      lbWeightValue.TabIndex = 2;
+      lbWeightValue.Text = "0.000";
+      lbWeightValue.TextAlign = ContentAlignment.MiddleRight;
       // 
       // label5
       // 
@@ -187,49 +300,6 @@
       label5.TabIndex = 2;
       label5.Text = "Trạng thái cân";
       label5.TextAlign = ContentAlignment.MiddleRight;
-      // 
-      // tableLayoutPanel5
-      // 
-      tableLayoutPanel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel5.ColumnCount = 2;
-      tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle());
-      tableLayoutPanel5.Controls.Add(label3, 1, 0);
-      tableLayoutPanel5.Controls.Add(label2, 0, 0);
-      tableLayoutPanel5.Location = new Point(3, 103);
-      tableLayoutPanel5.Name = "tableLayoutPanel5";
-      tableLayoutPanel5.RowCount = 1;
-      tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel5.Size = new Size(651, 173);
-      tableLayoutPanel5.TabIndex = 2;
-      // 
-      // label3
-      // 
-      label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label3.AutoSize = true;
-      label3.BackColor = Color.Transparent;
-      label3.Font = new Font("Segoe UI", 48F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      label3.Location = new Point(533, 0);
-      label3.Margin = new Padding(0);
-      label3.Name = "label3";
-      label3.Size = new Size(118, 173);
-      label3.TabIndex = 3;
-      label3.Text = "Kg";
-      label3.TextAlign = ContentAlignment.BottomLeft;
-      // 
-      // label2
-      // 
-      label2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label2.AutoSize = true;
-      label2.BackColor = Color.Transparent;
-      label2.Font = new Font("Segoe UI", 90F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      label2.Location = new Point(0, 0);
-      label2.Margin = new Padding(0);
-      label2.Name = "label2";
-      label2.Size = new Size(533, 173);
-      label2.TabIndex = 2;
-      label2.Text = "0.000";
-      label2.TextAlign = ContentAlignment.MiddleRight;
       // 
       // label1
       // 
@@ -252,12 +322,12 @@
       tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
       tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
       tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-      tableLayoutPanel6.Controls.Add(rjButton9, 2, 1);
-      tableLayoutPanel6.Controls.Add(rjButton8, 1, 1);
-      tableLayoutPanel6.Controls.Add(rjButton7, 0, 1);
-      tableLayoutPanel6.Controls.Add(rjButton6, 2, 0);
-      tableLayoutPanel6.Controls.Add(rjButton5, 1, 0);
-      tableLayoutPanel6.Controls.Add(rjButton1, 0, 0);
+      tableLayoutPanel6.Controls.Add(btnZero, 2, 1);
+      tableLayoutPanel6.Controls.Add(btnBack, 1, 1);
+      tableLayoutPanel6.Controls.Add(btnPrint, 0, 1);
+      tableLayoutPanel6.Controls.Add(btnWeightTime02, 2, 0);
+      tableLayoutPanel6.Controls.Add(btnWeightTime01, 1, 0);
+      tableLayoutPanel6.Controls.Add(btnTriggerWeight, 0, 0);
       tableLayoutPanel6.Location = new Point(0, 289);
       tableLayoutPanel6.Margin = new Padding(0);
       tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -268,146 +338,151 @@
       tableLayoutPanel6.Size = new Size(657, 120);
       tableLayoutPanel6.TabIndex = 2;
       // 
-      // rjButton9
+      // btnZero
       // 
-      rjButton9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton9.BackColor = Color.FromArgb(64, 107, 177);
-      rjButton9.BackgroundColor = Color.FromArgb(64, 107, 177);
-      rjButton9.BorderColor = Color.White;
-      rjButton9.BorderRadius = 5;
-      rjButton9.BorderSize = 0;
-      rjButton9.FlatAppearance.BorderColor = Color.White;
-      rjButton9.FlatAppearance.BorderSize = 0;
-      rjButton9.FlatStyle = FlatStyle.Flat;
-      rjButton9.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton9.ForeColor = Color.White;
-      rjButton9.Location = new Point(438, 63);
-      rjButton9.Name = "rjButton9";
-      rjButton9.Size = new Size(211, 54);
-      rjButton9.TabIndex = 22;
-      rjButton9.Text = "Zero";
-      rjButton9.TextColor = Color.White;
-      rjButton9.UseVisualStyleBackColor = false;
+      btnZero.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnZero.BackColor = Color.FromArgb(64, 107, 177);
+      btnZero.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnZero.BorderColor = Color.White;
+      btnZero.BorderRadius = 5;
+      btnZero.BorderSize = 0;
+      btnZero.FlatAppearance.BorderColor = Color.White;
+      btnZero.FlatAppearance.BorderSize = 0;
+      btnZero.FlatStyle = FlatStyle.Flat;
+      btnZero.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnZero.ForeColor = Color.White;
+      btnZero.Location = new Point(438, 63);
+      btnZero.Name = "btnZero";
+      btnZero.Size = new Size(211, 54);
+      btnZero.TabIndex = 22;
+      btnZero.Text = "Zero";
+      btnZero.TextColor = Color.White;
+      btnZero.UseVisualStyleBackColor = false;
       // 
-      // rjButton8
+      // btnBack
       // 
-      rjButton8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton8.BackColor = Color.FromArgb(64, 107, 177);
-      rjButton8.BackgroundColor = Color.FromArgb(64, 107, 177);
-      rjButton8.BorderColor = Color.White;
-      rjButton8.BorderRadius = 5;
-      rjButton8.BorderSize = 0;
-      rjButton8.FlatAppearance.BorderColor = Color.White;
-      rjButton8.FlatAppearance.BorderSize = 0;
-      rjButton8.FlatStyle = FlatStyle.Flat;
-      rjButton8.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton8.ForeColor = Color.White;
-      rjButton8.Image = Properties.Resources.icon_back;
-      rjButton8.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton8.Location = new Point(223, 63);
-      rjButton8.Name = "rjButton8";
-      rjButton8.Padding = new Padding(10, 0, 0, 0);
-      rjButton8.Size = new Size(209, 54);
-      rjButton8.TabIndex = 21;
-      rjButton8.Text = "Quay lại";
-      rjButton8.TextColor = Color.White;
-      rjButton8.UseVisualStyleBackColor = false;
+      btnBack.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnBack.BackColor = Color.FromArgb(64, 107, 177);
+      btnBack.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnBack.BorderColor = Color.White;
+      btnBack.BorderRadius = 5;
+      btnBack.BorderSize = 0;
+      btnBack.FlatAppearance.BorderColor = Color.White;
+      btnBack.FlatAppearance.BorderSize = 0;
+      btnBack.FlatStyle = FlatStyle.Flat;
+      btnBack.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnBack.ForeColor = Color.White;
+      btnBack.Image = Properties.Resources.icon_back;
+      btnBack.ImageAlign = ContentAlignment.MiddleLeft;
+      btnBack.Location = new Point(223, 63);
+      btnBack.Name = "btnBack";
+      btnBack.Padding = new Padding(10, 0, 0, 0);
+      btnBack.Size = new Size(209, 54);
+      btnBack.TabIndex = 21;
+      btnBack.Text = "Quay lại";
+      btnBack.TextColor = Color.White;
+      btnBack.UseVisualStyleBackColor = false;
+      btnBack.Click += btnBack_Click;
       // 
-      // rjButton7
+      // btnPrint
       // 
-      rjButton7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton7.BackColor = Color.FromArgb(64, 107, 177);
-      rjButton7.BackgroundColor = Color.FromArgb(64, 107, 177);
-      rjButton7.BorderColor = Color.White;
-      rjButton7.BorderRadius = 5;
-      rjButton7.BorderSize = 0;
-      rjButton7.FlatAppearance.BorderColor = Color.White;
-      rjButton7.FlatAppearance.BorderSize = 0;
-      rjButton7.FlatStyle = FlatStyle.Flat;
-      rjButton7.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton7.ForeColor = Color.White;
-      rjButton7.Image = Properties.Resources.icon_print;
-      rjButton7.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton7.Location = new Point(8, 63);
-      rjButton7.Name = "rjButton7";
-      rjButton7.Padding = new Padding(10, 0, 0, 0);
-      rjButton7.Size = new Size(209, 54);
-      rjButton7.TabIndex = 20;
-      rjButton7.Text = "In phiếu";
-      rjButton7.TextColor = Color.White;
-      rjButton7.UseVisualStyleBackColor = false;
+      btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnPrint.BackColor = Color.FromArgb(64, 107, 177);
+      btnPrint.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnPrint.BorderColor = Color.White;
+      btnPrint.BorderRadius = 5;
+      btnPrint.BorderSize = 0;
+      btnPrint.FlatAppearance.BorderColor = Color.White;
+      btnPrint.FlatAppearance.BorderSize = 0;
+      btnPrint.FlatStyle = FlatStyle.Flat;
+      btnPrint.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnPrint.ForeColor = Color.White;
+      btnPrint.Image = Properties.Resources.icon_print;
+      btnPrint.ImageAlign = ContentAlignment.MiddleLeft;
+      btnPrint.Location = new Point(8, 63);
+      btnPrint.Name = "btnPrint";
+      btnPrint.Padding = new Padding(10, 0, 0, 0);
+      btnPrint.Size = new Size(209, 54);
+      btnPrint.TabIndex = 20;
+      btnPrint.Text = "In phiếu";
+      btnPrint.TextColor = Color.White;
+      btnPrint.UseVisualStyleBackColor = false;
+      btnPrint.Click += btnPrint_Click;
       // 
-      // rjButton6
+      // btnWeightTime02
       // 
-      rjButton6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton6.BackColor = Color.FromArgb(64, 107, 177);
-      rjButton6.BackgroundColor = Color.FromArgb(64, 107, 177);
-      rjButton6.BorderColor = Color.White;
-      rjButton6.BorderRadius = 5;
-      rjButton6.BorderSize = 0;
-      rjButton6.FlatAppearance.BorderColor = Color.White;
-      rjButton6.FlatAppearance.BorderSize = 0;
-      rjButton6.FlatStyle = FlatStyle.Flat;
-      rjButton6.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton6.ForeColor = Color.White;
-      rjButton6.Image = Properties.Resources.icon_weight;
-      rjButton6.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton6.Location = new Point(438, 3);
-      rjButton6.Name = "rjButton6";
-      rjButton6.Padding = new Padding(10, 0, 0, 0);
-      rjButton6.Size = new Size(211, 54);
-      rjButton6.TabIndex = 19;
-      rjButton6.Text = "Cân lần 02";
-      rjButton6.TextColor = Color.White;
-      rjButton6.UseVisualStyleBackColor = false;
+      btnWeightTime02.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnWeightTime02.BackColor = Color.FromArgb(64, 107, 177);
+      btnWeightTime02.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnWeightTime02.BorderColor = Color.White;
+      btnWeightTime02.BorderRadius = 5;
+      btnWeightTime02.BorderSize = 0;
+      btnWeightTime02.FlatAppearance.BorderColor = Color.White;
+      btnWeightTime02.FlatAppearance.BorderSize = 0;
+      btnWeightTime02.FlatStyle = FlatStyle.Flat;
+      btnWeightTime02.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnWeightTime02.ForeColor = Color.White;
+      btnWeightTime02.Image = Properties.Resources.icon_weight;
+      btnWeightTime02.ImageAlign = ContentAlignment.MiddleLeft;
+      btnWeightTime02.Location = new Point(438, 3);
+      btnWeightTime02.Name = "btnWeightTime02";
+      btnWeightTime02.Padding = new Padding(10, 0, 0, 0);
+      btnWeightTime02.Size = new Size(211, 54);
+      btnWeightTime02.TabIndex = 19;
+      btnWeightTime02.Text = "Cân lần 02";
+      btnWeightTime02.TextColor = Color.White;
+      btnWeightTime02.UseVisualStyleBackColor = false;
+      btnWeightTime02.Click += btnWeightTime02_Click;
       // 
-      // rjButton5
+      // btnWeightTime01
       // 
-      rjButton5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton5.BackColor = Color.FromArgb(64, 107, 177);
-      rjButton5.BackgroundColor = Color.FromArgb(64, 107, 177);
-      rjButton5.BorderColor = Color.White;
-      rjButton5.BorderRadius = 5;
-      rjButton5.BorderSize = 0;
-      rjButton5.FlatAppearance.BorderColor = Color.White;
-      rjButton5.FlatAppearance.BorderSize = 0;
-      rjButton5.FlatStyle = FlatStyle.Flat;
-      rjButton5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton5.ForeColor = Color.White;
-      rjButton5.Image = Properties.Resources.icon_weight;
-      rjButton5.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton5.Location = new Point(223, 3);
-      rjButton5.Name = "rjButton5";
-      rjButton5.Padding = new Padding(10, 0, 0, 0);
-      rjButton5.Size = new Size(209, 54);
-      rjButton5.TabIndex = 18;
-      rjButton5.Text = "Cân lần 01";
-      rjButton5.TextColor = Color.White;
-      rjButton5.UseVisualStyleBackColor = false;
+      btnWeightTime01.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnWeightTime01.BackColor = Color.FromArgb(64, 107, 177);
+      btnWeightTime01.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnWeightTime01.BorderColor = Color.White;
+      btnWeightTime01.BorderRadius = 5;
+      btnWeightTime01.BorderSize = 0;
+      btnWeightTime01.FlatAppearance.BorderColor = Color.White;
+      btnWeightTime01.FlatAppearance.BorderSize = 0;
+      btnWeightTime01.FlatStyle = FlatStyle.Flat;
+      btnWeightTime01.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnWeightTime01.ForeColor = Color.White;
+      btnWeightTime01.Image = Properties.Resources.icon_weight;
+      btnWeightTime01.ImageAlign = ContentAlignment.MiddleLeft;
+      btnWeightTime01.Location = new Point(223, 3);
+      btnWeightTime01.Name = "btnWeightTime01";
+      btnWeightTime01.Padding = new Padding(10, 0, 0, 0);
+      btnWeightTime01.Size = new Size(209, 54);
+      btnWeightTime01.TabIndex = 18;
+      btnWeightTime01.Text = "Cân lần 01";
+      btnWeightTime01.TextColor = Color.White;
+      btnWeightTime01.UseVisualStyleBackColor = false;
+      btnWeightTime01.Click += btnWeightTime01_Click;
       // 
-      // rjButton1
+      // btnTriggerWeight
       // 
-      rjButton1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton1.BackColor = Color.FromArgb(64, 107, 177);
-      rjButton1.BackgroundColor = Color.FromArgb(64, 107, 177);
-      rjButton1.BorderColor = Color.White;
-      rjButton1.BorderRadius = 5;
-      rjButton1.BorderSize = 0;
-      rjButton1.FlatAppearance.BorderColor = Color.White;
-      rjButton1.FlatAppearance.BorderSize = 0;
-      rjButton1.FlatStyle = FlatStyle.Flat;
-      rjButton1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton1.ForeColor = Color.White;
-      rjButton1.Image = Properties.Resources.icon_weight_log;
-      rjButton1.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton1.Location = new Point(8, 3);
-      rjButton1.Name = "rjButton1";
-      rjButton1.Padding = new Padding(10, 0, 0, 0);
-      rjButton1.Size = new Size(209, 54);
-      rjButton1.TabIndex = 17;
-      rjButton1.Text = "Cân";
-      rjButton1.TextColor = Color.White;
-      rjButton1.UseVisualStyleBackColor = false;
+      btnTriggerWeight.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnTriggerWeight.BackColor = Color.FromArgb(64, 107, 177);
+      btnTriggerWeight.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnTriggerWeight.BorderColor = Color.White;
+      btnTriggerWeight.BorderRadius = 5;
+      btnTriggerWeight.BorderSize = 0;
+      btnTriggerWeight.FlatAppearance.BorderColor = Color.White;
+      btnTriggerWeight.FlatAppearance.BorderSize = 0;
+      btnTriggerWeight.FlatStyle = FlatStyle.Flat;
+      btnTriggerWeight.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnTriggerWeight.ForeColor = Color.White;
+      btnTriggerWeight.Image = Properties.Resources.icon_weight_log;
+      btnTriggerWeight.ImageAlign = ContentAlignment.MiddleLeft;
+      btnTriggerWeight.Location = new Point(8, 3);
+      btnTriggerWeight.Name = "btnTriggerWeight";
+      btnTriggerWeight.Padding = new Padding(10, 0, 0, 0);
+      btnTriggerWeight.Size = new Size(209, 54);
+      btnTriggerWeight.TabIndex = 17;
+      btnTriggerWeight.Text = "Cân";
+      btnTriggerWeight.TextColor = Color.White;
+      btnTriggerWeight.UseVisualStyleBackColor = false;
+      btnTriggerWeight.Click += btnTriggerWeight_Click;
       // 
       // tableLayoutPanel4
       // 
@@ -436,8 +511,8 @@
       tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel8.Controls.Add(rjTextBox11, 1, 1);
-      tableLayoutPanel8.Controls.Add(rjTextBox9, 1, 5);
-      tableLayoutPanel8.Controls.Add(rjTextBox10, 1, 7);
+      tableLayoutPanel8.Controls.Add(txtNameDriver, 1, 5);
+      tableLayoutPanel8.Controls.Add(txtDocument, 1, 7);
       tableLayoutPanel8.Controls.Add(label19, 0, 7);
       tableLayoutPanel8.Controls.Add(tableLayoutPanel15, 1, 4);
       tableLayoutPanel8.Controls.Add(tableLayoutPanel14, 1, 3);
@@ -488,51 +563,51 @@
       rjTextBox11.Texts = "";
       rjTextBox11.UnderlinedStyle = false;
       // 
-      // rjTextBox9
+      // txtNameDriver
       // 
-      rjTextBox9.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox9.BackColor = SystemColors.Window;
-      rjTextBox9.BorderColor = Color.Black;
-      rjTextBox9.BorderFocusColor = Color.HotPink;
-      rjTextBox9.BorderRadius = 5;
-      rjTextBox9.BorderSize = 2;
-      rjTextBox9.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox9.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox9.Location = new Point(132, 224);
-      rjTextBox9.Margin = new Padding(4);
-      rjTextBox9.Multiline = false;
-      rjTextBox9.Name = "rjTextBox9";
-      rjTextBox9.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox9.PasswordChar = false;
-      rjTextBox9.PlaceholderColor = Color.DarkGray;
-      rjTextBox9.PlaceholderText = "";
-      rjTextBox9.Size = new Size(515, 40);
-      rjTextBox9.TabIndex = 15;
-      rjTextBox9.Texts = "";
-      rjTextBox9.UnderlinedStyle = false;
+      txtNameDriver.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtNameDriver.BackColor = SystemColors.Window;
+      txtNameDriver.BorderColor = Color.Black;
+      txtNameDriver.BorderFocusColor = Color.HotPink;
+      txtNameDriver.BorderRadius = 5;
+      txtNameDriver.BorderSize = 2;
+      txtNameDriver.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtNameDriver.ForeColor = Color.FromArgb(64, 64, 64);
+      txtNameDriver.Location = new Point(132, 224);
+      txtNameDriver.Margin = new Padding(4);
+      txtNameDriver.Multiline = false;
+      txtNameDriver.Name = "txtNameDriver";
+      txtNameDriver.Padding = new Padding(10, 7, 10, 7);
+      txtNameDriver.PasswordChar = false;
+      txtNameDriver.PlaceholderColor = Color.DarkGray;
+      txtNameDriver.PlaceholderText = "";
+      txtNameDriver.Size = new Size(515, 40);
+      txtNameDriver.TabIndex = 15;
+      txtNameDriver.Texts = "Nguyễn Xuân Việt";
+      txtNameDriver.UnderlinedStyle = false;
       // 
-      // rjTextBox10
+      // txtDocument
       // 
-      rjTextBox10.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox10.BackColor = SystemColors.Window;
-      rjTextBox10.BorderColor = Color.Black;
-      rjTextBox10.BorderFocusColor = Color.HotPink;
-      rjTextBox10.BorderRadius = 5;
-      rjTextBox10.BorderSize = 2;
-      rjTextBox10.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox10.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox10.Location = new Point(132, 313);
-      rjTextBox10.Margin = new Padding(4);
-      rjTextBox10.Multiline = false;
-      rjTextBox10.Name = "rjTextBox10";
-      rjTextBox10.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox10.PasswordChar = false;
-      rjTextBox10.PlaceholderColor = Color.DarkGray;
-      rjTextBox10.PlaceholderText = "";
-      rjTextBox10.Size = new Size(515, 40);
-      rjTextBox10.TabIndex = 18;
-      rjTextBox10.Texts = "";
-      rjTextBox10.UnderlinedStyle = false;
+      txtDocument.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtDocument.BackColor = SystemColors.Window;
+      txtDocument.BorderColor = Color.Black;
+      txtDocument.BorderFocusColor = Color.HotPink;
+      txtDocument.BorderRadius = 5;
+      txtDocument.BorderSize = 2;
+      txtDocument.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtDocument.ForeColor = Color.FromArgb(64, 64, 64);
+      txtDocument.Location = new Point(132, 313);
+      txtDocument.Margin = new Padding(4);
+      txtDocument.Multiline = false;
+      txtDocument.Name = "txtDocument";
+      txtDocument.Padding = new Padding(10, 7, 10, 7);
+      txtDocument.PasswordChar = false;
+      txtDocument.PlaceholderColor = Color.DarkGray;
+      txtDocument.PlaceholderText = "";
+      txtDocument.Size = new Size(515, 40);
+      txtDocument.TabIndex = 18;
+      txtDocument.Texts = "Không có";
+      txtDocument.UnderlinedStyle = false;
       // 
       // label19
       // 
@@ -556,8 +631,8 @@
       tableLayoutPanel15.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
       tableLayoutPanel15.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
       tableLayoutPanel15.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel15.Controls.Add(rjTextBox6, 0, 0);
-      tableLayoutPanel15.Controls.Add(rjButton4, 1, 0);
+      tableLayoutPanel15.Controls.Add(txtWareHouse, 0, 0);
+      tableLayoutPanel15.Controls.Add(btnLoadWarehouse, 1, 0);
       tableLayoutPanel15.Location = new Point(128, 176);
       tableLayoutPanel15.Margin = new Padding(0);
       tableLayoutPanel15.Name = "tableLayoutPanel15";
@@ -566,49 +641,50 @@
       tableLayoutPanel15.Size = new Size(523, 44);
       tableLayoutPanel15.TabIndex = 20;
       // 
-      // rjTextBox6
+      // txtWareHouse
       // 
-      rjTextBox6.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox6.BackColor = SystemColors.Window;
-      rjTextBox6.BorderColor = Color.Black;
-      rjTextBox6.BorderFocusColor = Color.HotPink;
-      rjTextBox6.BorderRadius = 5;
-      rjTextBox6.BorderSize = 2;
-      rjTextBox6.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox6.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox6.Location = new Point(4, 4);
-      rjTextBox6.Margin = new Padding(4);
-      rjTextBox6.Multiline = false;
-      rjTextBox6.Name = "rjTextBox6";
-      rjTextBox6.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox6.PasswordChar = false;
-      rjTextBox6.PlaceholderColor = Color.DarkGray;
-      rjTextBox6.PlaceholderText = "";
-      rjTextBox6.Size = new Size(455, 40);
-      rjTextBox6.TabIndex = 15;
-      rjTextBox6.Texts = "";
-      rjTextBox6.UnderlinedStyle = false;
+      txtWareHouse.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtWareHouse.BackColor = SystemColors.Window;
+      txtWareHouse.BorderColor = Color.Black;
+      txtWareHouse.BorderFocusColor = Color.HotPink;
+      txtWareHouse.BorderRadius = 5;
+      txtWareHouse.BorderSize = 2;
+      txtWareHouse.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtWareHouse.ForeColor = Color.FromArgb(64, 64, 64);
+      txtWareHouse.Location = new Point(4, 4);
+      txtWareHouse.Margin = new Padding(4);
+      txtWareHouse.Multiline = false;
+      txtWareHouse.Name = "txtWareHouse";
+      txtWareHouse.Padding = new Padding(10, 7, 10, 7);
+      txtWareHouse.PasswordChar = false;
+      txtWareHouse.PlaceholderColor = Color.DarkGray;
+      txtWareHouse.PlaceholderText = "";
+      txtWareHouse.Size = new Size(455, 40);
+      txtWareHouse.TabIndex = 15;
+      txtWareHouse.Texts = "";
+      txtWareHouse.UnderlinedStyle = false;
       // 
-      // rjButton4
+      // btnLoadWarehouse
       // 
-      rjButton4.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjButton4.BackColor = Color.White;
-      rjButton4.BackgroundColor = Color.White;
-      rjButton4.BorderColor = Color.Black;
-      rjButton4.BorderRadius = 5;
-      rjButton4.BorderSize = 0;
-      rjButton4.FlatAppearance.BorderColor = Color.Black;
-      rjButton4.FlatAppearance.BorderSize = 3;
-      rjButton4.FlatStyle = FlatStyle.Flat;
-      rjButton4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton4.ForeColor = Color.Black;
-      rjButton4.Location = new Point(466, 3);
-      rjButton4.Name = "rjButton4";
-      rjButton4.Size = new Size(54, 38);
-      rjButton4.TabIndex = 16;
-      rjButton4.Text = "...";
-      rjButton4.TextColor = Color.Black;
-      rjButton4.UseVisualStyleBackColor = false;
+      btnLoadWarehouse.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      btnLoadWarehouse.BackColor = Color.White;
+      btnLoadWarehouse.BackgroundColor = Color.White;
+      btnLoadWarehouse.BorderColor = Color.Black;
+      btnLoadWarehouse.BorderRadius = 5;
+      btnLoadWarehouse.BorderSize = 0;
+      btnLoadWarehouse.FlatAppearance.BorderColor = Color.Black;
+      btnLoadWarehouse.FlatAppearance.BorderSize = 3;
+      btnLoadWarehouse.FlatStyle = FlatStyle.Flat;
+      btnLoadWarehouse.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnLoadWarehouse.ForeColor = Color.Black;
+      btnLoadWarehouse.Location = new Point(466, 3);
+      btnLoadWarehouse.Name = "btnLoadWarehouse";
+      btnLoadWarehouse.Size = new Size(54, 38);
+      btnLoadWarehouse.TabIndex = 16;
+      btnLoadWarehouse.Text = "...";
+      btnLoadWarehouse.TextColor = Color.Black;
+      btnLoadWarehouse.UseVisualStyleBackColor = false;
+      btnLoadWarehouse.Click += btnLoadWarehouse_Click;
       // 
       // tableLayoutPanel14
       // 
@@ -618,8 +694,8 @@
       tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 60F));
       tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
       tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel14.Controls.Add(rjTextBox5, 0, 0);
-      tableLayoutPanel14.Controls.Add(rjButton3, 1, 0);
+      tableLayoutPanel14.Controls.Add(txtTypeGoods, 0, 0);
+      tableLayoutPanel14.Controls.Add(btnLoadTypeGoods, 1, 0);
       tableLayoutPanel14.Location = new Point(128, 132);
       tableLayoutPanel14.Margin = new Padding(0);
       tableLayoutPanel14.Name = "tableLayoutPanel14";
@@ -628,49 +704,50 @@
       tableLayoutPanel14.Size = new Size(523, 44);
       tableLayoutPanel14.TabIndex = 19;
       // 
-      // rjTextBox5
+      // txtTypeGoods
       // 
-      rjTextBox5.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox5.BackColor = SystemColors.Window;
-      rjTextBox5.BorderColor = Color.Black;
-      rjTextBox5.BorderFocusColor = Color.HotPink;
-      rjTextBox5.BorderRadius = 5;
-      rjTextBox5.BorderSize = 2;
-      rjTextBox5.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox5.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox5.Location = new Point(4, 4);
-      rjTextBox5.Margin = new Padding(4);
-      rjTextBox5.Multiline = false;
-      rjTextBox5.Name = "rjTextBox5";
-      rjTextBox5.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox5.PasswordChar = false;
-      rjTextBox5.PlaceholderColor = Color.DarkGray;
-      rjTextBox5.PlaceholderText = "";
-      rjTextBox5.Size = new Size(455, 40);
-      rjTextBox5.TabIndex = 15;
-      rjTextBox5.Texts = "";
-      rjTextBox5.UnderlinedStyle = false;
+      txtTypeGoods.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtTypeGoods.BackColor = SystemColors.Window;
+      txtTypeGoods.BorderColor = Color.Black;
+      txtTypeGoods.BorderFocusColor = Color.HotPink;
+      txtTypeGoods.BorderRadius = 5;
+      txtTypeGoods.BorderSize = 2;
+      txtTypeGoods.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtTypeGoods.ForeColor = Color.FromArgb(64, 64, 64);
+      txtTypeGoods.Location = new Point(4, 4);
+      txtTypeGoods.Margin = new Padding(4);
+      txtTypeGoods.Multiline = false;
+      txtTypeGoods.Name = "txtTypeGoods";
+      txtTypeGoods.Padding = new Padding(10, 7, 10, 7);
+      txtTypeGoods.PasswordChar = false;
+      txtTypeGoods.PlaceholderColor = Color.DarkGray;
+      txtTypeGoods.PlaceholderText = "";
+      txtTypeGoods.Size = new Size(455, 40);
+      txtTypeGoods.TabIndex = 15;
+      txtTypeGoods.Texts = "";
+      txtTypeGoods.UnderlinedStyle = false;
       // 
-      // rjButton3
+      // btnLoadTypeGoods
       // 
-      rjButton3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjButton3.BackColor = Color.White;
-      rjButton3.BackgroundColor = Color.White;
-      rjButton3.BorderColor = Color.Black;
-      rjButton3.BorderRadius = 5;
-      rjButton3.BorderSize = 0;
-      rjButton3.FlatAppearance.BorderColor = Color.Black;
-      rjButton3.FlatAppearance.BorderSize = 3;
-      rjButton3.FlatStyle = FlatStyle.Flat;
-      rjButton3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton3.ForeColor = Color.Black;
-      rjButton3.Location = new Point(466, 3);
-      rjButton3.Name = "rjButton3";
-      rjButton3.Size = new Size(54, 38);
-      rjButton3.TabIndex = 16;
-      rjButton3.Text = "...";
-      rjButton3.TextColor = Color.Black;
-      rjButton3.UseVisualStyleBackColor = false;
+      btnLoadTypeGoods.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      btnLoadTypeGoods.BackColor = Color.White;
+      btnLoadTypeGoods.BackgroundColor = Color.White;
+      btnLoadTypeGoods.BorderColor = Color.Black;
+      btnLoadTypeGoods.BorderRadius = 5;
+      btnLoadTypeGoods.BorderSize = 0;
+      btnLoadTypeGoods.FlatAppearance.BorderColor = Color.Black;
+      btnLoadTypeGoods.FlatAppearance.BorderSize = 3;
+      btnLoadTypeGoods.FlatStyle = FlatStyle.Flat;
+      btnLoadTypeGoods.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnLoadTypeGoods.ForeColor = Color.Black;
+      btnLoadTypeGoods.Location = new Point(466, 3);
+      btnLoadTypeGoods.Name = "btnLoadTypeGoods";
+      btnLoadTypeGoods.Size = new Size(54, 38);
+      btnLoadTypeGoods.TabIndex = 16;
+      btnLoadTypeGoods.Text = "...";
+      btnLoadTypeGoods.TextColor = Color.Black;
+      btnLoadTypeGoods.UseVisualStyleBackColor = false;
+      btnLoadTypeGoods.Click += btnLoadTypeGoods_Click;
       // 
       // tableLayoutPanel13
       // 
@@ -800,8 +877,8 @@
       tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.0000076F));
       tableLayoutPanel11.Controls.Add(label12, 2, 0);
-      tableLayoutPanel11.Controls.Add(rjTextBox1, 0, 0);
-      tableLayoutPanel11.Controls.Add(rjTextBox2, 3, 0);
+      tableLayoutPanel11.Controls.Add(txtNoLabelAuto, 0, 0);
+      tableLayoutPanel11.Controls.Add(txtNoLabel, 3, 0);
       tableLayoutPanel11.Location = new Point(128, 0);
       tableLayoutPanel11.Margin = new Padding(0);
       tableLayoutPanel11.Name = "tableLayoutPanel11";
@@ -824,51 +901,51 @@
       label12.Text = "Số phiếu nhà máy:";
       label12.TextAlign = ContentAlignment.MiddleRight;
       // 
-      // rjTextBox1
+      // txtNoLabelAuto
       // 
-      rjTextBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox1.BackColor = SystemColors.Window;
-      rjTextBox1.BorderColor = Color.Black;
-      rjTextBox1.BorderFocusColor = Color.HotPink;
-      rjTextBox1.BorderRadius = 5;
-      rjTextBox1.BorderSize = 2;
-      rjTextBox1.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox1.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox1.Location = new Point(4, 4);
-      rjTextBox1.Margin = new Padding(4);
-      rjTextBox1.Multiline = false;
-      rjTextBox1.Name = "rjTextBox1";
-      rjTextBox1.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox1.PasswordChar = false;
-      rjTextBox1.PlaceholderColor = Color.DarkGray;
-      rjTextBox1.PlaceholderText = "";
-      rjTextBox1.Size = new Size(150, 40);
-      rjTextBox1.TabIndex = 15;
-      rjTextBox1.Texts = "";
-      rjTextBox1.UnderlinedStyle = false;
+      txtNoLabelAuto.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtNoLabelAuto.BackColor = SystemColors.Window;
+      txtNoLabelAuto.BorderColor = Color.Black;
+      txtNoLabelAuto.BorderFocusColor = Color.HotPink;
+      txtNoLabelAuto.BorderRadius = 5;
+      txtNoLabelAuto.BorderSize = 2;
+      txtNoLabelAuto.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtNoLabelAuto.ForeColor = Color.FromArgb(64, 64, 64);
+      txtNoLabelAuto.Location = new Point(4, 4);
+      txtNoLabelAuto.Margin = new Padding(4);
+      txtNoLabelAuto.Multiline = false;
+      txtNoLabelAuto.Name = "txtNoLabelAuto";
+      txtNoLabelAuto.Padding = new Padding(10, 7, 10, 7);
+      txtNoLabelAuto.PasswordChar = false;
+      txtNoLabelAuto.PlaceholderColor = Color.DarkGray;
+      txtNoLabelAuto.PlaceholderText = "";
+      txtNoLabelAuto.Size = new Size(150, 40);
+      txtNoLabelAuto.TabIndex = 15;
+      txtNoLabelAuto.Texts = "A26-00001";
+      txtNoLabelAuto.UnderlinedStyle = false;
       // 
-      // rjTextBox2
+      // txtNoLabel
       // 
-      rjTextBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox2.BackColor = SystemColors.Window;
-      rjTextBox2.BorderColor = Color.Black;
-      rjTextBox2.BorderFocusColor = Color.HotPink;
-      rjTextBox2.BorderRadius = 5;
-      rjTextBox2.BorderSize = 2;
-      rjTextBox2.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox2.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox2.Location = new Point(367, 4);
-      rjTextBox2.Margin = new Padding(4);
-      rjTextBox2.Multiline = false;
-      rjTextBox2.Name = "rjTextBox2";
-      rjTextBox2.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox2.PasswordChar = false;
-      rjTextBox2.PlaceholderColor = Color.DarkGray;
-      rjTextBox2.PlaceholderText = "";
-      rjTextBox2.Size = new Size(152, 40);
-      rjTextBox2.TabIndex = 16;
-      rjTextBox2.Texts = "";
-      rjTextBox2.UnderlinedStyle = false;
+      txtNoLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtNoLabel.BackColor = SystemColors.Window;
+      txtNoLabel.BorderColor = Color.Black;
+      txtNoLabel.BorderFocusColor = Color.HotPink;
+      txtNoLabel.BorderRadius = 5;
+      txtNoLabel.BorderSize = 2;
+      txtNoLabel.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtNoLabel.ForeColor = Color.FromArgb(64, 64, 64);
+      txtNoLabel.Location = new Point(367, 4);
+      txtNoLabel.Margin = new Padding(4);
+      txtNoLabel.Multiline = false;
+      txtNoLabel.Name = "txtNoLabel";
+      txtNoLabel.Padding = new Padding(10, 7, 10, 7);
+      txtNoLabel.PasswordChar = false;
+      txtNoLabel.PlaceholderColor = Color.DarkGray;
+      txtNoLabel.PlaceholderText = "";
+      txtNoLabel.Size = new Size(152, 40);
+      txtNoLabel.TabIndex = 16;
+      txtNoLabel.Texts = "B26-00001";
+      txtNoLabel.UnderlinedStyle = false;
       // 
       // label15
       // 
@@ -920,9 +997,9 @@
       tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
       tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel16.Controls.Add(rjTextBox7, 0, 0);
+      tableLayoutPanel16.Controls.Add(txtLicensePlate, 0, 0);
       tableLayoutPanel16.Controls.Add(label13, 2, 0);
-      tableLayoutPanel16.Controls.Add(rjTextBox8, 3, 0);
+      tableLayoutPanel16.Controls.Add(txtIdCard, 3, 0);
       tableLayoutPanel16.Location = new Point(128, 264);
       tableLayoutPanel16.Margin = new Padding(0);
       tableLayoutPanel16.Name = "tableLayoutPanel16";
@@ -931,28 +1008,28 @@
       tableLayoutPanel16.Size = new Size(523, 44);
       tableLayoutPanel16.TabIndex = 21;
       // 
-      // rjTextBox7
+      // txtLicensePlate
       // 
-      rjTextBox7.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox7.BackColor = SystemColors.Window;
-      rjTextBox7.BorderColor = Color.Black;
-      rjTextBox7.BorderFocusColor = Color.HotPink;
-      rjTextBox7.BorderRadius = 5;
-      rjTextBox7.BorderSize = 2;
-      rjTextBox7.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox7.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox7.Location = new Point(4, 4);
-      rjTextBox7.Margin = new Padding(4);
-      rjTextBox7.Multiline = false;
-      rjTextBox7.Name = "rjTextBox7";
-      rjTextBox7.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox7.PasswordChar = false;
-      rjTextBox7.PlaceholderColor = Color.DarkGray;
-      rjTextBox7.PlaceholderText = "";
-      rjTextBox7.Size = new Size(292, 40);
-      rjTextBox7.TabIndex = 15;
-      rjTextBox7.Texts = "";
-      rjTextBox7.UnderlinedStyle = false;
+      txtLicensePlate.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtLicensePlate.BackColor = SystemColors.Window;
+      txtLicensePlate.BorderColor = Color.Black;
+      txtLicensePlate.BorderFocusColor = Color.HotPink;
+      txtLicensePlate.BorderRadius = 5;
+      txtLicensePlate.BorderSize = 2;
+      txtLicensePlate.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtLicensePlate.ForeColor = Color.FromArgb(64, 64, 64);
+      txtLicensePlate.Location = new Point(4, 4);
+      txtLicensePlate.Margin = new Padding(4);
+      txtLicensePlate.Multiline = false;
+      txtLicensePlate.Name = "txtLicensePlate";
+      txtLicensePlate.Padding = new Padding(10, 7, 10, 7);
+      txtLicensePlate.PasswordChar = false;
+      txtLicensePlate.PlaceholderColor = Color.DarkGray;
+      txtLicensePlate.PlaceholderText = "";
+      txtLicensePlate.Size = new Size(292, 40);
+      txtLicensePlate.TabIndex = 15;
+      txtLicensePlate.Texts = "85C1-44216";
+      txtLicensePlate.UnderlinedStyle = false;
       // 
       // label13
       // 
@@ -968,28 +1045,28 @@
       label13.Text = "CCCD:";
       label13.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // rjTextBox8
+      // txtIdCard
       // 
-      rjTextBox8.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox8.BackColor = SystemColors.Window;
-      rjTextBox8.BorderColor = Color.Black;
-      rjTextBox8.BorderFocusColor = Color.HotPink;
-      rjTextBox8.BorderRadius = 5;
-      rjTextBox8.BorderSize = 2;
-      rjTextBox8.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox8.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox8.Location = new Point(394, 4);
-      rjTextBox8.Margin = new Padding(4);
-      rjTextBox8.Multiline = false;
-      rjTextBox8.Name = "rjTextBox8";
-      rjTextBox8.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox8.PasswordChar = false;
-      rjTextBox8.PlaceholderColor = Color.DarkGray;
-      rjTextBox8.PlaceholderText = "";
-      rjTextBox8.Size = new Size(125, 40);
-      rjTextBox8.TabIndex = 18;
-      rjTextBox8.Texts = "";
-      rjTextBox8.UnderlinedStyle = false;
+      txtIdCard.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtIdCard.BackColor = SystemColors.Window;
+      txtIdCard.BorderColor = Color.Black;
+      txtIdCard.BorderFocusColor = Color.HotPink;
+      txtIdCard.BorderRadius = 5;
+      txtIdCard.BorderSize = 2;
+      txtIdCard.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtIdCard.ForeColor = Color.FromArgb(64, 64, 64);
+      txtIdCard.Location = new Point(394, 4);
+      txtIdCard.Margin = new Padding(4);
+      txtIdCard.Multiline = false;
+      txtIdCard.Name = "txtIdCard";
+      txtIdCard.Padding = new Padding(10, 7, 10, 7);
+      txtIdCard.PasswordChar = false;
+      txtIdCard.PlaceholderColor = Color.DarkGray;
+      txtIdCard.PlaceholderText = "";
+      txtIdCard.Size = new Size(125, 40);
+      txtIdCard.TabIndex = 18;
+      txtIdCard.Texts = "058200005781";
+      txtIdCard.UnderlinedStyle = false;
       // 
       // label10
       // 
@@ -1075,9 +1152,9 @@
       tableLayoutPanel7.BackColor = Color.FromArgb(236, 236, 236);
       tableLayoutPanel7.ColumnCount = 1;
       tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel7.Controls.Add(dgv, 0, 2);
       tableLayoutPanel7.Controls.Add(tableLayoutPanel10, 0, 1);
       tableLayoutPanel7.Controls.Add(label27, 0, 0);
-      tableLayoutPanel7.Controls.Add(dataGridView1, 0, 2);
       tableLayoutPanel7.Location = new Point(0, 419);
       tableLayoutPanel7.Margin = new Padding(0);
       tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -1087,6 +1164,48 @@
       tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel7.Size = new Size(1525, 506);
       tableLayoutPanel7.TabIndex = 2;
+      // 
+      // dgv
+      // 
+      dgv.AllowUserToResizeColumns = false;
+      dgv.AllowUserToResizeRows = false;
+      dgv.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+      dgv.BackgroundColor = Color.FromArgb(236, 236, 236);
+      dgv.BorderStyle = BorderStyle.None;
+      dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = SystemColors.Control;
+      dataGridViewCellStyle1.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+      dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = SystemColors.Window;
+      dataGridViewCellStyle2.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+      dgv.DefaultCellStyle = dataGridViewCellStyle2;
+      dgv.EnableHeadersVisualStyles = false;
+      dgv.Location = new Point(3, 113);
+      dgv.Name = "dgv";
+      dgv.ReadOnly = true;
+      dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = SystemColors.Control;
+      dataGridViewCellStyle3.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+      dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+      dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+      dgv.RowHeadersVisible = false;
+      dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+      dgv.Size = new Size(1519, 390);
+      dgv.TabIndex = 23;
       // 
       // tableLayoutPanel10
       // 
@@ -1118,7 +1237,7 @@
       tableLayoutPanel10.Controls.Add(label20, 8, 0);
       tableLayoutPanel10.Controls.Add(label21, 11, 0);
       tableLayoutPanel10.Controls.Add(comboBox2, 12, 0);
-      tableLayoutPanel10.Controls.Add(rjButton10, 14, 0);
+      tableLayoutPanel10.Controls.Add(btnSearchHistorical, 14, 0);
       tableLayoutPanel10.Location = new Point(0, 50);
       tableLayoutPanel10.Margin = new Padding(0);
       tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -1262,26 +1381,27 @@
       comboBox2.Size = new Size(194, 38);
       comboBox2.TabIndex = 26;
       // 
-      // rjButton10
+      // btnSearchHistorical
       // 
-      rjButton10.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton10.BackColor = Color.FromArgb(64, 107, 177);
-      rjButton10.BackgroundColor = Color.FromArgb(64, 107, 177);
-      rjButton10.BorderColor = Color.White;
-      rjButton10.BorderRadius = 5;
-      rjButton10.BorderSize = 0;
-      rjButton10.FlatAppearance.BorderColor = Color.White;
-      rjButton10.FlatAppearance.BorderSize = 0;
-      rjButton10.FlatStyle = FlatStyle.Flat;
-      rjButton10.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton10.ForeColor = Color.White;
-      rjButton10.Location = new Point(1328, 3);
-      rjButton10.Name = "rjButton10";
-      rjButton10.Size = new Size(194, 54);
-      rjButton10.TabIndex = 27;
-      rjButton10.Text = "Tìm kiếm";
-      rjButton10.TextColor = Color.White;
-      rjButton10.UseVisualStyleBackColor = false;
+      btnSearchHistorical.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnSearchHistorical.BackColor = Color.FromArgb(64, 107, 177);
+      btnSearchHistorical.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnSearchHistorical.BorderColor = Color.White;
+      btnSearchHistorical.BorderRadius = 5;
+      btnSearchHistorical.BorderSize = 0;
+      btnSearchHistorical.FlatAppearance.BorderColor = Color.White;
+      btnSearchHistorical.FlatAppearance.BorderSize = 0;
+      btnSearchHistorical.FlatStyle = FlatStyle.Flat;
+      btnSearchHistorical.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnSearchHistorical.ForeColor = Color.White;
+      btnSearchHistorical.Location = new Point(1328, 3);
+      btnSearchHistorical.Name = "btnSearchHistorical";
+      btnSearchHistorical.Size = new Size(194, 54);
+      btnSearchHistorical.TabIndex = 27;
+      btnSearchHistorical.Text = "Tìm kiếm";
+      btnSearchHistorical.TextColor = Color.White;
+      btnSearchHistorical.UseVisualStyleBackColor = false;
+      btnSearchHistorical.Click += btnSearchHistorical_Click;
       // 
       // label27
       // 
@@ -1297,16 +1417,6 @@
       label27.Text = "Lịch sử cân";
       label27.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // dataGridView1
-      // 
-      dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      dataGridView1.BackgroundColor = Color.White;
-      dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      dataGridView1.Location = new Point(3, 113);
-      dataGridView1.Name = "dataGridView1";
-      dataGridView1.Size = new Size(1519, 390);
-      dataGridView1.TabIndex = 23;
-      // 
       // FrmHome
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1319,8 +1429,11 @@
       tableLayoutPanel2.ResumeLayout(false);
       tableLayoutPanel3.ResumeLayout(false);
       tableLayoutPanel3.PerformLayout();
-      tableLayoutPanel5.ResumeLayout(false);
-      tableLayoutPanel5.PerformLayout();
+      tableLayoutPanel12.ResumeLayout(false);
+      tableLayoutPanel17.ResumeLayout(false);
+      tableLayoutPanel17.PerformLayout();
+      tableLayoutPanel18.ResumeLayout(false);
+      tableLayoutPanel18.PerformLayout();
       tableLayoutPanel6.ResumeLayout(false);
       tableLayoutPanel4.ResumeLayout(false);
       tableLayoutPanel4.PerformLayout();
@@ -1337,9 +1450,9 @@
       tableLayoutPanel9.PerformLayout();
       tableLayoutPanel7.ResumeLayout(false);
       tableLayoutPanel7.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)dgv).EndInit();
       tableLayoutPanel10.ResumeLayout(false);
       tableLayoutPanel10.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
       ResumeLayout(false);
     }
 
@@ -1348,8 +1461,7 @@
     private TableLayoutPanel tableLayoutPanel1;
     private TableLayoutPanel tableLayoutPanel2;
     private TableLayoutPanel tableLayoutPanel3;
-    private TableLayoutPanel tableLayoutPanel5;
-    private Label label2;
+    private Label lbWeightValue;
     private Label label5;
     private Label label3;
     private Label label1;
@@ -1370,32 +1482,32 @@
     private Label label15;
     private Label label16;
     private TableLayoutPanel tableLayoutPanel11;
-    private Custom.RJTextBox rjTextBox1;
+    private Custom.RJTextBox txtNoLabelAuto;
     private Label label12;
-    private Custom.RJTextBox rjTextBox2;
+    private Custom.RJTextBox txtNoLabel;
     private TableLayoutPanel tableLayoutPanel14;
-    private Custom.RJTextBox rjTextBox5;
-    private LaborTrackPro.Custom.RJButton rjButton3;
+    private Custom.RJTextBox txtTypeGoods;
+    private LaborTrackPro.Custom.RJButton btnLoadTypeGoods;
     private TableLayoutPanel tableLayoutPanel13;
     private Custom.RJTextBox txtClient;
     private LaborTrackPro.Custom.RJButton btnLoadClient;
     private TableLayoutPanel tableLayoutPanel15;
-    private Custom.RJTextBox rjTextBox6;
-    private LaborTrackPro.Custom.RJButton rjButton4;
+    private Custom.RJTextBox txtWareHouse;
+    private LaborTrackPro.Custom.RJButton btnLoadWarehouse;
     private TableLayoutPanel tableLayoutPanel16;
-    private Custom.RJTextBox rjTextBox7;
+    private Custom.RJTextBox txtLicensePlate;
     private Label label13;
-    private Custom.RJTextBox rjTextBox8;
-    private Custom.RJTextBox rjTextBox9;
+    private Custom.RJTextBox txtIdCard;
+    private Custom.RJTextBox txtNameDriver;
     private Label label19;
-    private Custom.RJTextBox rjTextBox10;
+    private Custom.RJTextBox txtDocument;
     private Custom.RJTextBox rjTextBox11;
-    private LaborTrackPro.Custom.RJButton rjButton9;
-    private LaborTrackPro.Custom.RJButton rjButton8;
-    private LaborTrackPro.Custom.RJButton rjButton7;
-    private LaborTrackPro.Custom.RJButton rjButton6;
-    private LaborTrackPro.Custom.RJButton rjButton5;
-    private LaborTrackPro.Custom.RJButton rjButton1;
+    private LaborTrackPro.Custom.RJButton btnZero;
+    private LaborTrackPro.Custom.RJButton btnBack;
+    private LaborTrackPro.Custom.RJButton btnPrint;
+    private LaborTrackPro.Custom.RJButton btnWeightTime02;
+    private LaborTrackPro.Custom.RJButton btnWeightTime01;
+    private LaborTrackPro.Custom.RJButton btnTriggerWeight;
     private TableLayoutPanel tableLayoutPanel7;
     private Label label27;
     private TableLayoutPanel tableLayoutPanel10;
@@ -1409,7 +1521,12 @@
     private ComboBox comboBox1;
     private Label label21;
     private ComboBox comboBox2;
-    private LaborTrackPro.Custom.RJButton rjButton10;
-    private DataGridView dataGridView1;
+    private LaborTrackPro.Custom.RJButton btnSearchHistorical;
+    private TableLayoutPanel tableLayoutPanel12;
+    private TableLayoutPanel tableLayoutPanel17;
+    private Label lbWeightTrigger;
+    private Label label2;
+    private TableLayoutPanel tableLayoutPanel18;
+    private DataGridView dgv;
   }
 }

@@ -1,0 +1,41 @@
+﻿using iSoft.Database.DbContexts;
+using iSoft.Database.Models;
+using iSoft.Database.Repositorys;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace iSoft.Database.Service
+{
+  public class RecordTruckService
+  {
+    public async Task<List<RecordTruck>> GetAllAsync(bool IsContainDelete = false)
+    {
+      try
+      {
+        await using var context = new PostgresDbContext();
+        var repository = new RecordTruckRepository(context);
+        return await repository.GetAllAsync(IsContainDelete).ConfigureAwait(false);
+      }
+      catch (Exception)
+      {
+        throw;
+      }
+    }
+    public async Task<RecordTruck> AddOrUpdateAsync(RecordTruck recordTruck)
+    {
+      try
+      {
+        await using var context = new PostgresDbContext();
+        var repository = new RecordTruckRepository(context);
+        return await repository.AddOrUpdateAsync(recordTruck);
+      }
+      catch (Exception)
+      {
+        throw;
+      }
+    }
+  }
+}

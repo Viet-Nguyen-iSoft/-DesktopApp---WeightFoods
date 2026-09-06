@@ -30,8 +30,7 @@ namespace LaborTrackPro.Printer
 
     [JsonIgnore]
     public List<RecordWeight>? LaborProductivityRecognitions { get; set; }
-    [JsonIgnore]
-    public List<MaterialDeliveryDTO>? MaterialDelivaryDTOs { get; set; }
+
     [JsonIgnore]
     public Station? Machine { get; set; }
 

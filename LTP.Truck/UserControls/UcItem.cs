@@ -37,6 +37,13 @@ namespace LTP.Truck.UserControls
         lbTitle.Text = value;
       }
     }
+    public string Value
+    {
+      set
+      {
+        lbValue.Text = value;
+      }
+    }
 
   }
 }

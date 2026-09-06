@@ -49,6 +49,28 @@ namespace LTP.Truck.Popup
 
         dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
       }
+      else if (typeof(T) == typeof(TypeGoods))
+      {
+        _enumTypeData = EnumTypeData.TypeGoods;
+
+        var dto = DTOHelper.ConvertTypeGoodsDTO(items as List<TypeGoods>);
+        dgv.DataSource = dto;
+
+        dgv.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+        dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+      }
+      else if (typeof(T) == typeof(Warehouse))
+      {
+        _enumTypeData = EnumTypeData.Warehouse;
+
+        var dto = DTOHelper.ConvertWareHouseDTO(items as List<Warehouse>);
+        dgv.DataSource = dto;
+
+        dgv.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+        dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+      }
     }
 
     private void btnClose_Click(object sender, EventArgs e)

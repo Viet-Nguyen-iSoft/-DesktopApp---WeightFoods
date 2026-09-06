@@ -36,8 +36,6 @@ namespace iSoft.Database.DTO
     [DisplayName("Ngày tạo")]
     public string? CreatedAt { get; set; }
 
-    [Browsable(false)]
-    public List<MaterialDeliveryDTO>? MaterialDelivaryDTOs { get; set; }
 
     [Browsable(false)]
     public string? JsonFill { get; set; }

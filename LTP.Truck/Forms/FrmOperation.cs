@@ -42,20 +42,43 @@ namespace LTP.Truck.Forms
     {
       this.btnHome.Click += btnHome_Click;
       this.btnHome.PerformClick();
+
+      this.btnClient.Click += BtnClient_Click;
+      this.btnTypeGoods.Click += BtnTypeGoods_Click;
+      this.btnWarehouse.Click += BtnWarehouse_Click;
     }
 
-    private void btnHome_Click(object? sender, EventArgs e)
+    private async void BtnWarehouse_Click(object? sender, EventArgs e)
     {
-      ChangePage(EnumScreen.Home);
-    }
-    private void btnSetting_Click(object sender, EventArgs e)
-    {
-      ChangePage(EnumScreen.Setting);
+      await ChangePage(EnumScreen.MD_Warehouse);
     }
 
+    private async void BtnTypeGoods_Click(object? sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.MD_TypeGoods);
+    }
+    private async void BtnClient_Click(object? sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.MD_Client);
+    }
+    private async void btnMasterData_Click(object sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.MD_Client);
+    }
+    
+
+    private async void btnHome_Click(object? sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.Home);
+    }
+    private async void btnSetting_Click(object sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.Setting);
+    }
+    
 
     #region ChangePage
-    public void ChangePage(EnumScreen appModulSupport, bool actionBack = false)
+    public async Task ChangePage(EnumScreen appModulSupport, bool actionBack = false)
     {
       try
       {
@@ -66,6 +89,18 @@ namespace LTP.Truck.Forms
             break;
           case EnumScreen.Setting:
             OpenChildForm(appModulSupport, FrmSetting.Instance);
+            break;
+          case EnumScreen.MD_Client:
+            OpenChildForm(appModulSupport, FrmMasterData.Instance);
+            await FrmMasterData.Instance.LoadData(EnumTypeMasterData.Client);
+            break;
+          case EnumScreen.MD_TypeGoods:
+            OpenChildForm(appModulSupport, FrmMasterData.Instance);
+            await FrmMasterData.Instance.LoadData(EnumTypeMasterData.TypeGoods);
+            break;
+          case EnumScreen.MD_Warehouse:
+            OpenChildForm(appModulSupport, FrmMasterData.Instance);
+            await FrmMasterData.Instance.LoadData(EnumTypeMasterData.Warehouse);
             break;
             //case AppModulSupport.AreaInternalOrExternal:
             //  OpenChildForm(appModulSupport, FrmInternalOrExternal.Instance);
@@ -241,6 +276,5 @@ namespace LTP.Truck.Forms
     }
     #endregion
 
-   
   }
 }

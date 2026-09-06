@@ -335,7 +335,6 @@ namespace LaborTrackPro.Controls
       public Employee? EmployeeReceivingFirst { get; set; }
       public Employee? EmployeeQC { get; set; }
       public List<RecordWeight>? DatalogWeights { get; set; } = new List<RecordWeight>();
-      public List<MaterialDeliveryDTO>? MaterialDelivaryDTOs { get; set; } = new List<MaterialDeliveryDTO>();
       public bool IsDelivery { get; set; }
     }
 

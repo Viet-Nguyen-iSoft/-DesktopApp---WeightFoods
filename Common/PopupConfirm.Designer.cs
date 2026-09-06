@@ -84,10 +84,11 @@
       // tableLayoutPanel4
       // 
       tableLayoutPanel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel4.ColumnCount = 2;
-      tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15F));
-      tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 85F));
-      tableLayoutPanel4.Controls.Add(lbInformation, 1, 0);
+      tableLayoutPanel4.ColumnCount = 3;
+      tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
+      tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel4.Controls.Add(lbInformation, 2, 0);
       tableLayoutPanel4.Controls.Add(picIcon, 0, 0);
       tableLayoutPanel4.Location = new Point(0, 0);
       tableLayoutPanel4.Margin = new Padding(0);
@@ -103,12 +104,12 @@
       lbInformation.AutoSize = true;
       lbInformation.Font = new Font("Microsoft Sans Serif", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
       lbInformation.ForeColor = Color.Black;
-      lbInformation.Location = new Point(122, 0);
+      lbInformation.Location = new Point(143, 0);
       lbInformation.Name = "lbInformation";
-      lbInformation.Size = new Size(669, 158);
+      lbInformation.Size = new Size(648, 158);
       lbInformation.TabIndex = 11;
       lbInformation.Text = "...";
-      lbInformation.TextAlign = ContentAlignment.MiddleCenter;
+      lbInformation.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // picIcon
       // 
@@ -116,7 +117,7 @@
       picIcon.Location = new Point(10, 30);
       picIcon.Margin = new Padding(10, 30, 10, 30);
       picIcon.Name = "picIcon";
-      picIcon.Size = new Size(99, 98);
+      picIcon.Size = new Size(100, 98);
       picIcon.SizeMode = PictureBoxSizeMode.StretchImage;
       picIcon.TabIndex = 12;
       picIcon.TabStop = false;

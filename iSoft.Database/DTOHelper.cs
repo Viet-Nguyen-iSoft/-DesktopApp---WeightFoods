@@ -11,6 +11,56 @@ namespace iSoft.Database
 {
   public static class DTOHelper
   {
+    public static RecordTruckDTO ConvertRecordTruckDTO(RecordTruck recordTruck)
+    {
+      ArgumentNullException.ThrowIfNull(recordTruck);
+
+      return new RecordTruckDTO
+      {
+        RecordTruck = recordTruck,
+        No = 1,
+        NoLabelAuto = recordTruck.NoLabelAuto,
+        NoLabelManual = recordTruck.NoLabelManual,
+        NetTime01 = recordTruck.NetTime01.ToString("F3"),
+        NetTime02 = recordTruck.NetTime02.ToString("F3"),
+        Status = recordTruck.EnumTypeDataTruck switch
+        {
+          EnumTypeDataTruck.None => "Chưa cân",
+          EnumTypeDataTruck.WeightedTime01 => "Đang cân lần 1",
+          EnumTypeDataTruck.DoneTime01 => "Đã cân lần 1",
+          EnumTypeDataTruck.WeightedTime02 => "Đã cân lần 1",
+          EnumTypeDataTruck.DoneTime02 => "Đã cân lần 2",
+          _ => recordTruck.EnumTypeDataTruck.ToString()
+        },
+        EnumTypeDataTruck = recordTruck.EnumTypeDataTruck,
+        Client = recordTruck.Client?.Name,
+        TypeGoods = recordTruck.TypeGoods?.Name,
+        Warehouse = recordTruck.Warehouse?.Name,
+        NameDriver = recordTruck.NameDriver,
+        IdCard = recordTruck.IdCard,
+        LicensePlate = recordTruck.LicensePlate,
+        Document = recordTruck.Document,
+        Datetime = recordTruck.UpdatedAt?.ToString("dd/MM/yyyy HH:mm:ss") ?? "",
+      };
+    }
+
+    public static List<RecordTruckDTO> ConvertRecordTruckDTO(List<RecordTruck>? recordTrucks)
+    {
+      if (recordTrucks == null || recordTrucks.Count == 0)
+        return new List<RecordTruckDTO>();
+
+      return recordTrucks
+        .OrderByDescending(recordTruck => recordTruck.CreatedAt)
+        .ThenByDescending(recordTruck => recordTruck.Id)
+        .Select((recordTruck, index) =>
+        {
+          var dto = ConvertRecordTruckDTO(recordTruck);
+          dto.No = recordTrucks.Count - index;
+          return dto;
+        })
+        .ToList();
+    }
+
     public static List<ClientDTO>? ConvertClientDTO(List<Client>? clients)
     {
       var rsDto = new List<ClientDTO>();
@@ -21,7 +71,7 @@ namespace iSoft.Database
           .Select((e, index) => new ClientDTO
           {
             Client = e,
-            No = index + 1, // STT bắt đầu từ 1
+            No = index + 1,
             Name = e.Name,
             Description = e.Description,
           })
@@ -30,8 +80,48 @@ namespace iSoft.Database
       }  
       return rsDto;
     }
-    
-    
+
+    public static List<TypeGoodsDTO>? ConvertTypeGoodsDTO(List<TypeGoods>? typeGoods)
+    {
+      var rsDto = new List<TypeGoodsDTO>();
+      if (typeGoods?.Count() > 0)
+      {
+        typeGoods = typeGoods.OrderBy(e => e.Name).ToList();
+        rsDto = typeGoods
+          .Select((e, index) => new TypeGoodsDTO
+          {
+            TypeGoods = e,
+            No = index + 1,
+            Name = e.Name,
+            Description = e.Description,
+          })
+          .OrderBy(e => e.Name)
+          .ToList();
+      }
+      return rsDto;
+    }
+
+    public static List<WareHouseDTO>? ConvertWareHouseDTO(List<Warehouse>? warehouses)
+    {
+      var rsDto = new List<WareHouseDTO>();
+      if (warehouses?.Count() > 0)
+      {
+        warehouses = warehouses.OrderBy(e => e.Name).ToList();
+        rsDto = warehouses
+          .Select((e, index) => new WareHouseDTO
+          {
+            Warehouse = e,
+            No = index + 1,
+            Name = e.Name,
+            Description = e.Description,
+          })
+          .OrderBy(e => e.Name)
+          .ToList();
+      }
+      return rsDto;
+    }
+
+
 
     public static List<DepartmentDTO> ConvertDepartmentToDTO(List<Department> departments)
     {

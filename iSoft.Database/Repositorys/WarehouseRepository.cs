@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace iSoft.Database.Repositorys
 {
-  public class ClientRepository : GenericRepository<Client, CommonDbContext>
+  public class WarehouseRepository : GenericRepository<Warehouse, CommonDbContext>
   {
-    public ClientRepository(CommonDbContext context) : base(context)
+    public WarehouseRepository(CommonDbContext context) : base(context)
     {
     }
 
-    public Task<List<Client>> GetAllAsync(bool IsContainDelete = false)
+    public Task<List<Warehouse>> GetAllAsync(bool IsContainDelete = false)
     {
-      var query = Context.Set<Client>().AsQueryable();
+      var query = Context.Set<Warehouse>().AsQueryable();
       if (!IsContainDelete)
         query = query.Where(x => !x.DeletedFlag);
       return query.ToListAsync();

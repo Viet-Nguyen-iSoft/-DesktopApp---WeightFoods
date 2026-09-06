@@ -44,8 +44,8 @@ namespace Common
     {
       None = 0,
       Client,
-      Question,
-      Warning,
+      TypeGoods,
+      Warehouse,
       Information,
     }
   }

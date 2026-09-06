@@ -12,9 +12,15 @@ namespace LTP.Truck
     {
       Waiting,
       Operation,
+      Setting,
+      MasterData,
+
+      MD_Client,
+      MD_TypeGoods,
+      MD_Warehouse,
 
       Home,
-      MasterData,
+      
       Employee,
 
       OpChooseModeFunction,
@@ -33,7 +39,7 @@ namespace LTP.Truck
       LogInSussess,
 
 
-      Setting,
+      
       SettingDevice,
       SettingServer,
       SettingPrinter,
@@ -59,6 +65,13 @@ namespace LTP.Truck
       DeliveryPlan,
       ListItemDelivery,
       ReviewDelivery
+    }
+
+    public enum EnumTypeMasterData
+    {
+      Client,
+      TypeGoods,
+      Warehouse,
     }
   }
 }
