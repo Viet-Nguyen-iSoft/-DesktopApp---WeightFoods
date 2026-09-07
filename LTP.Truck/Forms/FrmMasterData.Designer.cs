@@ -35,7 +35,7 @@
       dgv = new DataGridView();
       tableLayoutPanel10 = new TableLayoutPanel();
       label4 = new Label();
-      rjTextBox12 = new LTP.Truck.Custom.RJTextBox();
+      txtSearch = new LTP.Truck.Custom.RJTextBox();
       btnSearch = new LaborTrackPro.Custom.RJButton();
       label27 = new Label();
       tableLayoutPanel7.SuspendLayout();
@@ -114,7 +114,7 @@
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
       tableLayoutPanel10.Controls.Add(label4, 0, 0);
-      tableLayoutPanel10.Controls.Add(rjTextBox12, 1, 0);
+      tableLayoutPanel10.Controls.Add(txtSearch, 1, 0);
       tableLayoutPanel10.Controls.Add(btnSearch, 3, 0);
       tableLayoutPanel10.Location = new Point(0, 50);
       tableLayoutPanel10.Margin = new Padding(0);
@@ -138,28 +138,28 @@
       label4.Text = "Tìm kiếm:";
       label4.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // rjTextBox12
+      // txtSearch
       // 
-      rjTextBox12.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox12.BackColor = SystemColors.Window;
-      rjTextBox12.BorderColor = Color.Black;
-      rjTextBox12.BorderFocusColor = Color.HotPink;
-      rjTextBox12.BorderRadius = 5;
-      rjTextBox12.BorderSize = 2;
-      rjTextBox12.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox12.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox12.Location = new Point(106, 10);
-      rjTextBox12.Margin = new Padding(4);
-      rjTextBox12.Multiline = false;
-      rjTextBox12.Name = "rjTextBox12";
-      rjTextBox12.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox12.PasswordChar = false;
-      rjTextBox12.PlaceholderColor = Color.DarkGray;
-      rjTextBox12.PlaceholderText = "";
-      rjTextBox12.Size = new Size(651, 40);
-      rjTextBox12.TabIndex = 18;
-      rjTextBox12.Texts = "";
-      rjTextBox12.UnderlinedStyle = false;
+      txtSearch.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtSearch.BackColor = SystemColors.Window;
+      txtSearch.BorderColor = Color.Black;
+      txtSearch.BorderFocusColor = Color.HotPink;
+      txtSearch.BorderRadius = 5;
+      txtSearch.BorderSize = 2;
+      txtSearch.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtSearch.ForeColor = Color.FromArgb(64, 64, 64);
+      txtSearch.Location = new Point(106, 10);
+      txtSearch.Margin = new Padding(4);
+      txtSearch.Multiline = false;
+      txtSearch.Name = "txtSearch";
+      txtSearch.Padding = new Padding(10, 7, 10, 7);
+      txtSearch.PasswordChar = false;
+      txtSearch.PlaceholderColor = Color.DarkGray;
+      txtSearch.PlaceholderText = "";
+      txtSearch.Size = new Size(651, 40);
+      txtSearch.TabIndex = 18;
+      txtSearch.Texts = "";
+      txtSearch.UnderlinedStyle = false;
       // 
       // btnSearch
       // 
@@ -219,7 +219,7 @@
     private DataGridView dgv;
     private TableLayoutPanel tableLayoutPanel10;
     private Label label4;
-    private Custom.RJTextBox rjTextBox12;
+    private Custom.RJTextBox txtSearch;
     private LaborTrackPro.Custom.RJButton btnSearch;
     private Label label27;
   }
