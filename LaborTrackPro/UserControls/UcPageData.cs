@@ -125,7 +125,7 @@ namespace LaborTrackPro.UserControls
 
 
     private List<DatalogDetailDTO> _datalogDetailDTOs = new List<DatalogDetailDTO>();
-    private List<DatalogOperationGroupDTO> _datalogOperationGroupDTOs = new List<DatalogOperationGroupDTO>();
+    private List<ProductGroupDTO> _datalogOperationGroupDTOs = new List<ProductGroupDTO>();
     private List<DatalogPOGroupDTO> _datalogPOGroupDTOs = new List<DatalogPOGroupDTO>();
     private List<DatalogDetailDeleteDTO> _datalogDetailDTOsDelete = new List<DatalogDetailDeleteDTO>();
     private List<DatalogDeliveryDTO> _datalogDeliveryDTOs = new List<DatalogDeliveryDTO>();

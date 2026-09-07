@@ -1,32 +1,30 @@
 ﻿using iSoft.Database.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace iSoft.Database.DTO
 {
-  public class ClientDTO
+  public class ProductDTO
   {
     [Browsable(false)]
-    public Client? Client { get; set; }
+    public Product? Product { get; set; }
 
 
     [DisplayName("Stt")]
     public int? No { get; set; }
+    [DisplayName("Nhóm sản phẩm")]
+    public string? Group { get; set; }
 
-    [DisplayName("Tên")]
+    [DisplayName("Tên sản phẩm")]
     public string? Name { get; set; }
 
     [DisplayName("Mô tả")]
     public string? Description { get; set; }
     [DisplayName("Cập nhật")]
     public string? UpdatedAt { get; set; }
-  }
-
-  public enum EnumStatusDataPO
-  {
-    None = 0,
-    NotStarted,
-    Active,
-    Expired,
-    NotAprove,
   }
 }

@@ -49,6 +49,9 @@ namespace LTP.Truck.Controls
     public readonly TypeGoodsService _typeGoodsService = new();
     public readonly WarehouseService _warehouseService = new();
     public readonly RecordTruckService _recordTruckService = new();
+    public readonly CategoryTareService _categoryTareService = new();
+    public readonly ProductGroupService _productGroupService = new();
+    public readonly ProductService _productService = new();
 
 
     public string _folderFileLog = Application.StartupPath + "Logs";

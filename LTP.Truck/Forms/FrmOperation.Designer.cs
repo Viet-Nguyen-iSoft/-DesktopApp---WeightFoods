@@ -35,18 +35,16 @@
       btnMenu = new PictureBox();
       tableLayoutPanel6 = new TableLayoutPanel();
       flowLayoutPanel1 = new FlowLayoutPanel();
-      btnHome = new LTP.Truck.Custom.RJButton();
-      rjButton2 = new LTP.Truck.Custom.RJButton();
-      rjButton3 = new LTP.Truck.Custom.RJButton();
+      btnHomeTruck = new LTP.Truck.Custom.RJButton();
+      btnHomeGoods = new LTP.Truck.Custom.RJButton();
       btnSetting = new LaborTrackPro.Custom.RJButton();
       btnMasterData = new LTP.Truck.Custom.RJButton();
       btnClient = new LTP.Truck.Custom.RJButton();
       btnTypeGoods = new LTP.Truck.Custom.RJButton();
       btnWarehouse = new LTP.Truck.Custom.RJButton();
-      rjButton6 = new LTP.Truck.Custom.RJButton();
-      rjButton7 = new LTP.Truck.Custom.RJButton();
-      rjButton8 = new LTP.Truck.Custom.RJButton();
-      rjButton9 = new LTP.Truck.Custom.RJButton();
+      btnTare = new LTP.Truck.Custom.RJButton();
+      btnGroupProduct = new LTP.Truck.Custom.RJButton();
+      btnProduct = new LTP.Truck.Custom.RJButton();
       tableLayoutPanel7 = new TableLayoutPanel();
       label3 = new Label();
       pictureBox1 = new PictureBox();
@@ -155,96 +153,71 @@
       // 
       flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       flowLayoutPanel1.BackColor = Color.FromArgb(236, 236, 236);
-      flowLayoutPanel1.Controls.Add(btnHome);
-      flowLayoutPanel1.Controls.Add(rjButton2);
-      flowLayoutPanel1.Controls.Add(rjButton3);
+      flowLayoutPanel1.Controls.Add(btnHomeTruck);
+      flowLayoutPanel1.Controls.Add(btnHomeGoods);
       flowLayoutPanel1.Controls.Add(btnSetting);
       flowLayoutPanel1.Controls.Add(btnMasterData);
       flowLayoutPanel1.Controls.Add(btnClient);
       flowLayoutPanel1.Controls.Add(btnTypeGoods);
       flowLayoutPanel1.Controls.Add(btnWarehouse);
-      flowLayoutPanel1.Controls.Add(rjButton6);
-      flowLayoutPanel1.Controls.Add(rjButton7);
-      flowLayoutPanel1.Controls.Add(rjButton8);
-      flowLayoutPanel1.Controls.Add(rjButton9);
+      flowLayoutPanel1.Controls.Add(btnTare);
+      flowLayoutPanel1.Controls.Add(btnGroupProduct);
+      flowLayoutPanel1.Controls.Add(btnProduct);
       flowLayoutPanel1.Location = new Point(0, 0);
       flowLayoutPanel1.Margin = new Padding(0);
       flowLayoutPanel1.Name = "flowLayoutPanel1";
       flowLayoutPanel1.Size = new Size(250, 759);
       flowLayoutPanel1.TabIndex = 0;
       // 
-      // btnHome
+      // btnHomeTruck
       // 
-      btnHome.BackColor = Color.Silver;
-      btnHome.BackgroundColor = Color.Silver;
-      btnHome.BorderColor = Color.PaleVioletRed;
-      btnHome.BorderRadius = 5;
-      btnHome.BorderSize = 0;
-      btnHome.Dock = DockStyle.Top;
-      btnHome.FlatAppearance.BorderSize = 0;
-      btnHome.FlatStyle = FlatStyle.Flat;
-      btnHome.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      btnHome.ForeColor = Color.Black;
-      btnHome.Image = Properties.Resources.icon_btn_home;
-      btnHome.ImageAlign = ContentAlignment.MiddleLeft;
-      btnHome.Location = new Point(3, 3);
-      btnHome.Name = "btnHome";
-      btnHome.Padding = new Padding(15, 0, 0, 0);
-      btnHome.Size = new Size(242, 70);
-      btnHome.TabIndex = 0;
-      btnHome.Text = "         TRANG CHÍNH";
-      btnHome.TextAlign = ContentAlignment.MiddleLeft;
-      btnHome.TextColor = Color.Black;
-      btnHome.UseVisualStyleBackColor = false;
-      btnHome.Click += btnHome_Click;
+      btnHomeTruck.BackColor = Color.Silver;
+      btnHomeTruck.BackgroundColor = Color.Silver;
+      btnHomeTruck.BorderColor = Color.PaleVioletRed;
+      btnHomeTruck.BorderRadius = 5;
+      btnHomeTruck.BorderSize = 0;
+      btnHomeTruck.Dock = DockStyle.Top;
+      btnHomeTruck.FlatAppearance.BorderSize = 0;
+      btnHomeTruck.FlatStyle = FlatStyle.Flat;
+      btnHomeTruck.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnHomeTruck.ForeColor = Color.Black;
+      btnHomeTruck.Image = Properties.Resources.icon_truck;
+      btnHomeTruck.ImageAlign = ContentAlignment.MiddleLeft;
+      btnHomeTruck.Location = new Point(3, 3);
+      btnHomeTruck.Name = "btnHomeTruck";
+      btnHomeTruck.Padding = new Padding(15, 0, 0, 0);
+      btnHomeTruck.Size = new Size(242, 70);
+      btnHomeTruck.TabIndex = 0;
+      btnHomeTruck.Text = "         CÂN XE TẢI";
+      btnHomeTruck.TextAlign = ContentAlignment.MiddleLeft;
+      btnHomeTruck.TextColor = Color.Black;
+      btnHomeTruck.UseVisualStyleBackColor = false;
+      btnHomeTruck.Click += btnHomeTruck_Click;
       // 
-      // rjButton2
+      // btnHomeGoods
       // 
-      rjButton2.BackColor = Color.Silver;
-      rjButton2.BackgroundColor = Color.Silver;
-      rjButton2.BorderColor = Color.PaleVioletRed;
-      rjButton2.BorderRadius = 5;
-      rjButton2.BorderSize = 0;
-      rjButton2.Dock = DockStyle.Top;
-      rjButton2.FlatAppearance.BorderSize = 0;
-      rjButton2.FlatStyle = FlatStyle.Flat;
-      rjButton2.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton2.ForeColor = Color.Black;
-      rjButton2.Image = Properties.Resources.icon_btn_masterdata;
-      rjButton2.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton2.Location = new Point(3, 79);
-      rjButton2.Name = "rjButton2";
-      rjButton2.Padding = new Padding(15, 0, 0, 0);
-      rjButton2.Size = new Size(242, 70);
-      rjButton2.TabIndex = 1;
-      rjButton2.Text = "         TRANG CHÍNH";
-      rjButton2.TextAlign = ContentAlignment.MiddleLeft;
-      rjButton2.TextColor = Color.Black;
-      rjButton2.UseVisualStyleBackColor = false;
-      // 
-      // rjButton3
-      // 
-      rjButton3.BackColor = Color.Silver;
-      rjButton3.BackgroundColor = Color.Silver;
-      rjButton3.BorderColor = Color.PaleVioletRed;
-      rjButton3.BorderRadius = 5;
-      rjButton3.BorderSize = 0;
-      rjButton3.Dock = DockStyle.Top;
-      rjButton3.FlatAppearance.BorderSize = 0;
-      rjButton3.FlatStyle = FlatStyle.Flat;
-      rjButton3.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton3.ForeColor = Color.Black;
-      rjButton3.Image = Properties.Resources.icon_btn_user;
-      rjButton3.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton3.Location = new Point(3, 155);
-      rjButton3.Name = "rjButton3";
-      rjButton3.Padding = new Padding(15, 0, 0, 0);
-      rjButton3.Size = new Size(242, 70);
-      rjButton3.TabIndex = 2;
-      rjButton3.Text = "         TRANG CHÍNH";
-      rjButton3.TextAlign = ContentAlignment.MiddleLeft;
-      rjButton3.TextColor = Color.Black;
-      rjButton3.UseVisualStyleBackColor = false;
+      btnHomeGoods.BackColor = Color.Silver;
+      btnHomeGoods.BackgroundColor = Color.Silver;
+      btnHomeGoods.BorderColor = Color.PaleVioletRed;
+      btnHomeGoods.BorderRadius = 5;
+      btnHomeGoods.BorderSize = 0;
+      btnHomeGoods.Dock = DockStyle.Top;
+      btnHomeGoods.FlatAppearance.BorderSize = 0;
+      btnHomeGoods.FlatStyle = FlatStyle.Flat;
+      btnHomeGoods.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnHomeGoods.ForeColor = Color.Black;
+      btnHomeGoods.Image = Properties.Resources.icon_goods;
+      btnHomeGoods.ImageAlign = ContentAlignment.MiddleLeft;
+      btnHomeGoods.Location = new Point(3, 79);
+      btnHomeGoods.Name = "btnHomeGoods";
+      btnHomeGoods.Padding = new Padding(15, 0, 0, 0);
+      btnHomeGoods.Size = new Size(242, 70);
+      btnHomeGoods.TabIndex = 2;
+      btnHomeGoods.Text = "         CÂN HÀNG";
+      btnHomeGoods.TextAlign = ContentAlignment.MiddleLeft;
+      btnHomeGoods.TextColor = Color.Black;
+      btnHomeGoods.UseVisualStyleBackColor = false;
+      btnHomeGoods.Click += btnHomeGoods_Click;
       // 
       // btnSetting
       // 
@@ -260,12 +233,12 @@
       btnSetting.ForeColor = Color.Black;
       btnSetting.Image = (Image)resources.GetObject("btnSetting.Image");
       btnSetting.ImageAlign = ContentAlignment.MiddleLeft;
-      btnSetting.Location = new Point(3, 231);
+      btnSetting.Location = new Point(3, 155);
       btnSetting.Name = "btnSetting";
       btnSetting.Padding = new Padding(15, 0, 0, 0);
       btnSetting.Size = new Size(242, 70);
       btnSetting.TabIndex = 6;
-      btnSetting.Text = "         CÀI ĐẶT";
+      btnSetting.Text = "       CÀI ĐẶT";
       btnSetting.TextAlign = ContentAlignment.MiddleLeft;
       btnSetting.TextColor = Color.Black;
       btnSetting.UseVisualStyleBackColor = false;
@@ -285,7 +258,7 @@
       btnMasterData.ForeColor = Color.Black;
       btnMasterData.Image = Properties.Resources.icon_btn_masterdata;
       btnMasterData.ImageAlign = ContentAlignment.MiddleLeft;
-      btnMasterData.Location = new Point(3, 307);
+      btnMasterData.Location = new Point(3, 231);
       btnMasterData.Name = "btnMasterData";
       btnMasterData.Padding = new Padding(15, 0, 0, 0);
       btnMasterData.Size = new Size(242, 70);
@@ -309,7 +282,7 @@
       btnClient.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
       btnClient.ForeColor = Color.Black;
       btnClient.ImageAlign = ContentAlignment.MiddleLeft;
-      btnClient.Location = new Point(3, 383);
+      btnClient.Location = new Point(3, 307);
       btnClient.Name = "btnClient";
       btnClient.Padding = new Padding(15, 0, 0, 0);
       btnClient.Size = new Size(242, 40);
@@ -332,7 +305,7 @@
       btnTypeGoods.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
       btnTypeGoods.ForeColor = Color.Black;
       btnTypeGoods.ImageAlign = ContentAlignment.MiddleLeft;
-      btnTypeGoods.Location = new Point(3, 429);
+      btnTypeGoods.Location = new Point(3, 353);
       btnTypeGoods.Name = "btnTypeGoods";
       btnTypeGoods.Padding = new Padding(15, 0, 0, 0);
       btnTypeGoods.Size = new Size(242, 40);
@@ -355,7 +328,7 @@
       btnWarehouse.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
       btnWarehouse.ForeColor = Color.Black;
       btnWarehouse.ImageAlign = ContentAlignment.MiddleLeft;
-      btnWarehouse.Location = new Point(3, 475);
+      btnWarehouse.Location = new Point(3, 399);
       btnWarehouse.Name = "btnWarehouse";
       btnWarehouse.Padding = new Padding(15, 0, 0, 0);
       btnWarehouse.Size = new Size(242, 40);
@@ -365,97 +338,74 @@
       btnWarehouse.TextColor = Color.Black;
       btnWarehouse.UseVisualStyleBackColor = false;
       // 
-      // rjButton6
+      // btnTare
       // 
-      rjButton6.BackColor = Color.Transparent;
-      rjButton6.BackgroundColor = Color.Transparent;
-      rjButton6.BorderColor = Color.PaleVioletRed;
-      rjButton6.BorderRadius = 5;
-      rjButton6.BorderSize = 0;
-      rjButton6.Dock = DockStyle.Top;
-      rjButton6.FlatAppearance.BorderSize = 0;
-      rjButton6.FlatStyle = FlatStyle.Flat;
-      rjButton6.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton6.ForeColor = Color.Black;
-      rjButton6.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton6.Location = new Point(3, 521);
-      rjButton6.Name = "rjButton6";
-      rjButton6.Padding = new Padding(15, 0, 0, 0);
-      rjButton6.Size = new Size(242, 40);
-      rjButton6.TabIndex = 11;
-      rjButton6.Text = "         MASTERDATA";
-      rjButton6.TextAlign = ContentAlignment.MiddleLeft;
-      rjButton6.TextColor = Color.Black;
-      rjButton6.UseVisualStyleBackColor = false;
+      btnTare.BackColor = Color.Transparent;
+      btnTare.BackgroundColor = Color.Transparent;
+      btnTare.BorderColor = Color.PaleVioletRed;
+      btnTare.BorderRadius = 5;
+      btnTare.BorderSize = 0;
+      btnTare.Dock = DockStyle.Top;
+      btnTare.FlatAppearance.BorderSize = 0;
+      btnTare.FlatStyle = FlatStyle.Flat;
+      btnTare.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnTare.ForeColor = Color.Black;
+      btnTare.ImageAlign = ContentAlignment.MiddleLeft;
+      btnTare.Location = new Point(3, 445);
+      btnTare.Name = "btnTare";
+      btnTare.Padding = new Padding(15, 0, 0, 0);
+      btnTare.Size = new Size(242, 40);
+      btnTare.TabIndex = 11;
+      btnTare.Text = "      Nhóm Tare";
+      btnTare.TextAlign = ContentAlignment.MiddleLeft;
+      btnTare.TextColor = Color.Black;
+      btnTare.UseVisualStyleBackColor = false;
       // 
-      // rjButton7
+      // btnGroupProduct
       // 
-      rjButton7.BackColor = Color.Transparent;
-      rjButton7.BackgroundColor = Color.Transparent;
-      rjButton7.BorderColor = Color.PaleVioletRed;
-      rjButton7.BorderRadius = 5;
-      rjButton7.BorderSize = 0;
-      rjButton7.Dock = DockStyle.Top;
-      rjButton7.FlatAppearance.BorderSize = 0;
-      rjButton7.FlatStyle = FlatStyle.Flat;
-      rjButton7.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton7.ForeColor = Color.Black;
-      rjButton7.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton7.Location = new Point(3, 567);
-      rjButton7.Name = "rjButton7";
-      rjButton7.Padding = new Padding(15, 0, 0, 0);
-      rjButton7.Size = new Size(242, 40);
-      rjButton7.TabIndex = 12;
-      rjButton7.Text = "         MASTERDATA";
-      rjButton7.TextAlign = ContentAlignment.MiddleLeft;
-      rjButton7.TextColor = Color.Black;
-      rjButton7.UseVisualStyleBackColor = false;
+      btnGroupProduct.BackColor = Color.Transparent;
+      btnGroupProduct.BackgroundColor = Color.Transparent;
+      btnGroupProduct.BorderColor = Color.PaleVioletRed;
+      btnGroupProduct.BorderRadius = 5;
+      btnGroupProduct.BorderSize = 0;
+      btnGroupProduct.Dock = DockStyle.Top;
+      btnGroupProduct.FlatAppearance.BorderSize = 0;
+      btnGroupProduct.FlatStyle = FlatStyle.Flat;
+      btnGroupProduct.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnGroupProduct.ForeColor = Color.Black;
+      btnGroupProduct.ImageAlign = ContentAlignment.MiddleLeft;
+      btnGroupProduct.Location = new Point(3, 491);
+      btnGroupProduct.Name = "btnGroupProduct";
+      btnGroupProduct.Padding = new Padding(15, 0, 0, 0);
+      btnGroupProduct.Size = new Size(242, 40);
+      btnGroupProduct.TabIndex = 12;
+      btnGroupProduct.Text = "      Nhóm sản phẩm";
+      btnGroupProduct.TextAlign = ContentAlignment.MiddleLeft;
+      btnGroupProduct.TextColor = Color.Black;
+      btnGroupProduct.UseVisualStyleBackColor = false;
       // 
-      // rjButton8
+      // btnProduct
       // 
-      rjButton8.BackColor = Color.Transparent;
-      rjButton8.BackgroundColor = Color.Transparent;
-      rjButton8.BorderColor = Color.PaleVioletRed;
-      rjButton8.BorderRadius = 5;
-      rjButton8.BorderSize = 0;
-      rjButton8.Dock = DockStyle.Top;
-      rjButton8.FlatAppearance.BorderSize = 0;
-      rjButton8.FlatStyle = FlatStyle.Flat;
-      rjButton8.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton8.ForeColor = Color.Black;
-      rjButton8.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton8.Location = new Point(3, 613);
-      rjButton8.Name = "rjButton8";
-      rjButton8.Padding = new Padding(15, 0, 0, 0);
-      rjButton8.Size = new Size(242, 40);
-      rjButton8.TabIndex = 13;
-      rjButton8.Text = "         MASTERDATA";
-      rjButton8.TextAlign = ContentAlignment.MiddleLeft;
-      rjButton8.TextColor = Color.Black;
-      rjButton8.UseVisualStyleBackColor = false;
-      // 
-      // rjButton9
-      // 
-      rjButton9.BackColor = Color.Transparent;
-      rjButton9.BackgroundColor = Color.Transparent;
-      rjButton9.BorderColor = Color.PaleVioletRed;
-      rjButton9.BorderRadius = 5;
-      rjButton9.BorderSize = 0;
-      rjButton9.Dock = DockStyle.Top;
-      rjButton9.FlatAppearance.BorderSize = 0;
-      rjButton9.FlatStyle = FlatStyle.Flat;
-      rjButton9.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      rjButton9.ForeColor = Color.Black;
-      rjButton9.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton9.Location = new Point(3, 659);
-      rjButton9.Name = "rjButton9";
-      rjButton9.Padding = new Padding(15, 0, 0, 0);
-      rjButton9.Size = new Size(242, 40);
-      rjButton9.TabIndex = 14;
-      rjButton9.Text = "         MASTERDATA";
-      rjButton9.TextAlign = ContentAlignment.MiddleLeft;
-      rjButton9.TextColor = Color.Black;
-      rjButton9.UseVisualStyleBackColor = false;
+      btnProduct.BackColor = Color.Transparent;
+      btnProduct.BackgroundColor = Color.Transparent;
+      btnProduct.BorderColor = Color.PaleVioletRed;
+      btnProduct.BorderRadius = 5;
+      btnProduct.BorderSize = 0;
+      btnProduct.Dock = DockStyle.Top;
+      btnProduct.FlatAppearance.BorderSize = 0;
+      btnProduct.FlatStyle = FlatStyle.Flat;
+      btnProduct.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnProduct.ForeColor = Color.Black;
+      btnProduct.ImageAlign = ContentAlignment.MiddleLeft;
+      btnProduct.Location = new Point(3, 537);
+      btnProduct.Name = "btnProduct";
+      btnProduct.Padding = new Padding(15, 0, 0, 0);
+      btnProduct.Size = new Size(242, 40);
+      btnProduct.TabIndex = 13;
+      btnProduct.Text = "      Sản phẩm";
+      btnProduct.TextAlign = ContentAlignment.MiddleLeft;
+      btnProduct.TextColor = Color.Black;
+      btnProduct.UseVisualStyleBackColor = false;
       // 
       // tableLayoutPanel7
       // 
@@ -640,17 +590,15 @@
     private Label label1;
     private Label label2;
     private Panel panelMain;
-    private Custom.RJButton btnHome;
-    private Custom.RJButton rjButton2;
-    private Custom.RJButton rjButton3;
+    private Custom.RJButton btnHomeTruck;
+    private Custom.RJButton btnHomeGoods;
     private LaborTrackPro.Custom.RJButton btnSetting;
     private Custom.RJButton btnMasterData;
     private Custom.RJButton btnClient;
     private Custom.RJButton btnTypeGoods;
     private Custom.RJButton btnWarehouse;
-    private Custom.RJButton rjButton6;
-    private Custom.RJButton rjButton7;
-    private Custom.RJButton rjButton8;
-    private Custom.RJButton rjButton9;
+    private Custom.RJButton btnTare;
+    private Custom.RJButton btnGroupProduct;
+    private Custom.RJButton btnProduct;
   }
 }

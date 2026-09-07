@@ -15,10 +15,84 @@ namespace LTP.Truck.Forms
 {
   public partial class FrmOperation : Form
   {
+    private readonly Dictionary<Button, (Color BackColor, Color ForeColor, Color MouseOverColor, Color MouseDownColor)> _menuButtonColors = new();
+    private bool _masterDataExpanded;
+
     public FrmOperation()
     {
       InitializeComponent();
+      InitializeMenuSelection();
+      SetMasterDataExpanded(false);
       this.Load += FrmOperation_Load;
+    }
+
+    private void InitializeMenuSelection()
+    {
+      Button[] menuButtons =
+      {
+        btnHomeTruck, btnHomeGoods, btnSetting, btnMasterData,
+        btnClient, btnTypeGoods, btnWarehouse, btnTare, btnGroupProduct, btnProduct
+      };
+
+      foreach (Button button in menuButtons)
+      {
+        _menuButtonColors.Add(button, (button.BackColor, button.ForeColor,
+          button.FlatAppearance.MouseOverBackColor, button.FlatAppearance.MouseDownBackColor));
+        button.Click += MenuButton_Click;
+      }
+    }
+
+    private void MenuButton_Click(object? sender, EventArgs e)
+    {
+      if (sender is Button button)
+        CheckMenuButton(button);
+    }
+
+    private void CheckMenuButton(Button selectedButton)
+    {
+      Color choose = Color.FromArgb(255, 204, 204);
+      bool selectedChild = IsMasterDataChild(selectedButton);
+      Button selectedMainButton = selectedChild ? btnMasterData : selectedButton;
+
+      Button? selectedChildButton = selectedChild ? selectedButton
+        : selectedButton == btnMasterData ? btnClient : null;
+
+      foreach (var entry in _menuButtonColors)
+      {
+        Button button = entry.Key;
+        var originalColors = entry.Value;
+        bool mainSelected = button == selectedMainButton;
+        bool childSelected = button == selectedChildButton;
+        button.BackColor = mainSelected ? choose : originalColors.BackColor;
+        button.ForeColor = mainSelected ? Color.Red
+          : childSelected ? Color.Red : originalColors.ForeColor;
+        button.FlatAppearance.MouseOverBackColor = mainSelected ? choose : originalColors.MouseOverColor;
+        button.FlatAppearance.MouseDownBackColor = mainSelected ? choose : originalColors.MouseDownColor;
+      }
+    }
+
+    private bool IsMasterDataChild(Button button)
+    {
+      return button == btnClient || button == btnTypeGoods || button == btnWarehouse
+        || button == btnTare || button == btnGroupProduct || button == btnProduct;
+    }
+
+    private void SetMasterDataExpanded(bool expanded)
+    {
+      _masterDataExpanded = expanded;
+      flowLayoutPanel1.SuspendLayout();
+      try
+      {
+        foreach (Button button in _menuButtonColors.Keys)
+        {
+          if (IsMasterDataChild(button))
+            button.Visible = expanded;
+        }
+      }
+      finally
+      {
+        flowLayoutPanel1.ResumeLayout(true);
+      }
     }
 
     #region Instance
@@ -40,12 +114,30 @@ namespace LTP.Truck.Forms
 
     private void FrmOperation_Load(object? sender, EventArgs e)
     {
-      this.btnHome.Click += btnHome_Click;
-      this.btnHome.PerformClick();
+      this.btnHomeTruck.Click += btnHomeTruck_Click;
+      this.btnHomeTruck.PerformClick();
 
       this.btnClient.Click += BtnClient_Click;
       this.btnTypeGoods.Click += BtnTypeGoods_Click;
       this.btnWarehouse.Click += BtnWarehouse_Click;
+      this.btnTare.Click += BtnTare_Click;
+      this.btnGroupProduct.Click += BtnGroupProduct_Click;
+      this.btnProduct.Click += BtnProduct_Click;
+    }
+
+    private async void BtnProduct_Click(object? sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.MD_Product);
+    }
+
+    private async void BtnGroupProduct_Click(object? sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.MD_GroupProduct);
+    }
+
+    private async void BtnTare_Click(object? sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.MD_Tare);
     }
 
     private async void BtnWarehouse_Click(object? sender, EventArgs e)
@@ -63,19 +155,24 @@ namespace LTP.Truck.Forms
     }
     private async void btnMasterData_Click(object sender, EventArgs e)
     {
+      SetMasterDataExpanded(!_masterDataExpanded);
       await ChangePage(EnumScreen.MD_Client);
     }
-    
 
-    private async void btnHome_Click(object? sender, EventArgs e)
+
+    private async void btnHomeTruck_Click(object? sender, EventArgs e)
     {
-      await ChangePage(EnumScreen.Home);
+      await ChangePage(EnumScreen.HomeTruck);
+    }
+    private async void btnHomeGoods_Click(object sender, EventArgs e)
+    {
+      await ChangePage(EnumScreen.HomeGoods);
     }
     private async void btnSetting_Click(object sender, EventArgs e)
     {
       await ChangePage(EnumScreen.Setting);
     }
-    
+
 
     #region ChangePage
     public async Task ChangePage(EnumScreen appModulSupport, bool actionBack = false)
@@ -84,8 +181,11 @@ namespace LTP.Truck.Forms
       {
         switch (appModulSupport)
         {
-          case EnumScreen.Home:
-            OpenChildForm(appModulSupport, FrmHome.Instance);
+          case EnumScreen.HomeTruck:
+            OpenChildForm(appModulSupport, FrmHomeTruck.Instance);
+            break;
+          case EnumScreen.HomeGoods:
+            OpenChildForm(appModulSupport, FrmHomeGoods.Instance);
             break;
           case EnumScreen.Setting:
             OpenChildForm(appModulSupport, FrmSetting.Instance);
@@ -102,129 +202,18 @@ namespace LTP.Truck.Forms
             OpenChildForm(appModulSupport, FrmMasterData.Instance);
             await FrmMasterData.Instance.LoadData(EnumTypeMasterData.Warehouse);
             break;
-            //case AppModulSupport.AreaInternalOrExternal:
-            //  OpenChildForm(appModulSupport, FrmInternalOrExternal.Instance);
-            //  HideBackButton(false);
-            //  FrmInternalOrExternal.Instance.CheckHighlight();
-            //  break;
-            //case AppModulSupport.OpTypePO:
-            //  OpenChildForm(appModulSupport, FrmOpModePO.Instance);
-            //  HideBackButton(false);
-            //  FrmOpModePO.Instance.CheckHighlight();
-            //  break;
-            //case AppModulSupport.OpShowListPO:
-            //  OpenChildForm(appModulSupport, FrmOpListPO.Instance);
-            //  HideBackButton(false);
-            //  if (!actionBack)
-            //    FrmOpListPO.Instance.LoadDataByChangeMode();
-            //  break;
-            //case AppModulSupport.OpTypeForPoOther:
-            //  OpenChildForm(appModulSupport, FrmTypeForPOOther.Instance);
-            //  HideBackButton(false);
-            //  FrmTypeForPOOther.Instance.CheckHighlight();
-            //  break;
-            //case AppModulSupport.OpChooseExportImport:
-            //  OpenChildForm(appModulSupport, FrmChooseExportImport.Instance);
-            //  FrmChooseExportImport.Instance.CheckChangeTitle();
-            //  FrmChooseExportImport.Instance.CheckHighlight();
-            //  HideBackButton(false);
-            //  break;
-            //case AppModulSupport.OpTypeMR:
-            //  OpenChildForm(appModulSupport, FrmTypeMR.Instance);
-            //  HideBackButton(false);
-            //  break;
-            //case AppModulSupport.OpDetailMRs:
-            //  OpenChildForm(appModulSupport, FrmDetailMRs.Instance);
-            //  HideBackButton(false);
-            //  if (!actionBack)
-            //  {
-            //    await FrmDetailMRs.Instance.LoadItemMaterial();
-            //  }
-            //  break;
-            //case AppModulSupport.OpRMs_BTP_Defect:
-            //  AppCore.Ins._dataManager.EnumStepOperation = EnumStepOperation.DetailRMs_BTP_Defect;
-            //  OpenChildForm(appModulSupport, FrmListMRs_BTP_Defect.Instance);
-            //  HideBackButton(false);
-            //  if (!actionBack)
-            //    FrmListMRs_BTP_Defect.Instance.LoadItemMaterial();
-            //  break;
-            //case AppModulSupport.OperationPrint:
-            //  AppCore.Ins._dataManager.EnumStepOperation = EnumStepOperation.Print;
-            //  OpenChildForm(appModulSupport, FrmOperationPrint.Instance);
-            //  HideBackButton(false);
-            //  if (!actionBack)
-            //    FrmOperationPrint.Instance.ShowData();
-            //  break;
-            //case AppModulSupport.Menu:
-            //  OpenChildForm(appModulSupport, FrmMenu.Instance);
-            //  HideBackButton(true);
-            //  break;
-            //case AppModulSupport.Setting:
-            //  OpenChildForm(appModulSupport, FrmSetting.Instance);
-            //  HideBackButton(true);
-            //  break;
-            //case AppModulSupport.LoadingPrintting:
-            //  OpenChildForm(appModulSupport, FrmLoadingPrinting.Instance);
-            //  HideBackButton(true);
-            //  break;
-            //case AppModulSupport.MasterData:
-            //  OpenChildForm(appModulSupport, FrmMasterData.Instance);
-            //  HideBackButton(true);
-            //  break;
-            //case AppModulSupport.CheckUpdateVer:
-            //  OpenChildForm(appModulSupport, FrmCheckVersion.Instance);
-            //  HideBackButton(true);
-            //  break;
-
-            //case AppModulSupport.ScanReceiving:
-            //  OpenChildForm(appModulSupport, FrmScanRfidReceiving.Instance);
-            //  HideBackButton(false);
-            //  AppCore.Ins._dataManager.EnumStepOperation = EnumStepOperation.ScanReceiving;
-            //  if (!actionBack)
-            //  {
-            //    if (AppCore.Ins._dataManager.EnumInternalExternalStatus == EnumInternalExternalStatus.External)
-            //    {
-            //      if (AppCore.Ins._dataManager.EnumExportImport == EnumExportImport.Import)
-            //        FrmScanRfidReceiving.Instance.SetTitle("Thông tin bên nhận");
-            //      if (AppCore.Ins._dataManager.EnumExportImport == EnumExportImport.Export)
-            //        FrmScanRfidReceiving.Instance.SetTitle("Thông tin bên giao");
-            //    }
-            //    else
-            //    {
-            //      FrmScanRfidReceiving.Instance.SetTitle("Thông tin bên nhận");
-            //    }
-            //  }
-            //  break;
-            //case AppModulSupport.ScanDelivery:
-            //  OpenChildForm(appModulSupport, FrmScanRfidDelivery.Instance);
-            //  HideBackButton(false);
-            //  AppCore.Ins._dataManager.EnumStepOperation = EnumStepOperation.ScanDelivery;
-            //  if (!actionBack)
-            //  {
-            //    FrmScanRfidDelivery.Instance.SetTitle("Thông tin bên giao");
-            //  }
-            //  break;
-            //case AppModulSupport.DeliveryPlan:
-            //  OpenChildForm(appModulSupport, FrmChooseDelivery.Instance);
-            //  HideBackButton(false);
-            //  if (!actionBack)
-            //    await FrmChooseDelivery.Instance.ShowListData();
-            //  break;
-            //case AppModulSupport.ListItemDelivery:
-            //  OpenChildForm(appModulSupport, FrmListItemDelivery.Instance);
-            //  HideBackButton(false);
-            //  FrmListItemDelivery.Instance.ApplyCheckedRowsStyle();
-            //  if (!actionBack)
-            //    FrmListItemDelivery.Instance.ShowListData();
-            //  break;
-            //case AppModulSupport.ReviewDelivery:
-            //  OpenChildForm(appModulSupport, FrmReviewDelivery.Instance);
-            //  HideBackButton(false);
-            //  AppCore.Ins._dataManager.EnumStepOperation = EnumStepOperation.ReviewDelivery;
-            //  if (!actionBack)
-            //    await FrmReviewDelivery.Instance.ShowData();
-            //  break;
-
+          case EnumScreen.MD_Tare:
+            OpenChildForm(appModulSupport, FrmMasterData.Instance);
+            await FrmMasterData.Instance.LoadData(EnumTypeMasterData.Tare);
+            break;
+          case EnumScreen.MD_GroupProduct:
+            OpenChildForm(appModulSupport, FrmMasterData.Instance);
+            await FrmMasterData.Instance.LoadData(EnumTypeMasterData.GroupProduct);
+            break;
+          case EnumScreen.MD_Product:
+            OpenChildForm(appModulSupport, FrmMasterData.Instance);
+            await FrmMasterData.Instance.LoadData(EnumTypeMasterData.Product);
+            break;
         }
       }
       catch (Exception ex)

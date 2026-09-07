@@ -22,5 +22,7 @@ namespace iSoft.Database.DTO
 
     [DisplayName("Mô tả")]
     public string? Description { get; set; }
+    [DisplayName("Cập nhật")]
+    public string? UpdatedAt { get; set; }
   }
 }

@@ -16,32 +16,12 @@ namespace iSoft.Database.Repositorys
 
     }
 
-    public async Task<List<CategoryTare>> GetAllAsync(bool isContainDelete = false)
+    public Task<List<CategoryTare>> GetAllAsync(bool IsContainDelete = false)
     {
-      if (isContainDelete)
-      {
-        return await this.Context.Set<CategoryTare>()
-            .ToListAsync();
-      }
-      else
-      {
-        return await this.Context.Set<CategoryTare>()
-            .Where(x => !x.DeletedFlag)
-            .ToListAsync();
-      }
-    }
-
-    public async Task<List<CategoryTare>> GetCategoryTareBuMaterialIdAsync(long? id)
-    {
-      return new List<CategoryTare>();
-      //return await this.Context.Set<CategoryTare>()
-      //      .Where(x => !x.DeletedFlag && x.MaterialId == id)
-      //      .ToListAsync();
-
-      //return await this.Context.Set<CategoryTare>()
-      //     .Where(x => !x.DeletedFlag)
-      //     .Include(x=>x.TareGroup)
-      //     .ToListAsync();
+      var query = Context.Set<CategoryTare>().AsQueryable();
+      if (!IsContainDelete)
+        query = query.Where(x => !x.DeletedFlag);
+      return query.ToListAsync();
     }
   }
 }

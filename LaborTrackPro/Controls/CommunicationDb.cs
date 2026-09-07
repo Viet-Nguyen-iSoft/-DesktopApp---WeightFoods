@@ -310,64 +310,9 @@ namespace LaborTrackPro.Controls
       return new List<Product>();
     }
 
-    public async Task UpdateMaterial(Product material)
-    {
-      //using (var context = new PostgresDbContext())
-      //{
-      //  var repo = new ProductRepository(context);
-      //  await repo.UpdateMaterial(material);
-      //}
-    }
-
-    public async Task UpdateMaterials(List<Product> materials)
-    {
-      if (materials is null || materials.Count == 0)
-        return;
-
-      await using var context = new PostgresDbContext();
-      var repo = new ProductRepository(context);
-
-      await repo.UpdateMaterials(materials);
-    }
 
 
-
-    public async Task<Product?> GetMaterialsByIdAsync(long? id)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductRepository(context);
-        return await repo.GetMaterialsByIdAsync(id);
-      }
-    }
-
-    public async Task<List<Product>> GetMaterialsAsync(EnumMaterialType eMaterialType)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductRepository(context);
-        return await repo.GetAllAsync(eMaterialType);
-      }
-    }
-
-    public async Task<List<Product>> GetMaterialsDefectAsync(Product material, EnumMaterialType eMaterialType = EnumMaterialType.MRsDefect)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductRepository(context);
-        return await repo.GetMaterialsDefectAsync(material, (int)eMaterialType);
-      }
-    }
-    public async Task<Product?> GetMaterialsByIdSrcAsync(Guid? guid)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new ProductRepository(context);
-        return await repo.GetMaterialsByIdSrcAsync(guid);
-      }
-    }
-
-
+  
 
     public async Task UpdateMaterials(Product material)
     {
@@ -928,14 +873,7 @@ namespace LaborTrackPro.Controls
 
 
 
-    public async Task<List<CategoryTare>> GetAllCategoryTareByMaterialIdAsync(long? id)
-    {
-      using (var context = new PostgresDbContext())
-      {
-        var repo = new CategoryTareRepository(context);
-        return await repo.GetCategoryTareBuMaterialIdAsync(id);
-      }
-    }
+  
 
 
 

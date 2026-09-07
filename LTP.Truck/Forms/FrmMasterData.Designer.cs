@@ -36,7 +36,7 @@
       tableLayoutPanel10 = new TableLayoutPanel();
       label4 = new Label();
       rjTextBox12 = new LTP.Truck.Custom.RJTextBox();
-      btnSearchHistorical = new LaborTrackPro.Custom.RJButton();
+      btnSearch = new LaborTrackPro.Custom.RJButton();
       label27 = new Label();
       tableLayoutPanel7.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
@@ -115,7 +115,7 @@
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
       tableLayoutPanel10.Controls.Add(label4, 0, 0);
       tableLayoutPanel10.Controls.Add(rjTextBox12, 1, 0);
-      tableLayoutPanel10.Controls.Add(btnSearchHistorical, 3, 0);
+      tableLayoutPanel10.Controls.Add(btnSearch, 3, 0);
       tableLayoutPanel10.Location = new Point(0, 50);
       tableLayoutPanel10.Margin = new Padding(0);
       tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -161,26 +161,27 @@
       rjTextBox12.Texts = "";
       rjTextBox12.UnderlinedStyle = false;
       // 
-      // btnSearchHistorical
+      // btnSearch
       // 
-      btnSearchHistorical.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      btnSearchHistorical.BackColor = Color.FromArgb(64, 107, 177);
-      btnSearchHistorical.BackgroundColor = Color.FromArgb(64, 107, 177);
-      btnSearchHistorical.BorderColor = Color.White;
-      btnSearchHistorical.BorderRadius = 5;
-      btnSearchHistorical.BorderSize = 0;
-      btnSearchHistorical.FlatAppearance.BorderColor = Color.White;
-      btnSearchHistorical.FlatAppearance.BorderSize = 0;
-      btnSearchHistorical.FlatStyle = FlatStyle.Flat;
-      btnSearchHistorical.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      btnSearchHistorical.ForeColor = Color.White;
-      btnSearchHistorical.Location = new Point(1046, 3);
-      btnSearchHistorical.Name = "btnSearchHistorical";
-      btnSearchHistorical.Size = new Size(195, 54);
-      btnSearchHistorical.TabIndex = 27;
-      btnSearchHistorical.Text = "Tìm kiếm";
-      btnSearchHistorical.TextColor = Color.White;
-      btnSearchHistorical.UseVisualStyleBackColor = false;
+      btnSearch.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnSearch.BackColor = Color.FromArgb(64, 107, 177);
+      btnSearch.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnSearch.BorderColor = Color.White;
+      btnSearch.BorderRadius = 5;
+      btnSearch.BorderSize = 0;
+      btnSearch.FlatAppearance.BorderColor = Color.White;
+      btnSearch.FlatAppearance.BorderSize = 0;
+      btnSearch.FlatStyle = FlatStyle.Flat;
+      btnSearch.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnSearch.ForeColor = Color.White;
+      btnSearch.Location = new Point(1046, 3);
+      btnSearch.Name = "btnSearch";
+      btnSearch.Size = new Size(195, 54);
+      btnSearch.TabIndex = 27;
+      btnSearch.Text = "Tìm kiếm";
+      btnSearch.TextColor = Color.White;
+      btnSearch.UseVisualStyleBackColor = false;
+      btnSearch.Click += btnSearch_Click;
       // 
       // label27
       // 
@@ -219,7 +220,7 @@
     private TableLayoutPanel tableLayoutPanel10;
     private Label label4;
     private Custom.RJTextBox rjTextBox12;
-    private LaborTrackPro.Custom.RJButton btnSearchHistorical;
+    private LaborTrackPro.Custom.RJButton btnSearch;
     private Label label27;
   }
 }

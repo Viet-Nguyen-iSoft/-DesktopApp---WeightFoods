@@ -23,9 +23,9 @@ using static iSoft.Database.EnumData;
 
 namespace LTP.Truck.Forms
 {
-  public partial class FrmHome : Form
+  public partial class FrmHomeTruck : Form
   {
-    public FrmHome()
+    public FrmHomeTruck()
     {
       InitializeComponent();
       dgv.CellContentClick += dgv_CellContentClick;
@@ -34,12 +34,12 @@ namespace LTP.Truck.Forms
     }
 
     #region Instance
-    private static FrmHome _Instance = null;
-    public static FrmHome Instance
+    private static FrmHomeTruck _Instance = null;
+    public static FrmHomeTruck Instance
     {
       get
       {
-        if (_Instance == null) _Instance = new FrmHome();
+        if (_Instance == null) _Instance = new FrmHomeTruck();
         return _Instance;
       }
     }

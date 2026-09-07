@@ -154,7 +154,7 @@ namespace LTP.Truck
       try
       {
         _syncTask ??= PeriodicRunner.RunEvery5SecondsAsync(_syncCts.Token);
-        AppCore.Ins.ConnectWeight();
+        //AppCore.Ins.ConnectWeight();
         CheckOpenMulApp();
         ChangePage(EnumScreen.Waiting);
       }

@@ -15,11 +15,17 @@ namespace LTP.Truck
       Setting,
       MasterData,
 
+      HomeTruck,
+      HomeGoods,
+
       MD_Client,
       MD_TypeGoods,
       MD_Warehouse,
+      MD_Tare,
+      MD_GroupProduct,
+      MD_Product,
 
-      Home,
+      
       
       Employee,
 
@@ -72,6 +78,9 @@ namespace LTP.Truck
       Client,
       TypeGoods,
       Warehouse,
+      Tare,
+      GroupProduct,
+      Product,
     }
   }
 }

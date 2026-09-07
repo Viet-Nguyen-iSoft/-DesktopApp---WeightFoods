@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iSoft.Database.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,21 +11,21 @@ namespace iSoft.Database.DTO
   public class CategoryTareDTO
   {
     [Browsable(false)]
-    public long Id { get; set; }
+    public CategoryTare? CategoryTare { get; set; }
+
 
     [DisplayName("Stt")]
-    public long No { get; set; }
+    public int? No { get; set; }
 
     [DisplayName("Tên")]
     public string? Name { get; set; }
-    [DisplayName("Giá trị (gam)")]
-    public double? Value { get; set; } = 0;
 
-
-    [DisplayName("Ngày tạo")]
-    public string? CreatedAt { get; set; }
+    [DisplayName("Mô tả")]
+    public string? Description { get; set; }
+    [DisplayName("Khối lượng (Kg)")]
+    public string? Value { get; set; }
 
     [DisplayName("Cập nhật")]
-    public string? UpdateAt { get; set; }
+    public string? UpdatedAt { get; set; }
   }
 }

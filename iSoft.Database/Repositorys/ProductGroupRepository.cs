@@ -5,27 +5,19 @@ using static iSoft.Database.EnumData;
 
 namespace iSoft.Database.Repositorys
 {
-  public class ProductGroupRepository : GenericRepository<Product, CommonDbContext>
+  public class ProductGroupRepository : GenericRepository<ProductGroup, CommonDbContext>
   {
-    public ProductGroupRepository(DbContext context) : base(context)
+    public ProductGroupRepository(CommonDbContext context) : base(context)
     {
-
     }
 
-    public async Task<List<ProductGroup>> GetAllAsync(bool isContainDelete = false)
+    public Task<List<ProductGroup>> GetAllAsync(bool IsContainDelete = false)
     {
-      if (isContainDelete)
-      {
-        return await this.Context.Set<ProductGroup>().AsNoTracking()
-              .ToListAsync();
-      }
-      else
-      {
-        return await this.Context.Set<ProductGroup>().AsNoTracking()
-              .Where(e => !e.DeletedFlag)
-              .ToListAsync();
-      }
+      var query = Context.Set<ProductGroup>().AsQueryable();
+      if (!IsContainDelete)
+        query = query.Where(x => !x.DeletedFlag);
+      return query.ToListAsync();
     }
-    
+
   }
 }

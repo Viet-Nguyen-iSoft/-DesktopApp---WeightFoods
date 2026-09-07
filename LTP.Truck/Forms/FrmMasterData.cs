@@ -73,8 +73,11 @@ namespace LTP.Truck.Forms
 
     }
 
+    private EnumTypeMasterData _enumTypeMasterDataCurrent { get; set; }
+
     public async Task LoadData(EnumTypeMasterData enumTypeMaster)
     {
+      _enumTypeMasterDataCurrent = enumTypeMaster;
       switch (enumTypeMaster)
       {
         case EnumTypeMasterData.Client:
@@ -92,13 +95,34 @@ namespace LTP.Truck.Forms
           var dtoWarehouse = DTOHelper.ConvertWareHouseDTO(rsWarehouse);
           SetDgv(enumTypeMaster, dtoWarehouse);
           break;
+        case EnumTypeMasterData.Tare:
+          var rsTare = await AppCore.Ins._categoryTareService.GetAllAsync();
+          var dtoTare = DTOHelper.ConvertCategoryTareDTO(rsTare);
+          SetDgv(enumTypeMaster, dtoTare);
+          break;
+        case EnumTypeMasterData.GroupProduct:
+          var rsGroupProduct = await AppCore.Ins._productGroupService.GetAllAsync();
+          var dtoGroupProduct = DTOHelper.ConvertProductGroupDTO(rsGroupProduct);
+          SetDgv(enumTypeMaster, dtoGroupProduct);
+          break;
+        case EnumTypeMasterData.Product:
+          var rsProduct = await AppCore.Ins._productService.GetAllAsync();
+          var dtoProduct = DTOHelper.ConvertProductDTO(rsProduct);
+          SetDgv(enumTypeMaster, dtoProduct);
+          break;
         default:
           break;
       }
     }
 
+    private async void btnSearch_Click(object sender, EventArgs e)
+    {
+      await LoadData(_enumTypeMasterDataCurrent);
+    }
+
     public void SetDgv<T>(EnumTypeMasterData enumTypeMasterData, List<T>? values)
     {
+      dgv.DataSource = null;
       dgv.DataSource = values;
 
       if (enumTypeMasterData == EnumTypeMasterData.Client)
@@ -106,6 +130,7 @@ namespace LTP.Truck.Forms
         var autoSizeColumns = new[]
          {
             nameof(ClientDTO.No),
+            nameof(ClientDTO.UpdatedAt),
           };
         foreach (var columnName in autoSizeColumns)
         {
@@ -115,12 +140,22 @@ namespace LTP.Truck.Forms
 
         var alignmentMiddleCenterColumns = new[]
         {
-            nameof(TypeGoodsDTO.No),
+            nameof(ClientDTO.No),
           };
         foreach (var columnName in alignmentMiddleCenterColumns)
         {
           if (dgv.Columns.Contains(columnName))
             dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        var alignmentRightCenterColumns = new[]
+        {
+          nameof(ClientDTO.UpdatedAt),
+        };
+        foreach (var columnName in alignmentRightCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
       }
       else if (enumTypeMasterData == EnumTypeMasterData.TypeGoods)
@@ -128,6 +163,7 @@ namespace LTP.Truck.Forms
         var autoSizeColumns = new[]
         {
           nameof(TypeGoodsDTO.No),
+          nameof(TypeGoodsDTO.UpdatedAt),
         };
         foreach (var columnName in autoSizeColumns)
         {
@@ -144,12 +180,23 @@ namespace LTP.Truck.Forms
           if (dgv.Columns.Contains(columnName))
             dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
+
+        var alignmentRightCenterColumns = new[]
+        {
+          nameof(TypeGoodsDTO.UpdatedAt),
+        };
+        foreach (var columnName in alignmentRightCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
       }
       else if (enumTypeMasterData == EnumTypeMasterData.Warehouse)
       {
         var autoSizeColumns = new[]
         {
           nameof(WareHouseDTO.No),
+          nameof(WareHouseDTO.UpdatedAt),
         };
         foreach (var columnName in autoSizeColumns)
         {
@@ -165,6 +212,116 @@ namespace LTP.Truck.Forms
         {
           if (dgv.Columns.Contains(columnName))
             dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        var alignmentRightCenterColumns = new[]
+        {
+          nameof(WareHouseDTO.UpdatedAt),
+        };
+        foreach (var columnName in alignmentRightCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+      }
+      else if (enumTypeMasterData == EnumTypeMasterData.Tare)
+      {
+        var autoSizeColumns = new[]
+        {
+          nameof(CategoryTareDTO.No),
+          nameof(CategoryTareDTO.UpdatedAt),
+        };
+        foreach (var columnName in autoSizeColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
+
+        var alignmentMiddleCenterColumns = new[]
+        {
+          nameof(CategoryTareDTO.No),
+        };
+        foreach (var columnName in alignmentMiddleCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        var alignmentRightCenterColumns = new[]
+        {
+          nameof(CategoryTareDTO.Value),
+          nameof(CategoryTareDTO.UpdatedAt),
+        };
+        foreach (var columnName in alignmentRightCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+      }
+      else if (enumTypeMasterData == EnumTypeMasterData.GroupProduct)
+      {
+        var autoSizeColumns = new[]
+        {
+          nameof(CategoryTareDTO.No),
+          nameof(ProductGroupDTO.UpdatedAt),
+        };
+        foreach (var columnName in autoSizeColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
+
+        var alignmentMiddleCenterColumns = new[]
+        {
+          nameof(ProductGroupDTO.No),
+        };
+        foreach (var columnName in alignmentMiddleCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        var alignmentRightCenterColumns = new[]
+        {
+          nameof(ProductGroupDTO.UpdatedAt),
+        };
+        foreach (var columnName in alignmentRightCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+      }
+      else if (enumTypeMasterData == EnumTypeMasterData.Product)
+      {
+        var autoSizeColumns = new[]
+        {
+          nameof(ProductDTO.No),
+          nameof(ProductDTO.UpdatedAt),
+        };
+        foreach (var columnName in autoSizeColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
+
+        var alignmentMiddleCenterColumns = new[]
+        {
+          nameof(ProductDTO.No),
+        };
+        foreach (var columnName in alignmentMiddleCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+
+        var alignmentRightCenterColumns = new[]
+        {
+          nameof(ProductDTO.UpdatedAt),
+        };
+        foreach (var columnName in alignmentRightCenterColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
       }
     }

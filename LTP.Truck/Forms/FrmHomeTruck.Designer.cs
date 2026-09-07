@@ -1,6 +1,6 @@
 ﻿namespace LTP.Truck.Forms
 {
-  partial class FrmHome
+  partial class FrmHomeTruck
   {
     /// <summary>
     /// Required designer variable.
@@ -1417,13 +1417,13 @@
       label27.Text = "Lịch sử cân";
       label27.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // FrmHome
+      // FrmHomeTruck
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       ClientSize = new Size(1530, 930);
       Controls.Add(tableLayoutPanel1);
-      Name = "FrmHome";
+      Name = "FrmHomeTruck";
       Text = "FrmHome";
       tableLayoutPanel1.ResumeLayout(false);
       tableLayoutPanel2.ResumeLayout(false);
