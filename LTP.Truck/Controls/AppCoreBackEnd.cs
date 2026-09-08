@@ -1,9 +1,12 @@
-﻿using iSoft.Database.Service;
+﻿using iSoft.Database.Models;
+using iSoft.Database.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
+using static HelperManager.EnumData;
 
 namespace LTP.Truck.Controls
 {
@@ -52,6 +55,7 @@ namespace LTP.Truck.Controls
     public readonly CategoryTareService _categoryTareService = new();
     public readonly ProductGroupService _productGroupService = new();
     public readonly ProductService _productService = new();
+    public readonly AppConfigService _appConfigService = new();
 
 
     public string _folderFileLog = Application.StartupPath + "Logs";
@@ -59,7 +63,7 @@ namespace LTP.Truck.Controls
     {
       try
       {
-        //LoadDataConfig().Wait();
+        LoadDataConfig().Wait();
 
         // _enableRabbit = (Environment.GetEnvironmentVariable("IS_ENABLE_RABBITMQ").ToLower() == "true");
 
@@ -101,9 +105,18 @@ namespace LTP.Truck.Controls
       }
     }
 
+    public AppConfig? _appConfig { get;set; }
+    public async Task LoadDataConfig()
+    {
+      try
+      {
+        _appConfig = await _appConfigService.GetAppConfigAsync();
+      }
+      catch (Exception)
+      {
+        throw;
+      }
+    }
 
   }
-
-
-
 }

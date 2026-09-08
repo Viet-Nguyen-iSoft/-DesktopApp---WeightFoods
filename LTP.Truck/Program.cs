@@ -49,26 +49,20 @@ namespace LTP.Truck
             await db.Database.EnsureCreatedAsync();
             await db.Database.BeginTransactionAsync();
 
-            //if (db?.AppConfigs?.Count() <= 0)
-            //{
-            //  await db.AppConfigs.AddAsync(new AppConfig
-            //  {
-            //    IpServer = "10.0.0.45", //"100.101.165.42",
-            //    PortServer = 6902,
-            //    MachineCode = "HSF01",
-            //    NamePrinter = "",
-            //    NamePrinterA4 = "",
-            //    TimeDelayPrinter = 1000,
-            //    TimeDurationPrinter = 2000,
-            //    IsAutoSyncData = true,
-            //    TimeSyncData = 3000,
-            //    DeletedFlag = false,
-            //    EnableFlag = true,
-            //    SyncFlag = true,
-            //    CreatedAt = DateTime.Now,
-            //    UpdatedAt = DateTime.Now,
-            //  });
-            //}
+            if (db?.AppConfigs?.Count() <= 0)
+            {
+              await db.AppConfigs.AddAsync(new AppConfig
+              {
+                IpServer = "10.0.0.45", //"100.101.165.42",
+                PortServer = 6902,
+                Key = "A",
+                DeletedFlag = false,
+                EnableFlag = true,
+                SyncFlag = true,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+              });
+            }
 
             await db!.SaveChangesAsync();
             await db.Database.CommitTransactionAsync();

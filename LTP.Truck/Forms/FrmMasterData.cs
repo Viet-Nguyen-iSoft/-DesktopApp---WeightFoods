@@ -11,6 +11,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Common.EnumData;
@@ -20,10 +21,13 @@ namespace LTP.Truck.Forms
 {
   public partial class FrmMasterData : Form
   {
+    private CancellationTokenSource? _searchDebounceCancellation;
+
     public FrmMasterData()
     {
       InitializeComponent();
       CustomUI();
+      txtSearch._TextChanged += txtSearch_TextChanged;
     }
 
     #region Instance
@@ -141,6 +145,33 @@ namespace LTP.Truck.Forms
       await LoadData(_enumTypeMasterDataCurrent);
     }
 
+    private async void txtSearch_TextChanged(object? sender, EventArgs e)
+    {
+      _searchDebounceCancellation?.Cancel();
+      _searchDebounceCancellation?.Dispose();
+
+      var cancellation = new CancellationTokenSource();
+      _searchDebounceCancellation = cancellation;
+
+      try
+      {
+        await Task.Delay(300, cancellation.Token);
+        await LoadData(_enumTypeMasterDataCurrent);
+      }
+      catch (OperationCanceledException)
+      {
+        // Người dùng vẫn đang nhập, chờ lần thay đổi mới nhất.
+      }
+      finally
+      {
+        if (ReferenceEquals(_searchDebounceCancellation, cancellation))
+        {
+          _searchDebounceCancellation.Dispose();
+          _searchDebounceCancellation = null;
+        }
+      }
+    }
+
     public void SetDgv<T>(EnumTypeMasterData enumTypeMasterData, List<T>? values)
     {
       dgv.DataSource = null;
@@ -251,6 +282,7 @@ namespace LTP.Truck.Forms
         {
           nameof(CategoryTareDTO.No),
           nameof(CategoryTareDTO.UpdatedAt),
+          nameof(CategoryTareDTO.Value),
         };
         foreach (var columnName in autoSizeColumns)
         {
@@ -318,6 +350,7 @@ namespace LTP.Truck.Forms
         {
           nameof(ProductDTO.No),
           nameof(ProductDTO.UpdatedAt),
+          nameof(ProductDTO.Group),
         };
         foreach (var columnName in autoSizeColumns)
         {

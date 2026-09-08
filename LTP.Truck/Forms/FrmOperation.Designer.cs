@@ -166,7 +166,7 @@
       flowLayoutPanel1.Location = new Point(0, 0);
       flowLayoutPanel1.Margin = new Padding(0);
       flowLayoutPanel1.Name = "flowLayoutPanel1";
-      flowLayoutPanel1.Size = new Size(250, 759);
+      flowLayoutPanel1.Size = new Size(250, 763);
       flowLayoutPanel1.TabIndex = 0;
       // 
       // btnHomeTruck
@@ -284,10 +284,10 @@
       btnClient.ImageAlign = ContentAlignment.MiddleLeft;
       btnClient.Location = new Point(3, 307);
       btnClient.Name = "btnClient";
-      btnClient.Padding = new Padding(15, 0, 0, 0);
+      btnClient.Padding = new Padding(60, 0, 0, 0);
       btnClient.Size = new Size(242, 40);
       btnClient.TabIndex = 8;
-      btnClient.Text = "      Khách hàng";
+      btnClient.Text = "Khách hàng";
       btnClient.TextAlign = ContentAlignment.MiddleLeft;
       btnClient.TextColor = Color.Black;
       btnClient.UseVisualStyleBackColor = false;
@@ -307,10 +307,10 @@
       btnTypeGoods.ImageAlign = ContentAlignment.MiddleLeft;
       btnTypeGoods.Location = new Point(3, 353);
       btnTypeGoods.Name = "btnTypeGoods";
-      btnTypeGoods.Padding = new Padding(15, 0, 0, 0);
+      btnTypeGoods.Padding = new Padding(60, 0, 0, 0);
       btnTypeGoods.Size = new Size(242, 40);
       btnTypeGoods.TabIndex = 9;
-      btnTypeGoods.Text = "      Loại hàng";
+      btnTypeGoods.Text = "Loại hàng";
       btnTypeGoods.TextAlign = ContentAlignment.MiddleLeft;
       btnTypeGoods.TextColor = Color.Black;
       btnTypeGoods.UseVisualStyleBackColor = false;
@@ -330,10 +330,10 @@
       btnWarehouse.ImageAlign = ContentAlignment.MiddleLeft;
       btnWarehouse.Location = new Point(3, 399);
       btnWarehouse.Name = "btnWarehouse";
-      btnWarehouse.Padding = new Padding(15, 0, 0, 0);
+      btnWarehouse.Padding = new Padding(60, 0, 0, 0);
       btnWarehouse.Size = new Size(242, 40);
       btnWarehouse.TabIndex = 10;
-      btnWarehouse.Text = "      Kho hàng";
+      btnWarehouse.Text = "Kho hàng";
       btnWarehouse.TextAlign = ContentAlignment.MiddleLeft;
       btnWarehouse.TextColor = Color.Black;
       btnWarehouse.UseVisualStyleBackColor = false;
@@ -353,10 +353,10 @@
       btnTare.ImageAlign = ContentAlignment.MiddleLeft;
       btnTare.Location = new Point(3, 445);
       btnTare.Name = "btnTare";
-      btnTare.Padding = new Padding(15, 0, 0, 0);
+      btnTare.Padding = new Padding(60, 0, 0, 0);
       btnTare.Size = new Size(242, 40);
       btnTare.TabIndex = 11;
-      btnTare.Text = "      Nhóm Tare";
+      btnTare.Text = "Nhóm Tare";
       btnTare.TextAlign = ContentAlignment.MiddleLeft;
       btnTare.TextColor = Color.Black;
       btnTare.UseVisualStyleBackColor = false;
@@ -376,10 +376,10 @@
       btnGroupProduct.ImageAlign = ContentAlignment.MiddleLeft;
       btnGroupProduct.Location = new Point(3, 491);
       btnGroupProduct.Name = "btnGroupProduct";
-      btnGroupProduct.Padding = new Padding(15, 0, 0, 0);
+      btnGroupProduct.Padding = new Padding(60, 0, 0, 0);
       btnGroupProduct.Size = new Size(242, 40);
       btnGroupProduct.TabIndex = 12;
-      btnGroupProduct.Text = "      Nhóm sản phẩm";
+      btnGroupProduct.Text = "Nhóm sản phẩm";
       btnGroupProduct.TextAlign = ContentAlignment.MiddleLeft;
       btnGroupProduct.TextColor = Color.Black;
       btnGroupProduct.UseVisualStyleBackColor = false;
@@ -399,10 +399,10 @@
       btnProduct.ImageAlign = ContentAlignment.MiddleLeft;
       btnProduct.Location = new Point(3, 537);
       btnProduct.Name = "btnProduct";
-      btnProduct.Padding = new Padding(15, 0, 0, 0);
+      btnProduct.Padding = new Padding(60, 0, 0, 0);
       btnProduct.Size = new Size(242, 40);
       btnProduct.TabIndex = 13;
-      btnProduct.Text = "      Sản phẩm";
+      btnProduct.Text = "Sản phẩm";
       btnProduct.TextAlign = ContentAlignment.MiddleLeft;
       btnProduct.TextColor = Color.Black;
       btnProduct.UseVisualStyleBackColor = false;
@@ -414,13 +414,13 @@
       tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel7.Controls.Add(label3, 0, 1);
       tableLayoutPanel7.Controls.Add(pictureBox1, 0, 0);
-      tableLayoutPanel7.Location = new Point(3, 762);
+      tableLayoutPanel7.Location = new Point(3, 766);
       tableLayoutPanel7.Name = "tableLayoutPanel7";
       tableLayoutPanel7.RowCount = 3;
       tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel7.RowStyles.Add(new RowStyle());
       tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel7.Size = new Size(244, 91);
+      tableLayoutPanel7.Size = new Size(244, 87);
       tableLayoutPanel7.TabIndex = 1;
       // 
       // label3
@@ -428,7 +428,7 @@
       label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       label3.AutoSize = true;
       label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label3.Location = new Point(0, 56);
+      label3.Location = new Point(0, 52);
       label3.Margin = new Padding(0);
       label3.Name = "label3";
       label3.Size = new Size(244, 30);
@@ -440,10 +440,10 @@
       // 
       pictureBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-      pictureBox1.Location = new Point(10, 0);
-      pictureBox1.Margin = new Padding(10, 0, 10, 0);
+      pictureBox1.Location = new Point(30, 0);
+      pictureBox1.Margin = new Padding(30, 0, 30, 0);
       pictureBox1.Name = "pictureBox1";
-      pictureBox1.Size = new Size(224, 56);
+      pictureBox1.Size = new Size(184, 52);
       pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
       pictureBox1.TabIndex = 0;
       pictureBox1.TabStop = false;

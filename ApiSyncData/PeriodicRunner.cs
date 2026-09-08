@@ -2,6 +2,8 @@ namespace ApiSyncData
 {
   public static class PeriodicRunner
   {
+    public static event EventHandler<MasterDataChangedEventArgs>? EntityChanged;
+
     // Dữ liệu của lần đồng bộ thành công gần nhất; null trước lần đầu thành công.
     public static Resp.StationAPI? Stations { get; private set; }
     public static Resp.WarehouseAPI? Warehouses { get; private set; }
@@ -54,12 +56,34 @@ namespace ApiSyncData
     }
 
     private static async Task LoadAndSyncAsync<T>(Task<T> request,
-      Func<T, CancellationToken, Task> sync, Action<T> updateCache, CancellationToken token)
+      Func<T, CancellationToken, Task<MasterDataChangedEventArgs?>> sync,
+      Action<T> updateCache, CancellationToken token)
     {
       var response = await request.ConfigureAwait(false);
       token.ThrowIfCancellationRequested();
-      await sync(response, token).ConfigureAwait(false);
+      var changes = await sync(response, token).ConfigureAwait(false);
       updateCache(response);
+      if (changes != null)
+        NotifyEntityChanged(changes);
+    }
+
+    private static void NotifyEntityChanged(MasterDataChangedEventArgs changes)
+    {
+      var subscribers = EntityChanged;
+      if (subscribers == null)
+        return;
+
+      foreach (EventHandler<MasterDataChangedEventArgs> subscriber in subscribers.GetInvocationList())
+      {
+        try
+        {
+          subscriber(null, changes);
+        }
+        catch (Exception ex)
+        {
+          System.Diagnostics.Trace.TraceError(ex.ToString());
+        }
+      }
     }
 
     private static async Task SyncProductsAfterGroupsAsync(

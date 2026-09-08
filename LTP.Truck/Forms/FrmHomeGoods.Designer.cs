@@ -46,14 +46,14 @@
       tableLayoutPanel8 = new TableLayoutPanel();
       label13 = new Label();
       label12 = new Label();
-      comboBox3 = new ComboBox();
-      comboBox2 = new ComboBox();
+      cbbTare = new ComboBox();
+      cbbProduct = new ComboBox();
       label6 = new Label();
       label7 = new Label();
       label8 = new Label();
       label9 = new Label();
       label11 = new Label();
-      comboBox1 = new ComboBox();
+      cbbProductGroup = new ComboBox();
       label10 = new Label();
       tableLayoutPanel10 = new TableLayoutPanel();
       rjButton3 = new LaborTrackPro.Custom.RJButton();
@@ -312,14 +312,14 @@
       tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel8.Controls.Add(label13, 1, 4);
       tableLayoutPanel8.Controls.Add(label12, 1, 3);
-      tableLayoutPanel8.Controls.Add(comboBox3, 1, 2);
-      tableLayoutPanel8.Controls.Add(comboBox2, 1, 1);
+      tableLayoutPanel8.Controls.Add(cbbTare, 1, 2);
+      tableLayoutPanel8.Controls.Add(cbbProduct, 1, 1);
       tableLayoutPanel8.Controls.Add(label6, 0, 0);
       tableLayoutPanel8.Controls.Add(label7, 0, 1);
       tableLayoutPanel8.Controls.Add(label8, 0, 2);
       tableLayoutPanel8.Controls.Add(label9, 0, 3);
       tableLayoutPanel8.Controls.Add(label11, 0, 4);
-      tableLayoutPanel8.Controls.Add(comboBox1, 1, 0);
+      tableLayoutPanel8.Controls.Add(cbbProductGroup, 1, 0);
       tableLayoutPanel8.Location = new Point(3, 63);
       tableLayoutPanel8.Name = "tableLayoutPanel8";
       tableLayoutPanel8.RowCount = 5;
@@ -360,25 +360,27 @@
       label12.Text = "0.000";
       label12.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // comboBox3
+      // cbbTare
       // 
-      comboBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      comboBox3.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      comboBox3.FormattingEnabled = true;
-      comboBox3.Location = new Point(160, 96);
-      comboBox3.Name = "comboBox3";
-      comboBox3.Size = new Size(591, 38);
-      comboBox3.TabIndex = 8;
+      cbbTare.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      cbbTare.DropDownStyle = ComboBoxStyle.DropDownList;
+      cbbTare.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      cbbTare.FormattingEnabled = true;
+      cbbTare.Location = new Point(160, 96);
+      cbbTare.Name = "cbbTare";
+      cbbTare.Size = new Size(591, 38);
+      cbbTare.TabIndex = 8;
       // 
-      // comboBox2
+      // cbbProduct
       // 
-      comboBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      comboBox2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      comboBox2.FormattingEnabled = true;
-      comboBox2.Location = new Point(160, 50);
-      comboBox2.Name = "comboBox2";
-      comboBox2.Size = new Size(591, 38);
-      comboBox2.TabIndex = 7;
+      cbbProduct.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      cbbProduct.DropDownStyle = ComboBoxStyle.DropDownList;
+      cbbProduct.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      cbbProduct.FormattingEnabled = true;
+      cbbProduct.Location = new Point(160, 50);
+      cbbProduct.Name = "cbbProduct";
+      cbbProduct.Size = new Size(591, 38);
+      cbbProduct.TabIndex = 7;
       // 
       // label6
       // 
@@ -450,15 +452,16 @@
       label11.Text = "Giá trị Tare (kg):";
       label11.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // comboBox1
+      // cbbProductGroup
       // 
-      comboBox1.Anchor = AnchorStyles.Left;
-      comboBox1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      comboBox1.FormattingEnabled = true;
-      comboBox1.Location = new Point(160, 4);
-      comboBox1.Name = "comboBox1";
-      comboBox1.Size = new Size(240, 38);
-      comboBox1.TabIndex = 6;
+      cbbProductGroup.Anchor = AnchorStyles.Left;
+      cbbProductGroup.DropDownStyle = ComboBoxStyle.DropDownList;
+      cbbProductGroup.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      cbbProductGroup.FormattingEnabled = true;
+      cbbProductGroup.Location = new Point(160, 4);
+      cbbProductGroup.Name = "cbbProductGroup";
+      cbbProductGroup.Size = new Size(240, 38);
+      cbbProductGroup.TabIndex = 6;
       // 
       // label10
       // 
@@ -558,14 +561,14 @@
     private TableLayoutPanel tableLayoutPanel8;
     private Label label13;
     private Label label12;
-    private ComboBox comboBox3;
-    private ComboBox comboBox2;
+    private ComboBox cbbTare;
+    private ComboBox cbbProduct;
     private Label label6;
     private Label label7;
     private Label label8;
     private Label label9;
     private Label label11;
-    private ComboBox comboBox1;
+    private ComboBox cbbProductGroup;
     private Label label10;
     private TableLayoutPanel tableLayoutPanel10;
     private LaborTrackPro.Custom.RJButton rjButton3;

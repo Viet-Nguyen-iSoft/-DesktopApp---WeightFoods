@@ -1,4 +1,5 @@
 ﻿using Common;
+using HelperManager;
 using iSoft.Communication.Interface;
 using iSoft.Database;
 using iSoft.Database.DTO;
@@ -6,19 +7,8 @@ using iSoft.Database.Models;
 using LTP.Truck.Controls;
 using LTP.Truck.Custom;
 using LTP.Truck.Popup;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Common.EnumData;
-using static HelperManager.EnumData;
 using static iSoft.Database.EnumData;
 
 namespace LTP.Truck.Forms
@@ -28,9 +18,9 @@ namespace LTP.Truck.Forms
     public FrmHomeTruck()
     {
       InitializeComponent();
-      dgv.CellContentClick += dgv_CellContentClick;
       CustomUI();
       this.Load += FrmHome_Load;
+      this.Shown += FrmHomeTruck_Shown;
     }
 
     #region Instance
@@ -47,6 +37,12 @@ namespace LTP.Truck.Forms
 
     private void CustomUI()
     {
+      dtpFrom.Format = DateTimePickerFormat.Custom;
+      dtpFrom.CustomFormat = "dd/MM/yyyy";
+
+      dtpTo.Format = DateTimePickerFormat.Custom;
+      dtpTo.CustomFormat = "dd/MM/yyyy";
+
       ucItemWeight01.Title = "KL cân lần 1 (Kg)";
       ucItemWeight02.Title = "KL cân lần 2 (Kg)";
       ucItemWeightGoods.Title = "KL hàng (Kg)";
@@ -81,12 +77,20 @@ namespace LTP.Truck.Forms
       dgv.RowHeadersDefaultCellStyle.SelectionBackColor = dgv.RowHeadersDefaultCellStyle.BackColor;
       dgv.RowHeadersDefaultCellStyle.SelectionForeColor = dgv.RowHeadersDefaultCellStyle.ForeColor;
       dgv.CellPainting += dgv_CellPainting;
+      dgv.CellContentClick += dgv_CellContentClick;
     }
 
     private void FrmHome_Load(object? sender, EventArgs e)
     {
+      cbbStatus.SelectedIndex = 1;
+
       AppCore.Ins.OnSendDataWeight += Ins_OnSendDataWeight;
       CheckShowStatusButton(_recordTruck);
+    }
+
+    private async void FrmHomeTruck_Shown(object? sender, EventArgs e)
+    {
+      await LoadHistorical();
     }
 
     private void Ins_OnSendDataWeight(object? sender, MessageDataOutput e)
@@ -225,7 +229,7 @@ namespace LTP.Truck.Forms
       CheckShowStatusButton(_recordTruck);
 
       //Save DB
-      _recordTruck.NoLabelAuto = DateTime.Now.ToString("yyyyMMddHHmmss");
+      _recordTruck.NoLabelAuto = KeyHelper.CreateLabel(AppCore.Ins._appConfig?.Key);
       _recordTruck.NoLabelManual = txtNoLabel.Texts;
       _recordTruck.NameDriver = txtNameDriver.Texts;
       _recordTruck.LicensePlate = txtLicensePlate.Texts;
@@ -341,6 +345,96 @@ namespace LTP.Truck.Forms
       lbWeightTrigger.Text = recordTruck.NetTimeTemp.ToString("F3");
     }
 
+    private void ShowDataHistorical(RecordTruck recordTruck)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          ShowDataHistorical(recordTruck);
+        }));
+        return;
+      }
+
+      switch (recordTruck.EnumTypeDataTruck)
+      {
+        case iSoft.Database.EnumData.EnumTypeDataTruck.None:
+          btnWeightTime01.Enabled = true;
+          btnWeightTime02.Enabled = false;
+          btnPrint.Enabled = false;
+
+          ucItemWeight01.Value = "...";
+          ucItemWeight02.Value = "...";
+          break;
+        case iSoft.Database.EnumData.EnumTypeDataTruck.WeightedTime01:
+          btnWeightTime01.Enabled = true;
+          btnWeightTime02.Enabled = false;
+          btnPrint.Enabled = false;
+
+          ucItemWeight01.Value = "...";
+          ucItemWeight02.Value = "...";
+          break;
+        case iSoft.Database.EnumData.EnumTypeDataTruck.DoneTime01:
+          btnWeightTime01.Enabled = false;
+          btnWeightTime02.Enabled = true;
+          btnPrint.Enabled = false;
+
+          ucItemWeight01.Value = recordTruck.NetTime01.ToString("F3");
+          ucItemWeight02.Value = "...";
+          break;
+        case iSoft.Database.EnumData.EnumTypeDataTruck.WeightedTime02:
+          btnWeightTime01.Enabled = false;
+          btnWeightTime02.Enabled = true;
+          btnPrint.Enabled = false;
+
+          ucItemWeight01.Value = recordTruck.NetTime01.ToString("F3");
+          ucItemWeight02.Value = "...";
+          break;
+        case iSoft.Database.EnumData.EnumTypeDataTruck.DoneTime02:
+          btnWeightTime01.Enabled = false;
+          btnWeightTime02.Enabled = false;
+          btnPrint.Enabled = true;
+
+          ucItemWeight01.Value = recordTruck.NetTime01.ToString("F3");
+          ucItemWeight02.Value = recordTruck.NetTime02.ToString("F3");
+          break;
+        default:
+          break;
+      }
+
+      double valueGoods = (recordTruck.NetTime02 - recordTruck.NetTime01);
+      ucItemWeightGoods.Value = valueGoods.ToString("F3");
+      lbWeightTrigger.Text = recordTruck.NetTimeTemp.ToString("F3");
+
+      if (valueGoods>0 && recordTruck.NetTime01> 0 && recordTruck.NetTime02>0)
+      {
+        txtTypeWeight.Texts = "Xuất hàng";
+      }
+      else if (valueGoods < 0 && recordTruck.NetTime01 > 0 && recordTruck.NetTime02 > 0)
+      {
+        txtTypeWeight.Texts = "Nhập hàng";
+      }
+      else
+      {
+        txtTypeWeight.Texts = "Chưa xác định";
+      }
+
+
+      //Show thông tin
+      txtNoLabelAuto.Texts = recordTruck?.NoLabelAuto ?? string.Empty;
+      txtNoLabel.Texts = recordTruck?.NoLabelManual ?? string.Empty;
+
+      txtNameDriver.Texts = recordTruck?.NameDriver ?? string.Empty;
+      txtLicensePlate.Texts = recordTruck?.LicensePlate ?? string.Empty;
+      txtIdCard.Texts = recordTruck?.IdCard ?? string.Empty;
+      txtDocument.Texts = recordTruck?.Document ?? string.Empty;
+
+      txtClient.Texts = recordTruck?.Client?.Name ?? string.Empty;
+      txtWareHouse.Texts = recordTruck?.Warehouse?.Name ?? string.Empty;
+      txtTypeGoods.Texts = recordTruck?.TypeGoods?.Name ?? string.Empty;
+    }
+
+
     private void btnPrint_Click(object sender, EventArgs e)
     {
       try
@@ -376,8 +470,47 @@ namespace LTP.Truck.Forms
 
     private async Task LoadHistorical()
     {
+      var fromDate = dtpFrom.Value.Date;
+      var toDate = dtpTo.Value.Date;
+      if (fromDate > toDate)
+      {
+        using var popup = new PopupConfirm("Ngày bắt đầu không được lớn hơn ngày kết thúc.",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popup.ShowDialog();
+        return;
+      }
+
+      // Records are saved in UTC; the date pickers represent local calendar days.
+      var fromUtc = fromDate.ToUniversalTime();
+      var toUtcExclusive = toDate.AddDays(1).ToUniversalTime();
+      var statusIndex = cbbStatus.SelectedIndex;
+      var searchKey = txtSearchKey.Texts.Trim();
+
       var rs = await AppCore.Ins._recordTruckService.GetAllAsync();
-      var dto = DTOHelper.ConvertRecordTruckDTO(rs);
+      var filtered = rs.Where(record =>
+        record.UpdatedAt >= fromUtc && record.UpdatedAt < toUtcExclusive);
+
+      filtered = statusIndex switch
+      {
+        1 => filtered.Where(record =>
+          record.EnumTypeDataTruck == EnumTypeDataTruck.WeightedTime01 ||
+          record.EnumTypeDataTruck == EnumTypeDataTruck.DoneTime01 ||
+          record.EnumTypeDataTruck == EnumTypeDataTruck.WeightedTime02),
+        2 => filtered.Where(record => record.EnumTypeDataTruck == EnumTypeDataTruck.DoneTime02),
+        _ => filtered
+      };
+
+      if (!string.IsNullOrEmpty(searchKey))
+      {
+        filtered = filtered.Where(record => new[]
+        {
+          record.NoLabelAuto, record.NoLabelManual, record.LicensePlate,
+          record.NameDriver, record.IdCard, record.Document,
+          record.Client?.Name, record.TypeGoods?.Name, record.Warehouse?.Name
+        }.Any(value => value?.Contains(searchKey, StringComparison.OrdinalIgnoreCase) == true));
+      }
+
+      var dto = DTOHelper.ConvertRecordTruckDTO(filtered.ToList());
       SetDgvHistorical(dto);
     }
 
@@ -492,7 +625,17 @@ namespace LTP.Truck.Forms
 
     private void btnDetail_Click(RecordTruckDTO recordTruckDto)
     {
-      
+      if (recordTruckDto != null)
+      {
+        _recordTruck = recordTruckDto.RecordTruck;
+        ShowDataHistorical(_recordTruck);
+      }
+    }
+
+    private void btnCreate_Click(object sender, EventArgs e)
+    {
+      _recordTruck = new RecordTruck();
+      ShowDataHistorical(_recordTruck);
     }
 
 
@@ -531,7 +674,7 @@ namespace LTP.Truck.Forms
           backColor = Color.FromArgb(220, 245, 228);
           textColor = borderColor;
           break;
-        
+
         default:
           //Xám
           borderColor = Color.FromArgb(73, 80, 87);

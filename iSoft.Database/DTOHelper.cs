@@ -40,7 +40,7 @@ namespace iSoft.Database
         IdCard = recordTruck.IdCard,
         LicensePlate = recordTruck.LicensePlate,
         Document = recordTruck.Document,
-        Datetime = recordTruck.UpdatedAt?.ToString("dd/MM/yyyy HH:mm:ss") ?? "",
+        Datetime = recordTruck.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "",
       };
     }
 
@@ -74,8 +74,8 @@ namespace iSoft.Database
             No = index + 1,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -96,8 +96,8 @@ namespace iSoft.Database
             No = index + 1,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -118,8 +118,8 @@ namespace iSoft.Database
             No = index + 1,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -141,8 +141,8 @@ namespace iSoft.Database
             Name = e.Name,
             Description = e.Description,
             Value = (e?.Value??0.0).ToString("F3"),
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -163,8 +163,8 @@ namespace iSoft.Database
             No = index + 1,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -186,8 +186,8 @@ namespace iSoft.Database
             Group = e.ProductGroup?.Name,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt!=null ? (e?.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -197,29 +197,7 @@ namespace iSoft.Database
 
 
 
-    public static List<DepartmentDTO> ConvertDepartmentToDTO(List<Department> departments)
-    {
-      try
-      {
-        return departments
-             .Select((e, index) => new DepartmentDTO
-             {
-               Id = e.Id,
-               No = index + 1,
-               Name = e.Name,
-               Description = e.Description,
-               CreatedAt = e.CreatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "",
-               UpdatedAt = e.UpdatedAt?.ToString("yyyy-MM-dd HH:mm:ss") ?? "",
-               Enable = e.EnableFlag
-             })
-             .ToList();
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
-    }
-
+   
     
 
 
