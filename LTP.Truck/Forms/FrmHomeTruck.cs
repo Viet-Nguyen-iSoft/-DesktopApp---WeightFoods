@@ -84,7 +84,7 @@ namespace LTP.Truck.Forms
     {
       cbbStatus.SelectedIndex = 1;
 
-      AppCore.Ins.OnSendDataWeight += Ins_OnSendDataWeight;
+      AppCore.Ins.OnSendDataWeightTruck += Ins_OnSendDataWeightTruck;
       CheckShowStatusButton(_recordTruck);
     }
 
@@ -93,7 +93,7 @@ namespace LTP.Truck.Forms
       await LoadHistorical();
     }
 
-    private void Ins_OnSendDataWeight(object? sender, MessageDataOutput e)
+    private void Ins_OnSendDataWeightTruck(object? sender, MessageDataOutput e)
     {
       _msgDataWeight = e;
       SetDataWeight(e);
@@ -488,7 +488,12 @@ namespace LTP.Truck.Forms
 
       var rs = await AppCore.Ins._recordTruckService.GetAllAsync();
       var filtered = rs.Where(record =>
-        record.UpdatedAt >= fromUtc && record.UpdatedAt < toUtcExclusive);
+      {
+        // Npgsql legacy timestamp mode returns local DateTime values.
+        // Normalize both sides to UTC before comparing their clock values.
+        var updatedAtUtc = record.UpdatedAt?.ToUniversalTime();
+        return updatedAtUtc >= fromUtc && updatedAtUtc < toUtcExclusive;
+      });
 
       filtered = statusIndex switch
       {

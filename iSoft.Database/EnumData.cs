@@ -50,9 +50,9 @@ namespace iSoft.Database
     public enum EnumTypeDataTruck
     {
       None,
-      WeightedTime01,
+      WeightedTime01, //KHông dùng
       DoneTime01,
-      WeightedTime02,
+      WeightedTime02, //KHông dùng
       DoneTime02,
     }
   }

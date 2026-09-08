@@ -8,6 +8,7 @@ using LTP.Truck.Custom;
 using LTP.Truck.Forms;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using static Common.EnumData;
 using static LTP.Truck.EnumData;
 using AppCore = LTP.Truck.Controls.AppCore;
 
@@ -15,6 +16,9 @@ namespace LTP.Truck
 {
   public partial class FrmMain : Form
   {
+    public event EventHandler? OnChangeProductGroup;
+    public event EventHandler? OnChangeProduct;
+    public event EventHandler? OnChangeTare;
     public FrmMain()
     {
       InitializeComponent();
@@ -149,11 +153,30 @@ namespace LTP.Truck
     // Khai báo trong class FrmMain
     private readonly CancellationTokenSource _syncCts = new();
     private Task? _syncTask;
+
+    private ApiService _apiService = new ApiService();
     private void FrmMain_Load(object? sender, EventArgs e)
     {
       try
       {
+        //var rs = _apiService.User();
         _syncTask ??= PeriodicRunner.RunEvery5SecondsAsync(_syncCts.Token);
+        PeriodicRunner.EntityChanged += (sender, e) =>
+        {
+          if (e.EntityType == typeof(ProductGroup))
+          {
+            OnChangeProductGroup?.Invoke(this, e);
+          }
+          else if (e.EntityType == typeof(Product))
+          {
+            OnChangeProduct?.Invoke(this, e);
+          }
+          else if (e.EntityType == typeof(CategoryTare))
+          {
+            OnChangeTare?.Invoke(this, e);
+          }
+        };
+
         AppCore.Ins.ConnectWeight();
         CheckOpenMulApp();
         ChangePage(EnumScreen.Waiting);

@@ -47,6 +47,7 @@ namespace Common
       TypeGoods,
       Warehouse,
       Information,
+      RecordTruck,
     }
   }
 }

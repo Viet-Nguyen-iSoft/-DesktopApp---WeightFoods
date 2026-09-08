@@ -87,6 +87,21 @@ namespace ApiSyncData
         db.Set<TEntity>().AddRange(added);
 
         db.ChangeTracker.DetectChanges();
+
+        // Không ghi DB khi server chỉ trả timestamp khác nhưng dữ liệu entity giữ nguyên.
+        // Việc này cũng ngăn EntityChanged phát ở mọi chu kỳ vì sai lệch timestamp.
+        foreach (var entry in db.ChangeTracker.Entries<TEntity>()
+          .Where(entry => entry.State == EntityState.Modified))
+        {
+          var hasEntityDataChange = entry.Properties.Any(property =>
+            property.IsModified &&
+            property.Metadata.Name != nameof(BaseModel.CreatedAt) &&
+            property.Metadata.Name != nameof(BaseModel.UpdatedAt));
+
+          if (!hasEntityDataChange)
+            entry.State = EntityState.Unchanged;
+        }
+
         var changedEntries = db.ChangeTracker.Entries<TEntity>()
           .Where(entry => entry.State == EntityState.Added || entry.State == EntityState.Modified)
           .ToList();
@@ -110,13 +125,16 @@ namespace ApiSyncData
           .ToList();
 
         // Một lần SaveChanges cho cả thêm, cập nhật, xóa mềm; lỗi thì không lưu lượt này.
-        await db.SaveChangesAsync(token).ConfigureAwait(false);
+        var affectedRows = await db.SaveChangesAsync(token).ConfigureAwait(false);
+        if (affectedRows == 0)
+          return null;
 
         return new MasterDataChangedEventArgs(
           typeof(TEntity),
           addedEntities.Select(entity => entity.Id).ToList(),
           updatedEntities.Select(entity => entity.Id).ToList(),
-          deletedEntities.Select(entity => entity.Id).ToList());
+          deletedEntities.Select(entity => entity.Id).ToList(),
+          affectedRows);
       }
       finally
       {

@@ -12,19 +12,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iSoft.Communication.Interface;
 
 namespace LTP.Truck.Forms
 {
   public partial class FrmHomeGoods : Form
   {
     private List<Product> _products = new();
-
+    private int _productGroupRefreshVersion;
+    private int _tareRefreshVersion;
+    private MessageDataOutput _msgDataWeight { get; set; } = new MessageDataOutput();
     public FrmHomeGoods()
     {
       InitializeComponent();
       CustomUI();
+
+      cbbTare.SelectedValueChanged += cbbTare_SelectedValueChanged;
+      lbTare.Text = "0.000";
       this.Load += FrmHomeGoods_Load;
-      cbbProductGroup.SelectedValueChanged += cbbProductGroup_SelectedValueChanged;
     }
 
     #region Instance
@@ -48,23 +53,24 @@ namespace LTP.Truck.Forms
       ElipseControl elipseControl01 = new ElipseControl();
       elipseControl01.TargetControl = tableLayoutPanel4;
       elipseControl01.CornerRadius = 20;
-
-      //ElipseControl elipseControl02 = new ElipseControl();
-      //elipseControl02.TargetControl = tableLayoutPanel7;
-      //elipseControl02.CornerRadius = 20;
-
-      //ElipseControl elipseControl03 = new ElipseControl();
-      //elipseControl03.TargetControl = tableLayoutPanel9;
-      //elipseControl03.CornerRadius = 20;
     }
 
     private async void FrmHomeGoods_Load(object? sender, EventArgs e)
     {
       try
       {
-        await LoadData();
+        await LoadDataFirst();
 
         cbbProductGroup.SelectedIndex = -1;
+        cbbTare.SelectedIndex = -1;
+
+        //Đăng kí sự kiện
+        cbbProductGroup.SelectedValueChanged += cbbProductGroup_SelectedValueChanged;
+
+        FrmMain.Instance.OnChangeProductGroup += Instance_OnChangeProductGroup;
+        FrmMain.Instance.OnChangeProduct += Instance_OnChangeProduct;
+        FrmMain.Instance.OnChangeTare += Instance_OnChangeTare;
+        AppCore.Ins.OnSendDataWeightGoods += Ins_OnSendDataWeightGoods;
       }
       catch (Exception ex)
       {
@@ -72,22 +78,111 @@ namespace LTP.Truck.Forms
       }
     }
 
-    private async Task LoadData()
+    private void Ins_OnSendDataWeightGoods(object? sender, MessageDataOutput e)
     {
-      var categoryTares = await AppCore.Ins._categoryTareService.GetAllAsync();
+      _msgDataWeight = e;
+      SetDataWeight(e);
+    }
+    private void SetDataWeight(MessageDataOutput messageData)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          SetDataWeight(messageData);
+        }));
+        return;
+      }
+
+      lbWeightValue.Text = messageData.ValueWeight.ToString("F3");
+    }
+
+    private async void Instance_OnChangeTare(object? sender, EventArgs e)
+    {
+      if (InvokeRequired)
+      {
+        BeginInvoke(new Action(() => Instance_OnChangeTare(sender, e)));
+        return;
+      }
+
+      var refreshVersion = ++_tareRefreshVersion;
+
+      try
+      {
+        var categoryTares = await AppCore.Ins._categoryTareService.GetAllAsync();
+        if (IsDisposed || Disposing || refreshVersion != _tareRefreshVersion)
+          return;
+
+        var selectedTareId = (cbbTare.SelectedItem as CategoryTare)?.Id;
+        var selectedTareIndex = categoryTares.FindIndex(tare => tare.Id == selectedTareId);
+
+        SetTare(categoryTares);
+        cbbTare.SelectedIndex = selectedTareIndex;
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+      }
+    }
+
+    private async void Instance_OnChangeProduct(object? sender, EventArgs e)
+    {
+      if (InvokeRequired)
+      {
+        BeginInvoke(new Action(() => Instance_OnChangeProduct(sender, e)));
+        return;
+      }
+
+      var selectedProductId = (cbbProduct.SelectedItem as Product)?.Id;
+      _products = await AppCore.Ins._productService.GetAllAsync();
+      FillProduct(selectedProductId, preserveSelection: true);
+    }
+
+    private async void Instance_OnChangeProductGroup(object? sender, EventArgs e)
+    {
+      if (InvokeRequired)
+      {
+        BeginInvoke(new Action(() => Instance_OnChangeProductGroup(sender, e)));
+        return;
+      }
+
+      var refreshVersion = ++_productGroupRefreshVersion;
+
+      try
+      {
+        var productGroups = await AppCore.Ins._productGroupService.GetAllAsync();
+        if (IsDisposed || Disposing || refreshVersion != _productGroupRefreshVersion)
+          return;
+
+        var selectedProductGroupId = (cbbProductGroup.SelectedItem as ProductGroup)?.Id;
+        var selectedProductId = (cbbProduct.SelectedItem as Product)?.Id;
+        var selectedGroupIndex = productGroups.FindIndex(group => group.Id == selectedProductGroupId);
+
+        cbbProductGroup.SelectedValueChanged -= cbbProductGroup_SelectedValueChanged;
+        try
+        {
+          SetProductGroup(productGroups);
+          cbbProductGroup.SelectedIndex = selectedGroupIndex;
+          FillProduct(selectedProductId, preserveSelection: true);
+        }
+        finally
+        {
+          cbbProductGroup.SelectedValueChanged += cbbProductGroup_SelectedValueChanged;
+        }
+      }
+      catch (Exception)
+      {
+      }
+    }
+
+    private async Task LoadDataFirst()
+    {
+      _products = await AppCore.Ins._productService.GetAllAsync();
       var productGroups = await AppCore.Ins._productGroupService.GetAllAsync();
-      var products = await AppCore.Ins._productService.GetAllAsync();
+      var categoryTares = await AppCore.Ins._categoryTareService.GetAllAsync();
 
-      _products = products;
       SetProductGroup(productGroups);
-
-      //cbbProduct.DisplayMember = nameof(Product.Name);
-      //cbbProduct.ValueMember = nameof(Product.Id);
-      //cbbProduct.DataSource = products;
-
-      //cbbTare.DisplayMember = nameof(CategoryTare.Value);
-      //cbbTare.ValueMember = nameof(CategoryTare.Id);
-      //cbbTare.DataSource = categoryTares;
+      SetTare(categoryTares);
     }
 
     private void SetProductGroup(List<ProductGroup> productGroups)
@@ -105,6 +200,26 @@ namespace LTP.Truck.Forms
       cbbProductGroup.ValueMember = nameof(ProductGroup.Id);
       cbbProductGroup.DataSource = productGroups;
     }
+    private void SetTare(List<CategoryTare> categoryTares)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          SetTare(categoryTares);
+        }));
+        return;
+      }
+
+      cbbTare.DisplayMember = nameof(CategoryTare.Name);
+      cbbTare.ValueMember = nameof(CategoryTare.Id);
+      cbbTare.DataSource = categoryTares;
+    }
+
+    private void cbbTare_SelectedValueChanged(object? sender, EventArgs e)
+    {
+      lbTare.Text = (cbbTare.SelectedItem as CategoryTare)?.Value?.ToString("0.000") ?? string.Empty;
+    }
 
     private void cbbProductGroup_SelectedValueChanged(object? sender, EventArgs e)
     {
@@ -113,11 +228,16 @@ namespace LTP.Truck.Forms
 
     private void FillProduct()
     {
+      FillProduct(null, preserveSelection: false);
+    }
+
+    private void FillProduct(long? selectedProductId, bool preserveSelection)
+    {
       if (this.InvokeRequired)
       {
         this.Invoke(new Action(() =>
         {
-          FillProduct();
+          FillProduct(selectedProductId, preserveSelection);
         }));
         return;
       }
@@ -135,6 +255,68 @@ namespace LTP.Truck.Forms
       cbbProduct.DisplayMember = nameof(Product.Name);
       cbbProduct.ValueMember = nameof(Product.Id);
       cbbProduct.DataSource = products;
+
+      if (!preserveSelection)
+        return;
+
+      if (selectedProductId.HasValue &&
+        products.Any(product => product.Id == selectedProductId.Value))
+      {
+        cbbProduct.SelectedValue = selectedProductId.Value;
+      }
+      else
+      {
+        cbbProduct.SelectedIndex = -1;
+      }
+    }
+
+    private async void btnLoadLicensePlate_Click(object sender, EventArgs e)
+    {
+      btnLoadLicensePlate.Enabled = false;
+      try
+      {
+        await ShowFirstWeighingRecordsAsync();
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+        if (!IsDisposed && !Disposing)
+          MessageBox.Show(this, "Không thể tải danh sách phiếu cân lần 1. Vui lòng thử lại.",
+            "Lỗi tải dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      }
+      finally
+      {
+        if (!IsDisposed && !Disposing)
+          btnLoadLicensePlate.Enabled = true;
+      }
+    }
+
+    private async Task ShowFirstWeighingRecordsAsync()
+    {
+      var filtered = await AppCore.Ins._recordTruckService.GetFirstWeighingRecordsAsync();
+      if (IsDisposed || Disposing)
+        return;
+
+      if (filtered.Count == 0)
+      {
+        MessageBox.Show(this, "Không có phiếu đã cân lần 1 đang chờ cân lần 2.",
+          "Danh sách phiếu cân", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        return;
+      }
+
+      using var popup = new LTP.Truck.Popup.PopupLoadMD();
+      var records = iSoft.Database.DTOHelper.ConvertRecordTruckDTO(filtered.ToList());
+      popup.SetData(records);
+      popup.OnSendData += (data, type) =>
+      {
+        if (data is iSoft.Database.DTO.RecordTruckDTO selectedRecord)
+        {
+          txtLicensePlate.Texts = selectedRecord.LicensePlate ?? string.Empty;
+          txtNameDriver.Texts = selectedRecord.NameDriver ?? string.Empty;
+          txtIdCard.Texts = selectedRecord.IdCard ?? string.Empty;
+        }  
+      };
+      popup.ShowDialog(this);
     }
   }
 }

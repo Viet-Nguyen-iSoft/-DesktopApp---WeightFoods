@@ -1,5 +1,6 @@
 ﻿using Common;
 using iSoft.Database;
+using iSoft.Database.DTO;
 using iSoft.Database.Models;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,45 @@ namespace LTP.Truck.Popup
         dgv.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
         dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+      }
+      else if (typeof(T) == typeof(RecordTruckDTO))
+      {
+        _enumTypeData = EnumTypeData.RecordTruck;
+        lbTitle.Text = "Danh sách phiếu đã cân lần 1";
+        dgv.DataSource = items;
+        dgv.Columns[nameof(RecordTruckDTO.NetTime02)].Visible = false;
+        dgv.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        dgv.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+        var hideColumns = new[]
+        {
+          nameof(RecordTruckDTO.NetTime01),
+          nameof(RecordTruckDTO.NetTime02),
+          nameof(RecordTruckDTO.Status),
+          nameof(RecordTruckDTO.Warehouse),
+          nameof(RecordTruckDTO.TypeGoods),
+          nameof(RecordTruckDTO.Client),
+          nameof(RecordTruckDTO.Document),
+        };
+        foreach (var columnName in hideColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].Visible = false;
+        }
+
+
+        var autoSizeColumns = new[]
+        {
+            nameof(RecordTruckDTO.No),
+            nameof(RecordTruckDTO.Datetime),
+            nameof(RecordTruckDTO.NoLabelAuto),
+            nameof(RecordTruckDTO.NoLabelManual),
+          };
+        foreach (var columnName in autoSizeColumns)
+        {
+          if (dgv.Columns.Contains(columnName))
+            dgv.Columns[columnName].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+        }
       }
       else if (typeof(T) == typeof(Warehouse))
       {

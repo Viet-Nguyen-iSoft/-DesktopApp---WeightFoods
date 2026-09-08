@@ -24,6 +24,13 @@ namespace iSoft.Database.Service
         throw;
       }
     }
+    public async Task<List<RecordTruck>> GetFirstWeighingRecordsAsync()
+    {
+      await using var context = new PostgresDbContext();
+      var repository = new RecordTruckRepository(context);
+      return await repository.GetFirstWeighingRecordsAsync().ConfigureAwait(false);
+    }
+
     public async Task<RecordTruck> AddOrUpdateAsync(RecordTruck recordTruck)
     {
       try

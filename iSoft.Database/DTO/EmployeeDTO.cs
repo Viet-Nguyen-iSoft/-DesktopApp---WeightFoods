@@ -22,6 +22,7 @@ namespace iSoft.Database.DTO
 
     [DisplayName("Mã thẻ RFID")]
     public string? IdCardCode { get; set; }
+
     [DisplayName("Ngày tạo")]
     public string? CreatedAt { get; set; }
     [DisplayName("Cập nhật")]

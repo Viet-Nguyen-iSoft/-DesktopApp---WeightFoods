@@ -14,7 +14,8 @@ namespace LTP.Truck.Controls
 {
   public partial class AppCore
   {
-    public event EventHandler<MessageDataOutput>? OnSendDataWeight;
+    public event EventHandler<MessageDataOutput>? OnSendDataWeightTruck;
+    public event EventHandler<MessageDataOutput>? OnSendDataWeightGoods;
     private const string ScaleId = "SCALE_01";
 
     private readonly ICommunicationService _communication =
@@ -28,7 +29,7 @@ namespace LTP.Truck.Controls
       {
         Code = ScaleId,
         NameDevice = "Cân TCP",
-        Host = "192.168.2.198",
+        Host = "192.168.100.244",
         Port = 8000,
         eModeCommunication = eModeCommunication.SICS,
         AutoConnect = true,
@@ -49,7 +50,8 @@ namespace LTP.Truck.Controls
        object? sender,
        MessageDataOutput data)
     {
-      OnSendDataWeight?.Invoke(sender, data);
+      OnSendDataWeightTruck?.Invoke(sender, data);
+      OnSendDataWeightGoods?.Invoke(sender, data);
     }
 
     private void Communication_StatusChanged(

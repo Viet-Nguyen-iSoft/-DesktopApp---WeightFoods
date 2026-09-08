@@ -27,6 +27,20 @@ namespace iSoft.Database.Repositorys
       return query.ToListAsync();
     }
 
+    public Task<List<RecordTruck>> GetFirstWeighingRecordsAsync()
+    {
+      return Context.Set<RecordTruck>()
+        .AsNoTracking()
+        .Where(record => !record.DeletedFlag &&
+          record.EnumTypeDataTruck == EnumData.EnumTypeDataTruck.DoneTime01)
+        .Include(record => record.Client)
+        .Include(record => record.TypeGoods)
+        .Include(record => record.Warehouse)
+        .OrderByDescending(record => record.CreatedAt)
+        .ThenByDescending(record => record.Id)
+        .ToListAsync();
+    }
+
     public async Task<RecordTruck> AddOrUpdateAsync(RecordTruck recordTruck)
     {
       if (recordTruck == null)
