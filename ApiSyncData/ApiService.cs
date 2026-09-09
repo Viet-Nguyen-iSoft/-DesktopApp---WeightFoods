@@ -333,5 +333,88 @@ namespace ApiSyncData
     }
 
 
+    public async Task<string> SyncRecordTruck(
+      string rawData,
+      CancellationToken cancellationToken = default)
+    {
+      ArgumentException.ThrowIfNullOrWhiteSpace(rawData);
+
+      string baseAPI = Environment.GetEnvironmentVariable("URL_API")
+        ?? throw new InvalidOperationException("Environment variable URL_API is not configured.");
+      string apiKey = Environment.GetEnvironmentVariable("API_KEY")
+        ?? throw new InvalidOperationException("Environment variable API_KEY is not configured.");
+
+      var apiUrl = $"{baseAPI.TrimEnd('/')}/v1/RecordTruck/sync-desktop";
+
+      using var httpClient = new HttpClient();
+      httpClient.DefaultRequestHeaders.Add("X-API-KEY", apiKey.Trim());
+
+      using var requestContent = new StringContent(
+        rawData,
+        System.Text.Encoding.UTF8,
+        "application/json");
+      using var response = await httpClient.PostAsync(
+        apiUrl,
+        requestContent,
+        cancellationToken);
+
+      var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
+
+      if (!response.IsSuccessStatusCode)
+      {
+        throw new HttpRequestException(
+          $"SyncRecordTruck. " +
+          $"URL: {apiUrl}. " +
+          $"HTTP {(int)response.StatusCode} " +
+          $"({response.ReasonPhrase}). " +
+          $"Response: {responseContent}");
+      }
+
+      return responseContent;
+    }
+
+    public async Task<string> SyncRecordWeight(
+      string rawData,
+      CancellationToken cancellationToken = default)
+    {
+      ArgumentException.ThrowIfNullOrWhiteSpace(rawData);
+
+      string baseAPI = Environment.GetEnvironmentVariable("URL_API")
+        ?? throw new InvalidOperationException("Environment variable URL_API is not configured.");
+      string apiKey = Environment.GetEnvironmentVariable("API_KEY")
+        ?? throw new InvalidOperationException("Environment variable API_KEY is not configured.");
+
+      var apiUrl = $"{baseAPI.TrimEnd('/')}/v1/RecordGoods/sync-desktop";
+
+      using var httpClient = new HttpClient();
+      httpClient.DefaultRequestHeaders.Add("X-API-KEY", apiKey.Trim());
+
+      using var requestContent = new StringContent(
+        rawData,
+        System.Text.Encoding.UTF8,
+        "application/json");
+      using var response = await httpClient.PostAsync(
+        apiUrl,
+        requestContent,
+        cancellationToken);
+
+      var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
+
+      if (!response.IsSuccessStatusCode)
+      {
+        throw new HttpRequestException(
+          $"SyncRecordWeight. " +
+          $"URL: {apiUrl}. " +
+          $"HTTP {(int)response.StatusCode} " +
+          $"({response.ReasonPhrase}). " +
+          $"Response: {responseContent}");
+      }
+
+      return responseContent;
+    }
+
+
+
+
   }
 }

@@ -1,4 +1,6 @@
-﻿namespace LTP.Truck.Forms
+﻿using LTP.Truck.Custom;
+
+namespace LTP.Truck.Forms
 {
   partial class FrmMasterData
   {
@@ -36,7 +38,7 @@
       tableLayoutPanel10 = new TableLayoutPanel();
       label4 = new Label();
       txtSearch = new LTP.Truck.Custom.RJTextBox();
-      btnSearch = new LaborTrackPro.Custom.RJButton();
+      btnSearch = new RJButton();
       label27 = new Label();
       tableLayoutPanel7.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
@@ -220,7 +222,7 @@
     private TableLayoutPanel tableLayoutPanel10;
     private Label label4;
     private Custom.RJTextBox txtSearch;
-    private LaborTrackPro.Custom.RJButton btnSearch;
+    private RJButton btnSearch;
     private Label label27;
   }
 }

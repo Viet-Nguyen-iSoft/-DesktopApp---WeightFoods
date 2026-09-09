@@ -1,14 +1,7 @@
 ﻿using iSoft.Communication.Communication;
 using iSoft.Communication.Interface;
 using iSoft.Communication.JsonPayload;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Common.EnumData;
 using static iSoft.Communication.EnumCommunication;
-using static LaborTrackPro.Controls.AppCore;
 
 namespace LTP.Truck.Controls
 {
@@ -29,7 +22,7 @@ namespace LTP.Truck.Controls
       {
         Code = ScaleId,
         NameDevice = "Cân TCP",
-        Host = "192.168.100.244",
+        Host = "192.168.2.198",
         Port = 8000,
         eModeCommunication = eModeCommunication.SICS,
         AutoConnect = true,

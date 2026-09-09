@@ -30,5 +30,12 @@ namespace iSoft.Database.Repositorys
           .ToListAsync();
       }  
     }
+
+    public async Task<Station?> GetFirstDataStationAsync()
+    {
+      return await this.Context.Set<Station>()
+          .Where(x => !x.DeletedFlag && x.EnableFlag == true)
+          .FirstOrDefaultAsync();
+    }
   }
 }

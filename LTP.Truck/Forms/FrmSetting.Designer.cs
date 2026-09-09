@@ -1,4 +1,8 @@
-﻿namespace LTP.Truck.Forms
+﻿
+
+using LTP.Truck.Custom;
+
+namespace LTP.Truck.Forms
 {
   partial class FrmSetting
   {
@@ -34,7 +38,8 @@
       tableLayoutPanel3 = new TableLayoutPanel();
       tableLayoutPanel10 = new TableLayoutPanel();
       label1 = new Label();
-      btnAddCommWeight = new LaborTrackPro.Custom.RJButton();
+      btnAddCommWeight = new RJButton();
+      flowCommWeight = new FlowLayoutPanel();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel3.SuspendLayout();
@@ -82,6 +87,7 @@
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.Controls.Add(tableLayoutPanel10, 0, 0);
+      tableLayoutPanel3.Controls.Add(flowCommWeight, 0, 1);
       tableLayoutPanel3.Location = new Point(0, 0);
       tableLayoutPanel3.Margin = new Padding(0);
       tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -150,6 +156,14 @@
       btnAddCommWeight.UseVisualStyleBackColor = false;
       btnAddCommWeight.Click += btnAddCommWeight_Click;
       // 
+      // flowCommWeight
+      // 
+      flowCommWeight.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      flowCommWeight.Location = new Point(3, 63);
+      flowCommWeight.Name = "flowCommWeight";
+      flowCommWeight.Size = new Size(599, 244);
+      flowCommWeight.TabIndex = 3;
+      // 
       // FrmSetting
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
@@ -173,6 +187,7 @@
     private TableLayoutPanel tableLayoutPanel3;
     private TableLayoutPanel tableLayoutPanel10;
     private Label label1;
-    private LaborTrackPro.Custom.RJButton btnAddCommWeight;
+    private RJButton btnAddCommWeight;
+    private FlowLayoutPanel flowCommWeight;
   }
 }

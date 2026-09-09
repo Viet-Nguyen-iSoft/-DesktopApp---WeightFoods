@@ -27,13 +27,13 @@ namespace iSoft.Database.Repositorys
       }  
     }
 
-    public async Task<Department> GetByIdAsync(long id)
+    public async Task<Department> GetByIdAsync(Guid id)
     {
       return await this.Context.Set<Department>()
         .FirstOrDefaultAsync(x=>x.Id == id);
     }
 
-    public async Task<Department> UpdateFlagDeleteAsync(long id)
+    public async Task<Department> UpdateFlagDeleteAsync(Guid id)
     {
       var rs = await this.Context.Set<Department>()
         .FirstOrDefaultAsync(x => x.Id == id);

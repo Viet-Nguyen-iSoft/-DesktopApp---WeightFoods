@@ -12,47 +12,68 @@ namespace iSoft.Database.Repositorys
 
     }
 
-    public async Task<List<Connection>> GetAllConnectionWeightAsync_SyncData()
+    public Task<List<Connection>> GetAllAsync(bool isContainDelete = false)
     {
-      try
-      {
-        return await this.Context.Set<Connection>()
-        .Where(x => x.EnumDevice == EnumDevice.Weight && !x.DeletedFlag && !x.SyncFlag)
-        //.Include(x=>x.Machine)
-        .ToListAsync();
-      }
-      catch (Exception)
-      {
-        throw;
-      }
+      var query = Context.Set<Connection>()
+        .Include(connection => connection.Station)
+        .AsQueryable();
+
+      if (!isContainDelete)
+        query = query.Where(connection => !connection.DeletedFlag);
+
+      return query.ToListAsync();
     }
 
-    public async Task<List<Connection>> GetAllConnectionAsync()
+    public Task<List<Connection>> GetAllWeightNotSynchronizedAsync()
     {
-      try
-      {
-        return await this.Context.Set<Connection>()
-        .Where(x => !x.DeletedFlag)
-        //.Include(x=>x.Machine)
+      return Context.Set<Connection>()
+        .Where(connection =>
+          connection.EnumDevice == EnumDevice.Weight &&
+          !connection.DeletedFlag &&
+          !connection.SyncFlag)
+        .Include(connection => connection.Station)
         .ToListAsync();
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
     }
 
-    public async Task<Connection?> GetConnectionByIdAsync(long? id)
+    public Task<Connection?> GetByIdAsync(Guid id)
     {
-      try
-      {
-        return await this.Context.Set<Connection>()
-                      .Where(x => x.Id == id).FirstOrDefaultAsync();
-      }
-      catch (Exception ex)
-      {
-        throw ex;
-      }
+      return Context.Set<Connection>()
+        .Include(connection => connection.Station)
+        .FirstOrDefaultAsync(connection => connection.Id == id);
     }
+
+    public async Task<Connection> AddOrUpdateAsync(Connection connection)
+    {
+      ArgumentNullException.ThrowIfNull(connection);
+
+      connection.SyncFlag = false;
+      await Context.Database.EnsureCreatedAsync();
+
+      var records = Context.Set<Connection>();
+      var existingRecord = connection.Id == Guid.Empty
+        ? null
+        : await records.FindAsync(connection.Id);
+
+      if (existingRecord == null)
+        await records.AddAsync(connection);
+      else
+        Context.Entry(existingRecord).CurrentValues.SetValues(connection);
+
+      await Context.SaveChangesAsync();
+      return existingRecord ?? connection;
+    }
+
+    // Giữ tương thích với các điểm gọi cũ.
+    public Task<List<Connection>> GetAllConnectionAsync()
+      => GetAllAsync();
+
+    public Task<List<Connection>> GetAllConnectionWeightAsync_SyncData()
+      => GetAllWeightNotSynchronizedAsync();
+
+    public Task<Connection?> GetConnectionByIdAsync(Guid? id)
+      => !id.HasValue || id == Guid.Empty
+        ? Task.FromResult<Connection?>(null)
+        : GetByIdAsync(id.Value);
+
   }
 }

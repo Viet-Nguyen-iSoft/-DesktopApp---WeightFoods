@@ -211,6 +211,7 @@ namespace iSoft.Database
             Product = e,
             No = index + 1,
             Group = e.ProductGroup?.Name,
+            Code = e.Code,
             Name = e.Name,
             Description = e.Description,
             UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :

@@ -1,12 +1,4 @@
-﻿using iSoft.Database;
-using iSoft.Database.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static iSoft.Database.EnumData;
+﻿using static iSoft.Database.EnumData;
 
 namespace ApiSyncData.Record
 {
@@ -29,5 +21,7 @@ namespace ApiSyncData.Record
     public Guid? WarehouseId { get; set; }
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
+    public bool? DeletedFlag { get; set; }
+    public string? ReasonDelete { get; set; }
   }
 }

@@ -16,8 +16,10 @@ namespace iSoft.Database.DTO
 
     [DisplayName("Stt")]
     public int? No { get; set; }
-    [DisplayName("Nhóm sản phẩm")]
+    [DisplayName("Nhóm")]
     public string? Group { get; set; }
+    [DisplayName("Mã")]
+    public string? Code { get; set; }
 
     [DisplayName("Tên sản phẩm")]
     public string? Name { get; set; }

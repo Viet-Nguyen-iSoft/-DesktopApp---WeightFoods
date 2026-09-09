@@ -16,19 +16,19 @@ namespace iSoft.Database.Models
 
 
     #region Mapping
-    public long? StationId { get; set; }
+    public Guid? StationId { get; set; }
     public Station? Station { get; set; }
 
-    public long? EmployeeId { get; set; }
+    public Guid? EmployeeId { get; set; }
     public Employee? Employee { get; set; }
 
-    public long? ProductId { get; set; }
+    public Guid? ProductId { get; set; }
     public Product Product { get; set; } = null!;
 
-    public long? CategoryTareId { get; set; }
+    public Guid? CategoryTareId { get; set; }
     public CategoryTare CategoryTare { get; set; } = null!;
 
-    public long? RecordTruckId { get; set; }
+    public Guid? RecordTruckId { get; set; }
     public RecordTruck RecordTruck { get; set; } = null!;
 
     #endregion

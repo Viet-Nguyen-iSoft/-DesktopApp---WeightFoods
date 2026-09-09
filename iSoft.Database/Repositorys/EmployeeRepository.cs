@@ -97,7 +97,7 @@ namespace iSoft.Database.Repositorys
       }
     }
 
-    public async Task<Employee> UpdateFlagDeleteAsync(long id)
+    public async Task<Employee> UpdateFlagDeleteAsync(Guid id)
     {
       var rs = await this.Context.Set<Employee>()
         .FirstOrDefaultAsync(x => x.Id == id);
@@ -111,7 +111,7 @@ namespace iSoft.Database.Repositorys
       return rs;
     }
 
-    public async Task<Employee?> GetByIdAsync(long? id)
+    public async Task<Employee?> GetByIdAsync(Guid? id)
     {
       return await this.Context.Set<Employee>()
         .FirstOrDefaultAsync(x => x.Id == id);

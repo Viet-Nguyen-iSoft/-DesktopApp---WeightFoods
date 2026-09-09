@@ -60,6 +60,7 @@ namespace Common.Settings
       {
         PopupConfirm popupConfirm = new PopupConfirm("Không tìm thấy thông tin !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
         popupConfirm.ShowDialog();
+        this.Close();
       }
     }
   }

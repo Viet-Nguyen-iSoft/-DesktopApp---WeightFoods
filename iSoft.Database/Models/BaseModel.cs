@@ -11,20 +11,20 @@ namespace iSoft.Database.Models
   {
     [Browsable(false)]
     [DisplayName("Id")]
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 
 
     [DisplayName("Ngày tạo")]
     public DateTime? CreatedAt { get; set; } 
     [DisplayName("Tạo bởi")]
-    public long? CreatedBy { get; set; }
+    public Guid? CreatedBy { get; set; }
 
 
 
     [DisplayName("Cập nhật")]
     public DateTime? UpdatedAt { get; set; }
     [DisplayName("Cập nhật")]
-    public long? UpdatedBy { get; set; }
+    public Guid? UpdatedBy { get; set; }
 
 
 

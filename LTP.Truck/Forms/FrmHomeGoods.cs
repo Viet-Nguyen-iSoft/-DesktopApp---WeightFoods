@@ -1,21 +1,11 @@
 ﻿using Common;
-using DocumentFormat.OpenXml.Wordprocessing;
 using iSoft.Communication.Interface;
 using iSoft.Database;
 using iSoft.Database.DTO;
 using iSoft.Database.Models;
-using LaborTrackPro.Helper;
 using LTP.Truck.Controls;
 using LTP.Truck.Custom;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Common.EnumData;
 
 namespace LTP.Truck.Forms
@@ -123,14 +113,14 @@ namespace LTP.Truck.Forms
       lbWeightValue.Text = messageData.ValueWeight.ToString("F3");
 
       //Tare
-      if (_categoryTare!=null)
+      if (_categoryTare != null)
       {
-        lbGross.Text = (messageData.ValueWeight + (_categoryTare?.Value??0.0)).ToString("F3");
-      }  
+        lbGross.Text = (messageData.ValueWeight + (_categoryTare?.Value ?? 0.0)).ToString("F3");
+      }
       else
       {
         lbGross.Text = messageData.ValueWeight.ToString("F3");
-      }  
+      }
     }
 
     private async void Instance_OnChangeTare(object? sender, EventArgs e)
@@ -255,14 +245,14 @@ namespace LTP.Truck.Forms
     private void cbbTare_SelectedValueChanged(object? sender, EventArgs e)
     {
       _categoryTare = cbbTare.SelectedItem as CategoryTare;
-      if (_categoryTare!=null)
+      if (_categoryTare != null)
       {
         lbTare.Text = _categoryTare?.Value?.ToString("0.000") ?? string.Empty;
-      } 
+      }
       else
       {
         lbTare.Text = 0.0.ToString("0.000") ?? string.Empty;
-      }  
+      }
     }
 
     private void cbbProductGroup_SelectedValueChanged(object? sender, EventArgs e)
@@ -275,7 +265,7 @@ namespace LTP.Truck.Forms
       FillProduct(null, preserveSelection: false);
     }
 
-    private void FillProduct(long? selectedProductId, bool preserveSelection)
+    private void FillProduct(Guid? selectedProductId, bool preserveSelection)
     {
       if (this.InvokeRequired)
       {
@@ -409,6 +399,7 @@ namespace LTP.Truck.Forms
         RecordTruckId = selectedRecordTruck.Id,
         Net = _msgDataWeight.ValueWeight,
         Tare = selectedTare.Value ?? 0.0,
+        StationId = AppCore.Ins._station?.Id,
         CreatedAt = DateTime.UtcNow,
         EnableFlag = true
       };
@@ -430,7 +421,7 @@ namespace LTP.Truck.Forms
           using var popupMsg = new PopupConfirm("Lưu phiếu cân thành công.",
           EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
           popupMsg.ShowDialog(this);
-        }  
+        }
       }
       catch (Exception ex)
       {
@@ -440,7 +431,7 @@ namespace LTP.Truck.Forms
           using var popupMsg = new PopupConfirm("Không thể lưu phiếu cân. Vui lòng thử lại !",
           EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
           popupMsg.ShowDialog(this);
-        }  
+        }
       }
       finally
       {

@@ -59,7 +59,7 @@
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
-      tableLayoutPanel3.Size = new Size(667, 410);
+      tableLayoutPanel3.Size = new Size(534, 410);
       tableLayoutPanel3.TabIndex = 3;
       // 
       // label1
@@ -71,7 +71,7 @@
       label1.Location = new Point(0, 0);
       label1.Margin = new Padding(0);
       label1.Name = "label1";
-      label1.Size = new Size(667, 60);
+      label1.Size = new Size(534, 60);
       label1.TabIndex = 0;
       label1.Text = "Chọn chuẩn kết nối";
       label1.TextAlign = ContentAlignment.MiddleLeft;
@@ -90,7 +90,7 @@
       tableLayoutPanel1.RowCount = 1;
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel1.Size = new Size(647, 80);
+      tableLayoutPanel1.Size = new Size(514, 80);
       tableLayoutPanel1.TabIndex = 3;
       // 
       // label2
@@ -115,7 +115,7 @@
       cbbComm.FormattingEnabled = true;
       cbbComm.Location = new Point(143, 21);
       cbbComm.Name = "cbbComm";
-      cbbComm.Size = new Size(501, 37);
+      cbbComm.Size = new Size(368, 37);
       cbbComm.TabIndex = 2;
       // 
       // tableLayoutPanel2
@@ -132,7 +132,7 @@
       tableLayoutPanel2.Name = "tableLayoutPanel2";
       tableLayoutPanel2.RowCount = 1;
       tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel2.Size = new Size(647, 60);
+      tableLayoutPanel2.Size = new Size(514, 60);
       tableLayoutPanel2.TabIndex = 4;
       // 
       // btnConfirm
@@ -149,7 +149,7 @@
       btnConfirm.ForeColor = Color.White;
       btnConfirm.Image = Properties.Resources.icon_confirm;
       btnConfirm.ImageAlign = ContentAlignment.MiddleLeft;
-      btnConfirm.Location = new Point(330, 3);
+      btnConfirm.Location = new Point(197, 3);
       btnConfirm.Name = "btnConfirm";
       btnConfirm.Padding = new Padding(10, 0, 0, 0);
       btnConfirm.Size = new Size(154, 54);
@@ -172,7 +172,7 @@
       btnClose.ForeColor = Color.White;
       btnClose.Image = Properties.Resources.icon_close;
       btnClose.ImageAlign = ContentAlignment.MiddleLeft;
-      btnClose.Location = new Point(490, 3);
+      btnClose.Location = new Point(357, 3);
       btnClose.Name = "btnClose";
       btnClose.Padding = new Padding(10, 0, 0, 0);
       btnClose.Size = new Size(154, 54);
@@ -185,7 +185,7 @@
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(667, 410);
+      ClientSize = new Size(534, 410);
       ControlBox = false;
       Controls.Add(tableLayoutPanel3);
       Name = "PopupSettingSerial";

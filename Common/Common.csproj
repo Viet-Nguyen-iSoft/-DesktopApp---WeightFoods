@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HelperManager\HelperManager.csproj" />
-    <ProjectReference Include="..\LaborTrackPro\LaborTrackPro.csproj" />
+    <ProjectReference Include="..\iSoft.Communication\iSoft.Communication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

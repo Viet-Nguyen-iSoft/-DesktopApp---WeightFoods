@@ -29,14 +29,24 @@ namespace iSoft.Database.Repositorys
       return query.ToListAsync();
     }
 
+    public async Task<double> SumNetByRecordTruckIdAsync(Guid recordTruckId)
+    {
+      return await Context.Set<RecordWeight>()
+        .Where(record => !record.DeletedFlag && record.RecordTruckId == recordTruckId)
+        .SumAsync(record => (double?)record.Net) ?? 0.0;
+    }
+
     public async Task<RecordWeight> AddOrUpdateAsync(RecordWeight recordWeight)
     {
       if (recordWeight == null)
         throw new ArgumentNullException(nameof(recordWeight));
 
+      // Mọi thay đổi local cần được đưa vào hàng đợi đồng bộ lại.
+      recordWeight.SyncFlag = false;
+
       await Context.Database.EnsureCreatedAsync();
       var records = Context.Set<RecordWeight>();
-      var existingRecord = recordWeight.Id == 0
+      var existingRecord = recordWeight.Id == Guid.Empty
         ? null
         : await records.FindAsync(recordWeight.Id);
 

@@ -1,4 +1,7 @@
 ﻿using Common.Settings;
+using iSoft.Database.Models;
+using iSoft.Database.Service;
+using LTP.Truck.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static HelperManager.EnumData;
 
 namespace LTP.Truck.Forms
 {
@@ -43,7 +47,22 @@ namespace LTP.Truck.Forms
 
     private void PopupChooseComm_OnSendConfirm(object? sender, Common.EnumData.EnumCommunication e)
     {
-      
+      PopupSettingTcpClient tcpClient = new PopupSettingTcpClient();
+      tcpClient.OnSendConfirm += TcpClient_OnSendConfirm;
+      tcpClient.ShowDialog();
+    }
+
+    private async void TcpClient_OnSendConfirm(object? sender, string e)
+    {
+      Connection connection = new Connection();
+      connection.Name = "Cân TCP";
+      connection.Code = "";
+      connection.EnumDevice = EnumDevice.Weight;
+      connection.EnumCommunicationType = EnumCommunicationType.TcpClient;
+      connection.JsonStrConfig = e;
+      connection.StationId = AppCore.Ins._station?.Id;
+
+      await AppCore.Ins._connectionService.AddOrUpdateAsync(connection);
     }
   }
 }

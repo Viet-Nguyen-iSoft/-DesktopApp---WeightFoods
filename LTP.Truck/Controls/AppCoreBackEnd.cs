@@ -57,7 +57,9 @@ namespace LTP.Truck.Controls
     public readonly ProductGroupService _productGroupService = new();
     public readonly ProductService _productService = new();
     public readonly AppConfigService _appConfigService = new();
-
+    public readonly StationService _stationService = new();
+    public readonly ConnectionService _connectionService = new();
+    
 
     public string _folderFileLog = Application.StartupPath + "Logs";
     public void Init()
@@ -107,11 +109,13 @@ namespace LTP.Truck.Controls
     }
 
     public AppConfig? _appConfig { get;set; }
+    public Station? _station { get;set; }
     public async Task LoadDataConfig()
     {
       try
       {
         _appConfig = await _appConfigService.GetAppConfigAsync();
+        _station = await _stationService.GetFirstDataStation();
       }
       catch (Exception)
       {

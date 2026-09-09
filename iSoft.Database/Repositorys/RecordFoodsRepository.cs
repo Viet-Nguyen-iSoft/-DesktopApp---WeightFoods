@@ -97,7 +97,7 @@ namespace iSoft.Database.Repositorys
                                  .Where(x => x.SyncFlag == false)
                                 .ToListAsync();
     }
-    public async Task<RecordWeight> UpdateFlagDeleteAsync(long id, long idEmloyee)
+    public async Task<RecordWeight> UpdateFlagDeleteAsync(Guid id, Guid idEmloyee)
     {
       try
       {
@@ -126,7 +126,7 @@ namespace iSoft.Database.Repositorys
     }
 
 
-    public async Task<List<RecordWeight>> GetRecordByPOAsync(long idPO)
+    public async Task<List<RecordWeight>> GetRecordByPOAsync(Guid idPO)
     {
       try
       {
@@ -143,7 +143,7 @@ namespace iSoft.Database.Repositorys
         throw;
       }
     }
-    public async Task<List<RecordWeight>> GetRecordByPOAsync(long idPO, DateTime dateTime, EnumInternalExternalStatus enumInternalExternal,EnumExportImport enumExportImport)
+    public async Task<List<RecordWeight>> GetRecordByPOAsync(Guid idPO, DateTime dateTime, EnumInternalExternalStatus enumInternalExternal,EnumExportImport enumExportImport)
     {
       try
       {
@@ -168,7 +168,7 @@ namespace iSoft.Database.Repositorys
       }
     }
 
-    public async Task<List<RecordWeight>> GetRecordByRequestOtherAsync(long? employeeId, DateTime dateTime, EnumInternalExternalStatus enumInternalExternalStatus)
+    public async Task<List<RecordWeight>> GetRecordByRequestOtherAsync(Guid? employeeId, DateTime dateTime, EnumInternalExternalStatus enumInternalExternalStatus)
     {
       try
       {
@@ -204,7 +204,7 @@ namespace iSoft.Database.Repositorys
       }
     }
 
-    public async Task<RecordWeight?> GetDatalogWeightByAsync(long? id)
+    public async Task<RecordWeight?> GetDatalogWeightByAsync(Guid? id)
     {
       try
       {
@@ -221,7 +221,7 @@ namespace iSoft.Database.Repositorys
       }
     }
 
-    public async Task<bool> UpdateData(RecordWeight record,long idDelivery)
+    public async Task<bool> UpdateData(RecordWeight record, Guid idDelivery)
     {
       try
       {

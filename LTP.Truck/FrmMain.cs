@@ -1,14 +1,9 @@
 using ApiSyncData;
 using HelperManager;
 using iSoft.Database.Models;
-using iSoft.Database.Service;
-using LaborTrackPro.Controls;
-using LTP.Truck.Controls;
 using LTP.Truck.Custom;
 using LTP.Truck.Forms;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using static Common.EnumData;
 using static LTP.Truck.EnumData;
 using AppCore = LTP.Truck.Controls.AppCore;
 
@@ -152,15 +147,16 @@ namespace LTP.Truck
 
     // Khai báo trong class FrmMain
     private readonly CancellationTokenSource _syncCts = new();
+    private readonly CancellationTokenSource _syncCts02 = new();
     private Task? _syncTask;
+    private Task? _localDataSyncTask;
 
-    private ApiService _apiService = new ApiService();
     private void FrmMain_Load(object? sender, EventArgs e)
     {
       try
       {
-        //var rs = _apiService.User();
         _syncTask ??= PeriodicRunner.RunEvery5SecondsAsync(_syncCts.Token);
+        _localDataSyncTask ??= LocalDataSyncService.RunEvery5SecondsAsync(_syncCts02.Token);
         PeriodicRunner.EntityChanged += (sender, e) =>
         {
           if (e.EntityType == typeof(ProductGroup))

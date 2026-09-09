@@ -31,24 +31,24 @@
       tableLayoutPanel3 = new TableLayoutPanel();
       label1 = new Label();
       tableLayoutPanel1 = new TableLayoutPanel();
-      rjTextBox3 = new Common.Custom.RJTextBox();
-      rjTextBox2 = new Common.Custom.RJTextBox();
+      iconAutoConnect = new PictureBox();
+      txtTimeout = new Common.Custom.RJTextBox();
+      txtPort = new Common.Custom.RJTextBox();
       label3 = new Label();
       label2 = new Label();
       label5 = new Label();
       label4 = new Label();
       label6 = new Label();
-      rjTextBox1 = new Common.Custom.RJTextBox();
-      pictureBox1 = new PictureBox();
+      txtIP = new Common.Custom.RJTextBox();
+      iconSendReq = new PictureBox();
       tableLayoutPanel2 = new TableLayoutPanel();
       btnConfirm = new Common.Custom.RJButton();
       btnClose = new Common.Custom.RJButton();
-      pictureBox2 = new PictureBox();
       tableLayoutPanel3.SuspendLayout();
       tableLayoutPanel1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)iconAutoConnect).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)iconSendReq).BeginInit();
       tableLayoutPanel2.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
       SuspendLayout();
       // 
       // tableLayoutPanel3
@@ -69,7 +69,7 @@
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
-      tableLayoutPanel3.Size = new Size(537, 509);
+      tableLayoutPanel3.Size = new Size(534, 463);
       tableLayoutPanel3.TabIndex = 4;
       // 
       // label1
@@ -81,7 +81,7 @@
       label1.Location = new Point(0, 0);
       label1.Margin = new Padding(0);
       label1.Name = "label1";
-      label1.Size = new Size(537, 60);
+      label1.Size = new Size(534, 60);
       label1.TabIndex = 0;
       label1.Text = "Chọn chuẩn kết nối";
       label1.TextAlign = ContentAlignment.MiddleLeft;
@@ -92,16 +92,16 @@
       tableLayoutPanel1.ColumnCount = 2;
       tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel1.Controls.Add(pictureBox2, 1, 4);
-      tableLayoutPanel1.Controls.Add(rjTextBox3, 1, 2);
-      tableLayoutPanel1.Controls.Add(rjTextBox2, 1, 1);
+      tableLayoutPanel1.Controls.Add(iconAutoConnect, 1, 4);
+      tableLayoutPanel1.Controls.Add(txtTimeout, 1, 2);
+      tableLayoutPanel1.Controls.Add(txtPort, 1, 1);
       tableLayoutPanel1.Controls.Add(label3, 0, 1);
       tableLayoutPanel1.Controls.Add(label2, 0, 0);
       tableLayoutPanel1.Controls.Add(label5, 0, 3);
       tableLayoutPanel1.Controls.Add(label4, 0, 2);
       tableLayoutPanel1.Controls.Add(label6, 0, 4);
-      tableLayoutPanel1.Controls.Add(rjTextBox1, 1, 0);
-      tableLayoutPanel1.Controls.Add(pictureBox1, 1, 3);
+      tableLayoutPanel1.Controls.Add(txtIP, 1, 0);
+      tableLayoutPanel1.Controls.Add(iconSendReq, 1, 3);
       tableLayoutPanel1.Location = new Point(10, 60);
       tableLayoutPanel1.Margin = new Padding(10, 0, 10, 0);
       tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -111,54 +111,66 @@
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20.666666F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 19.333334F));
-      tableLayoutPanel1.Size = new Size(517, 300);
+      tableLayoutPanel1.Size = new Size(514, 300);
       tableLayoutPanel1.TabIndex = 3;
       // 
-      // rjTextBox3
+      // iconAutoConnect
       // 
-      rjTextBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox3.BackColor = SystemColors.Window;
-      rjTextBox3.BorderColor = Color.Black;
-      rjTextBox3.BorderFocusColor = Color.HotPink;
-      rjTextBox3.BorderRadius = 5;
-      rjTextBox3.BorderSize = 2;
-      rjTextBox3.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox3.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox3.Location = new Point(194, 130);
-      rjTextBox3.Margin = new Padding(4);
-      rjTextBox3.Multiline = false;
-      rjTextBox3.Name = "rjTextBox3";
-      rjTextBox3.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox3.PasswordChar = false;
-      rjTextBox3.PlaceholderColor = Color.DarkGray;
-      rjTextBox3.PlaceholderText = "";
-      rjTextBox3.Size = new Size(319, 40);
-      rjTextBox3.TabIndex = 10;
-      rjTextBox3.Texts = "";
-      rjTextBox3.UnderlinedStyle = false;
+      iconAutoConnect.Anchor = AnchorStyles.Left;
+      iconAutoConnect.Image = Properties.Resources.switch_off;
+      iconAutoConnect.Location = new Point(193, 246);
+      iconAutoConnect.Name = "iconAutoConnect";
+      iconAutoConnect.Size = new Size(104, 50);
+      iconAutoConnect.SizeMode = PictureBoxSizeMode.StretchImage;
+      iconAutoConnect.TabIndex = 12;
+      iconAutoConnect.TabStop = false;
+      iconAutoConnect.Click += iconAutoConnect_Click;
       // 
-      // rjTextBox2
+      // txtTimeout
       // 
-      rjTextBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox2.BackColor = SystemColors.Window;
-      rjTextBox2.BorderColor = Color.Black;
-      rjTextBox2.BorderFocusColor = Color.HotPink;
-      rjTextBox2.BorderRadius = 5;
-      rjTextBox2.BorderSize = 2;
-      rjTextBox2.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox2.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox2.Location = new Point(194, 70);
-      rjTextBox2.Margin = new Padding(4);
-      rjTextBox2.Multiline = false;
-      rjTextBox2.Name = "rjTextBox2";
-      rjTextBox2.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox2.PasswordChar = false;
-      rjTextBox2.PlaceholderColor = Color.DarkGray;
-      rjTextBox2.PlaceholderText = "";
-      rjTextBox2.Size = new Size(319, 40);
-      rjTextBox2.TabIndex = 9;
-      rjTextBox2.Texts = "";
-      rjTextBox2.UnderlinedStyle = false;
+      txtTimeout.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtTimeout.BackColor = SystemColors.Window;
+      txtTimeout.BorderColor = Color.Black;
+      txtTimeout.BorderFocusColor = Color.HotPink;
+      txtTimeout.BorderRadius = 5;
+      txtTimeout.BorderSize = 2;
+      txtTimeout.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtTimeout.ForeColor = Color.FromArgb(64, 64, 64);
+      txtTimeout.Location = new Point(194, 130);
+      txtTimeout.Margin = new Padding(4);
+      txtTimeout.Multiline = false;
+      txtTimeout.Name = "txtTimeout";
+      txtTimeout.Padding = new Padding(10, 7, 10, 7);
+      txtTimeout.PasswordChar = false;
+      txtTimeout.PlaceholderColor = Color.DarkGray;
+      txtTimeout.PlaceholderText = "";
+      txtTimeout.Size = new Size(316, 40);
+      txtTimeout.TabIndex = 10;
+      txtTimeout.Texts = "";
+      txtTimeout.UnderlinedStyle = false;
+      // 
+      // txtPort
+      // 
+      txtPort.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtPort.BackColor = SystemColors.Window;
+      txtPort.BorderColor = Color.Black;
+      txtPort.BorderFocusColor = Color.HotPink;
+      txtPort.BorderRadius = 5;
+      txtPort.BorderSize = 2;
+      txtPort.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtPort.ForeColor = Color.FromArgb(64, 64, 64);
+      txtPort.Location = new Point(194, 70);
+      txtPort.Margin = new Padding(4);
+      txtPort.Multiline = false;
+      txtPort.Name = "txtPort";
+      txtPort.Padding = new Padding(10, 7, 10, 7);
+      txtPort.PasswordChar = false;
+      txtPort.PlaceholderColor = Color.DarkGray;
+      txtPort.PlaceholderText = "";
+      txtPort.Size = new Size(316, 40);
+      txtPort.TabIndex = 9;
+      txtPort.Texts = "";
+      txtPort.UnderlinedStyle = false;
       // 
       // label3
       // 
@@ -230,37 +242,40 @@
       label6.Text = "Tự động kết nối:";
       label6.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // rjTextBox1
+      // txtIP
       // 
-      rjTextBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox1.BackColor = SystemColors.Window;
-      rjTextBox1.BorderColor = Color.Black;
-      rjTextBox1.BorderFocusColor = Color.HotPink;
-      rjTextBox1.BorderRadius = 5;
-      rjTextBox1.BorderSize = 2;
-      rjTextBox1.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      rjTextBox1.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox1.Location = new Point(194, 10);
-      rjTextBox1.Margin = new Padding(4);
-      rjTextBox1.Multiline = false;
-      rjTextBox1.Name = "rjTextBox1";
-      rjTextBox1.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox1.PasswordChar = false;
-      rjTextBox1.PlaceholderColor = Color.DarkGray;
-      rjTextBox1.PlaceholderText = "";
-      rjTextBox1.Size = new Size(319, 40);
-      rjTextBox1.TabIndex = 8;
-      rjTextBox1.Texts = "";
-      rjTextBox1.UnderlinedStyle = false;
+      txtIP.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtIP.BackColor = SystemColors.Window;
+      txtIP.BorderColor = Color.Black;
+      txtIP.BorderFocusColor = Color.HotPink;
+      txtIP.BorderRadius = 5;
+      txtIP.BorderSize = 2;
+      txtIP.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtIP.ForeColor = Color.FromArgb(64, 64, 64);
+      txtIP.Location = new Point(194, 10);
+      txtIP.Margin = new Padding(4);
+      txtIP.Multiline = false;
+      txtIP.Name = "txtIP";
+      txtIP.Padding = new Padding(10, 7, 10, 7);
+      txtIP.PasswordChar = false;
+      txtIP.PlaceholderColor = Color.DarkGray;
+      txtIP.PlaceholderText = "";
+      txtIP.Size = new Size(316, 40);
+      txtIP.TabIndex = 8;
+      txtIP.Texts = "";
+      txtIP.UnderlinedStyle = false;
       // 
-      // pictureBox1
+      // iconSendReq
       // 
-      pictureBox1.Anchor = AnchorStyles.Left;
-      pictureBox1.Location = new Point(193, 191);
-      pictureBox1.Name = "pictureBox1";
-      pictureBox1.Size = new Size(100, 40);
-      pictureBox1.TabIndex = 11;
-      pictureBox1.TabStop = false;
+      iconSendReq.Anchor = AnchorStyles.Left;
+      iconSendReq.Image = Properties.Resources.switch_off;
+      iconSendReq.Location = new Point(193, 186);
+      iconSendReq.Name = "iconSendReq";
+      iconSendReq.Size = new Size(104, 50);
+      iconSendReq.SizeMode = PictureBoxSizeMode.StretchImage;
+      iconSendReq.TabIndex = 11;
+      iconSendReq.TabStop = false;
+      iconSendReq.Click += iconSendReq_Click;
       // 
       // tableLayoutPanel2
       // 
@@ -271,12 +286,12 @@
       tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160F));
       tableLayoutPanel2.Controls.Add(btnConfirm, 1, 0);
       tableLayoutPanel2.Controls.Add(btnClose, 2, 0);
-      tableLayoutPanel2.Location = new Point(10, 439);
+      tableLayoutPanel2.Location = new Point(10, 393);
       tableLayoutPanel2.Margin = new Padding(10, 0, 10, 0);
       tableLayoutPanel2.Name = "tableLayoutPanel2";
       tableLayoutPanel2.RowCount = 1;
       tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel2.Size = new Size(517, 60);
+      tableLayoutPanel2.Size = new Size(514, 60);
       tableLayoutPanel2.TabIndex = 4;
       // 
       // btnConfirm
@@ -293,7 +308,7 @@
       btnConfirm.ForeColor = Color.White;
       btnConfirm.Image = Properties.Resources.icon_confirm;
       btnConfirm.ImageAlign = ContentAlignment.MiddleLeft;
-      btnConfirm.Location = new Point(200, 3);
+      btnConfirm.Location = new Point(197, 3);
       btnConfirm.Name = "btnConfirm";
       btnConfirm.Padding = new Padding(10, 0, 0, 0);
       btnConfirm.Size = new Size(154, 54);
@@ -301,6 +316,7 @@
       btnConfirm.Text = "       Xác nhận";
       btnConfirm.TextColor = Color.White;
       btnConfirm.UseVisualStyleBackColor = false;
+      btnConfirm.Click += btnConfirm_Click;
       // 
       // btnClose
       // 
@@ -316,7 +332,7 @@
       btnClose.ForeColor = Color.White;
       btnClose.Image = Properties.Resources.icon_close;
       btnClose.ImageAlign = ContentAlignment.MiddleLeft;
-      btnClose.Location = new Point(360, 3);
+      btnClose.Location = new Point(357, 3);
       btnClose.Name = "btnClose";
       btnClose.Padding = new Padding(10, 0, 0, 0);
       btnClose.Size = new Size(154, 54);
@@ -324,31 +340,24 @@
       btnClose.Text = "       Đóng";
       btnClose.TextColor = Color.White;
       btnClose.UseVisualStyleBackColor = false;
-      // 
-      // pictureBox2
-      // 
-      pictureBox2.Anchor = AnchorStyles.Left;
-      pictureBox2.Location = new Point(193, 251);
-      pictureBox2.Name = "pictureBox2";
-      pictureBox2.Size = new Size(100, 40);
-      pictureBox2.TabIndex = 12;
-      pictureBox2.TabStop = false;
+      btnClose.Click += btnClose_Click;
       // 
       // PopupSettingTcpClient
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(537, 509);
+      ClientSize = new Size(534, 463);
       ControlBox = false;
       Controls.Add(tableLayoutPanel3);
       Name = "PopupSettingTcpClient";
+      StartPosition = FormStartPosition.CenterParent;
       tableLayoutPanel3.ResumeLayout(false);
       tableLayoutPanel3.PerformLayout();
       tableLayoutPanel1.ResumeLayout(false);
       tableLayoutPanel1.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+      ((System.ComponentModel.ISupportInitialize)iconAutoConnect).EndInit();
+      ((System.ComponentModel.ISupportInitialize)iconSendReq).EndInit();
       tableLayoutPanel2.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
       ResumeLayout(false);
     }
 
@@ -365,10 +374,10 @@
     private Label label4;
     private Label label5;
     private Label label6;
-    private Custom.RJTextBox rjTextBox1;
-    private Custom.RJTextBox rjTextBox3;
-    private Custom.RJTextBox rjTextBox2;
-    private PictureBox pictureBox1;
-    private PictureBox pictureBox2;
+    private Custom.RJTextBox txtIP;
+    private Custom.RJTextBox txtTimeout;
+    private Custom.RJTextBox txtPort;
+    private PictureBox iconSendReq;
+    private PictureBox iconAutoConnect;
   }
 }

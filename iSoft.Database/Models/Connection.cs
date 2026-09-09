@@ -12,7 +12,7 @@ namespace iSoft.Database.Models
 
 
     #region Mapping
-    public long? StationId { get; set; }
+    public Guid? StationId { get; set; }
     public Station? Station { get; set; }
     #endregion
   }

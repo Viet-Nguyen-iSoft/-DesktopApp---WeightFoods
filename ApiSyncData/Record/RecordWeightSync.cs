@@ -9,6 +9,7 @@ namespace ApiSyncData.Record
 {
   public class RecordWeightSync
   {
+    public Guid Id { get; set; }
     public double Net { get; set; }
     public double Tare { get; set; }
     public Guid? StationId { get; set; }

@@ -13,7 +13,7 @@ namespace iSoft.Database.DbContexts
 {
   public class CommonDbContext : DbContext
   {
-    public virtual DbSet<Station>? Machines { get; set; }
+    public virtual DbSet<Station>? Stations { get; set; }
     public virtual DbSet<Connection>? Connections { get; set; }
     public virtual DbSet<AppConfig>? AppConfigs { get; set; }
     public virtual DbSet<LogAction>? LogActions { get; set; }

@@ -25,6 +25,7 @@ namespace ApiSyncData.Resp
   {
     public Guid? Id { get; set; }
     public string? Name { get; set; }
+    public string? SerialCode { get; set; }
     public string? Description { get; set; }
     public string? ProductGroupId { get; set; }
     public ItemProductGroup? ItemProductGroup { get; set; }

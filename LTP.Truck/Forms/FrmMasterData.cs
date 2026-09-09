@@ -1,20 +1,8 @@
 ﻿using iSoft.Database;
 using iSoft.Database.DTO;
-using iSoft.Database.Models;
-using LaborTrackPro.Helper;
 using LTP.Truck.Controls;
-using LTP.Truck.Custom;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static Common.EnumData;
 using static LTP.Truck.EnumData;
 
 namespace LTP.Truck.Forms
@@ -351,6 +339,7 @@ namespace LTP.Truck.Forms
           nameof(ProductDTO.No),
           nameof(ProductDTO.UpdatedAt),
           nameof(ProductDTO.Group),
+          nameof(ProductDTO.Code),
         };
         foreach (var columnName in autoSizeColumns)
         {

@@ -1,15 +1,4 @@
-﻿using HelperManager;
-using iSoft.Database.DbContexts;
-using iSoft.Database.Models;
-using LaborTrackPro.Communication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static HelperManager.EnumData;
-
-namespace LTP.Truck.Controls
+﻿namespace LTP.Truck.Controls
 {
   public partial class AppCore
   {
@@ -18,6 +7,6 @@ namespace LTP.Truck.Controls
       Application.Run(FrmMain.Instance);
     }
 
-    
+
   }
 }

@@ -48,9 +48,12 @@ namespace iSoft.Database.Repositorys
         throw new ArgumentNullException(nameof(recordTruck));
       }
 
+      // Mọi thay đổi local cần được đưa vào hàng đợi đồng bộ lại.
+      recordTruck.SyncFlag = false;
+
       await Context.Database.EnsureCreatedAsync();
       var records = Context.Set<RecordTruck>();
-      var existingRecord = recordTruck.Id == 0
+      var existingRecord = recordTruck.Id == Guid.Empty
         ? null
         : await records.FindAsync(recordTruck.Id);
 

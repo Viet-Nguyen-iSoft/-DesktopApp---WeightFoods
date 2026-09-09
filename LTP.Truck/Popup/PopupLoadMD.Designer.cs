@@ -1,4 +1,6 @@
-﻿namespace LTP.Truck.Popup
+﻿using LTP.Truck.Custom;
+
+namespace LTP.Truck.Popup
 {
   partial class PopupLoadMD
   {
@@ -36,7 +38,7 @@
       tableLayoutPanel10 = new TableLayoutPanel();
       label4 = new Label();
       txtSearch = new LTP.Truck.Custom.RJTextBox();
-      btnSearch = new LaborTrackPro.Custom.RJButton();
+      btnSearch = new RJButton();
       lbTitle = new Label();
       tableLayoutPanel2 = new TableLayoutPanel();
       btnConfirm = new Common.Custom.RJButton();
@@ -298,6 +300,6 @@
     private TableLayoutPanel tableLayoutPanel10;
     private Label label4;
     private Custom.RJTextBox txtSearch;
-    private LaborTrackPro.Custom.RJButton btnSearch;
+    private RJButton btnSearch;
   }
 }

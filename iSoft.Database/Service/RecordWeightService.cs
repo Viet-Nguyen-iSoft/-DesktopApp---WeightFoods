@@ -21,5 +21,12 @@ namespace iSoft.Database.Service
       var repository = new RecordWeightRepository(context);
       return await repository.AddOrUpdateAsync(recordWeight).ConfigureAwait(false);
     }
+
+    public async Task<double> SumNetByRecordTruckIdAsync(Guid recordTruckId)
+    {
+      await using var context = new PostgresDbContext();
+      var repository = new RecordWeightRepository(context);
+      return await repository.SumNetByRecordTruckIdAsync(recordTruckId).ConfigureAwait(false);
+    }
   }
 }

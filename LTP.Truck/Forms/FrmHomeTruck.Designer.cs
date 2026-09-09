@@ -1,3 +1,7 @@
+
+
+using LTP.Truck.Custom;
+
 namespace LTP.Truck.Forms
 {
   partial class FrmHomeTruck
@@ -44,43 +48,43 @@ namespace LTP.Truck.Forms
       label5 = new Label();
       label1 = new Label();
       tableLayoutPanel6 = new TableLayoutPanel();
-      btnCreate = new LaborTrackPro.Custom.RJButton();
-      btnZero = new LaborTrackPro.Custom.RJButton();
-      btnBack = new LaborTrackPro.Custom.RJButton();
-      btnPrint = new LaborTrackPro.Custom.RJButton();
-      btnWeightTime02 = new LaborTrackPro.Custom.RJButton();
-      btnWeightTime01 = new LaborTrackPro.Custom.RJButton();
-      btnTriggerWeight = new LaborTrackPro.Custom.RJButton();
+      btnCreate = new RJButton();
+      btnZero = new RJButton();
+      btnBack = new RJButton();
+      btnPrint = new RJButton();
+      btnWeightTime02 = new RJButton();
+      btnWeightTime01 = new RJButton();
+      btnTriggerWeight = new RJButton();
       tableLayoutPanel4 = new TableLayoutPanel();
       tableLayoutPanel8 = new TableLayoutPanel();
       label20 = new Label();
-      txtNameDriver = new LTP.Truck.Custom.RJTextBox();
-      txtNoLabel = new LTP.Truck.Custom.RJTextBox();
-      txtDocument = new LTP.Truck.Custom.RJTextBox();
+      txtNameDriver = new RJTextBox();
+      txtNoLabel = new RJTextBox();
+      txtDocument = new RJTextBox();
       label19 = new Label();
       tableLayoutPanel15 = new TableLayoutPanel();
-      txtWareHouse = new LTP.Truck.Custom.RJTextBox();
-      btnLoadWarehouse = new LaborTrackPro.Custom.RJButton();
+      txtWareHouse = new RJTextBox();
+      btnLoadWarehouse = new RJButton();
       tableLayoutPanel14 = new TableLayoutPanel();
-      txtTypeGoods = new LTP.Truck.Custom.RJTextBox();
-      btnLoadTypeGoods = new LaborTrackPro.Custom.RJButton();
+      txtTypeGoods = new RJTextBox();
+      btnLoadTypeGoods = new RJButton();
       tableLayoutPanel13 = new TableLayoutPanel();
-      txtClient = new LTP.Truck.Custom.RJTextBox();
-      btnLoadClient = new LaborTrackPro.Custom.RJButton();
+      txtClient = new RJTextBox();
+      btnLoadClient = new RJButton();
       label6 = new Label();
       label8 = new Label();
       label9 = new Label();
       label11 = new Label();
       tableLayoutPanel11 = new TableLayoutPanel();
-      txtTypeWeight = new LTP.Truck.Custom.RJTextBox();
+      txtTypeWeight = new RJTextBox();
       label12 = new Label();
-      txtNoLabelAuto = new LTP.Truck.Custom.RJTextBox();
+      txtNoLabelAuto = new RJTextBox();
       label16 = new Label();
       label7 = new Label();
       tableLayoutPanel16 = new TableLayoutPanel();
-      txtLicensePlate = new LTP.Truck.Custom.RJTextBox();
+      txtLicensePlate = new RJTextBox();
       label13 = new Label();
-      txtIdCard = new LTP.Truck.Custom.RJTextBox();
+      txtIdCard = new RJTextBox();
       label10 = new Label();
       tableLayoutPanel9 = new TableLayoutPanel();
       label14 = new Label();
@@ -91,14 +95,14 @@ namespace LTP.Truck.Forms
       dgv = new DataGridView();
       tableLayoutPanel10 = new TableLayoutPanel();
       label4 = new Label();
-      txtSearchKey = new LTP.Truck.Custom.RJTextBox();
+      txtSearchKey = new RJTextBox();
       dtpFrom = new DateTimePicker();
       label17 = new Label();
       dtpTo = new DateTimePicker();
       label18 = new Label();
       label21 = new Label();
       cbbStatus = new ComboBox();
-      btnSearchHistorical = new LaborTrackPro.Custom.RJButton();
+      btnSearchHistorical = new RJButton();
       label27 = new Label();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
@@ -1491,13 +1495,13 @@ namespace LTP.Truck.Forms
     private Custom.RJTextBox txtNoLabel;
     private TableLayoutPanel tableLayoutPanel14;
     private Custom.RJTextBox txtTypeGoods;
-    private LaborTrackPro.Custom.RJButton btnLoadTypeGoods;
+    private RJButton btnLoadTypeGoods;
     private TableLayoutPanel tableLayoutPanel13;
     private Custom.RJTextBox txtClient;
-    private LaborTrackPro.Custom.RJButton btnLoadClient;
+    private RJButton btnLoadClient;
     private TableLayoutPanel tableLayoutPanel15;
     private Custom.RJTextBox txtWareHouse;
-    private LaborTrackPro.Custom.RJButton btnLoadWarehouse;
+    private RJButton btnLoadWarehouse;
     private TableLayoutPanel tableLayoutPanel16;
     private Custom.RJTextBox txtLicensePlate;
     private Label label13;
@@ -1506,12 +1510,12 @@ namespace LTP.Truck.Forms
     private Label label19;
     private Custom.RJTextBox txtDocument;
     private Custom.RJTextBox txtTypeWeight;
-    private LaborTrackPro.Custom.RJButton btnZero;
-    private LaborTrackPro.Custom.RJButton btnBack;
-    private LaborTrackPro.Custom.RJButton btnPrint;
-    private LaborTrackPro.Custom.RJButton btnWeightTime02;
-    private LaborTrackPro.Custom.RJButton btnWeightTime01;
-    private LaborTrackPro.Custom.RJButton btnTriggerWeight;
+    private RJButton btnZero;
+    private RJButton btnBack;
+    private RJButton btnPrint;
+    private RJButton btnWeightTime02;
+    private RJButton btnWeightTime01;
+    private RJButton btnTriggerWeight;
     private TableLayoutPanel tableLayoutPanel7;
     private Label label27;
     private TableLayoutPanel tableLayoutPanel10;
@@ -1523,14 +1527,14 @@ namespace LTP.Truck.Forms
     private Label label18;
     private Label label21;
     private ComboBox cbbStatus;
-    private LaborTrackPro.Custom.RJButton btnSearchHistorical;
+    private RJButton btnSearchHistorical;
     private TableLayoutPanel tableLayoutPanel12;
     private TableLayoutPanel tableLayoutPanel17;
     private Label lbWeightTrigger;
     private Label label2;
     private TableLayoutPanel tableLayoutPanel18;
     private DataGridView dgv;
-    private LaborTrackPro.Custom.RJButton btnCreate;
+    private RJButton btnCreate;
     private Label label20;
   }
 }

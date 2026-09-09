@@ -24,19 +24,23 @@ namespace iSoft.Database.Models
     public string? IdCard { get; set; }
     public string? LicensePlate { get; set; }
     public string? Document { get; set; }
+    public string? ReasonDelete { get; set; }
 
     #region Mapping
-    public long? ClientId { get; set; }
+    public Guid? ClientId { get; set; }
     public Client? Client { get; set; }
 
-    public long? TypeGoodsId { get; set; }
+    public Guid? TypeGoodsId { get; set; }
     public TypeGoods? TypeGoods { get; set; }
 
-    public long? WarehouseId { get; set; }
+    public Guid? WarehouseId { get; set; }
     public Warehouse? Warehouse { get; set; }
 
-    public long? EmployeeId { get; set; }
+    public Guid? EmployeeId { get; set; }
     public Employee? Employee { get; set; }
+
+    public Guid? StationId { get; set; }
+    public Station? Station { get; set; }
 
 
     public ICollection<RecordWeight>? RecordWeights { get; set; }

@@ -1,9 +1,7 @@
 ﻿using HelperManager;
 using iSoft.Database.DbContexts;
 using iSoft.Database.Models;
-using LaborTrackPro.Communication;
 using LTP.Truck.Controls;
-using static HelperManager.EnumData;
 
 namespace LTP.Truck
 {

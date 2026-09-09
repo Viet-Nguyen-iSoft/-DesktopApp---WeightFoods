@@ -1,4 +1,6 @@
-﻿namespace LTP.Truck.Forms
+﻿using LTP.Truck.Custom;
+
+namespace LTP.Truck.Forms
 {
   partial class FrmOperation
   {
@@ -37,7 +39,7 @@
       flowLayoutPanel1 = new FlowLayoutPanel();
       btnHomeTruck = new LTP.Truck.Custom.RJButton();
       btnHomeGoods = new LTP.Truck.Custom.RJButton();
-      btnSetting = new LaborTrackPro.Custom.RJButton();
+      btnSetting = new RJButton();
       btnMasterData = new LTP.Truck.Custom.RJButton();
       btnClient = new LTP.Truck.Custom.RJButton();
       btnTypeGoods = new LTP.Truck.Custom.RJButton();
@@ -592,7 +594,7 @@
     private Panel panelMain;
     private Custom.RJButton btnHomeTruck;
     private Custom.RJButton btnHomeGoods;
-    private LaborTrackPro.Custom.RJButton btnSetting;
+    private RJButton btnSetting;
     private Custom.RJButton btnMasterData;
     private Custom.RJButton btnClient;
     private Custom.RJButton btnTypeGoods;

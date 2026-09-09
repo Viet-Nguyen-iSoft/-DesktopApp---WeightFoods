@@ -35,7 +35,7 @@ namespace ApiSyncData
 
     public static Task<MasterDataChangedEventArgs?> SyncProductsAsync(ProductAPI response, CancellationToken token = default)
     {
-      var groups = new Dictionary<Guid, long>();
+      var groups = new Dictionary<Guid, Guid>();
       return SyncAsync<ListDatumProduct, Product>(response.Data?.ListData, response.Data?.TotalRecord,
         (s, l) =>
         {
@@ -48,7 +48,7 @@ namespace ApiSyncData
               throw new InvalidOperationException($"Product {s.Id}: thông tin nhóm không nhất quán.");
             groupId = parsed;
           }
-          long? localGroupId = null;
+          Guid? localGroupId = null;
           if (groupId.HasValue)
           {
             if (!groups.TryGetValue(groupId.Value, out var id))
@@ -56,6 +56,7 @@ namespace ApiSyncData
             localGroupId = id;
           }
           l.Name = s.Name;
+          l.Code = s.SerialCode;
           l.Description = s.Description;
           l.ProductGroupId = localGroupId;
         }, token,

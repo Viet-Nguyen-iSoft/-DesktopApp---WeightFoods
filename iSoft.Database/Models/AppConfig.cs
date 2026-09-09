@@ -11,7 +11,7 @@ namespace iSoft.Database.Models
   {
     public string? IpServer { get; set; }
     public int? PortServer { get; set; }
-    public long? MachineId { get; set; }
+    public Guid? MachineId { get; set; }
     public string? Version { get; set; }
 
     public string? Key { get; set; }

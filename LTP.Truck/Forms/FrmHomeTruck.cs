@@ -15,12 +15,25 @@ namespace LTP.Truck.Forms
 {
   public partial class FrmHomeTruck : Form
   {
+    private readonly ToolTip _deleteReasonToolTip = new()
+    {
+      OwnerDraw = true,
+      ShowAlways = true
+    };
+    private readonly Font _deleteReasonToolTipFont = new("Segoe UI", 16F);
+    private string _deleteReasonToolTipText = string.Empty;
+
     public FrmHomeTruck()
     {
       InitializeComponent();
       CustomUI();
       this.Load += FrmHome_Load;
       this.Shown += FrmHomeTruck_Shown;
+      this.Disposed += (_, _) =>
+      {
+        _deleteReasonToolTip.Dispose();
+        _deleteReasonToolTipFont.Dispose();
+      };
     }
 
     #region Instance
@@ -70,6 +83,7 @@ namespace LTP.Truck.Forms
       dgv.RowTemplate.Height = 60;
       dgv.BorderStyle = BorderStyle.None;
       dgv.MultiSelect = false;
+      dgv.ShowCellToolTips = false;
       dgv.DefaultCellStyle.SelectionBackColor = dgv.DefaultCellStyle.BackColor;
       dgv.DefaultCellStyle.SelectionForeColor = dgv.DefaultCellStyle.ForeColor;
       dgv.ColumnHeadersDefaultCellStyle.SelectionBackColor = dgv.ColumnHeadersDefaultCellStyle.BackColor;
@@ -78,14 +92,23 @@ namespace LTP.Truck.Forms
       dgv.RowHeadersDefaultCellStyle.SelectionForeColor = dgv.RowHeadersDefaultCellStyle.ForeColor;
       dgv.CellPainting += dgv_CellPainting;
       dgv.CellContentClick += dgv_CellContentClick;
+      dgv.CellMouseEnter += dgv_CellMouseEnter;
+      dgv.CellMouseLeave += (_, _) => _deleteReasonToolTip.Hide(dgv);
+      _deleteReasonToolTip.Popup += DeleteReasonToolTip_Popup;
+      _deleteReasonToolTip.Draw += DeleteReasonToolTip_Draw;
     }
 
     private void FrmHome_Load(object? sender, EventArgs e)
     {
       cbbStatus.SelectedIndex = 1;
-
+      cbbStatus.SelectedIndexChanged += CbbStatus_SelectedIndexChanged;
       AppCore.Ins.OnSendDataWeightTruck += Ins_OnSendDataWeightTruck;
       CheckShowStatusButton(_recordTruck);
+    }
+
+    private async void CbbStatus_SelectedIndexChanged(object? sender, EventArgs e)
+    {
+      await LoadHistorical();
     }
 
     private async void FrmHomeTruck_Shown(object? sender, EventArgs e)
@@ -192,6 +215,7 @@ namespace LTP.Truck.Forms
 
     private RecordTruck _recordTruck { get; set; } = new RecordTruck();
     private MessageDataOutput _msgDataWeight { get; set; } = new MessageDataOutput();
+    private int _weightGoodsLoadVersion;
     private void btnTriggerWeight_Click(object sender, EventArgs e)
     {
       if (_msgDataWeight.ValueWeight <= 0)
@@ -235,10 +259,12 @@ namespace LTP.Truck.Forms
       _recordTruck.LicensePlate = txtLicensePlate.Texts;
       _recordTruck.IdCard = txtIdCard.Texts;
       _recordTruck.Document = txtDocument.Texts;
+      _recordTruck.StationId = AppCore.Ins._station?.Id;
       _recordTruck.CreatedAt = DateTime.UtcNow;
       _recordTruck.UpdatedAt = DateTime.UtcNow;
 
       await AppCore.Ins._recordTruckService.AddOrUpdateAsync(_recordTruck);
+      await LoadHistorical();
     }
 
     private async void btnWeightTime02_Click(object sender, EventArgs e)
@@ -262,9 +288,11 @@ namespace LTP.Truck.Forms
       _recordTruck.LicensePlate = txtLicensePlate.Texts;
       _recordTruck.IdCard = txtIdCard.Texts;
       _recordTruck.Document = txtDocument.Texts;
+      _recordTruck.StationId = AppCore.Ins._station?.Id;
       _recordTruck.UpdatedAt = DateTime.UtcNow;
 
       await AppCore.Ins._recordTruckService.AddOrUpdateAsync(_recordTruck);
+      await LoadHistorical();
     }
 
     private void btnBack_Click(object sender, EventArgs e)
@@ -341,7 +369,7 @@ namespace LTP.Truck.Forms
           break;
       }
 
-      ucItemWeightGoods.Value = (recordTruck.NetTime02 - recordTruck.NetTime01).ToString("F3");
+      _ = LoadWeightGoodsAsync(recordTruck.Id);
       lbWeightTrigger.Text = recordTruck.NetTimeTemp.ToString("F3");
     }
 
@@ -403,7 +431,7 @@ namespace LTP.Truck.Forms
       }
 
       double valueGoods = (recordTruck.NetTime02 - recordTruck.NetTime01);
-      ucItemWeightGoods.Value = valueGoods.ToString("F3");
+      _ = LoadWeightGoodsAsync(recordTruck.Id);
       lbWeightTrigger.Text = recordTruck.NetTimeTemp.ToString("F3");
 
       if (valueGoods>0 && recordTruck.NetTime01> 0 && recordTruck.NetTime02>0)
@@ -432,6 +460,37 @@ namespace LTP.Truck.Forms
       txtClient.Texts = recordTruck?.Client?.Name ?? string.Empty;
       txtWareHouse.Texts = recordTruck?.Warehouse?.Name ?? string.Empty;
       txtTypeGoods.Texts = recordTruck?.TypeGoods?.Name ?? string.Empty;
+    }
+
+    private async Task LoadWeightGoodsAsync(Guid recordTruckId)
+    {
+      var loadVersion = ++_weightGoodsLoadVersion;
+
+      try
+      {
+        var totalNet = recordTruckId != Guid.Empty
+          ? await AppCore.Ins._recordWeightService.SumNetByRecordTruckIdAsync(recordTruckId)
+          : 0.0;
+
+        if (IsDisposed || Disposing || loadVersion != _weightGoodsLoadVersion)
+          return;
+
+        if (InvokeRequired)
+        {
+          BeginInvoke(new Action(() =>
+          {
+            if (loadVersion == _weightGoodsLoadVersion)
+              ucItemWeightGoods.Value = totalNet.ToString("F3");
+          }));
+          return;
+        }
+
+        ucItemWeightGoods.Value = totalNet.ToString("F3");
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+      }
     }
 
 
@@ -486,7 +545,8 @@ namespace LTP.Truck.Forms
       var statusIndex = cbbStatus.SelectedIndex;
       var searchKey = txtSearchKey.Texts.Trim();
 
-      var rs = await AppCore.Ins._recordTruckService.GetAllAsync();
+      // Hiển thị cả bản ghi đã xóa để người dùng có thể phục hồi.
+      var rs = await AppCore.Ins._recordTruckService.GetAllAsync(true);
       var filtered = rs.Where(record =>
       {
         // Npgsql legacy timestamp mode returns local DateTime values.
@@ -519,7 +579,7 @@ namespace LTP.Truck.Forms
       SetDgvHistorical(dto);
     }
 
-    private void dgv_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+    private async void dgv_CellContentClick(object? sender, DataGridViewCellEventArgs e)
     {
       if (e.RowIndex < 0 || e.ColumnIndex < 0)
         return;
@@ -532,6 +592,44 @@ namespace LTP.Truck.Forms
         case "btnDetail":
           btnDetail_Click(recordTruckDto);
           break;
+        case "btnDelete":
+          await ToggleDeletedFlagAsync(recordTruckDto);
+          break;
+      }
+    }
+
+    private async Task ToggleDeletedFlagAsync(RecordTruckDTO recordTruckDto)
+    {
+      if (recordTruckDto.RecordTruck is not RecordTruck recordTruck)
+        return;
+
+      try
+      {
+        if (!recordTruck.DeletedFlag)
+        {
+          using var inputReason = new PopupInputReason();
+          if (inputReason.ShowDialog(this) != DialogResult.OK)
+            return;
+          recordTruck.ReasonDelete = inputReason.Reason;
+          recordTruck.DeletedFlag = true;
+        }
+        else
+        {
+          recordTruck.DeletedFlag = false;
+        }
+
+        recordTruck.UpdatedAt = DateTime.UtcNow;
+        await AppCore.Ins._recordTruckService.AddOrUpdateAsync(recordTruck);
+        await LoadHistorical();
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+        using var popup = new PopupConfirm(
+          "Không thể cập nhật trạng thái bản ghi. Vui lòng thử lại!",
+          EnumTypeMsg.MessageManualClose,
+          EnumImageMsg.Warning);
+        popup.ShowDialog(this);
       }
     }
 
@@ -563,7 +661,38 @@ namespace LTP.Truck.Forms
         });
       }
 
-      dgv.Columns["btnDetail"].DisplayIndex = dgv.Columns.Count - 1;
+      if (!dgv.Columns.Contains("btnDelete"))
+      {
+        dgv.Columns.Add(new DataGridViewButtonColumn
+        {
+          Name = "btnDelete",
+          HeaderText = "",
+          UseColumnTextForButtonValue = false,
+          AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+          Width = 120,
+          Resizable = DataGridViewTriState.False,
+          SortMode = DataGridViewColumnSortMode.NotSortable,
+        });
+      }
+
+      dgv.Columns["btnDetail"].DisplayIndex = dgv.Columns.Count - 2;
+      dgv.Columns["btnDelete"].DisplayIndex = dgv.Columns.Count - 1;
+
+      foreach (DataGridViewRow row in dgv.Rows)
+      {
+        if (row.DataBoundItem is RecordTruckDTO item && item.RecordTruck != null)
+        {
+          var isDeleted = item.RecordTruck.DeletedFlag;
+          row.Cells["btnDelete"].Value = isDeleted
+            ? "Phục hồi"
+            : "Xóa";
+          var rowBackColor = isDeleted
+            ? Color.Tomato
+            : dgv.DefaultCellStyle.BackColor;
+          row.DefaultCellStyle.BackColor = rowBackColor;
+          row.DefaultCellStyle.SelectionBackColor = rowBackColor;
+        }
+      }
 
       var hiddenColumns = new[]
       {
@@ -628,6 +757,56 @@ namespace LTP.Truck.Forms
       }
     }
 
+    private void dgv_CellMouseEnter(object? sender, DataGridViewCellEventArgs e)
+    {
+      _deleteReasonToolTip.Hide(dgv);
+      _deleteReasonToolTipText = string.Empty;
+
+      if (e.RowIndex < 0 || e.ColumnIndex < 0 ||
+        dgv.Columns[e.ColumnIndex].Name != "btnDelete" ||
+        dgv.Rows[e.RowIndex].DataBoundItem is not RecordTruckDTO item ||
+        item.RecordTruck?.DeletedFlag != true ||
+        string.IsNullOrWhiteSpace(item.RecordTruck.ReasonDelete))
+      {
+        return;
+      }
+
+      var cellBounds = dgv.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+      _deleteReasonToolTipText = $"Lý do xóa: {item.RecordTruck.ReasonDelete}";
+      _deleteReasonToolTip.Show(
+        _deleteReasonToolTipText,
+        dgv,
+        cellBounds.Left,
+        cellBounds.Bottom,
+        10000);
+    }
+
+    private void DeleteReasonToolTip_Popup(object? sender, PopupEventArgs e)
+    {
+      if (string.IsNullOrEmpty(_deleteReasonToolTipText))
+        return;
+
+      var textSize = TextRenderer.MeasureText(
+        _deleteReasonToolTipText,
+        _deleteReasonToolTipFont,
+        new Size(600, 0),
+        TextFormatFlags.WordBreak);
+      e.ToolTipSize = new Size(textSize.Width + 24, textSize.Height + 16);
+    }
+
+    private void DeleteReasonToolTip_Draw(object? sender, DrawToolTipEventArgs e)
+    {
+      e.Graphics.FillRectangle(Brushes.LightYellow, e.Bounds);
+      e.DrawBorder();
+      TextRenderer.DrawText(
+        e.Graphics,
+        e.ToolTipText,
+        _deleteReasonToolTipFont,
+        Rectangle.Inflate(e.Bounds, -12, -8),
+        Color.Black,
+        TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.WordBreak);
+    }
+
     private void btnDetail_Click(RecordTruckDTO recordTruckDto)
     {
       if (recordTruckDto != null)
@@ -663,7 +842,13 @@ namespace LTP.Truck.Forms
 
       e.PaintBackground(e.CellBounds, true);
 
-      switch (itemMaterial.EnumTypeDataTruck)
+      if (itemMaterial.RecordTruck?.DeletedFlag == true)
+      {
+        borderColor = Color.DarkRed;
+        backColor = Color.Tomato;
+        textColor = Color.White;
+      }
+      else switch (itemMaterial.EnumTypeDataTruck)
       {
         case EnumTypeDataTruck.WeightedTime01:
         case EnumTypeDataTruck.DoneTime01:

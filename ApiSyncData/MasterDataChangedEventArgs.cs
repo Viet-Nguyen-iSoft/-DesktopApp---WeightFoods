@@ -4,9 +4,9 @@ namespace ApiSyncData
   {
     public MasterDataChangedEventArgs(
       Type entityType,
-      IReadOnlyList<long> addedIds,
-      IReadOnlyList<long> updatedIds,
-      IReadOnlyList<long> deletedIds,
+      IReadOnlyList<Guid> addedIds,
+      IReadOnlyList<Guid> updatedIds,
+      IReadOnlyList<Guid> deletedIds,
       int affectedRows)
     {
       EntityType = entityType;
@@ -17,9 +17,9 @@ namespace ApiSyncData
     }
 
     public Type EntityType { get; }
-    public IReadOnlyList<long> AddedIds { get; }
-    public IReadOnlyList<long> UpdatedIds { get; }
-    public IReadOnlyList<long> DeletedIds { get; }
+    public IReadOnlyList<Guid> AddedIds { get; }
+    public IReadOnlyList<Guid> UpdatedIds { get; }
+    public IReadOnlyList<Guid> DeletedIds { get; }
     public int AffectedRows { get; }
   }
 }
