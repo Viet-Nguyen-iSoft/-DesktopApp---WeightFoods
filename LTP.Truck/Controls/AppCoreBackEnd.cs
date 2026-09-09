@@ -179,7 +179,7 @@ namespace LTP.Truck.Controls
               {
                 e.Graphics.DrawImage(
                     qrBitmap,
-                    new Rectangle(startX, startY + 4 * offsetY, 20, 20)
+                    new Rectangle(startX, startY + 4 * offsetY, 19, 19)
                 );
               }
             }
@@ -209,7 +209,7 @@ namespace LTP.Truck.Controls
           }
 
           e.Graphics.DrawString("Loại Tare :", fontTilte, brush, new PointF(startX, startY + offsetY * i));
-          e.Graphics.DrawString(dTOPrintLabel.TypeTare, fontValue, brush, new PointF(startX + 28, startY + offsetY * i));
+          e.Graphics.DrawString(dTOPrintLabel.TypeTare, fontValue, brush, new PointF(startX + 20, startY + offsetY * i));
 
           i++;
 

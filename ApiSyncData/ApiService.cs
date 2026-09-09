@@ -300,7 +300,7 @@ namespace ApiSyncData
         string apiKey = Environment.GetEnvironmentVariable("API_KEY");
 
         var apiUrl =
-          $"{baseAPI.TrimEnd('/')}/v1/User/get-list-simplify?page=1&pageSize=20&searchStr=";
+          $"{baseAPI.TrimEnd('/')}/v1/User/get-list-simplify?page=1&pageSize=10000&searchStr=";
         using var httpClient = new HttpClient();
 
         // Giống cấu hình Authorization trong Postman:

@@ -25,10 +25,8 @@ namespace iSoft.Database.DbContexts
     public virtual DbSet<Client>? Clients { get; set; }
     public virtual DbSet<RecordTruck>? RecordTrucks { get; set; }
     public virtual DbSet<RecordWeight>? RecordWeights { get; set; }
-    
+    public virtual DbSet<Employee>? Employee { get; set; }
 
-
-    //public virtual DbSet<Employee>? Employees { get; set; }
     //public virtual DbSet<Department>? Departments { get; set; }
 
 

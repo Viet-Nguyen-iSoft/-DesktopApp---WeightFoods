@@ -18,9 +18,12 @@ namespace ApiSyncData.Resp
     public List<ListDatumUser>? ListData { get; set; }
   }
 
-  public class ListDatumUser
+  public class ListDatumUser : IServerRecord
   {
     public Guid? Id { get; set; }
+    public DateTime? CreatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
+    public bool? IsDelete { get; set; }
     public string? DisplayName { get; set; }
     public string? Username { get; set; }
     public string? Password { get; set; }
