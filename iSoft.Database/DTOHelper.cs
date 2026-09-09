@@ -83,7 +83,6 @@ namespace iSoft.Database
           CategoryTare = record.CategoryTare?.Name,
           Net = record.Net.ToString("F3"),
           Tare = record.Tare.ToString("F3"),
-          Gross = (record.Net + record.Tare).ToString("F3")
         })
         .ToList();
     }

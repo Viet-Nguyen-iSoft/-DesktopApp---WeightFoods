@@ -8,6 +8,7 @@ namespace Common.Settings
   public partial class UcComm : UserControl
   {
     public event Action<Connection?> OnSendDataDetail;
+    public event Action<Connection?> OnSendDelete;
     public Connection? Connection { get; set; }
     public string CommName
     {
@@ -44,7 +45,14 @@ namespace Common.Settings
 
     private void btnDelete_Click(object sender, EventArgs e)
     {
+      PopupConfirm popupConfirm = new PopupConfirm("Xác nhận xóa kết nối cân !", EnumTypeMsg.Confirm, EnumImageMsg.Information);
+      popupConfirm.OnSendConfirm += PopupConfirm_OnSendConfirm;
+      popupConfirm.ShowDialog();
+    }
 
+    private void PopupConfirm_OnSendConfirm(object? sender, EnumResponsible e)
+    {
+      OnSendDelete?.Invoke(Connection);
     }
   }
 }

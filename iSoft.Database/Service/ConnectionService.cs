@@ -33,5 +33,11 @@ namespace iSoft.Database.Service
       var repository = new ConnectionRepository(context);
       return await repository.AddOrUpdateAsync(connection).ConfigureAwait(false);
     }
+    public async Task<Connection> DeleteAsync(Connection connection)
+    {
+      await using var context = new PostgresDbContext();
+      var repository = new ConnectionRepository(context);
+      return await repository.AddOrUpdateAsync(connection).ConfigureAwait(false);
+    }
   }
 }

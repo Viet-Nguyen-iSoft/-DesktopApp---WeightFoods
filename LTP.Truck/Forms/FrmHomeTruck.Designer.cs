@@ -103,6 +103,8 @@ namespace LTP.Truck.Forms
       label21 = new Label();
       cbbStatus = new ComboBox();
       btnSearchHistorical = new RJButton();
+      labelType = new Label();
+      cbbType = new ComboBox();
       label27 = new Label();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
@@ -1244,7 +1246,7 @@ namespace LTP.Truck.Forms
       // tableLayoutPanel10
       // 
       tableLayoutPanel10.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel10.ColumnCount = 12;
+      tableLayoutPanel10.ColumnCount = 15;
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
@@ -1256,10 +1258,10 @@ namespace LTP.Truck.Forms
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
       tableLayoutPanel10.Controls.Add(label4, 0, 0);
       tableLayoutPanel10.Controls.Add(txtSearchKey, 1, 0);
       tableLayoutPanel10.Controls.Add(dtpFrom, 4, 0);
@@ -1268,7 +1270,9 @@ namespace LTP.Truck.Forms
       tableLayoutPanel10.Controls.Add(label18, 5, 0);
       tableLayoutPanel10.Controls.Add(label21, 8, 0);
       tableLayoutPanel10.Controls.Add(cbbStatus, 9, 0);
-      tableLayoutPanel10.Controls.Add(btnSearchHistorical, 11, 0);
+      tableLayoutPanel10.Controls.Add(btnSearchHistorical, 14, 0);
+      tableLayoutPanel10.Controls.Add(labelType, 11, 0);
+      tableLayoutPanel10.Controls.Add(cbbType, 12, 0);
       tableLayoutPanel10.Location = new Point(0, 50);
       tableLayoutPanel10.Margin = new Padding(0);
       tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -1309,7 +1313,7 @@ namespace LTP.Truck.Forms
       txtSearchKey.PasswordChar = false;
       txtSearchKey.PlaceholderColor = Color.DarkGray;
       txtSearchKey.PlaceholderText = "";
-      txtSearchKey.Size = new Size(406, 40);
+      txtSearchKey.Size = new Size(107, 40);
       txtSearchKey.TabIndex = 18;
       txtSearchKey.Texts = "";
       txtSearchKey.UnderlinedStyle = false;
@@ -1320,7 +1324,7 @@ namespace LTP.Truck.Forms
       dtpFrom.CalendarFont = new Font("Roboto", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
       dtpFrom.Font = new Font("Roboto", 20.25F);
       dtpFrom.Format = DateTimePickerFormat.Short;
-      dtpFrom.Location = new Point(575, 10);
+      dtpFrom.Location = new Point(276, 10);
       dtpFrom.Name = "dtpFrom";
       dtpFrom.Size = new Size(174, 40);
       dtpFrom.TabIndex = 19;
@@ -1331,7 +1335,7 @@ namespace LTP.Truck.Forms
       label17.AutoSize = true;
       label17.BackColor = Color.Transparent;
       label17.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label17.Location = new Point(536, 0);
+      label17.Location = new Point(237, 0);
       label17.Margin = new Padding(0);
       label17.Name = "label17";
       label17.Size = new Size(36, 60);
@@ -1345,7 +1349,7 @@ namespace LTP.Truck.Forms
       dtpTo.CalendarFont = new Font("Roboto", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
       dtpTo.Font = new Font("Roboto", 20.25F);
       dtpTo.Format = DateTimePickerFormat.Short;
-      dtpTo.Location = new Point(803, 10);
+      dtpTo.Location = new Point(504, 10);
       dtpTo.Name = "dtpTo";
       dtpTo.Size = new Size(174, 40);
       dtpTo.TabIndex = 20;
@@ -1356,7 +1360,7 @@ namespace LTP.Truck.Forms
       label18.AutoSize = true;
       label18.BackColor = Color.Transparent;
       label18.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label18.Location = new Point(752, 0);
+      label18.Location = new Point(453, 0);
       label18.Margin = new Padding(0);
       label18.Name = "label18";
       label18.Size = new Size(48, 60);
@@ -1370,7 +1374,7 @@ namespace LTP.Truck.Forms
       label21.AutoSize = true;
       label21.BackColor = Color.Transparent;
       label21.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label21.Location = new Point(1000, 0);
+      label21.Location = new Point(701, 0);
       label21.Margin = new Padding(0);
       label21.Name = "label21";
       label21.Size = new Size(105, 60);
@@ -1385,7 +1389,7 @@ namespace LTP.Truck.Forms
       cbbStatus.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
       cbbStatus.FormattingEnabled = true;
       cbbStatus.Items.AddRange(new object[] { "Tất cả", "Cân lần 01", "Cân lần 02" });
-      cbbStatus.Location = new Point(1108, 11);
+      cbbStatus.Location = new Point(809, 11);
       cbbStatus.Name = "cbbStatus";
       cbbStatus.Size = new Size(194, 38);
       cbbStatus.TabIndex = 26;
@@ -1411,6 +1415,32 @@ namespace LTP.Truck.Forms
       btnSearchHistorical.TextColor = Color.White;
       btnSearchHistorical.UseVisualStyleBackColor = false;
       btnSearchHistorical.Click += btnSearchHistorical_Click;
+      // 
+      // labelType
+      // 
+      labelType.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      labelType.AutoSize = true;
+      labelType.BackColor = Color.Transparent;
+      labelType.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      labelType.Location = new Point(1026, 0);
+      labelType.Margin = new Padding(0);
+      labelType.Name = "labelType";
+      labelType.Size = new Size(79, 60);
+      labelType.TabIndex = 28;
+      labelType.Text = "Dữ liệu";
+      labelType.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // cbbType
+      // 
+      cbbType.Anchor = AnchorStyles.Left;
+      cbbType.DropDownStyle = ComboBoxStyle.DropDownList;
+      cbbType.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      cbbType.FormattingEnabled = true;
+      cbbType.Items.AddRange(new object[] { "Tất cả", "Dữ liệu hiện hữu", "Dữ liệu xóa" });
+      cbbType.Location = new Point(1108, 11);
+      cbbType.Name = "cbbType";
+      cbbType.Size = new Size(194, 38);
+      cbbType.TabIndex = 29;
       // 
       // label27
       // 
@@ -1536,5 +1566,7 @@ namespace LTP.Truck.Forms
     private DataGridView dgv;
     private RJButton btnCreate;
     private Label label20;
+    private Label labelType;
+    private ComboBox cbbType;
   }
 }

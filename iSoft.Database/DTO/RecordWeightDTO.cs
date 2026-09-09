@@ -16,7 +16,7 @@ namespace iSoft.Database.DTO
     [DisplayName("Biển số xe")]
     public string? LicensePlate { get; set; }
 
-    [DisplayName("Nhóm sản phẩm")]
+    [DisplayName("Nhóm SP")]
     public string? ProductGroup { get; set; }
 
     [DisplayName("Sản phẩm")]
@@ -25,13 +25,10 @@ namespace iSoft.Database.DTO
     [DisplayName("Loại bì")]
     public string? CategoryTare { get; set; }
 
-    [DisplayName("Khối lượng hàng (Kg)")]
+    [DisplayName("Net (Kg)")]
     public string? Net { get; set; }
 
-    [DisplayName("Khối lượng bì (Kg)")]
+    [DisplayName("Tare (Kg)")]
     public string? Tare { get; set; }
-
-    [DisplayName("Tổng khối lượng (Kg)")]
-    public string? Gross { get; set; }
   }
 }

@@ -102,6 +102,8 @@ namespace LTP.Truck.Forms
     {
       cbbStatus.SelectedIndex = 1;
       cbbStatus.SelectedIndexChanged += CbbStatus_SelectedIndexChanged;
+      cbbType.SelectedIndex = 0;
+      cbbType.SelectedIndexChanged += CbbStatus_SelectedIndexChanged;
       AppCore.Ins.OnSendDataWeightTruck += Ins_OnSendDataWeightTruck;
       CheckShowStatusButton(_recordTruck);
     }
@@ -543,6 +545,7 @@ namespace LTP.Truck.Forms
       var fromUtc = fromDate.ToUniversalTime();
       var toUtcExclusive = toDate.AddDays(1).ToUniversalTime();
       var statusIndex = cbbStatus.SelectedIndex;
+      var typeIndex = cbbType.SelectedIndex;
       var searchKey = txtSearchKey.Texts.Trim();
 
       // Hiển thị cả bản ghi đã xóa để người dùng có thể phục hồi.
@@ -554,6 +557,13 @@ namespace LTP.Truck.Forms
         var updatedAtUtc = record.UpdatedAt?.ToUniversalTime();
         return updatedAtUtc >= fromUtc && updatedAtUtc < toUtcExclusive;
       });
+
+      filtered = typeIndex switch
+      {
+        1 => filtered.Where(record => !record.DeletedFlag),
+        2 => filtered.Where(record => record.DeletedFlag),
+        _ => filtered
+      };
 
       filtered = statusIndex switch
       {

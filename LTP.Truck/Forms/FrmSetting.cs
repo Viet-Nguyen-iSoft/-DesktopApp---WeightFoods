@@ -2,20 +2,10 @@
 using HelperManager;
 using iSoft.Communication.JsonPayload;
 using iSoft.Database.Models;
-using iSoft.Database.Service;
 using LTP.Truck.Controls;
 using LTP.Truck.Custom;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static HelperManager.EnumData;
 
 namespace LTP.Truck.Forms
@@ -31,7 +21,7 @@ namespace LTP.Truck.Forms
       InitializeComponent();
       CustomUI();
       flowCommWeight.AutoScroll = true;
-      flowCommWeight.FlowDirection = FlowDirection.TopDown;
+      flowCommWeight.FlowDirection = FlowDirection.LeftToRight;
       flowCommWeight.WrapContents = false;
       this.Load += FrmSetting_Load;
     }
@@ -56,6 +46,14 @@ namespace LTP.Truck.Forms
       ElipseControl elipseControl02 = new ElipseControl();
       elipseControl02.CornerRadius = 20;
       elipseControl02.TargetControl = tableLayoutPanel3;
+
+      ElipseControl elipseControl03 = new ElipseControl();
+      elipseControl03.CornerRadius = 20;
+      elipseControl03.TargetControl = tableLayoutPanel4;
+
+      ElipseControl elipseControl04 = new ElipseControl();
+      elipseControl04.CornerRadius = 20;
+      elipseControl04.TargetControl = tableLayoutPanel7;
     }
 
     private async void FrmSetting_Load(object? sender, EventArgs e)
@@ -88,10 +86,11 @@ namespace LTP.Truck.Forms
               Information = GetConnectionInformation(connection),
               Tag = connection,
               Margin = new Padding(3),
-              Width = Math.Max(100, flowCommWeight.ClientSize.Width / 2 - 5),
+              Width = Math.Max(100, flowCommWeight.ClientSize.Width / 3 - 5),
               Height = 200
             };
             item.OnSendDataDetail += Item_OnSendDataDetail;
+            item.OnSendDelete += Item_OnSendDelete;
             flowCommWeight.Controls.Add(item);
           }
         }
@@ -106,6 +105,25 @@ namespace LTP.Truck.Forms
       }
     }
 
+    private async void Item_OnSendDelete(Connection? obj)
+    {
+      if (obj == null)
+        return;
+
+      try
+      {
+        obj.DeletedFlag = true;
+        obj.UpdatedAt = DateTime.UtcNow;
+        await AppCore.Ins._connectionService.AddOrUpdateAsync(obj);
+
+        await LoadWeightConnectionsAsync();
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+      }
+    }
+
     private void Item_OnSendDataDetail(Connection? obj)
     {
       if (obj?.EnumCommunicationType == EnumCommunicationType.TcpClient)
@@ -113,7 +131,7 @@ namespace LTP.Truck.Forms
         PopupSettingTcpClient popupSettingTcpClient = new PopupSettingTcpClient(obj);
         popupSettingTcpClient.OnSendConfirm += TcpClient_OnSendConfirm;
         popupSettingTcpClient.ShowDialog();
-      }  
+      }
     }
 
     private static string GetConnectionInformation(Connection connection)

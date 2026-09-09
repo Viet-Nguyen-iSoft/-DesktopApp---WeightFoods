@@ -65,11 +65,11 @@
       tableLayoutPanel3.Name = "tableLayoutPanel3";
       tableLayoutPanel3.RowCount = 5;
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 300F));
+      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 350F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
-      tableLayoutPanel3.Size = new Size(534, 463);
+      tableLayoutPanel3.Size = new Size(534, 505);
       tableLayoutPanel3.TabIndex = 4;
       // 
       // label1
@@ -111,16 +111,16 @@
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20.666666F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 19.333334F));
-      tableLayoutPanel1.Size = new Size(514, 300);
+      tableLayoutPanel1.Size = new Size(514, 350);
       tableLayoutPanel1.TabIndex = 3;
       // 
       // iconAutoConnect
       // 
       iconAutoConnect.Anchor = AnchorStyles.Left;
       iconAutoConnect.Image = Properties.Resources.switch_off;
-      iconAutoConnect.Location = new Point(193, 246);
+      iconAutoConnect.Location = new Point(193, 285);
       iconAutoConnect.Name = "iconAutoConnect";
-      iconAutoConnect.Size = new Size(104, 50);
+      iconAutoConnect.Size = new Size(104, 62);
       iconAutoConnect.SizeMode = PictureBoxSizeMode.StretchImage;
       iconAutoConnect.TabIndex = 12;
       iconAutoConnect.TabStop = false;
@@ -136,7 +136,7 @@
       txtTimeout.BorderSize = 2;
       txtTimeout.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
       txtTimeout.ForeColor = Color.FromArgb(64, 64, 64);
-      txtTimeout.Location = new Point(194, 130);
+      txtTimeout.Location = new Point(194, 155);
       txtTimeout.Margin = new Padding(4);
       txtTimeout.Multiline = false;
       txtTimeout.Name = "txtTimeout";
@@ -159,7 +159,7 @@
       txtPort.BorderSize = 2;
       txtPort.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
       txtPort.ForeColor = Color.FromArgb(64, 64, 64);
-      txtPort.Location = new Point(194, 70);
+      txtPort.Location = new Point(194, 85);
       txtPort.Margin = new Padding(4);
       txtPort.Multiline = false;
       txtPort.Name = "txtPort";
@@ -178,10 +178,10 @@
       label3.AutoSize = true;
       label3.BackColor = Color.Transparent;
       label3.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label3.Location = new Point(0, 60);
+      label3.Location = new Point(0, 70);
       label3.Margin = new Padding(0);
       label3.Name = "label3";
-      label3.Size = new Size(190, 60);
+      label3.Size = new Size(190, 70);
       label3.TabIndex = 3;
       label3.Text = "Port:";
       label3.TextAlign = ContentAlignment.MiddleLeft;
@@ -195,7 +195,7 @@
       label2.Location = new Point(0, 0);
       label2.Margin = new Padding(0);
       label2.Name = "label2";
-      label2.Size = new Size(190, 60);
+      label2.Size = new Size(190, 70);
       label2.TabIndex = 1;
       label2.Text = "Địa chỉ IP:";
       label2.TextAlign = ContentAlignment.MiddleLeft;
@@ -206,10 +206,10 @@
       label5.AutoSize = true;
       label5.BackColor = Color.Transparent;
       label5.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label5.Location = new Point(0, 180);
+      label5.Location = new Point(0, 210);
       label5.Margin = new Padding(0);
       label5.Name = "label5";
-      label5.Size = new Size(190, 62);
+      label5.Size = new Size(190, 72);
       label5.TabIndex = 5;
       label5.Text = "Gửi lệnh lấy dữ liệu:";
       label5.TextAlign = ContentAlignment.MiddleLeft;
@@ -220,10 +220,10 @@
       label4.AutoSize = true;
       label4.BackColor = Color.Transparent;
       label4.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label4.Location = new Point(0, 120);
+      label4.Location = new Point(0, 140);
       label4.Margin = new Padding(0);
       label4.Name = "label4";
-      label4.Size = new Size(190, 60);
+      label4.Size = new Size(190, 70);
       label4.TabIndex = 4;
       label4.Text = "Timeout (s):";
       label4.TextAlign = ContentAlignment.MiddleLeft;
@@ -234,10 +234,10 @@
       label6.AutoSize = true;
       label6.BackColor = Color.Transparent;
       label6.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label6.Location = new Point(0, 242);
+      label6.Location = new Point(0, 282);
       label6.Margin = new Padding(0);
       label6.Name = "label6";
-      label6.Size = new Size(190, 58);
+      label6.Size = new Size(190, 68);
       label6.TabIndex = 6;
       label6.Text = "Tự động kết nối:";
       label6.TextAlign = ContentAlignment.MiddleLeft;
@@ -252,7 +252,7 @@
       txtIP.BorderSize = 2;
       txtIP.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
       txtIP.ForeColor = Color.FromArgb(64, 64, 64);
-      txtIP.Location = new Point(194, 10);
+      txtIP.Location = new Point(194, 15);
       txtIP.Margin = new Padding(4);
       txtIP.Multiline = false;
       txtIP.Name = "txtIP";
@@ -269,9 +269,9 @@
       // 
       iconSendReq.Anchor = AnchorStyles.Left;
       iconSendReq.Image = Properties.Resources.switch_off;
-      iconSendReq.Location = new Point(193, 186);
+      iconSendReq.Location = new Point(193, 213);
       iconSendReq.Name = "iconSendReq";
-      iconSendReq.Size = new Size(104, 50);
+      iconSendReq.Size = new Size(104, 66);
       iconSendReq.SizeMode = PictureBoxSizeMode.StretchImage;
       iconSendReq.TabIndex = 11;
       iconSendReq.TabStop = false;
@@ -286,7 +286,7 @@
       tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160F));
       tableLayoutPanel2.Controls.Add(btnConfirm, 1, 0);
       tableLayoutPanel2.Controls.Add(btnClose, 2, 0);
-      tableLayoutPanel2.Location = new Point(10, 393);
+      tableLayoutPanel2.Location = new Point(10, 435);
       tableLayoutPanel2.Margin = new Padding(10, 0, 10, 0);
       tableLayoutPanel2.Name = "tableLayoutPanel2";
       tableLayoutPanel2.RowCount = 1;
@@ -347,7 +347,7 @@
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(534, 463);
+      ClientSize = new Size(534, 505);
       ControlBox = false;
       Controls.Add(tableLayoutPanel3);
       Name = "PopupSettingTcpClient";

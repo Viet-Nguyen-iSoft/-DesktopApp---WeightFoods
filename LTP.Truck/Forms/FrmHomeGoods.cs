@@ -526,9 +526,10 @@ namespace LTP.Truck.Forms
         nameof(RecordWeightDTO.No),
         nameof(RecordWeightDTO.Datetime),
         nameof(RecordWeightDTO.LicensePlate),
+        nameof(RecordWeightDTO.ProductGroup),
+        nameof(RecordWeightDTO.CategoryTare),
         nameof(RecordWeightDTO.Net),
         nameof(RecordWeightDTO.Tare),
-        nameof(RecordWeightDTO.Gross)
       };
       foreach (var columnName in autoSizeColumns)
       {
@@ -540,7 +541,6 @@ namespace LTP.Truck.Forms
       {
         nameof(RecordWeightDTO.Net),
         nameof(RecordWeightDTO.Tare),
-        nameof(RecordWeightDTO.Gross)
       };
       foreach (var columnName in weightColumns)
       {
