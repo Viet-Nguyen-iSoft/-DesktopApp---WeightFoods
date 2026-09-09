@@ -1,0 +1,25 @@
+using iSoft.Database.DbContexts;
+using iSoft.Database.Models;
+using iSoft.Database.Repositorys;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace iSoft.Database.Service
+{
+  public class RecordWeightService
+  {
+    public async Task<List<RecordWeight>> GetAllAsync(bool IsContainDelete = false)
+    {
+      await using var context = new PostgresDbContext();
+      var repository = new RecordWeightRepository(context);
+      return await repository.GetAllAsync(IsContainDelete).ConfigureAwait(false);
+    }
+
+    public async Task<RecordWeight> AddOrUpdateAsync(RecordWeight recordWeight)
+    {
+      await using var context = new PostgresDbContext();
+      var repository = new RecordWeightRepository(context);
+      return await repository.AddOrUpdateAsync(recordWeight).ConfigureAwait(false);
+    }
+  }
+}

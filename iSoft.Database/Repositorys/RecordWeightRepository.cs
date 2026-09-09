@@ -1,0 +1,50 @@
+using iSoft.Database.DbContexts;
+using iSoft.Database.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace iSoft.Database.Repositorys
+{
+  public class RecordWeightRepository : GenericRepository<RecordWeight, CommonDbContext>
+  {
+    public RecordWeightRepository(CommonDbContext context) : base(context)
+    {
+    }
+
+    public Task<List<RecordWeight>> GetAllAsync(bool IsContainDelete = false)
+    {
+      var query = Context.Set<RecordWeight>()
+        .Include(record => record.Product)
+        .Include(record => record.CategoryTare)
+        .AsQueryable();
+
+      if (!IsContainDelete)
+        query = query.Where(record => !record.DeletedFlag);
+
+      return query.ToListAsync();
+    }
+
+    public async Task<RecordWeight> AddOrUpdateAsync(RecordWeight recordWeight)
+    {
+      if (recordWeight == null)
+        throw new ArgumentNullException(nameof(recordWeight));
+
+      await Context.Database.EnsureCreatedAsync();
+      var records = Context.Set<RecordWeight>();
+      var existingRecord = recordWeight.Id == 0
+        ? null
+        : await records.FindAsync(recordWeight.Id);
+
+      if (existingRecord == null)
+        await records.AddAsync(recordWeight);
+      else
+        Context.Entry(existingRecord).CurrentValues.SetValues(recordWeight);
+
+      await Context.SaveChangesAsync();
+      return existingRecord ?? recordWeight;
+    }
+  }
+}

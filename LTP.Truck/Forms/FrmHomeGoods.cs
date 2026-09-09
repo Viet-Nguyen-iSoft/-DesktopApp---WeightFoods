@@ -26,6 +26,7 @@ namespace LTP.Truck.Forms
     private int _tareRefreshVersion;
     private MessageDataOutput _msgDataWeight { get; set; } = new MessageDataOutput();
     private RecordTruckDTO _recordTruckDTO { get; set; }
+    private CategoryTare? _categoryTare { get; set; }
     public FrmHomeGoods()
     {
       InitializeComponent();
@@ -56,6 +57,10 @@ namespace LTP.Truck.Forms
 
       ElipseControl elipseControl01 = new ElipseControl();
       elipseControl01.TargetControl = tableLayoutPanel4;
+      elipseControl01.CornerRadius = 20;
+
+      ElipseControl elipseControl02 = new ElipseControl();
+      elipseControl01.TargetControl = tableLayoutPanel9;
       elipseControl01.CornerRadius = 20;
     }
 
@@ -99,6 +104,16 @@ namespace LTP.Truck.Forms
       }
 
       lbWeightValue.Text = messageData.ValueWeight.ToString("F3");
+
+      //Tare
+      if (_categoryTare!=null)
+      {
+        lbGross.Text = (messageData.ValueWeight + (_categoryTare?.Value??0.0)).ToString("F3");
+      }  
+      else
+      {
+        lbGross.Text = messageData.ValueWeight.ToString("F3");
+      }  
     }
 
     private async void Instance_OnChangeTare(object? sender, EventArgs e)
@@ -222,7 +237,15 @@ namespace LTP.Truck.Forms
 
     private void cbbTare_SelectedValueChanged(object? sender, EventArgs e)
     {
-      lbTare.Text = (cbbTare.SelectedItem as CategoryTare)?.Value?.ToString("0.000") ?? string.Empty;
+      _categoryTare = cbbTare.SelectedItem as CategoryTare;
+      if (_categoryTare!=null)
+      {
+        lbTare.Text = _categoryTare?.Value?.ToString("0.000") ?? string.Empty;
+      } 
+      else
+      {
+        lbTare.Text = 0.0.ToString("0.000") ?? string.Empty;
+      }  
     }
 
     private void cbbProductGroup_SelectedValueChanged(object? sender, EventArgs e)
@@ -325,7 +348,7 @@ namespace LTP.Truck.Forms
       popup.ShowDialog(this);
     }
 
-    private void btnPrint_Click(object sender, EventArgs e)
+    private async void btnPrint_Click(object sender, EventArgs e)
     {
       if (_recordTruckDTO == null)
       {
@@ -362,8 +385,42 @@ namespace LTP.Truck.Forms
         return;
       }
 
-      RecordWeight recordWeight = new RecordWeight();
+      var recordWeight = new RecordWeight
+      {
+        ProductId = selectedProduct.Id,
+        CategoryTareId = selectedTare.Id,
+        Net = _msgDataWeight.ValueWeight,
+        Tare = selectedTare.Value ?? 0.0,
+        CreatedAt = DateTime.UtcNow,
+        EnableFlag = true
+      };
 
+      btnPrint.Enabled = false;
+      try
+      {
+        await AppCore.Ins._recordWeightService.AddOrUpdateAsync(recordWeight);
+        if (!IsDisposed && !Disposing)
+        {
+          using var popupMsg = new PopupConfirm("Lưu phiếu cân thành công.",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+          popupMsg.ShowDialog(this);
+        }  
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+        if (!IsDisposed && !Disposing)
+        {
+          using var popupMsg = new PopupConfirm("Không thể lưu phiếu cân. Vui lòng thử lại !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+          popupMsg.ShowDialog(this);
+        }  
+      }
+      finally
+      {
+        if (!IsDisposed && !Disposing)
+          btnPrint.Enabled = true;
+      }
     }
   }
 }
