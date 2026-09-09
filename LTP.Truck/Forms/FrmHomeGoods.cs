@@ -408,6 +408,20 @@ namespace LTP.Truck.Forms
       try
       {
         await AppCore.Ins._recordWeightService.AddOrUpdateAsync(recordWeight);
+
+        //In máy in
+        var printDTO = new DTOPrintLabel()
+        {
+          ProductGroup = selectedProductGroup?.Name ?? string.Empty,
+          Product = selectedProduct?.Name ?? string.Empty,
+          TypeTare = selectedTare?.Name ?? string.Empty,
+          Net = recordWeight?.Net ?? 0.0,
+          Tare = recordWeight?.Tare ?? 0.0,
+          Datetime = recordWeight?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss"),
+          Operator = "Admin"
+        };
+        AppCore.Ins.PrinterLabel(AppCore.Ins._appConfig?.NamePrint, printDTO);
+
         try
         {
           await LoadHistorical();

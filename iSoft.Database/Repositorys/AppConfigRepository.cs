@@ -29,5 +29,24 @@ namespace iSoft.Database.Repositorys
         query = query.Where(x => !x.DeletedFlag);
       return query.FirstOrDefaultAsync();
     }
+
+    public async Task<AppConfig> AddOrUpdateAsync(AppConfig appConfig)
+    {
+      ArgumentNullException.ThrowIfNull(appConfig);
+
+      await Context.Database.EnsureCreatedAsync();
+      var records = Context.Set<AppConfig>();
+      var existingRecord = appConfig.Id == Guid.Empty
+        ? null
+        : await records.FindAsync(appConfig.Id);
+
+      if (existingRecord == null)
+        await records.AddAsync(appConfig);
+      else
+        Context.Entry(existingRecord).CurrentValues.SetValues(appConfig);
+
+      await Context.SaveChangesAsync();
+      return existingRecord ?? appConfig;
+    }
   }
 }

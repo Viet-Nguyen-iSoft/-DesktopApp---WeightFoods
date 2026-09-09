@@ -608,7 +608,7 @@ namespace LTP.Truck.Forms
       txtNameDriver.PlaceholderText = "";
       txtNameDriver.Size = new Size(421, 40);
       txtNameDriver.TabIndex = 15;
-      txtNameDriver.Texts = "Nguyễn Xuân Việt";
+      txtNameDriver.Texts = "";
       txtNameDriver.UnderlinedStyle = false;
       // 
       // txtNoLabel
@@ -631,7 +631,7 @@ namespace LTP.Truck.Forms
       txtNoLabel.PlaceholderText = "";
       txtNoLabel.Size = new Size(421, 40);
       txtNoLabel.TabIndex = 16;
-      txtNoLabel.Texts = "B26-00001";
+      txtNoLabel.Texts = "";
       txtNoLabel.UnderlinedStyle = false;
       // 
       // txtDocument
@@ -654,7 +654,7 @@ namespace LTP.Truck.Forms
       txtDocument.PlaceholderText = "";
       txtDocument.Size = new Size(421, 40);
       txtDocument.TabIndex = 18;
-      txtDocument.Texts = "Không có";
+      txtDocument.Texts = "";
       txtDocument.UnderlinedStyle = false;
       // 
       // label19
@@ -1064,7 +1064,7 @@ namespace LTP.Truck.Forms
       txtLicensePlate.PlaceholderText = "";
       txtLicensePlate.Size = new Size(192, 40);
       txtLicensePlate.TabIndex = 15;
-      txtLicensePlate.Texts = "85C1-44216";
+      txtLicensePlate.Texts = "";
       txtLicensePlate.UnderlinedStyle = false;
       // 
       // label13
@@ -1101,7 +1101,7 @@ namespace LTP.Truck.Forms
       txtIdCard.PlaceholderText = "";
       txtIdCard.Size = new Size(131, 40);
       txtIdCard.TabIndex = 18;
-      txtIdCard.Texts = "058200005781";
+      txtIdCard.Texts = "";
       txtIdCard.UnderlinedStyle = false;
       // 
       // label10

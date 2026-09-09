@@ -51,11 +51,11 @@ namespace LTP.Truck.Forms
       rjTextBox1 = new Common.Custom.RJTextBox();
       tableLayoutPanel7 = new TableLayoutPanel();
       tableLayoutPanel8 = new TableLayoutPanel();
-      rjButton1 = new Common.Custom.RJButton();
+      btnSavePrint = new Common.Custom.RJButton();
       label5 = new Label();
       tableLayoutPanel9 = new TableLayoutPanel();
       label6 = new Label();
-      comboBox1 = new ComboBox();
+      cbbPrint = new ComboBox();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel3.SuspendLayout();
       tableLayoutPanel10.SuspendLayout();
@@ -384,7 +384,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel8.Controls.Add(rjButton1, 2, 0);
+      tableLayoutPanel8.Controls.Add(btnSavePrint, 2, 0);
       tableLayoutPanel8.Location = new Point(0, 179);
       tableLayoutPanel8.Margin = new Padding(0);
       tableLayoutPanel8.Name = "tableLayoutPanel8";
@@ -393,28 +393,28 @@ namespace LTP.Truck.Forms
       tableLayoutPanel8.Size = new Size(784, 60);
       tableLayoutPanel8.TabIndex = 6;
       // 
-      // rjButton1
+      // btnSavePrint
       // 
-      rjButton1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton1.BackColor = Color.FromArgb(51, 108, 181);
-      rjButton1.BackgroundColor = Color.FromArgb(51, 108, 181);
-      rjButton1.BorderColor = Color.PaleVioletRed;
-      rjButton1.BorderRadius = 4;
-      rjButton1.BorderSize = 0;
-      rjButton1.FlatAppearance.BorderSize = 0;
-      rjButton1.FlatStyle = FlatStyle.Flat;
-      rjButton1.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
-      rjButton1.ForeColor = Color.White;
-      rjButton1.Image = Properties.Resources.icon_save;
-      rjButton1.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton1.Location = new Point(585, 3);
-      rjButton1.Name = "rjButton1";
-      rjButton1.Padding = new Padding(10, 0, 0, 0);
-      rjButton1.Size = new Size(191, 54);
-      rjButton1.TabIndex = 0;
-      rjButton1.Text = "       Lưu thay đổi";
-      rjButton1.TextColor = Color.White;
-      rjButton1.UseVisualStyleBackColor = false;
+      btnSavePrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnSavePrint.BackColor = Color.FromArgb(51, 108, 181);
+      btnSavePrint.BackgroundColor = Color.FromArgb(51, 108, 181);
+      btnSavePrint.BorderColor = Color.PaleVioletRed;
+      btnSavePrint.BorderRadius = 4;
+      btnSavePrint.BorderSize = 0;
+      btnSavePrint.FlatAppearance.BorderSize = 0;
+      btnSavePrint.FlatStyle = FlatStyle.Flat;
+      btnSavePrint.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
+      btnSavePrint.ForeColor = Color.White;
+      btnSavePrint.Image = Properties.Resources.icon_save;
+      btnSavePrint.ImageAlign = ContentAlignment.MiddleLeft;
+      btnSavePrint.Location = new Point(585, 3);
+      btnSavePrint.Name = "btnSavePrint";
+      btnSavePrint.Padding = new Padding(10, 0, 0, 0);
+      btnSavePrint.Size = new Size(191, 54);
+      btnSavePrint.TabIndex = 0;
+      btnSavePrint.Text = "       Lưu thay đổi";
+      btnSavePrint.TextColor = Color.White;
+      btnSavePrint.UseVisualStyleBackColor = false;
       // 
       // label5
       // 
@@ -438,7 +438,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
       tableLayoutPanel9.Controls.Add(label6, 0, 0);
-      tableLayoutPanel9.Controls.Add(comboBox1, 1, 0);
+      tableLayoutPanel9.Controls.Add(cbbPrint, 1, 0);
       tableLayoutPanel9.Location = new Point(3, 63);
       tableLayoutPanel9.Name = "tableLayoutPanel9";
       tableLayoutPanel9.RowCount = 2;
@@ -461,16 +461,16 @@ namespace LTP.Truck.Forms
       label6.Text = "IP:";
       label6.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // comboBox1
+      // cbbPrint
       // 
-      comboBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-      comboBox1.Font = new Font("Roboto", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      comboBox1.FormattingEnabled = true;
-      comboBox1.Location = new Point(153, 6);
-      comboBox1.Name = "comboBox1";
-      comboBox1.Size = new Size(617, 41);
-      comboBox1.TabIndex = 2;
+      cbbPrint.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      cbbPrint.DropDownStyle = ComboBoxStyle.DropDownList;
+      cbbPrint.Font = new Font("Roboto", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      cbbPrint.FormattingEnabled = true;
+      cbbPrint.Location = new Point(153, 6);
+      cbbPrint.Name = "cbbPrint";
+      cbbPrint.Size = new Size(617, 41);
+      cbbPrint.TabIndex = 2;
       // 
       // FrmSetting
       // 
@@ -518,10 +518,10 @@ namespace LTP.Truck.Forms
     private Common.Custom.RJTextBox rjTextBox1;
     private TableLayoutPanel tableLayoutPanel7;
     private TableLayoutPanel tableLayoutPanel8;
-    private Common.Custom.RJButton rjButton1;
+    private Common.Custom.RJButton btnSavePrint;
     private Label label5;
     private TableLayoutPanel tableLayoutPanel9;
     private Label label6;
-    private ComboBox comboBox1;
+    private ComboBox cbbPrint;
   }
 }

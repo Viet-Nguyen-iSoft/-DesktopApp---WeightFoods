@@ -22,7 +22,7 @@ namespace LTP.Truck.Controls
       {
         Code = ScaleId,
         NameDevice = "Cân TCP",
-        Host = "192.168.2.198",
+        Host = "192.168.100.244",
         Port = 8000,
         eModeCommunication = eModeCommunication.SICS,
         AutoConnect = true,

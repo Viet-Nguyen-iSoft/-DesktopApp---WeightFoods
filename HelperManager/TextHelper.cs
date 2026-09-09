@@ -122,5 +122,86 @@ namespace HelperManager
 
       return result.Length == 0 ? "0" : result;
     }
+
+    public static List<string> WrapText(
+    string text,
+    int minChars,
+    int maxChars)
+    {
+      if (minChars <= 0)
+        throw new ArgumentOutOfRangeException(nameof(minChars));
+
+      if (maxChars < minChars)
+        throw new ArgumentException(
+            "maxChars phải lớn hơn hoặc bằng minChars."
+        );
+
+      var result = new List<string>();
+
+      if (string.IsNullOrWhiteSpace(text))
+        return result;
+
+      string[] paragraphs = text
+          .Replace("\r\n", "\n")
+          .Replace('\r', '\n')
+          .Split('\n');
+
+      foreach (string paragraphValue in paragraphs)
+      {
+        string remaining = paragraphValue.Trim();
+
+        // Giữ lại dòng trống có sẵn trong nội dung.
+        if (remaining.Length == 0)
+        {
+          result.Add(string.Empty);
+          continue;
+        }
+
+        while (remaining.Length > maxChars)
+        {
+          int breakIndex = FindBreakIndex(
+              remaining,
+              minChars,
+              maxChars
+          );
+
+          result.Add(
+              remaining[..breakIndex].TrimEnd()
+          );
+
+          remaining = remaining[breakIndex..].TrimStart();
+        }
+
+        if (remaining.Length > 0)
+          result.Add(remaining);
+      }
+
+      return result;
+    }
+
+    private static int FindBreakIndex(
+        string text,
+        int minChars,
+        int maxChars)
+    {
+      // Ưu tiên khoảng trắng cuối cùng trong vùng min → max.
+      for (int i = maxChars; i >= minChars; i--)
+      {
+        if (i < text.Length && char.IsWhiteSpace(text[i]))
+          return i;
+      }
+
+      // Không tìm thấy thì thử khoảng trắng trước min.
+      for (int i = minChars - 1; i > 0; i--)
+      {
+        if (char.IsWhiteSpace(text[i]))
+          return i;
+      }
+
+      // Một từ dài hơn maxChars: buộc phải cắt từ.
+      return maxChars;
+    }
+
+    
   }
 }

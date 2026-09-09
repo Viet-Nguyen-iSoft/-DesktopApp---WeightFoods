@@ -23,5 +23,12 @@ namespace iSoft.Database.Service
       var repository = new AppConfigRepository(context);
       return await repository.GetFirstOrDefaultAsync(IsContainDelete).ConfigureAwait(false);
     }
+
+    public async Task<AppConfig> AddOrUpdateAsync(AppConfig appConfig)
+    {
+      await using var context = new PostgresDbContext();
+      var repository = new AppConfigRepository(context);
+      return await repository.AddOrUpdateAsync(appConfig).ConfigureAwait(false);
+    }
   }
 }

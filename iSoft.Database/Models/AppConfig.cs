@@ -15,5 +15,6 @@ namespace iSoft.Database.Models
     public string? Version { get; set; }
 
     public string? Key { get; set; }
+    public string? NamePrint { get; set; }
   }
 }

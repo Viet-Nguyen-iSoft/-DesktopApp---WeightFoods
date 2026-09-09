@@ -1,4 +1,5 @@
-﻿using Common.Settings;
+﻿using Common;
+using Common.Settings;
 using HelperManager;
 using iSoft.Communication.JsonPayload;
 using iSoft.Database.Models;
@@ -6,6 +7,8 @@ using LTP.Truck.Controls;
 using LTP.Truck.Custom;
 using Newtonsoft.Json;
 using System.Data;
+using System.Drawing.Printing;
+using static Common.EnumData;
 using static HelperManager.EnumData;
 
 namespace LTP.Truck.Forms
@@ -24,6 +27,7 @@ namespace LTP.Truck.Forms
       flowCommWeight.FlowDirection = FlowDirection.LeftToRight;
       flowCommWeight.WrapContents = false;
       this.Load += FrmSetting_Load;
+      btnSavePrint.Click += btnSavePrint_Click;
     }
     #region Instance
     private static FrmSetting _Instance = null;
@@ -58,7 +62,71 @@ namespace LTP.Truck.Forms
 
     private async void FrmSetting_Load(object? sender, EventArgs e)
     {
+      LoadInstalledPrinters();
       await LoadWeightConnectionsAsync();
+    }
+
+    private void LoadInstalledPrinters()
+    {
+      var printerNames = PrinterSettings.InstalledPrinters
+        .Cast<string>()
+        .OrderBy(name => name)
+        .ToList();
+
+      cbbPrint.BeginUpdate();
+      try
+      {
+        cbbPrint.Items.Clear();
+        cbbPrint.Items.AddRange(printerNames.Cast<object>().ToArray());
+
+        var savedPrinter = AppCore.Ins._appConfig?.NamePrint;
+        if (!string.IsNullOrWhiteSpace(savedPrinter))
+          cbbPrint.SelectedItem = printerNames.FirstOrDefault(name =>
+            string.Equals(name, savedPrinter, StringComparison.OrdinalIgnoreCase));
+
+        if (cbbPrint.SelectedIndex < 0 && cbbPrint.Items.Count > 0)
+          cbbPrint.SelectedIndex = 0;
+      }
+      finally
+      {
+        cbbPrint.EndUpdate();
+      }
+    }
+
+    private async void btnSavePrint_Click(object? sender, EventArgs e)
+    {
+      if (cbbPrint.SelectedItem is not string printerName ||
+        string.IsNullOrWhiteSpace(printerName))
+      {
+        PopupConfirm popupConfirm = new PopupConfirm("Vui lòng chọn máy in !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popupConfirm.ShowDialog();
+        return;
+      }
+
+      var appConfig = AppCore.Ins._appConfig;
+      if (appConfig == null)
+      {
+        PopupConfirm popupConfirm = new PopupConfirm("Không tìm thấy cấu hình ứng dụng !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popupConfirm.ShowDialog();
+        return;
+      }
+
+      try
+      {
+        appConfig.NamePrint = printerName;
+        appConfig.UpdatedAt = DateTime.UtcNow;
+        AppCore.Ins._appConfig = await AppCore.Ins._appConfigService
+          .AddOrUpdateAsync(appConfig);
+
+        PopupConfirm popupConfirm = new PopupConfirm("Đã lưu máy in.", EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+        popupConfirm.ShowDialog();
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+        PopupConfirm popupConfirm = new PopupConfirm("Không thể lưu máy in. Vui lòng thử lại !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popupConfirm.ShowDialog();
+      }
     }
 
     private async Task LoadWeightConnectionsAsync()

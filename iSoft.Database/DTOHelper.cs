@@ -223,8 +223,21 @@ namespace iSoft.Database
     }
 
 
+    public static DTOPrintLabel? ConvertProductDTO(RecordWeight recordWeight)
+    {
+      return new DTOPrintLabel()
+      {
+        ProductGroup = recordWeight?.Product?.ProductGroup?.Name ?? string.Empty,
+        Product = recordWeight?.Product?.Name ?? string.Empty,
+        TypeTare = recordWeight?.CategoryTare?.Name ?? string.Empty,
+        Net = recordWeight?.Net ?? 0.0,
+        Tare = recordWeight?.Tare ?? 0.0,
+        Datetime = recordWeight?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss")
+      };
+    }
 
-   
+
+
     
 
 
@@ -232,10 +245,10 @@ namespace iSoft.Database
 
 
 
-    
 
 
 
-    
+
+
   }
 }

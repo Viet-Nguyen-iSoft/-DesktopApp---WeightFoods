@@ -1,12 +1,17 @@
-﻿using iSoft.Database.Models;
+﻿using HelperManager;
+using iSoft.Database.DTO;
+using iSoft.Database.Models;
 using iSoft.Database.Service;
+using QRCoder;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using static HelperManager.EnumData;
+using static System.Windows.Forms.AxHost;
 
 namespace LTP.Truck.Controls
 {
@@ -123,5 +128,116 @@ namespace LTP.Truck.Controls
       }
     }
 
+    public void PrinterLabel(string printer, DTOPrintLabel dTOPrintLabel)
+    {
+      try
+      {
+        int offsetY = 5;
+        int offsetQR = 20;
+        int startX = 2;
+        int startY = 8;
+        int rowIndex = 0;
+        Brush brush = Brushes.Black;
+
+        PrintDocument pd = new PrintDocument();
+        pd.PrinterSettings.PrinterName = printer;
+
+        pd.PrintPage += (sender, e) =>
+        {
+          e.Graphics.PageUnit = GraphicsUnit.Millimeter;
+
+          // khung 80x50 mm
+          e.Graphics.DrawRectangle(Pens.Black, 0, 0, 80, 50);
+
+
+          string rawJson = Newtonsoft.Json.JsonConvert.SerializeObject(new
+          {
+            ProductGroup = dTOPrintLabel.ProductGroup,
+            Product = dTOPrintLabel.Product,
+            TypeTare = dTOPrintLabel.TypeTare,
+            Net = dTOPrintLabel.Net,
+            Tare = dTOPrintLabel.Tare,
+            Datetime = dTOPrintLabel.Datetime,
+            Operator = dTOPrintLabel.Operator,
+          });
+          string qrData = TextHelper.RemoveDiacritics(rawJson);
+          using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+          {
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(
+                qrData,
+                QRCodeGenerator.ECCLevel.Q
+            );
+
+            using (QRCode qrCode = new QRCode(qrCodeData))
+            {
+              using (Bitmap qrBitmap = qrCode.GetGraphic(
+                  pixelsPerModule: 2,
+                  darkColor: Color.Black,
+                  lightColor: Color.Transparent,
+                  drawQuietZones: false
+              ))
+              {
+                e.Graphics.DrawImage(
+                    qrBitmap,
+                    new Rectangle(startX, startY + 4 * offsetY, 20, 20)
+                );
+              }
+            }
+          }
+
+
+          // Font family and styles to match the mockup
+          Font fontTitlePallet = new Font("Arial", 10, FontStyle.Bold);
+          Font fontTilte = new Font("Arial", 10, FontStyle.Regular);
+          Font fontValue = new Font("Arial", 10, FontStyle.Bold);
+
+          // Draw PALLET LẺ
+          e.Graphics.DrawString("PHIẾU CÂN HÀNG", fontTitlePallet, brush, new PointF(startX, 2));
+
+          e.Graphics.DrawString("Nhóm sản phẩm:", fontTilte, brush, new PointF(startX, startY));
+          e.Graphics.DrawString(dTOPrintLabel.ProductGroup, fontValue, brush, new PointF(startX + 28, startY));
+
+          var product = TextHelper.WrapText(dTOPrintLabel.Product ?? string.Empty, 23, 28);
+          int i = 1;
+          e.Graphics.DrawString("Tên sản phẩm:", fontTilte, brush, new PointF(startX, startY + offsetY * i));
+          e.Graphics.DrawString(product[0], fontValue, brush, new PointF(startX + 28, startY + offsetY * i));
+          i++;
+          if (product?.Count()>=2)
+          {
+            e.Graphics.DrawString(product[1], fontValue, brush, new PointF(startX, startY + offsetY * i));
+            i++;
+          }
+
+          e.Graphics.DrawString("Loại Tare :", fontTilte, brush, new PointF(startX, startY + offsetY * i));
+          e.Graphics.DrawString(dTOPrintLabel.TypeTare, fontValue, brush, new PointF(startX + 28, startY + offsetY * i));
+
+          i++;
+
+          e.Graphics.DrawString("Net (Kg) :", fontTilte, brush, new PointF(startX + offsetQR, startY + offsetY * i));
+          e.Graphics.DrawString(dTOPrintLabel.Net.ToString("F3"), fontValue, brush, new PointF(startX + offsetQR + 20, startY + offsetY * i));
+
+          i++;
+
+          e.Graphics.DrawString("Tare (Kg) :", fontTilte, brush, new PointF(startX + offsetQR, startY + offsetY * i));
+          e.Graphics.DrawString(dTOPrintLabel.Tare.ToString("F3"), fontValue, brush, new PointF(startX + offsetQR + 20, startY + offsetY * i));
+
+          i++;
+
+          e.Graphics.DrawString("Thời gian:", fontTilte, brush, new PointF(startX + offsetQR, startY + offsetY * i));
+          e.Graphics.DrawString(dTOPrintLabel.Datetime, fontValue, brush, new PointF(startX + offsetQR + 20, startY + offsetY * i));
+
+          i++;
+
+          e.Graphics.DrawString("OP:", fontTilte, brush, new PointF(startX + offsetQR, startY + offsetY * i));
+          e.Graphics.DrawString("Admin", fontValue, brush, new PointF(startX + offsetQR + 20, startY + offsetY * i));
+        };
+
+        pd.Print();
+      }
+      catch (Exception ex)
+      {
+
+      }
+    }
   }
 }
