@@ -1,6 +1,9 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using LaborTrackPro.Helper;
+﻿using Common;
+using DocumentFormat.OpenXml.Wordprocessing;
+using iSoft.Communication.Interface;
+using iSoft.Database.DTO;
 using iSoft.Database.Models;
+using LaborTrackPro.Helper;
 using LTP.Truck.Controls;
 using LTP.Truck.Custom;
 using System;
@@ -12,7 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using iSoft.Communication.Interface;
+using static Common.EnumData;
 
 namespace LTP.Truck.Forms
 {
@@ -22,6 +25,7 @@ namespace LTP.Truck.Forms
     private int _productGroupRefreshVersion;
     private int _tareRefreshVersion;
     private MessageDataOutput _msgDataWeight { get; set; } = new MessageDataOutput();
+    private RecordTruckDTO _recordTruckDTO { get; set; }
     public FrmHomeGoods()
     {
       InitializeComponent();
@@ -299,8 +303,9 @@ namespace LTP.Truck.Forms
 
       if (filtered.Count == 0)
       {
-        MessageBox.Show(this, "Không có phiếu đã cân lần 1 đang chờ cân lần 2.",
-          "Danh sách phiếu cân", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        using var popupMsg = new PopupConfirm("Không có phiếu đã cân lần 1 đang chờ cân lần 2 !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+        popupMsg.ShowDialog();
         return;
       }
 
@@ -311,12 +316,54 @@ namespace LTP.Truck.Forms
       {
         if (data is iSoft.Database.DTO.RecordTruckDTO selectedRecord)
         {
+          _recordTruckDTO = selectedRecord;
           txtLicensePlate.Texts = selectedRecord.LicensePlate ?? string.Empty;
           txtNameDriver.Texts = selectedRecord.NameDriver ?? string.Empty;
           txtIdCard.Texts = selectedRecord.IdCard ?? string.Empty;
-        }  
+        }
       };
       popup.ShowDialog(this);
+    }
+
+    private void btnPrint_Click(object sender, EventArgs e)
+    {
+      if (_recordTruckDTO == null)
+      {
+        using var popupMsg = new PopupConfirm("Vui lòng chọn biển số xe !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+        popupMsg.ShowDialog();
+        return;
+      }
+
+      if (cbbProductGroup.SelectedItem is not ProductGroup selectedProductGroup)
+      {
+        using var popupMsg = new PopupConfirm("Vui lòng chọn nhóm sản phẩm !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+        popupMsg.ShowDialog(this);
+        cbbProductGroup.Focus();
+        return;
+      }
+
+      if (cbbProduct.SelectedItem is not Product selectedProduct)
+      {
+        using var popupMsg = new PopupConfirm("Vui lòng chọn sản phẩm !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+        popupMsg.ShowDialog(this);
+        cbbProduct.Focus();
+        return;
+      }
+
+      if (cbbTare.SelectedItem is not CategoryTare selectedTare)
+      {
+        using var popupMsg = new PopupConfirm("Vui lòng chọn Tare !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+        popupMsg.ShowDialog(this);
+        cbbTare.Focus();
+        return;
+      }
+
+      RecordWeight recordWeight = new RecordWeight();
+
     }
   }
 }

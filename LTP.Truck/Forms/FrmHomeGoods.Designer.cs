@@ -66,7 +66,7 @@ namespace LTP.Truck.Forms
       txtIdCard = new LTP.Truck.Custom.RJTextBox();
       label10 = new Label();
       tableLayoutPanel10 = new TableLayoutPanel();
-      rjButton3 = new LaborTrackPro.Custom.RJButton();
+      btnPrint = new LaborTrackPro.Custom.RJButton();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel3.SuspendLayout();
@@ -692,7 +692,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 189F));
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel10.Controls.Add(rjButton3, 1, 0);
+      tableLayoutPanel10.Controls.Add(btnPrint, 1, 0);
       tableLayoutPanel10.Location = new Point(0, 395);
       tableLayoutPanel10.Margin = new Padding(0);
       tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -701,29 +701,30 @@ namespace LTP.Truck.Forms
       tableLayoutPanel10.Size = new Size(760, 60);
       tableLayoutPanel10.TabIndex = 2;
       // 
-      // rjButton3
+      // btnPrint
       // 
-      rjButton3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton3.BackColor = Color.FromArgb(51, 108, 181);
-      rjButton3.BackgroundColor = Color.FromArgb(51, 108, 181);
-      rjButton3.BorderColor = Color.PaleVioletRed;
-      rjButton3.BorderRadius = 5;
-      rjButton3.BorderSize = 0;
-      rjButton3.FlatAppearance.BorderSize = 0;
-      rjButton3.FlatStyle = FlatStyle.Flat;
-      rjButton3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-      rjButton3.ForeColor = Color.White;
-      rjButton3.Image = (Image)resources.GetObject("rjButton3.Image");
-      rjButton3.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton3.Location = new Point(569, 3);
-      rjButton3.Name = "rjButton3";
-      rjButton3.Padding = new Padding(10, 0, 0, 0);
-      rjButton3.Size = new Size(183, 54);
-      rjButton3.TabIndex = 0;
-      rjButton3.Text = "        In phiếu cân";
-      rjButton3.TextAlign = ContentAlignment.MiddleLeft;
-      rjButton3.TextColor = Color.White;
-      rjButton3.UseVisualStyleBackColor = false;
+      btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnPrint.BackColor = Color.FromArgb(51, 108, 181);
+      btnPrint.BackgroundColor = Color.FromArgb(51, 108, 181);
+      btnPrint.BorderColor = Color.PaleVioletRed;
+      btnPrint.BorderRadius = 5;
+      btnPrint.BorderSize = 0;
+      btnPrint.FlatAppearance.BorderSize = 0;
+      btnPrint.FlatStyle = FlatStyle.Flat;
+      btnPrint.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
+      btnPrint.ForeColor = Color.White;
+      btnPrint.Image = (Image)resources.GetObject("btnPrint.Image");
+      btnPrint.ImageAlign = ContentAlignment.MiddleLeft;
+      btnPrint.Location = new Point(569, 3);
+      btnPrint.Name = "btnPrint";
+      btnPrint.Padding = new Padding(10, 0, 0, 0);
+      btnPrint.Size = new Size(183, 54);
+      btnPrint.TabIndex = 0;
+      btnPrint.Text = "        In phiếu cân";
+      btnPrint.TextAlign = ContentAlignment.MiddleLeft;
+      btnPrint.TextColor = Color.White;
+      btnPrint.UseVisualStyleBackColor = false;
+      btnPrint.Click += btnPrint_Click;
       // 
       // FrmHomeGoods
       // 
@@ -781,7 +782,7 @@ namespace LTP.Truck.Forms
     private ComboBox cbbProductGroup;
     private Label label10;
     private TableLayoutPanel tableLayoutPanel10;
-    private LaborTrackPro.Custom.RJButton rjButton3;
+    private LaborTrackPro.Custom.RJButton btnPrint;
     private TableLayoutPanel tableLayoutPanel12;
     private TableLayoutPanel tableLayoutPanel18;
     private Label label13;
