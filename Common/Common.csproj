@@ -11,6 +11,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HelperManager\HelperManager.csproj" />
     <ProjectReference Include="..\iSoft.Communication\iSoft.Communication.csproj" />
+    <ProjectReference Include="..\iSoft.Database\iSoft.Database.csproj" />
   </ItemGroup>
 
   <ItemGroup>

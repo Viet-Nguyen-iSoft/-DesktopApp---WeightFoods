@@ -314,6 +314,7 @@
       btnConfirm.Size = new Size(154, 54);
       btnConfirm.TabIndex = 0;
       btnConfirm.Text = "       Xác nhận";
+      btnConfirm.TextAlign = ContentAlignment.MiddleLeft;
       btnConfirm.TextColor = Color.White;
       btnConfirm.UseVisualStyleBackColor = false;
       btnConfirm.Click += btnConfirm_Click;

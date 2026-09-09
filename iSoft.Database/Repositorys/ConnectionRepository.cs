@@ -55,10 +55,16 @@ namespace iSoft.Database.Repositorys
         : await records.FindAsync(connection.Id);
 
       if (existingRecord == null)
+      {
+        connection.CreatedAt = DateTime.UtcNow;
         await records.AddAsync(connection);
+      }  
       else
+      {
+        connection.UpdatedAt = DateTime.UtcNow;
         Context.Entry(existingRecord).CurrentValues.SetValues(connection);
-
+      }  
+        
       await Context.SaveChangesAsync();
       return existingRecord ?? connection;
     }

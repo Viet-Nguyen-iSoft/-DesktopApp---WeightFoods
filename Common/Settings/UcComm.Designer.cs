@@ -40,22 +40,22 @@
       // 
       // tableLayoutPanel3
       // 
-      tableLayoutPanel3.BackColor = Color.FromArgb(236, 236, 236);
+      tableLayoutPanel3.BackColor = Color.AliceBlue;
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.Controls.Add(lbCommName, 0, 0);
-      tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 0, 2);
       tableLayoutPanel3.Controls.Add(lbInfor, 0, 1);
+      tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 0, 3);
       tableLayoutPanel3.Dock = DockStyle.Fill;
       tableLayoutPanel3.Location = new Point(0, 0);
       tableLayoutPanel3.Margin = new Padding(0);
       tableLayoutPanel3.Name = "tableLayoutPanel3";
-      tableLayoutPanel3.RowCount = 4;
+      tableLayoutPanel3.RowCount = 5;
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
-      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
       tableLayoutPanel3.Size = new Size(588, 215);
       tableLayoutPanel3.TabIndex = 4;
       // 
@@ -63,11 +63,13 @@
       // 
       lbCommName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       lbCommName.AutoSize = true;
-      lbCommName.BackColor = Color.FromArgb(199, 199, 199);
+      lbCommName.BackColor = Color.Transparent;
       lbCommName.Font = new Font("Roboto Condensed", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      lbCommName.ForeColor = Color.Black;
       lbCommName.Location = new Point(0, 0);
       lbCommName.Margin = new Padding(0);
       lbCommName.Name = "lbCommName";
+      lbCommName.Padding = new Padding(10, 0, 0, 0);
       lbCommName.Size = new Size(588, 60);
       lbCommName.TabIndex = 0;
       lbCommName.Text = "Tên kết nối";
@@ -82,12 +84,12 @@
       tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel2.Controls.Add(btnDelete, 1, 0);
       tableLayoutPanel2.Controls.Add(btnDetail, 2, 0);
-      tableLayoutPanel2.Location = new Point(10, 145);
-      tableLayoutPanel2.Margin = new Padding(10, 0, 10, 0);
+      tableLayoutPanel2.Location = new Point(5, 150);
+      tableLayoutPanel2.Margin = new Padding(5, 0, 5, 0);
       tableLayoutPanel2.Name = "tableLayoutPanel2";
       tableLayoutPanel2.RowCount = 1;
       tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel2.Size = new Size(568, 60);
+      tableLayoutPanel2.Size = new Size(578, 60);
       tableLayoutPanel2.TabIndex = 4;
       // 
       // btnDelete
@@ -104,7 +106,7 @@
       btnDelete.ForeColor = Color.White;
       btnDelete.Image = Properties.Resources.icon_delete;
       btnDelete.ImageAlign = ContentAlignment.MiddleLeft;
-      btnDelete.Location = new Point(279, 3);
+      btnDelete.Location = new Point(289, 3);
       btnDelete.Name = "btnDelete";
       btnDelete.Padding = new Padding(10, 0, 0, 0);
       btnDelete.Size = new Size(126, 54);
@@ -129,7 +131,7 @@
       btnDetail.ForeColor = Color.White;
       btnDetail.Image = Properties.Resources.icon_detail;
       btnDetail.ImageAlign = ContentAlignment.MiddleLeft;
-      btnDetail.Location = new Point(411, 3);
+      btnDetail.Location = new Point(421, 3);
       btnDetail.Name = "btnDetail";
       btnDetail.Padding = new Padding(10, 0, 0, 0);
       btnDetail.Size = new Size(154, 54);
@@ -148,7 +150,8 @@
       lbInfor.Location = new Point(0, 60);
       lbInfor.Margin = new Padding(0);
       lbInfor.Name = "lbInfor";
-      lbInfor.Size = new Size(588, 85);
+      lbInfor.Padding = new Padding(10, 0, 0, 0);
+      lbInfor.Size = new Size(588, 80);
       lbInfor.TabIndex = 1;
       lbInfor.Text = "Chuẩn kết nối";
       lbInfor.TextAlign = ContentAlignment.MiddleLeft;
