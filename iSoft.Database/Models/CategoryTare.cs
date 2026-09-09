@@ -16,7 +16,7 @@ namespace iSoft.Database.Models
     public double? Value { get; set; } = 0.0;
 
     #region Mapping
-    
+    public ICollection<RecordWeight>? RecordWeights { get; set; }
     #endregion
   }
 }

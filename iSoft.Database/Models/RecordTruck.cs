@@ -34,6 +34,12 @@ namespace iSoft.Database.Models
 
     public long? WarehouseId { get; set; }
     public Warehouse? Warehouse { get; set; }
+
+    public long? EmployeeId { get; set; }
+    public Employee? Employee { get; set; }
+
+
+    public ICollection<RecordWeight>? RecordWeights { get; set; }
     #endregion
   }
 }

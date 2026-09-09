@@ -1,6 +1,7 @@
 ﻿using Common;
 using DocumentFormat.OpenXml.Wordprocessing;
 using iSoft.Communication.Interface;
+using iSoft.Database;
 using iSoft.Database.DTO;
 using iSoft.Database.Models;
 using LaborTrackPro.Helper;
@@ -33,6 +34,7 @@ namespace LTP.Truck.Forms
       CustomUI();
 
       cbbTare.SelectedValueChanged += cbbTare_SelectedValueChanged;
+      btnSearchHistorical.Click += btnSearchHistorical_Click;
       lbTare.Text = "0.000";
       this.Load += FrmHomeGoods_Load;
     }
@@ -51,6 +53,11 @@ namespace LTP.Truck.Forms
 
     private void CustomUI()
     {
+      dtpFrom.Format = DateTimePickerFormat.Custom;
+      dtpFrom.CustomFormat = "dd/MM/yyyy";
+      dtpTo.Format = DateTimePickerFormat.Custom;
+      dtpTo.CustomFormat = "dd/MM/yyyy";
+
       ElipseControl elipseControl = new ElipseControl();
       elipseControl.TargetControl = tableLayoutPanel3;
       elipseControl.CornerRadius = 20;
@@ -60,8 +67,17 @@ namespace LTP.Truck.Forms
       elipseControl01.CornerRadius = 20;
 
       ElipseControl elipseControl02 = new ElipseControl();
-      elipseControl01.TargetControl = tableLayoutPanel9;
-      elipseControl01.CornerRadius = 20;
+      elipseControl02.TargetControl = tableLayoutPanel9;
+      elipseControl02.CornerRadius = 20;
+
+      dgv.EnableHeadersVisualStyles = false;
+      dgv.ColumnHeadersHeight = 50;
+      dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+      dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+      dgv.RowTemplate.Height = 60;
+      dgv.MultiSelect = false;
+      dgv.DefaultCellStyle.SelectionBackColor = dgv.DefaultCellStyle.BackColor;
+      dgv.DefaultCellStyle.SelectionForeColor = dgv.DefaultCellStyle.ForeColor;
     }
 
     private async void FrmHomeGoods_Load(object? sender, EventArgs e)
@@ -69,6 +85,7 @@ namespace LTP.Truck.Forms
       try
       {
         await LoadDataFirst();
+        await LoadHistorical();
 
         cbbProductGroup.SelectedIndex = -1;
         cbbTare.SelectedIndex = -1;
@@ -350,7 +367,7 @@ namespace LTP.Truck.Forms
 
     private async void btnPrint_Click(object sender, EventArgs e)
     {
-      if (_recordTruckDTO == null)
+      if (_recordTruckDTO?.RecordTruck is not RecordTruck selectedRecordTruck)
       {
         using var popupMsg = new PopupConfirm("Vui lòng chọn biển số xe !",
           EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
@@ -389,6 +406,7 @@ namespace LTP.Truck.Forms
       {
         ProductId = selectedProduct.Id,
         CategoryTareId = selectedTare.Id,
+        RecordTruckId = selectedRecordTruck.Id,
         Net = _msgDataWeight.ValueWeight,
         Tare = selectedTare.Value ?? 0.0,
         CreatedAt = DateTime.UtcNow,
@@ -399,6 +417,14 @@ namespace LTP.Truck.Forms
       try
       {
         await AppCore.Ins._recordWeightService.AddOrUpdateAsync(recordWeight);
+        try
+        {
+          await LoadHistorical();
+        }
+        catch (Exception ex)
+        {
+          HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+        }
         if (!IsDisposed && !Disposing)
         {
           using var popupMsg = new PopupConfirm("Lưu phiếu cân thành công.",
@@ -421,6 +447,119 @@ namespace LTP.Truck.Forms
         if (!IsDisposed && !Disposing)
           btnPrint.Enabled = true;
       }
+    }
+
+    private async void btnSearchHistorical_Click(object? sender, EventArgs e)
+    {
+      btnSearchHistorical.Enabled = false;
+      try
+      {
+        await LoadHistorical();
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+        if (!IsDisposed && !Disposing)
+        {
+          using var popupMsg = new PopupConfirm("Không thể tải lịch sử cân. Vui lòng thử lại !",
+            EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+          popupMsg.ShowDialog(this);
+        }
+      }
+      finally
+      {
+        if (!IsDisposed && !Disposing)
+          btnSearchHistorical.Enabled = true;
+      }
+    }
+
+    private async Task LoadHistorical()
+    {
+      var fromDate = dtpFrom.Value.Date;
+      var toDate = dtpTo.Value.Date;
+      if (fromDate > toDate)
+      {
+        using var popup = new PopupConfirm("Ngày bắt đầu không được lớn hơn ngày kết thúc.",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popup.ShowDialog(this);
+        return;
+      }
+
+      var fromUtc = fromDate.ToUniversalTime();
+      var toUtcExclusive = toDate.AddDays(1).ToUniversalTime();
+      var searchKey = txtSearchKey.Texts.Trim();
+      var records = await AppCore.Ins._recordWeightService.GetAllAsync();
+
+      var filteredRecords = records.Where(record =>
+      {
+        var createdAtUtc = record.CreatedAt?.ToUniversalTime();
+        return createdAtUtc >= fromUtc && createdAtUtc < toUtcExclusive;
+      });
+
+      if (!string.IsNullOrWhiteSpace(searchKey))
+      {
+        filteredRecords = filteredRecords.Where(record => new[]
+        {
+          record.Product?.Code,
+          record.Product?.Name,
+          record.Product?.ProductGroup?.Code,
+          record.Product?.ProductGroup?.Name,
+          record.CategoryTare?.Code,
+          record.CategoryTare?.Name,
+          record.RecordTruck?.NoLabelAuto,
+          record.RecordTruck?.NoLabelManual,
+          record.RecordTruck?.LicensePlate,
+          record.RecordTruck?.NameDriver,
+          record.RecordTruck?.IdCard
+        }.Any(value => value?.Contains(searchKey, StringComparison.OrdinalIgnoreCase) == true));
+      }
+
+      SetDgvHistorical(DTOHelper.ConvertRecordWeightDTO(filteredRecords.ToList()));
+    }
+
+    private void SetDgvHistorical(List<RecordWeightDTO> records)
+    {
+      if (InvokeRequired)
+      {
+        Invoke(new Action(() => SetDgvHistorical(records)));
+        return;
+      }
+
+      dgv.DataSource = records;
+
+      if (dgv.Columns.Contains(nameof(RecordWeightDTO.RecordWeight)))
+        dgv.Columns[nameof(RecordWeightDTO.RecordWeight)].Visible = false;
+
+      var autoSizeColumns = new[]
+      {
+        nameof(RecordWeightDTO.No),
+        nameof(RecordWeightDTO.Datetime),
+        nameof(RecordWeightDTO.LicensePlate),
+        nameof(RecordWeightDTO.Net),
+        nameof(RecordWeightDTO.Tare),
+        nameof(RecordWeightDTO.Gross)
+      };
+      foreach (var columnName in autoSizeColumns)
+      {
+        if (dgv.Columns.Contains(columnName))
+          dgv.Columns[columnName].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      }
+
+      var weightColumns = new[]
+      {
+        nameof(RecordWeightDTO.Net),
+        nameof(RecordWeightDTO.Tare),
+        nameof(RecordWeightDTO.Gross)
+      };
+      foreach (var columnName in weightColumns)
+      {
+        if (dgv.Columns.Contains(columnName))
+          dgv.Columns[columnName].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+      }
+
+      if (dgv.Columns.Contains(nameof(RecordWeightDTO.No)))
+        dgv.Columns[nameof(RecordWeightDTO.No)].DefaultCellStyle.Alignment =
+          DataGridViewContentAlignment.MiddleCenter;
     }
   }
 }

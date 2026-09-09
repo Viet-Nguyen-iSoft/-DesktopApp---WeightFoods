@@ -28,6 +28,9 @@ namespace iSoft.Database.Models
     public long? CategoryTareId { get; set; }
     public CategoryTare CategoryTare { get; set; } = null!;
 
+    public long? RecordTruckId { get; set; }
+    public RecordTruck RecordTruck { get; set; } = null!;
+
     #endregion
   }
 

@@ -61,6 +61,33 @@ namespace iSoft.Database
         .ToList();
     }
 
+    public static List<RecordWeightDTO> ConvertRecordWeightDTO(List<RecordWeight>? recordWeights)
+    {
+      if (recordWeights == null || recordWeights.Count == 0)
+        return new List<RecordWeightDTO>();
+
+      var orderedRecords = recordWeights
+        .OrderByDescending(record => record.CreatedAt)
+        .ThenByDescending(record => record.Id)
+        .ToList();
+
+      return orderedRecords
+        .Select((record, index) => new RecordWeightDTO
+        {
+          RecordWeight = record,
+          No = orderedRecords.Count - index,
+          Datetime = record.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? string.Empty,
+          LicensePlate = record.RecordTruck?.LicensePlate,
+          ProductGroup = record.Product?.ProductGroup?.Name,
+          Product = record.Product?.Name,
+          CategoryTare = record.CategoryTare?.Name,
+          Net = record.Net.ToString("F3"),
+          Tare = record.Tare.ToString("F3"),
+          Gross = (record.Net + record.Tare).ToString("F3")
+        })
+        .ToList();
+    }
+
     public static List<ClientDTO>? ConvertClientDTO(List<Client>? clients)
     {
       var rsDto = new List<ClientDTO>();

@@ -18,7 +18,9 @@ namespace iSoft.Database.Repositorys
     {
       var query = Context.Set<RecordWeight>()
         .Include(record => record.Product)
+          .ThenInclude(product => product.ProductGroup)
         .Include(record => record.CategoryTare)
+        .Include(record => record.RecordTruck)
         .AsQueryable();
 
       if (!IsContainDelete)

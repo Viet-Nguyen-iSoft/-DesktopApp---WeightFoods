@@ -18,6 +18,8 @@ namespace iSoft.Database.Models
     #region Mapping
     public long? ProductGroupId { get; set; }
     public ProductGroup? ProductGroup { get; set; }
+
+    public ICollection<RecordWeight>? RecordWeights { get; set; }
     #endregion
   }
 
