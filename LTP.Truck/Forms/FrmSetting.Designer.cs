@@ -458,7 +458,7 @@ namespace LTP.Truck.Forms
       label6.Name = "label6";
       label6.Size = new Size(150, 54);
       label6.TabIndex = 1;
-      label6.Text = "IP:";
+      label6.Text = "Máy in:";
       label6.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // cbbPrint

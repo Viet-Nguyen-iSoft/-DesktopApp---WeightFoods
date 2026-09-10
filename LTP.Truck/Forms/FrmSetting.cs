@@ -29,7 +29,10 @@ namespace LTP.Truck.Forms
       this.Load += FrmSetting_Load;
       btnSavePrint.Click += btnSavePrint_Click;
       btnAddCommWeight.Click += btnAddCommWeight_Click;
+
+      AppCore.Ins.OnSendDataWeightTruck += Ins_OnSendDataWeightTruck;
     }
+
     #region Instance
     private static FrmSetting _Instance = null;
     public static FrmSetting Instance
@@ -246,6 +249,11 @@ namespace LTP.Truck.Forms
 
       await AppCore.Ins._connectionService.AddOrUpdateAsync(e);
       await LoadWeightConnectionsAsync();
+    }
+
+    private void Ins_OnSendDataWeightTruck(object? sender, iSoft.Communication.Interface.MessageDataOutput e)
+    {
+
     }
   }
 }

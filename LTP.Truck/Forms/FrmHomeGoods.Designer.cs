@@ -31,12 +31,16 @@ namespace LTP.Truck.Forms
     private void InitializeComponent()
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHomeGoods));
-      DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-      DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
-      DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
+      DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+      DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+      DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
       tableLayoutPanel1 = new TableLayoutPanel();
       tableLayoutPanel2 = new TableLayoutPanel();
       tableLayoutPanel3 = new TableLayoutPanel();
+      label1 = new Label();
+      tableLayoutPanel6 = new TableLayoutPanel();
+      rjButton1 = new RJButton();
+      rjButton2 = new RJButton();
       tableLayoutPanel12 = new TableLayoutPanel();
       tableLayoutPanel5 = new TableLayoutPanel();
       label5 = new Label();
@@ -44,17 +48,21 @@ namespace LTP.Truck.Forms
       tableLayoutPanel18 = new TableLayoutPanel();
       label13 = new Label();
       lbWeightValue = new Label();
-      label1 = new Label();
-      tableLayoutPanel6 = new TableLayoutPanel();
-      rjButton1 = new RJButton();
-      rjButton2 = new RJButton();
+      tableLayoutPanel15 = new TableLayoutPanel();
+      tableLayoutPanel14 = new TableLayoutPanel();
+      label16 = new Label();
+      label12 = new Label();
+      label15 = new Label();
+      tableLayoutPanel17 = new TableLayoutPanel();
+      label19 = new Label();
+      label20 = new Label();
+      lbGross = new Label();
       tableLayoutPanel4 = new TableLayoutPanel();
       tableLayoutPanel8 = new TableLayoutPanel();
       tableLayoutPanel7 = new TableLayoutPanel();
       txtLicensePlate = new RJTextBox();
       btnLoadLicensePlate = new RJButton();
       label2 = new Label();
-      cbbTare = new ComboBox();
       cbbProduct = new ComboBox();
       label6 = new Label();
       label7 = new Label();
@@ -66,10 +74,11 @@ namespace LTP.Truck.Forms
       txtNameDriver = new RJTextBox();
       label14 = new Label();
       txtIdCard = new RJTextBox();
-      tableLayoutPanel13 = new TableLayoutPanel();
-      label11 = new Label();
-      lbGross = new Label();
+      tableLayoutPanel19 = new TableLayoutPanel();
       lbTare = new Label();
+      label11 = new Label();
+      cbbTare = new ComboBox();
+      lbSumWeight = new Label();
       label10 = new Label();
       tableLayoutPanel10 = new TableLayoutPanel();
       btnPrint = new RJButton();
@@ -78,24 +87,27 @@ namespace LTP.Truck.Forms
       tableLayoutPanel11 = new TableLayoutPanel();
       label9 = new Label();
       txtSearchKey = new RJTextBox();
-      dtpFrom = new DateTimePicker();
       label17 = new Label();
-      dtpTo = new DateTimePicker();
       label18 = new Label();
+      ucTimeSearchFrom = new LTP.Truck.UserControls.UcTimeSearch();
+      ucTimeSearchTo = new LTP.Truck.UserControls.UcTimeSearch();
       btnSearchHistorical = new RJButton();
       label27 = new Label();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel3.SuspendLayout();
+      tableLayoutPanel6.SuspendLayout();
       tableLayoutPanel12.SuspendLayout();
       tableLayoutPanel5.SuspendLayout();
       tableLayoutPanel18.SuspendLayout();
-      tableLayoutPanel6.SuspendLayout();
+      tableLayoutPanel15.SuspendLayout();
+      tableLayoutPanel14.SuspendLayout();
+      tableLayoutPanel17.SuspendLayout();
       tableLayoutPanel4.SuspendLayout();
       tableLayoutPanel8.SuspendLayout();
       tableLayoutPanel7.SuspendLayout();
       tableLayoutPanel16.SuspendLayout();
-      tableLayoutPanel13.SuspendLayout();
+      tableLayoutPanel19.SuspendLayout();
       tableLayoutPanel10.SuspendLayout();
       tableLayoutPanel9.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)dgv).BeginInit();
@@ -144,9 +156,9 @@ namespace LTP.Truck.Forms
       tableLayoutPanel3.BackColor = Color.FromArgb(236, 236, 236);
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel3.Controls.Add(tableLayoutPanel12, 0, 1);
       tableLayoutPanel3.Controls.Add(label1, 0, 0);
       tableLayoutPanel3.Controls.Add(tableLayoutPanel6, 0, 3);
+      tableLayoutPanel3.Controls.Add(tableLayoutPanel12, 0, 1);
       tableLayoutPanel3.Location = new Point(0, 0);
       tableLayoutPanel3.Margin = new Padding(0);
       tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -154,26 +166,101 @@ namespace LTP.Truck.Forms
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 62F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
       tableLayoutPanel3.Size = new Size(760, 414);
       tableLayoutPanel3.TabIndex = 0;
       // 
+      // label1
+      // 
+      label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label1.AutoSize = true;
+      label1.BackColor = Color.FromArgb(199, 199, 199);
+      label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      label1.Location = new Point(0, 0);
+      label1.Margin = new Padding(0);
+      label1.Name = "label1";
+      label1.Size = new Size(760, 50);
+      label1.TabIndex = 0;
+      label1.Text = "Thông tin cân";
+      label1.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // tableLayoutPanel6
+      // 
+      tableLayoutPanel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel6.ColumnCount = 5;
+      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 400F));
+      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
+      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
+      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel6.Controls.Add(rjButton1, 3, 0);
+      tableLayoutPanel6.Controls.Add(rjButton2, 2, 0);
+      tableLayoutPanel6.Location = new Point(0, 347);
+      tableLayoutPanel6.Margin = new Padding(0);
+      tableLayoutPanel6.Name = "tableLayoutPanel6";
+      tableLayoutPanel6.RowCount = 1;
+      tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel6.Size = new Size(760, 62);
+      tableLayoutPanel6.TabIndex = 2;
+      // 
+      // rjButton1
+      // 
+      rjButton1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      rjButton1.BackColor = Color.FromArgb(64, 107, 177);
+      rjButton1.BackgroundColor = Color.FromArgb(64, 107, 177);
+      rjButton1.BorderColor = Color.PaleVioletRed;
+      rjButton1.BorderRadius = 5;
+      rjButton1.BorderSize = 0;
+      rjButton1.FlatAppearance.BorderSize = 0;
+      rjButton1.FlatStyle = FlatStyle.Flat;
+      rjButton1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
+      rjButton1.ForeColor = Color.White;
+      rjButton1.Image = (Image)resources.GetObject("rjButton1.Image");
+      rjButton1.Location = new Point(578, 3);
+      rjButton1.Name = "rjButton1";
+      rjButton1.Size = new Size(174, 55);
+      rjButton1.TabIndex = 0;
+      rjButton1.TextColor = Color.White;
+      rjButton1.UseVisualStyleBackColor = false;
+      // 
+      // rjButton2
+      // 
+      rjButton2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      rjButton2.BackColor = Color.FromArgb(64, 107, 177);
+      rjButton2.BackgroundColor = Color.FromArgb(64, 107, 177);
+      rjButton2.BorderColor = Color.PaleVioletRed;
+      rjButton2.BorderRadius = 5;
+      rjButton2.BorderSize = 0;
+      rjButton2.FlatAppearance.BorderSize = 0;
+      rjButton2.FlatStyle = FlatStyle.Flat;
+      rjButton2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
+      rjButton2.ForeColor = Color.White;
+      rjButton2.Image = (Image)resources.GetObject("rjButton2.Image");
+      rjButton2.Location = new Point(398, 3);
+      rjButton2.Name = "rjButton2";
+      rjButton2.Size = new Size(174, 55);
+      rjButton2.TabIndex = 1;
+      rjButton2.TextColor = Color.White;
+      rjButton2.UseVisualStyleBackColor = false;
+      // 
       // tableLayoutPanel12
       // 
       tableLayoutPanel12.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel12.BackColor = Color.Wheat;
       tableLayoutPanel12.ColumnCount = 1;
       tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel12.Controls.Add(tableLayoutPanel5, 0, 0);
       tableLayoutPanel12.Controls.Add(tableLayoutPanel18, 0, 1);
+      tableLayoutPanel12.Controls.Add(tableLayoutPanel15, 0, 2);
       tableLayoutPanel12.Location = new Point(0, 50);
       tableLayoutPanel12.Margin = new Padding(0);
       tableLayoutPanel12.Name = "tableLayoutPanel12";
-      tableLayoutPanel12.RowCount = 2;
+      tableLayoutPanel12.RowCount = 3;
       tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
       tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel12.Size = new Size(760, 294);
+      tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
+      tableLayoutPanel12.Size = new Size(760, 292);
       tableLayoutPanel12.TabIndex = 5;
       // 
       // tableLayoutPanel5
@@ -232,7 +319,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel18.Name = "tableLayoutPanel18";
       tableLayoutPanel18.RowCount = 1;
       tableLayoutPanel18.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel18.Size = new Size(760, 244);
+      tableLayoutPanel18.Size = new Size(760, 172);
       tableLayoutPanel18.TabIndex = 4;
       // 
       // label13
@@ -245,7 +332,7 @@ namespace LTP.Truck.Forms
       label13.Margin = new Padding(0);
       label13.Name = "label13";
       label13.Padding = new Padding(0, 0, 0, 20);
-      label13.Size = new Size(96, 244);
+      label13.Size = new Size(96, 172);
       label13.TabIndex = 3;
       label13.Text = "Kg";
       label13.TextAlign = ContentAlignment.BottomLeft;
@@ -259,82 +346,147 @@ namespace LTP.Truck.Forms
       lbWeightValue.Location = new Point(0, 0);
       lbWeightValue.Margin = new Padding(0);
       lbWeightValue.Name = "lbWeightValue";
-      lbWeightValue.Size = new Size(664, 244);
+      lbWeightValue.Size = new Size(664, 172);
       lbWeightValue.TabIndex = 2;
       lbWeightValue.Text = "0.000";
       lbWeightValue.TextAlign = ContentAlignment.MiddleRight;
       // 
-      // label1
+      // tableLayoutPanel15
       // 
-      label1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label1.AutoSize = true;
-      label1.BackColor = Color.FromArgb(199, 199, 199);
-      label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      label1.Location = new Point(0, 0);
-      label1.Margin = new Padding(0);
-      label1.Name = "label1";
-      label1.Size = new Size(760, 50);
-      label1.TabIndex = 0;
-      label1.Text = "Thông tin cân";
-      label1.TextAlign = ContentAlignment.MiddleLeft;
+      tableLayoutPanel15.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel15.ColumnCount = 3;
+      tableLayoutPanel15.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+      tableLayoutPanel15.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel15.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+      tableLayoutPanel15.Controls.Add(tableLayoutPanel14, 0, 0);
+      tableLayoutPanel15.Controls.Add(tableLayoutPanel17, 2, 0);
+      tableLayoutPanel15.Location = new Point(0, 222);
+      tableLayoutPanel15.Margin = new Padding(0);
+      tableLayoutPanel15.Name = "tableLayoutPanel15";
+      tableLayoutPanel15.RowCount = 1;
+      tableLayoutPanel15.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel15.Size = new Size(760, 70);
+      tableLayoutPanel15.TabIndex = 5;
       // 
-      // tableLayoutPanel6
+      // tableLayoutPanel14
       // 
-      tableLayoutPanel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel6.ColumnCount = 4;
-      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-      tableLayoutPanel6.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel6.Controls.Add(rjButton1, 2, 0);
-      tableLayoutPanel6.Controls.Add(rjButton2, 1, 0);
-      tableLayoutPanel6.Location = new Point(0, 349);
-      tableLayoutPanel6.Margin = new Padding(0);
-      tableLayoutPanel6.Name = "tableLayoutPanel6";
-      tableLayoutPanel6.RowCount = 1;
-      tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel6.Size = new Size(760, 60);
-      tableLayoutPanel6.TabIndex = 2;
+      tableLayoutPanel14.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel14.BackColor = Color.Cornsilk;
+      tableLayoutPanel14.ColumnCount = 3;
+      tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel14.Controls.Add(label16, 2, 0);
+      tableLayoutPanel14.Controls.Add(label12, 0, 0);
+      tableLayoutPanel14.Controls.Add(label15, 1, 0);
+      tableLayoutPanel14.Location = new Point(3, 3);
+      tableLayoutPanel14.Name = "tableLayoutPanel14";
+      tableLayoutPanel14.RowCount = 1;
+      tableLayoutPanel14.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel14.Size = new Size(371, 64);
+      tableLayoutPanel14.TabIndex = 1;
       // 
-      // rjButton1
+      // label16
       // 
-      rjButton1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton1.BackColor = Color.FromArgb(51, 108, 181);
-      rjButton1.BackgroundColor = Color.FromArgb(51, 108, 181);
-      rjButton1.BorderColor = Color.PaleVioletRed;
-      rjButton1.BorderRadius = 5;
-      rjButton1.BorderSize = 0;
-      rjButton1.FlatAppearance.BorderSize = 0;
-      rjButton1.FlatStyle = FlatStyle.Flat;
-      rjButton1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-      rjButton1.ForeColor = Color.White;
-      rjButton1.Image = (Image)resources.GetObject("rjButton1.Image");
-      rjButton1.Location = new Point(578, 3);
-      rjButton1.Name = "rjButton1";
-      rjButton1.Size = new Size(174, 54);
-      rjButton1.TabIndex = 0;
-      rjButton1.TextColor = Color.White;
-      rjButton1.UseVisualStyleBackColor = false;
+      label16.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label16.AutoSize = true;
+      label16.BackColor = Color.Transparent;
+      label16.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold);
+      label16.Location = new Point(317, 0);
+      label16.Margin = new Padding(0);
+      label16.Name = "label16";
+      label16.Size = new Size(54, 64);
+      label16.TabIndex = 4;
+      label16.Text = "Kg";
+      label16.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // rjButton2
+      // label12
       // 
-      rjButton2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton2.BackColor = Color.FromArgb(51, 108, 181);
-      rjButton2.BackgroundColor = Color.FromArgb(51, 108, 181);
-      rjButton2.BorderColor = Color.PaleVioletRed;
-      rjButton2.BorderRadius = 5;
-      rjButton2.BorderSize = 0;
-      rjButton2.FlatAppearance.BorderSize = 0;
-      rjButton2.FlatStyle = FlatStyle.Flat;
-      rjButton2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
-      rjButton2.ForeColor = Color.White;
-      rjButton2.Image = (Image)resources.GetObject("rjButton2.Image");
-      rjButton2.Location = new Point(398, 3);
-      rjButton2.Name = "rjButton2";
-      rjButton2.Size = new Size(174, 54);
-      rjButton2.TabIndex = 1;
-      rjButton2.TextColor = Color.White;
-      rjButton2.UseVisualStyleBackColor = false;
+      label12.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label12.AutoSize = true;
+      label12.BackColor = Color.Transparent;
+      label12.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold);
+      label12.Location = new Point(0, 0);
+      label12.Margin = new Padding(0);
+      label12.Name = "label12";
+      label12.Size = new Size(84, 64);
+      label12.TabIndex = 2;
+      label12.Text = "Tare:";
+      label12.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // label15
+      // 
+      label15.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label15.AutoSize = true;
+      label15.BackColor = Color.Transparent;
+      label15.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold);
+      label15.Location = new Point(84, 0);
+      label15.Margin = new Padding(0);
+      label15.Name = "label15";
+      label15.Size = new Size(233, 64);
+      label15.TabIndex = 3;
+      label15.Text = "0.000";
+      label15.TextAlign = ContentAlignment.MiddleRight;
+      // 
+      // tableLayoutPanel17
+      // 
+      tableLayoutPanel17.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel17.BackColor = Color.Cornsilk;
+      tableLayoutPanel17.ColumnCount = 3;
+      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel17.Controls.Add(label19, 2, 0);
+      tableLayoutPanel17.Controls.Add(label20, 0, 0);
+      tableLayoutPanel17.Controls.Add(lbGross, 1, 0);
+      tableLayoutPanel17.Location = new Point(385, 3);
+      tableLayoutPanel17.Name = "tableLayoutPanel17";
+      tableLayoutPanel17.RowCount = 1;
+      tableLayoutPanel17.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel17.Size = new Size(372, 64);
+      tableLayoutPanel17.TabIndex = 2;
+      // 
+      // label19
+      // 
+      label19.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label19.AutoSize = true;
+      label19.BackColor = Color.Transparent;
+      label19.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold);
+      label19.Location = new Point(318, 0);
+      label19.Margin = new Padding(0);
+      label19.Name = "label19";
+      label19.Size = new Size(54, 64);
+      label19.TabIndex = 4;
+      label19.Text = "Kg";
+      label19.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // label20
+      // 
+      label20.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label20.AutoSize = true;
+      label20.BackColor = Color.Transparent;
+      label20.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold);
+      label20.Location = new Point(0, 0);
+      label20.Margin = new Padding(0);
+      label20.Name = "label20";
+      label20.Size = new Size(102, 64);
+      label20.TabIndex = 2;
+      label20.Text = "Gross:";
+      label20.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // lbGross
+      // 
+      lbGross.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbGross.AutoSize = true;
+      lbGross.BackColor = Color.Transparent;
+      lbGross.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold);
+      lbGross.Location = new Point(102, 0);
+      lbGross.Margin = new Padding(0);
+      lbGross.Name = "lbGross";
+      lbGross.Size = new Size(216, 64);
+      lbGross.TabIndex = 3;
+      lbGross.Text = "0.000";
+      lbGross.TextAlign = ContentAlignment.MiddleRight;
       // 
       // tableLayoutPanel4
       // 
@@ -366,7 +518,6 @@ namespace LTP.Truck.Forms
       tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
       tableLayoutPanel8.Controls.Add(tableLayoutPanel7, 1, 0);
       tableLayoutPanel8.Controls.Add(label2, 0, 0);
-      tableLayoutPanel8.Controls.Add(cbbTare, 1, 4);
       tableLayoutPanel8.Controls.Add(cbbProduct, 1, 3);
       tableLayoutPanel8.Controls.Add(label6, 0, 2);
       tableLayoutPanel8.Controls.Add(label7, 0, 3);
@@ -375,7 +526,8 @@ namespace LTP.Truck.Forms
       tableLayoutPanel8.Controls.Add(cbbProductGroup, 1, 2);
       tableLayoutPanel8.Controls.Add(label3, 0, 1);
       tableLayoutPanel8.Controls.Add(tableLayoutPanel16, 1, 1);
-      tableLayoutPanel8.Controls.Add(tableLayoutPanel13, 1, 5);
+      tableLayoutPanel8.Controls.Add(tableLayoutPanel19, 1, 4);
+      tableLayoutPanel8.Controls.Add(lbSumWeight, 1, 5);
       tableLayoutPanel8.Location = new Point(3, 53);
       tableLayoutPanel8.Name = "tableLayoutPanel8";
       tableLayoutPanel8.RowCount = 6;
@@ -399,12 +551,12 @@ namespace LTP.Truck.Forms
       tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 300F));
       tableLayoutPanel7.Controls.Add(txtLicensePlate, 0, 0);
       tableLayoutPanel7.Controls.Add(btnLoadLicensePlate, 2, 0);
-      tableLayoutPanel7.Location = new Point(170, 0);
+      tableLayoutPanel7.Location = new Point(188, 0);
       tableLayoutPanel7.Margin = new Padding(0);
       tableLayoutPanel7.Name = "tableLayoutPanel7";
       tableLayoutPanel7.RowCount = 1;
       tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel7.Size = new Size(579, 47);
+      tableLayoutPanel7.Size = new Size(561, 47);
       tableLayoutPanel7.TabIndex = 23;
       // 
       // txtLicensePlate
@@ -425,7 +577,7 @@ namespace LTP.Truck.Forms
       txtLicensePlate.PasswordChar = false;
       txtLicensePlate.PlaceholderColor = Color.DarkGray;
       txtLicensePlate.PlaceholderText = "";
-      txtLicensePlate.Size = new Size(206, 40);
+      txtLicensePlate.Size = new Size(188, 40);
       txtLicensePlate.TabIndex = 15;
       txtLicensePlate.Texts = "";
       txtLicensePlate.UnderlinedStyle = false;
@@ -443,7 +595,7 @@ namespace LTP.Truck.Forms
       btnLoadLicensePlate.FlatStyle = FlatStyle.Flat;
       btnLoadLicensePlate.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
       btnLoadLicensePlate.ForeColor = Color.Black;
-      btnLoadLicensePlate.Location = new Point(222, 4);
+      btnLoadLicensePlate.Location = new Point(204, 4);
       btnLoadLicensePlate.Name = "btnLoadLicensePlate";
       btnLoadLicensePlate.Size = new Size(54, 38);
       btnLoadLicensePlate.TabIndex = 17;
@@ -461,21 +613,10 @@ namespace LTP.Truck.Forms
       label2.Location = new Point(0, 0);
       label2.Margin = new Padding(0);
       label2.Name = "label2";
-      label2.Size = new Size(170, 47);
+      label2.Size = new Size(188, 47);
       label2.TabIndex = 11;
       label2.Text = "Biển số xe:";
       label2.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // cbbTare
-      // 
-      cbbTare.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      cbbTare.DropDownStyle = ComboBoxStyle.DropDownList;
-      cbbTare.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      cbbTare.FormattingEnabled = true;
-      cbbTare.Location = new Point(173, 196);
-      cbbTare.Name = "cbbTare";
-      cbbTare.Size = new Size(573, 38);
-      cbbTare.TabIndex = 8;
       // 
       // cbbProduct
       // 
@@ -483,9 +624,9 @@ namespace LTP.Truck.Forms
       cbbProduct.DropDownStyle = ComboBoxStyle.DropDownList;
       cbbProduct.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
       cbbProduct.FormattingEnabled = true;
-      cbbProduct.Location = new Point(173, 148);
+      cbbProduct.Location = new Point(191, 148);
       cbbProduct.Name = "cbbProduct";
-      cbbProduct.Size = new Size(573, 38);
+      cbbProduct.Size = new Size(555, 38);
       cbbProduct.TabIndex = 7;
       // 
       // label6
@@ -497,7 +638,7 @@ namespace LTP.Truck.Forms
       label6.Location = new Point(0, 95);
       label6.Margin = new Padding(0);
       label6.Name = "label6";
-      label6.Size = new Size(170, 48);
+      label6.Size = new Size(188, 48);
       label6.TabIndex = 1;
       label6.Text = "Loại phế phẩm:";
       label6.TextAlign = ContentAlignment.MiddleLeft;
@@ -511,7 +652,7 @@ namespace LTP.Truck.Forms
       label7.Location = new Point(0, 143);
       label7.Margin = new Padding(0);
       label7.Name = "label7";
-      label7.Size = new Size(170, 48);
+      label7.Size = new Size(188, 48);
       label7.TabIndex = 2;
       label7.Text = "Tên phế phẩm:";
       label7.TextAlign = ContentAlignment.MiddleLeft;
@@ -525,7 +666,7 @@ namespace LTP.Truck.Forms
       label8.Location = new Point(0, 191);
       label8.Margin = new Padding(0);
       label8.Name = "label8";
-      label8.Size = new Size(170, 48);
+      label8.Size = new Size(188, 48);
       label8.TabIndex = 3;
       label8.Text = "Loại Tare:";
       label8.TextAlign = ContentAlignment.MiddleLeft;
@@ -539,9 +680,9 @@ namespace LTP.Truck.Forms
       lbGrossT.Location = new Point(0, 239);
       lbGrossT.Margin = new Padding(0);
       lbGrossT.Name = "lbGrossT";
-      lbGrossT.Size = new Size(170, 49);
+      lbGrossT.Size = new Size(188, 49);
       lbGrossT.TabIndex = 4;
-      lbGrossT.Text = "Giá trị Gross (kg):";
+      lbGrossT.Text = "Tổng KL hàng (Kg):";
       lbGrossT.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // cbbProductGroup
@@ -550,7 +691,7 @@ namespace LTP.Truck.Forms
       cbbProductGroup.DropDownStyle = ComboBoxStyle.DropDownList;
       cbbProductGroup.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
       cbbProductGroup.FormattingEnabled = true;
-      cbbProductGroup.Location = new Point(173, 100);
+      cbbProductGroup.Location = new Point(191, 100);
       cbbProductGroup.Name = "cbbProductGroup";
       cbbProductGroup.Size = new Size(240, 38);
       cbbProductGroup.TabIndex = 6;
@@ -564,7 +705,7 @@ namespace LTP.Truck.Forms
       label3.Location = new Point(0, 47);
       label3.Margin = new Padding(0);
       label3.Name = "label3";
-      label3.Size = new Size(170, 48);
+      label3.Size = new Size(188, 48);
       label3.TabIndex = 17;
       label3.Text = "Tài xế xe:";
       label3.TextAlign = ContentAlignment.MiddleLeft;
@@ -579,12 +720,12 @@ namespace LTP.Truck.Forms
       tableLayoutPanel16.Controls.Add(txtNameDriver, 0, 0);
       tableLayoutPanel16.Controls.Add(label14, 1, 0);
       tableLayoutPanel16.Controls.Add(txtIdCard, 2, 0);
-      tableLayoutPanel16.Location = new Point(170, 47);
+      tableLayoutPanel16.Location = new Point(188, 47);
       tableLayoutPanel16.Margin = new Padding(0);
       tableLayoutPanel16.Name = "tableLayoutPanel16";
       tableLayoutPanel16.RowCount = 1;
       tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel16.Size = new Size(579, 48);
+      tableLayoutPanel16.Size = new Size(561, 48);
       tableLayoutPanel16.TabIndex = 22;
       // 
       // txtNameDriver
@@ -606,7 +747,7 @@ namespace LTP.Truck.Forms
       txtNameDriver.PasswordChar = false;
       txtNameDriver.PlaceholderColor = Color.DarkGray;
       txtNameDriver.PlaceholderText = "";
-      txtNameDriver.Size = new Size(271, 40);
+      txtNameDriver.Size = new Size(253, 40);
       txtNameDriver.TabIndex = 15;
       txtNameDriver.Texts = "";
       txtNameDriver.UnderlinedStyle = false;
@@ -617,7 +758,7 @@ namespace LTP.Truck.Forms
       label14.AutoSize = true;
       label14.BackColor = Color.Transparent;
       label14.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label14.Location = new Point(279, 0);
+      label14.Location = new Point(261, 0);
       label14.Margin = new Padding(0);
       label14.Name = "label14";
       label14.Size = new Size(100, 48);
@@ -636,7 +777,7 @@ namespace LTP.Truck.Forms
       txtIdCard.Enabled = false;
       txtIdCard.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
       txtIdCard.ForeColor = Color.FromArgb(64, 64, 64);
-      txtIdCard.Location = new Point(383, 4);
+      txtIdCard.Location = new Point(365, 4);
       txtIdCard.Margin = new Padding(4);
       txtIdCard.Multiline = false;
       txtIdCard.Name = "txtIdCard";
@@ -649,52 +790,24 @@ namespace LTP.Truck.Forms
       txtIdCard.Texts = "";
       txtIdCard.UnderlinedStyle = false;
       // 
-      // tableLayoutPanel13
+      // tableLayoutPanel19
       // 
-      tableLayoutPanel13.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel13.ColumnCount = 3;
-      tableLayoutPanel13.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-      tableLayoutPanel13.ColumnStyles.Add(new ColumnStyle());
-      tableLayoutPanel13.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-      tableLayoutPanel13.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel13.Controls.Add(label11, 1, 0);
-      tableLayoutPanel13.Controls.Add(lbGross, 0, 0);
-      tableLayoutPanel13.Controls.Add(lbTare, 2, 0);
-      tableLayoutPanel13.Location = new Point(170, 239);
-      tableLayoutPanel13.Margin = new Padding(0);
-      tableLayoutPanel13.Name = "tableLayoutPanel13";
-      tableLayoutPanel13.RowCount = 1;
-      tableLayoutPanel13.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel13.Size = new Size(579, 49);
-      tableLayoutPanel13.TabIndex = 24;
-      // 
-      // label11
-      // 
-      label11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label11.AutoSize = true;
-      label11.BackColor = Color.Transparent;
-      label11.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label11.Location = new Point(211, 0);
-      label11.Margin = new Padding(0);
-      label11.Name = "label11";
-      label11.Size = new Size(157, 49);
-      label11.TabIndex = 5;
-      label11.Text = "Giá trị Tare (kg):";
-      label11.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // lbGross
-      // 
-      lbGross.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      lbGross.AutoSize = true;
-      lbGross.BackColor = Color.Transparent;
-      lbGross.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
-      lbGross.Location = new Point(0, 0);
-      lbGross.Margin = new Padding(0);
-      lbGross.Name = "lbGross";
-      lbGross.Size = new Size(211, 49);
-      lbGross.TabIndex = 9;
-      lbGross.Text = "0.000";
-      lbGross.TextAlign = ContentAlignment.MiddleLeft;
+      tableLayoutPanel19.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel19.ColumnCount = 4;
+      tableLayoutPanel19.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel19.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel19.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel19.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160F));
+      tableLayoutPanel19.Controls.Add(lbTare, 3, 0);
+      tableLayoutPanel19.Controls.Add(label11, 2, 0);
+      tableLayoutPanel19.Controls.Add(cbbTare, 0, 0);
+      tableLayoutPanel19.Location = new Point(188, 191);
+      tableLayoutPanel19.Margin = new Padding(0);
+      tableLayoutPanel19.Name = "tableLayoutPanel19";
+      tableLayoutPanel19.RowCount = 1;
+      tableLayoutPanel19.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel19.Size = new Size(561, 48);
+      tableLayoutPanel19.TabIndex = 25;
       // 
       // lbTare
       // 
@@ -702,13 +815,52 @@ namespace LTP.Truck.Forms
       lbTare.AutoSize = true;
       lbTare.BackColor = Color.Transparent;
       lbTare.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
-      lbTare.Location = new Point(368, 0);
+      lbTare.Location = new Point(401, 0);
       lbTare.Margin = new Padding(0);
       lbTare.Name = "lbTare";
-      lbTare.Size = new Size(211, 49);
+      lbTare.Size = new Size(160, 48);
       lbTare.TabIndex = 10;
       lbTare.Text = "0.000";
       lbTare.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // label11
+      // 
+      label11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label11.AutoSize = true;
+      label11.BackColor = Color.Transparent;
+      label11.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      label11.Location = new Point(244, 0);
+      label11.Margin = new Padding(0);
+      label11.Name = "label11";
+      label11.Size = new Size(157, 48);
+      label11.TabIndex = 5;
+      label11.Text = "Giá trị Tare (kg):";
+      label11.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // cbbTare
+      // 
+      cbbTare.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      cbbTare.DropDownStyle = ComboBoxStyle.DropDownList;
+      cbbTare.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      cbbTare.FormattingEnabled = true;
+      cbbTare.Location = new Point(3, 5);
+      cbbTare.Name = "cbbTare";
+      cbbTare.Size = new Size(218, 38);
+      cbbTare.TabIndex = 8;
+      // 
+      // lbSumWeight
+      // 
+      lbSumWeight.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbSumWeight.AutoSize = true;
+      lbSumWeight.BackColor = Color.Transparent;
+      lbSumWeight.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold);
+      lbSumWeight.Location = new Point(188, 239);
+      lbSumWeight.Margin = new Padding(0);
+      lbSumWeight.Name = "lbSumWeight";
+      lbSumWeight.Size = new Size(561, 49);
+      lbSumWeight.TabIndex = 26;
+      lbSumWeight.Text = "0.000";
+      lbSumWeight.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // label10
       // 
@@ -729,7 +881,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel10.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       tableLayoutPanel10.ColumnCount = 3;
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 189F));
+      tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
       tableLayoutPanel10.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
       tableLayoutPanel10.Controls.Add(btnPrint, 1, 0);
       tableLayoutPanel10.Location = new Point(0, 349);
@@ -742,22 +894,22 @@ namespace LTP.Truck.Forms
       // 
       // btnPrint
       // 
-      btnPrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      btnPrint.BackColor = Color.FromArgb(51, 108, 181);
-      btnPrint.BackgroundColor = Color.FromArgb(51, 108, 181);
+      btnPrint.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      btnPrint.BackColor = Color.FromArgb(64, 107, 177);
+      btnPrint.BackgroundColor = Color.FromArgb(64, 107, 177);
       btnPrint.BorderColor = Color.PaleVioletRed;
       btnPrint.BorderRadius = 5;
       btnPrint.BorderSize = 0;
       btnPrint.FlatAppearance.BorderSize = 0;
       btnPrint.FlatStyle = FlatStyle.Flat;
-      btnPrint.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold);
+      btnPrint.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
       btnPrint.ForeColor = Color.White;
       btnPrint.Image = (Image)resources.GetObject("btnPrint.Image");
       btnPrint.ImageAlign = ContentAlignment.MiddleLeft;
-      btnPrint.Location = new Point(569, 3);
+      btnPrint.Location = new Point(558, 3);
       btnPrint.Name = "btnPrint";
       btnPrint.Padding = new Padding(10, 0, 0, 0);
-      btnPrint.Size = new Size(183, 54);
+      btnPrint.Size = new Size(194, 54);
       btnPrint.TabIndex = 0;
       btnPrint.Text = "        In phiếu cân";
       btnPrint.TextAlign = ContentAlignment.MiddleLeft;
@@ -779,7 +931,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel9.Name = "tableLayoutPanel9";
       tableLayoutPanel9.RowCount = 3;
       tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 62F));
       tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel9.Size = new Size(1525, 506);
       tableLayoutPanel9.TabIndex = 3;
@@ -792,38 +944,38 @@ namespace LTP.Truck.Forms
       dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
       dgv.BackgroundColor = Color.FromArgb(236, 236, 236);
       dgv.BorderStyle = BorderStyle.None;
-      dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle7.BackColor = SystemColors.Control;
-      dataGridViewCellStyle7.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
-      dataGridViewCellStyle7.SelectionBackColor = SystemColors.Highlight;
-      dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-      dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-      dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+      dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = SystemColors.Control;
+      dataGridViewCellStyle1.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+      dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+      dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+      dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+      dgv.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle8.BackColor = SystemColors.Window;
-      dataGridViewCellStyle8.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
-      dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-      dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-      dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-      dgv.DefaultCellStyle = dataGridViewCellStyle8;
+      dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = SystemColors.Window;
+      dataGridViewCellStyle2.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+      dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+      dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+      dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+      dgv.DefaultCellStyle = dataGridViewCellStyle2;
       dgv.EnableHeadersVisualStyles = false;
-      dgv.Location = new Point(3, 113);
+      dgv.Location = new Point(3, 115);
       dgv.Name = "dgv";
       dgv.ReadOnly = true;
-      dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle9.BackColor = SystemColors.Control;
-      dataGridViewCellStyle9.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-      dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-      dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-      dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-      dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+      dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle3.BackColor = SystemColors.Control;
+      dataGridViewCellStyle3.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+      dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+      dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+      dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+      dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
       dgv.RowHeadersVisible = false;
       dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-      dgv.Size = new Size(1519, 390);
+      dgv.Size = new Size(1519, 388);
       dgv.TabIndex = 23;
       // 
       // tableLayoutPanel11
@@ -834,27 +986,25 @@ namespace LTP.Truck.Forms
       tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
       tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle());
-      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
+      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 320F));
       tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle());
-      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
-      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 320F));
       tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
       tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
       tableLayoutPanel11.Controls.Add(label9, 0, 0);
       tableLayoutPanel11.Controls.Add(txtSearchKey, 1, 0);
-      tableLayoutPanel11.Controls.Add(dtpFrom, 4, 0);
       tableLayoutPanel11.Controls.Add(label17, 3, 0);
-      tableLayoutPanel11.Controls.Add(dtpTo, 6, 0);
       tableLayoutPanel11.Controls.Add(label18, 5, 0);
-      tableLayoutPanel11.Controls.Add(btnSearchHistorical, 9, 0);
+      tableLayoutPanel11.Controls.Add(ucTimeSearchFrom, 4, 0);
+      tableLayoutPanel11.Controls.Add(ucTimeSearchTo, 6, 0);
+      tableLayoutPanel11.Controls.Add(btnSearchHistorical, 8, 0);
       tableLayoutPanel11.Location = new Point(0, 50);
       tableLayoutPanel11.Margin = new Padding(0);
       tableLayoutPanel11.Name = "tableLayoutPanel11";
       tableLayoutPanel11.RowCount = 1;
       tableLayoutPanel11.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel11.Size = new Size(1525, 60);
+      tableLayoutPanel11.Size = new Size(1525, 62);
       tableLayoutPanel11.TabIndex = 22;
       // 
       // label9
@@ -866,7 +1016,7 @@ namespace LTP.Truck.Forms
       label9.Location = new Point(0, 0);
       label9.Margin = new Padding(0);
       label9.Name = "label9";
-      label9.Size = new Size(102, 60);
+      label9.Size = new Size(102, 62);
       label9.TabIndex = 17;
       label9.Text = "Tìm kiếm:";
       label9.TextAlign = ContentAlignment.MiddleLeft;
@@ -881,7 +1031,7 @@ namespace LTP.Truck.Forms
       txtSearchKey.BorderSize = 2;
       txtSearchKey.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
       txtSearchKey.ForeColor = Color.FromArgb(64, 64, 64);
-      txtSearchKey.Location = new Point(106, 10);
+      txtSearchKey.Location = new Point(106, 11);
       txtSearchKey.Margin = new Padding(4);
       txtSearchKey.Multiline = false;
       txtSearchKey.Name = "txtSearchKey";
@@ -889,21 +1039,10 @@ namespace LTP.Truck.Forms
       txtSearchKey.PasswordChar = false;
       txtSearchKey.PlaceholderColor = Color.DarkGray;
       txtSearchKey.PlaceholderText = "";
-      txtSearchKey.Size = new Size(711, 40);
+      txtSearchKey.Size = new Size(446, 40);
       txtSearchKey.TabIndex = 18;
       txtSearchKey.Texts = "";
       txtSearchKey.UnderlinedStyle = false;
-      // 
-      // dtpFrom
-      // 
-      dtpFrom.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      dtpFrom.CalendarFont = new Font("Roboto", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      dtpFrom.Font = new Font("Roboto", 20.25F);
-      dtpFrom.Format = DateTimePickerFormat.Short;
-      dtpFrom.Location = new Point(880, 10);
-      dtpFrom.Name = "dtpFrom";
-      dtpFrom.Size = new Size(174, 40);
-      dtpFrom.TabIndex = 19;
       // 
       // label17
       // 
@@ -911,24 +1050,13 @@ namespace LTP.Truck.Forms
       label17.AutoSize = true;
       label17.BackColor = Color.Transparent;
       label17.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label17.Location = new Point(841, 0);
+      label17.Location = new Point(576, 0);
       label17.Margin = new Padding(0);
       label17.Name = "label17";
-      label17.Size = new Size(36, 60);
+      label17.Size = new Size(36, 62);
       label17.TabIndex = 21;
       label17.Text = "Từ";
       label17.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // dtpTo
-      // 
-      dtpTo.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      dtpTo.CalendarFont = new Font("Roboto", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      dtpTo.Font = new Font("Roboto", 20.25F);
-      dtpTo.Format = DateTimePickerFormat.Short;
-      dtpTo.Location = new Point(1108, 10);
-      dtpTo.Name = "dtpTo";
-      dtpTo.Size = new Size(174, 40);
-      dtpTo.TabIndex = 20;
       // 
       // label18
       // 
@@ -936,17 +1064,33 @@ namespace LTP.Truck.Forms
       label18.AutoSize = true;
       label18.BackColor = Color.Transparent;
       label18.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      label18.Location = new Point(1057, 0);
+      label18.Location = new Point(932, 0);
       label18.Margin = new Padding(0);
       label18.Name = "label18";
-      label18.Size = new Size(48, 60);
+      label18.Size = new Size(48, 62);
       label18.TabIndex = 22;
       label18.Text = "đến";
       label18.TextAlign = ContentAlignment.MiddleLeft;
       // 
+      // ucTimeSearchFrom
+      // 
+      ucTimeSearchFrom.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      ucTimeSearchFrom.Location = new Point(615, 3);
+      ucTimeSearchFrom.Name = "ucTimeSearchFrom";
+      ucTimeSearchFrom.Size = new Size(314, 56);
+      ucTimeSearchFrom.TabIndex = 28;
+      // 
+      // ucTimeSearchTo
+      // 
+      ucTimeSearchTo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      ucTimeSearchTo.Location = new Point(983, 3);
+      ucTimeSearchTo.Name = "ucTimeSearchTo";
+      ucTimeSearchTo.Size = new Size(314, 56);
+      ucTimeSearchTo.TabIndex = 29;
+      // 
       // btnSearchHistorical
       // 
-      btnSearchHistorical.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnSearchHistorical.Anchor = AnchorStyles.Left | AnchorStyles.Right;
       btnSearchHistorical.BackColor = Color.FromArgb(64, 107, 177);
       btnSearchHistorical.BackgroundColor = Color.FromArgb(64, 107, 177);
       btnSearchHistorical.BorderColor = Color.White;
@@ -955,13 +1099,17 @@ namespace LTP.Truck.Forms
       btnSearchHistorical.FlatAppearance.BorderColor = Color.White;
       btnSearchHistorical.FlatAppearance.BorderSize = 0;
       btnSearchHistorical.FlatStyle = FlatStyle.Flat;
-      btnSearchHistorical.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      btnSearchHistorical.Font = new Font("Roboto", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
       btnSearchHistorical.ForeColor = Color.White;
-      btnSearchHistorical.Location = new Point(1328, 3);
+      btnSearchHistorical.Image = Properties.Resources.icon_search;
+      btnSearchHistorical.ImageAlign = ContentAlignment.MiddleLeft;
+      btnSearchHistorical.Location = new Point(1323, 3);
       btnSearchHistorical.Name = "btnSearchHistorical";
-      btnSearchHistorical.Size = new Size(194, 54);
+      btnSearchHistorical.Padding = new Padding(15, 0, 0, 0);
+      btnSearchHistorical.Size = new Size(194, 55);
       btnSearchHistorical.TabIndex = 27;
-      btnSearchHistorical.Text = "Tìm kiếm";
+      btnSearchHistorical.Text = "        Tìm kiếm";
+      btnSearchHistorical.TextAlign = ContentAlignment.MiddleLeft;
       btnSearchHistorical.TextColor = Color.White;
       btnSearchHistorical.UseVisualStyleBackColor = false;
       // 
@@ -991,12 +1139,17 @@ namespace LTP.Truck.Forms
       tableLayoutPanel2.ResumeLayout(false);
       tableLayoutPanel3.ResumeLayout(false);
       tableLayoutPanel3.PerformLayout();
+      tableLayoutPanel6.ResumeLayout(false);
       tableLayoutPanel12.ResumeLayout(false);
       tableLayoutPanel5.ResumeLayout(false);
       tableLayoutPanel5.PerformLayout();
       tableLayoutPanel18.ResumeLayout(false);
       tableLayoutPanel18.PerformLayout();
-      tableLayoutPanel6.ResumeLayout(false);
+      tableLayoutPanel15.ResumeLayout(false);
+      tableLayoutPanel14.ResumeLayout(false);
+      tableLayoutPanel14.PerformLayout();
+      tableLayoutPanel17.ResumeLayout(false);
+      tableLayoutPanel17.PerformLayout();
       tableLayoutPanel4.ResumeLayout(false);
       tableLayoutPanel4.PerformLayout();
       tableLayoutPanel8.ResumeLayout(false);
@@ -1004,8 +1157,8 @@ namespace LTP.Truck.Forms
       tableLayoutPanel7.ResumeLayout(false);
       tableLayoutPanel16.ResumeLayout(false);
       tableLayoutPanel16.PerformLayout();
-      tableLayoutPanel13.ResumeLayout(false);
-      tableLayoutPanel13.PerformLayout();
+      tableLayoutPanel19.ResumeLayout(false);
+      tableLayoutPanel19.PerformLayout();
       tableLayoutPanel10.ResumeLayout(false);
       tableLayoutPanel9.ResumeLayout(false);
       tableLayoutPanel9.PerformLayout();
@@ -1031,7 +1184,6 @@ namespace LTP.Truck.Forms
     private TableLayoutPanel tableLayoutPanel4;
     private TableLayoutPanel tableLayoutPanel8;
     private Label lbTare;
-    private Label lbGross;
     private ComboBox cbbTare;
     private ComboBox cbbProduct;
     private Label label6;
@@ -1060,12 +1212,22 @@ namespace LTP.Truck.Forms
     private TableLayoutPanel tableLayoutPanel11;
     private Label label9;
     private Custom.RJTextBox txtSearchKey;
-    private DateTimePicker dtpFrom;
     private Label label17;
-    private DateTimePicker dtpTo;
     private Label label18;
     private RJButton btnSearchHistorical;
     private Label label27;
-    private TableLayoutPanel tableLayoutPanel13;
+    private UserControls.UcTimeSearch ucTimeSearchFrom;
+    private UserControls.UcTimeSearch ucTimeSearchTo;
+    private Label label16;
+    private Label label15;
+    private Label label12;
+    private TableLayoutPanel tableLayoutPanel14;
+    private TableLayoutPanel tableLayoutPanel15;
+    private TableLayoutPanel tableLayoutPanel17;
+    private Label label19;
+    private Label label20;
+    private Label lbGross;
+    private TableLayoutPanel tableLayoutPanel19;
+    private Label lbSumWeight;
   }
 }

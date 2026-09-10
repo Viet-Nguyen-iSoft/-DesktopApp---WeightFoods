@@ -15,6 +15,7 @@ namespace LTP.Truck.Forms
     private List<Product> _products = new();
     private int _productGroupRefreshVersion;
     private int _tareRefreshVersion;
+    private int _sumWeightLoadVersion;
     private MessageDataOutput _msgDataWeight { get; set; } = new MessageDataOutput();
     private RecordTruckDTO _recordTruckDTO { get; set; }
     private CategoryTare? _categoryTare { get; set; }
@@ -43,10 +44,8 @@ namespace LTP.Truck.Forms
 
     private void CustomUI()
     {
-      dtpFrom.Format = DateTimePickerFormat.Custom;
-      dtpFrom.CustomFormat = "dd/MM/yyyy";
-      dtpTo.Format = DateTimePickerFormat.Custom;
-      dtpTo.CustomFormat = "dd/MM/yyyy";
+      ucTimeSearchFrom.Value = DateTime.Today;
+      ucTimeSearchTo.Value = DateTime.Today.AddDays(1).AddMinutes(-1);
 
       ElipseControl elipseControl = new ElipseControl();
       elipseControl.TargetControl = tableLayoutPanel3;
@@ -59,6 +58,18 @@ namespace LTP.Truck.Forms
       ElipseControl elipseControl02 = new ElipseControl();
       elipseControl02.TargetControl = tableLayoutPanel9;
       elipseControl02.CornerRadius = 20;
+
+      ElipseControl elipseControl03 = new ElipseControl();
+      elipseControl03.TargetControl = tableLayoutPanel14;
+      elipseControl03.CornerRadius = 20;
+
+      ElipseControl elipseControl04 = new ElipseControl();
+      elipseControl04.TargetControl = tableLayoutPanel17;
+      elipseControl04.CornerRadius = 20;
+
+      ElipseControl elipseControl05 = new ElipseControl();
+      elipseControl05.TargetControl = tableLayoutPanel12;
+      elipseControl05.CornerRadius = 20;
 
       dgv.EnableHeadersVisualStyles = false;
       dgv.ColumnHeadersHeight = 50;
@@ -315,8 +326,11 @@ namespace LTP.Truck.Forms
       {
         HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
         if (!IsDisposed && !Disposing)
-          MessageBox.Show(this, "Không thể tải danh sách phiếu cân lần 1. Vui lòng thử lại.",
-            "Lỗi tải dữ liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        {
+          using var popupMsg = new PopupConfirm("Không thể tải danh sách phiếu cân lần 1. Vui lòng thử lại !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+          popupMsg.ShowDialog();
+        }  
       }
       finally
       {
@@ -342,7 +356,7 @@ namespace LTP.Truck.Forms
       using var popup = new LTP.Truck.Popup.PopupLoadMD();
       var records = iSoft.Database.DTOHelper.ConvertRecordTruckDTO(filtered.ToList());
       popup.SetData(records);
-      popup.OnSendData += (data, type) =>
+      popup.OnSendData += async (data, type) =>
       {
         if (data is iSoft.Database.DTO.RecordTruckDTO selectedRecord)
         {
@@ -350,9 +364,41 @@ namespace LTP.Truck.Forms
           txtLicensePlate.Texts = selectedRecord.LicensePlate ?? string.Empty;
           txtNameDriver.Texts = selectedRecord.NameDriver ?? string.Empty;
           txtIdCard.Texts = selectedRecord.IdCard ?? string.Empty;
+          await LoadSumWeightAsync(selectedRecord.RecordTruck?.Id ?? Guid.Empty);
         }
       };
       popup.ShowDialog(this);
+    }
+
+    private async Task LoadSumWeightAsync(Guid recordTruckId)
+    {
+      var loadVersion = ++_sumWeightLoadVersion;
+
+      try
+      {
+        var totalWeight = recordTruckId != Guid.Empty
+          ? await AppCore.Ins._recordWeightService.SumNetByRecordTruckIdAsync(recordTruckId)
+          : 0.0;
+
+        if (IsDisposed || Disposing || loadVersion != _sumWeightLoadVersion)
+          return;
+
+        if (InvokeRequired)
+        {
+          BeginInvoke(new Action(() =>
+          {
+            if (loadVersion == _sumWeightLoadVersion)
+              lbSumWeight.Text = totalWeight.ToString("F3");
+          }));
+          return;
+        }
+
+        lbSumWeight.Text = totalWeight.ToString("F3");
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+      }
     }
 
     private async void btnPrint_Click(object sender, EventArgs e)
@@ -409,19 +455,20 @@ namespace LTP.Truck.Forms
       try
       {
         await AppCore.Ins._recordWeightService.AddOrUpdateAsync(recordWeight);
+        await LoadSumWeightAsync(selectedRecordTruck.Id);
 
-        //In máy in
-        var printDTO = new DTOPrintLabel()
-        {
-          ProductGroup = selectedProductGroup?.Name ?? string.Empty,
-          Product = selectedProduct?.Name ?? string.Empty,
-          TypeTare = selectedTare?.Name ?? string.Empty,
-          Net = recordWeight?.Net ?? 0.0,
-          Tare = recordWeight?.Tare ?? 0.0,
-          Datetime = recordWeight?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss"),
-          Operator = "Admin"
-        };
-        AppCore.Ins.PrinterLabel(AppCore.Ins._appConfig?.NamePrint, printDTO);
+        ////In máy in
+        //var printDTO = new DTOPrintLabel()
+        //{
+        //  ProductGroup = selectedProductGroup?.Name ?? string.Empty,
+        //  Product = selectedProduct?.Name ?? string.Empty,
+        //  TypeTare = selectedTare?.Name ?? string.Empty,
+        //  Net = recordWeight?.Net ?? 0.0,
+        //  Tare = recordWeight?.Tare ?? 0.0,
+        //  Datetime = recordWeight?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss"),
+        //  Operator = "Admin"
+        //};
+        //AppCore.Ins.PrinterLabel(AppCore.Ins._appConfig?.NamePrint, printDTO);
 
         try
         {
@@ -481,18 +528,20 @@ namespace LTP.Truck.Forms
 
     private async Task LoadHistorical()
     {
-      var fromDate = dtpFrom.Value.Date;
-      var toDate = dtpTo.Value.Date;
-      if (fromDate > toDate)
+      var fromDateTime = ucTimeSearchFrom.Value;
+      var toDateTime = ucTimeSearchTo.Value;
+      if (fromDateTime > toDateTime)
       {
-        using var popup = new PopupConfirm("Ngày bắt đầu không được lớn hơn ngày kết thúc.",
+        using var popup = new PopupConfirm("Thời gian bắt đầu không được lớn hơn thời gian kết thúc.",
           EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
         popup.ShowDialog(this);
         return;
       }
 
-      var fromUtc = fromDate.ToUniversalTime();
-      var toUtcExclusive = toDate.AddDays(1).ToUniversalTime();
+      // Records are saved in UTC; the search controls represent local date and time.
+      var fromUtc = fromDateTime.ToUniversalTime();
+      // Include records occurring anywhere within the selected ending minute.
+      var toUtcExclusive = toDateTime.AddMinutes(1).ToUniversalTime();
       var searchKey = txtSearchKey.Texts.Trim();
       var records = await AppCore.Ins._recordWeightService.GetAllAsync();
 

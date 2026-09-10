@@ -9,7 +9,10 @@ namespace LTP.Truck.Controls
   public partial class AppCore
   {
     public event EventHandler<MessageDataOutput>? OnSendDataWeightTruck;
+    public event EventHandler<CommunicationStatusChangedEventArgs>? OnSendStatusWeightTruck;
+
     public event EventHandler<MessageDataOutput>? OnSendDataWeightGoods;
+    public event EventHandler<CommunicationStatusChangedEventArgs>? OnSendStatusWeightGoods;
     private const string ScaleId = "SCALE_01";
 
     private readonly ICommunicationService _communication =
@@ -56,12 +59,8 @@ namespace LTP.Truck.Controls
         object? sender,
         CommunicationStatusChangedEventArgs e)
     {
-      //BeginInvoke(() =>
-      //{
-      //  //lblStatus.Text = e.IsConnected
-      //  //    ? $"{e.ConnectionId}: Connected"
-      //  //    : $"{e.ConnectionId}: Disconnected";
-      //});
+      OnSendStatusWeightTruck?.Invoke(sender, e);
+      OnSendStatusWeightGoods?.Invoke(sender, e);
     }
   }
 }

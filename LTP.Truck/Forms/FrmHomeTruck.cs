@@ -26,6 +26,8 @@ namespace LTP.Truck.Forms
     };
     private readonly Font _deleteReasonToolTipFont = new("Segoe UI", 16F);
     private string _deleteReasonToolTipText = string.Empty;
+    private int _statusFilterIndex = 1;
+    private int _typeFilterIndex;
 
     public FrmHomeTruck()
     {
@@ -54,15 +56,13 @@ namespace LTP.Truck.Forms
 
     private void CustomUI()
     {
-      dtpFrom.Format = DateTimePickerFormat.Custom;
-      dtpFrom.CustomFormat = "dd/MM/yyyy";
-
-      dtpTo.Format = DateTimePickerFormat.Custom;
-      dtpTo.CustomFormat = "dd/MM/yyyy";
+      ucTimeSearchFrom.Value = DateTime.Today;
+      ucTimeSearchTo.Value = DateTime.Today.AddDays(1).AddMinutes(-1);
 
       ucItemWeight01.Title = "KL cân lần 1";
       ucItemWeight02.Title = "KL cân lần 2";
       ucItemWeightGoods.Title = "KL hàng";
+      ucItemWeightGoods.Visible = false;
       ucItemOffsetWeight.Title = "KL chênh lệch xe";
 
       ElipseControl elipseControl = new ElipseControl();
@@ -105,16 +105,22 @@ namespace LTP.Truck.Forms
 
     private void FrmHome_Load(object? sender, EventArgs e)
     {
-      cbbStatus.SelectedIndex = 1;
-      cbbStatus.SelectedIndexChanged += CbbStatus_SelectedIndexChanged;
-      cbbType.SelectedIndex = 0;
-      cbbType.SelectedIndexChanged += CbbStatus_SelectedIndexChanged;
+      btnFilter.Click += BtnFilter_Click;
       AppCore.Ins.OnSendDataWeightTruck += Ins_OnSendDataWeightTruck;
       CheckShowStatusButton(_recordTruck);
     }
 
-    private async void CbbStatus_SelectedIndexChanged(object? sender, EventArgs e)
+    private void BtnFilter_Click(object? sender, EventArgs e)
     {
+      using var popupFilter = new PopupFilter(_statusFilterIndex, _typeFilterIndex);
+      popupFilter.OnSendData += PopupFilter_OnSendData;
+      popupFilter.ShowDialog();
+    }
+
+    private async void PopupFilter_OnSendData(int arg1, int arg2)
+    {
+      _statusFilterIndex = arg1;
+      _typeFilterIndex = arg2;
       await LoadHistorical();
     }
 
@@ -494,6 +500,7 @@ namespace LTP.Truck.Forms
         var totalNet = recordTruckId != Guid.Empty
           ? await AppCore.Ins._recordWeightService.SumNetByRecordTruckIdAsync(recordTruckId)
           : 0.0;
+        var hasWeightGoods = Math.Abs(totalNet) >= 0.0005;
 
         if (IsDisposed || Disposing || loadVersion != _weightGoodsLoadVersion)
           return;
@@ -503,12 +510,16 @@ namespace LTP.Truck.Forms
           BeginInvoke(new Action(() =>
           {
             if (loadVersion == _weightGoodsLoadVersion)
+            {
               ucItemWeightGoods.Value = totalNet.ToString("F3");
+              ucItemWeightGoods.Visible = hasWeightGoods;
+            }
           }));
           return;
         }
 
         ucItemWeightGoods.Value = totalNet.ToString("F3");
+        ucItemWeightGoods.Visible = hasWeightGoods;
       }
       catch (Exception ex)
       {
@@ -523,21 +534,22 @@ namespace LTP.Truck.Forms
 
     private async Task LoadHistorical()
     {
-      var fromDate = dtpFrom.Value.Date;
-      var toDate = dtpTo.Value.Date;
-      if (fromDate > toDate)
+      var fromDateTime = ucTimeSearchFrom.Value;
+      var toDateTime = ucTimeSearchTo.Value;
+      if (fromDateTime > toDateTime)
       {
-        using var popup = new PopupConfirm("Ngày bắt đầu không được lớn hơn ngày kết thúc.",
+        using var popup = new PopupConfirm("Thời gian bắt đầu không được lớn hơn thời gian kết thúc.",
           EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
         popup.ShowDialog();
         return;
       }
 
-      // Records are saved in UTC; the date pickers represent local calendar days.
-      var fromUtc = fromDate.ToUniversalTime();
-      var toUtcExclusive = toDate.AddDays(1).ToUniversalTime();
-      var statusIndex = cbbStatus.SelectedIndex;
-      var typeIndex = cbbType.SelectedIndex;
+      // Records are saved in UTC; the search controls represent local date and time.
+      var fromUtc = fromDateTime.ToUniversalTime();
+      // Include records occurring anywhere within the selected ending minute.
+      var toUtcExclusive = toDateTime.AddMinutes(1).ToUniversalTime();
+      var statusIndex = _statusFilterIndex;
+      var typeIndex = _typeFilterIndex;
       var searchKey = txtSearchKey.Texts.Trim();
 
       // Hiển thị cả bản ghi đã xóa để người dùng có thể phục hồi.
