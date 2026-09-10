@@ -42,6 +42,14 @@ namespace iSoft.Database.Repositorys
         .FirstOrDefaultAsync(connection => connection.Id == id);
     }
 
+    public Task<Connection?> GetFirstDataConnectionAsync()
+    {
+      return Context.Set<Connection>()
+        .Where(connection => !connection.DeletedFlag)
+        .Include(connection => connection.Station)
+        .FirstOrDefaultAsync();
+    }
+
     public async Task<Connection> AddOrUpdateAsync(Connection connection)
     {
       ArgumentNullException.ThrowIfNull(connection);

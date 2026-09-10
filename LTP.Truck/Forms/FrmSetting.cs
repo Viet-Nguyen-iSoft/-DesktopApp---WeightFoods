@@ -28,6 +28,7 @@ namespace LTP.Truck.Forms
       flowCommWeight.WrapContents = false;
       this.Load += FrmSetting_Load;
       btnSavePrint.Click += btnSavePrint_Click;
+      btnAddCommWeight.Click += btnAddCommWeight_Click;
     }
     #region Instance
     private static FrmSetting _Instance = null;
@@ -225,7 +226,7 @@ namespace LTP.Truck.Forms
     }
 
 
-    private void btnAddCommWeight_Click(object sender, EventArgs e)
+    private void btnAddCommWeight_Click(object? sender, EventArgs e)
     {
       PopupChooseComm popupChooseComm = new PopupChooseComm();
       popupChooseComm.OnSendConfirm += PopupChooseComm_OnSendConfirm;

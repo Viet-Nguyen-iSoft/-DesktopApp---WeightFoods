@@ -1,4 +1,5 @@
-﻿using iSoft.Communication.Communication;
+﻿using HelperManager;
+using iSoft.Communication.Communication;
 using iSoft.Communication.Interface;
 using iSoft.Communication.JsonPayload;
 using static iSoft.Communication.EnumCommunication;
@@ -18,25 +19,29 @@ namespace LTP.Truck.Controls
       _communication.DataReceived += Communication_DataReceived;
       _communication.ConnectionStatusChanged += Communication_StatusChanged;
 
-      var config = new ConfigTcpClient
+      if (AppCore.Ins._connection != null)
       {
-        Code = ScaleId,
-        NameDevice = "Cân TCP",
-        Host = "192.168.100.244",
-        Port = 8000,
-        eModeCommunication = eModeCommunication.SICS,
-        AutoConnect = true,
-        TimeoutMs = 5000,
-        Request = true,
-        TimeRequest = 200
-      };
+        var configData = JsonHelper.FromJson<JsonConfigTcpClient>(AppCore.Ins._connection.JsonStrConfig ?? string.Empty);
+        var config = new ConfigTcpClient
+        {
+          Code = ScaleId,
+          NameDevice = "Cân TCP",
+          Host = configData.Host,
+          Port = configData.Port,
+          eModeCommunication = eModeCommunication.SICS,
+          AutoConnect = true,
+          TimeoutMs = 5000,
+          Request = true,
+          TimeRequest = 200
+        };
 
-      _communication.AddConnection(
+        _communication.AddConnection(
           config,
           machineId: null,
           device: eDevice.Weight);
 
-      _communication.Connect(ScaleId);
+        _communication.Connect(ScaleId);
+      }  
     }
 
     private void Communication_DataReceived(

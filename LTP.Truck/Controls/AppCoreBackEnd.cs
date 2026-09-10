@@ -118,6 +118,7 @@ namespace LTP.Truck.Controls
     public Station? _station { get;set; }
     public List<Employee>? _employees { get;set; }
     public Employee? _employeeCurrent { get;set; }
+    public Connection? _connection { get;set; }
     public async Task LoadDataConfig()
     {
       try
@@ -125,13 +126,13 @@ namespace LTP.Truck.Controls
         _appConfig = await _appConfigService.GetAppConfigAsync();
         _station = await _stationService.GetFirstDataStation();
         _employees = await _employeeService.GetAllAsync();
-
+        _connection = await _connectionService.GetFirstDataConnection();
         //var employees = _employees.FirstOrDefault();
         //foreach (var item in _employees)
         //{
         //  var pass = HelperManager.EncoderHelper.Decrypt(item.Passwords);
         //}
-        
+
       }
       catch (Exception)
       {
