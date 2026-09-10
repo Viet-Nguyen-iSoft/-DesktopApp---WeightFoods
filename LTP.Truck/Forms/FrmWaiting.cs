@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common;
+using LTP.Truck.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Common.EnumData;
 using static LTP.Truck.EnumData;
 
 namespace LTP.Truck.Forms
@@ -43,7 +46,17 @@ namespace LTP.Truck.Forms
 
     private void UcPanelLogin1_OnSendLogin(object? sender, EventArgs e)
     {
-      FrmMain.Instance.ChangePage(EnumScreen.Operation);
+      if (ucPanelLogin1.Account=="admin" && ucPanelLogin1.Password == "admin")
+      {
+        FrmMain.Instance.ChangePage(EnumScreen.Operation);
+        AppCore.Ins._employeeCurrent = AppCore.Ins._employees?.Where(x => x.Account == "admin").FirstOrDefault();
+      }  
+      else
+      {
+        using var popupMsg = new PopupConfirm("Tài khoản hoặc mật khẩu sai. Vui lòng thử lại !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+        popupMsg.ShowDialog(this);
+      }  
     }
   }
 }

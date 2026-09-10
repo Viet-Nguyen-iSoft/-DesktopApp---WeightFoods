@@ -12,6 +12,7 @@ namespace ApiSyncData
     public static Resp.ProductAPI? Products { get; private set; }
     public static Resp.CategoryTareAPI? CategoryTares { get; private set; }
     public static Resp.ClientAPI? Clients { get; private set; }
+    public static Resp.UserAPI? Users { get; private set; }
 
     /// <summary>
     /// Chạy các API mặc định sau mỗi 5 giây. Giữ Task và hủy token khi cần dừng.
@@ -33,25 +34,34 @@ namespace ApiSyncData
     private static async Task RunDefaultFunctionsAsync(
       ApiService api, CancellationToken cancellationToken)
     {
-      cancellationToken.ThrowIfCancellationRequested();
+      try
+      {
+        cancellationToken.ThrowIfCancellationRequested();
 
-      var stations = LoadAndSyncAsync(api.Station(), MasterDataSyncService.SyncStationsAsync,
-        value => Stations = value, cancellationToken);
-      var warehouses = LoadAndSyncAsync(api.Warehouse(), MasterDataSyncService.SyncWarehousesAsync,
-        value => Warehouses = value, cancellationToken);
-      var typeGoods = LoadAndSyncAsync(api.TypeGoods(), MasterDataSyncService.SyncTypeGoodsAsync,
-        value => TypeGoods = value, cancellationToken);
-      var productGroups = LoadAndSyncAsync(api.ProductGroup(), MasterDataSyncService.SyncProductGroupsAsync,
-        value => ProductGroups = value, cancellationToken);
-      var products = SyncProductsAfterGroupsAsync(api.Product(), productGroups, cancellationToken);
-      var categoryTares = LoadAndSyncAsync(api.CategoryTare(), MasterDataSyncService.SyncCategoryTaresAsync,
-        value => CategoryTares = value, cancellationToken);
+        var stations = LoadAndSyncAsync(api.Station(), MasterDataSyncService.SyncStationsAsync,
+          value => Stations = value, cancellationToken);
+        var warehouses = LoadAndSyncAsync(api.Warehouse(), MasterDataSyncService.SyncWarehousesAsync,
+          value => Warehouses = value, cancellationToken);
+        var typeGoods = LoadAndSyncAsync(api.TypeGoods(), MasterDataSyncService.SyncTypeGoodsAsync,
+          value => TypeGoods = value, cancellationToken);
+        var productGroups = LoadAndSyncAsync(api.ProductGroup(), MasterDataSyncService.SyncProductGroupsAsync,
+          value => ProductGroups = value, cancellationToken);
+        var products = SyncProductsAfterGroupsAsync(api.Product(), productGroups, cancellationToken);
+        var categoryTares = LoadAndSyncAsync(api.CategoryTare(), MasterDataSyncService.SyncCategoryTaresAsync,
+          value => CategoryTares = value, cancellationToken);
 
-      var clients = LoadAndSyncAsync(api.Client(), MasterDataSyncService.SyncClientsAsync,
-        value => Clients = value, cancellationToken);
+        var clients = LoadAndSyncAsync(api.Client(), MasterDataSyncService.SyncClientsAsync,
+          value => Clients = value, cancellationToken);
+        var users = LoadAndSyncAsync(api.User(), MasterDataSyncService.SyncEmployeesAsync,
+          value => Users = value, cancellationToken);
 
-      await Task.WhenAll(stations, warehouses, typeGoods, productGroups,
-        products, categoryTares, clients).ConfigureAwait(false);
+        await Task.WhenAll(stations, warehouses, typeGoods, productGroups,
+          products, categoryTares, clients, users).ConfigureAwait(false);
+      }
+      catch (Exception ex)
+      {
+
+      }
 
     }
 

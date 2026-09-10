@@ -31,6 +31,13 @@ namespace iSoft.Database.Service
       return await repository.GetFirstWeighingRecordsAsync().ConfigureAwait(false);
     }
 
+    public async Task<RecordTruck?> GetDetailByIdAsync(Guid id, bool isContainDelete = false)
+    {
+      await using var context = new PostgresDbContext();
+      var repository = new RecordTruckRepository(context);
+      return await repository.GetDetailByIdAsync(id, isContainDelete).ConfigureAwait(false);
+    }
+
     public async Task<RecordTruck> AddOrUpdateAsync(RecordTruck recordTruck)
     {
       try

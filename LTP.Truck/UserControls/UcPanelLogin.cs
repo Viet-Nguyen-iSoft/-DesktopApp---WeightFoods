@@ -20,6 +20,30 @@ namespace LTP.Truck.UserControls
       CustomUI();
     }
 
+    public string Account
+    {
+      get
+      {
+        return txtAccount.Texts;
+      }
+      set
+      {
+        txtAccount.Texts = value;
+      }
+    }
+
+    public string Password
+    {
+      get
+      {
+        return txtPass.Texts;
+      }
+      set
+      {
+        txtPass.Texts = value;
+      }
+    }
+
     private void CustomUI()
     {
       ElipseControl elipseControl = new ElipseControl();

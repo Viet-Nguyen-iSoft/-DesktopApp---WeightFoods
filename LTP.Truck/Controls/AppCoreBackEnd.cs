@@ -64,7 +64,8 @@ namespace LTP.Truck.Controls
     public readonly AppConfigService _appConfigService = new();
     public readonly StationService _stationService = new();
     public readonly ConnectionService _connectionService = new();
-    
+    public readonly EmployeeService _employeeService = new();
+
 
     public string _folderFileLog = Application.StartupPath + "Logs";
     public void Init()
@@ -115,12 +116,23 @@ namespace LTP.Truck.Controls
 
     public AppConfig? _appConfig { get;set; }
     public Station? _station { get;set; }
+    public List<Employee>? _employees { get;set; }
+    public Employee? _employeeCurrent { get;set; }
+    public Connection? _connection { get;set; }
     public async Task LoadDataConfig()
     {
       try
       {
         _appConfig = await _appConfigService.GetAppConfigAsync();
         _station = await _stationService.GetFirstDataStation();
+        _employees = await _employeeService.GetAllAsync();
+        _connection = await _connectionService.GetFirstDataConnection();
+        //var employees = _employees.FirstOrDefault();
+        //foreach (var item in _employees)
+        //{
+        //  var pass = HelperManager.EncoderHelper.Decrypt(item.Passwords);
+        //}
+
       }
       catch (Exception)
       {
@@ -179,7 +191,7 @@ namespace LTP.Truck.Controls
               {
                 e.Graphics.DrawImage(
                     qrBitmap,
-                    new Rectangle(startX, startY + 4 * offsetY, 20, 20)
+                    new Rectangle(startX, startY + 4 * offsetY, 19, 19)
                 );
               }
             }
@@ -209,7 +221,7 @@ namespace LTP.Truck.Controls
           }
 
           e.Graphics.DrawString("Loại Tare :", fontTilte, brush, new PointF(startX, startY + offsetY * i));
-          e.Graphics.DrawString(dTOPrintLabel.TypeTare, fontValue, brush, new PointF(startX + 28, startY + offsetY * i));
+          e.Graphics.DrawString(dTOPrintLabel.TypeTare, fontValue, brush, new PointF(startX + 20, startY + offsetY * i));
 
           i++;
 

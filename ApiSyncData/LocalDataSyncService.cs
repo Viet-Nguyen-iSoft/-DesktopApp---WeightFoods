@@ -250,12 +250,12 @@ namespace ApiSyncData
           record.StationId,
           record.Station,
           nameof(record.Station)),
-        EmployeeId = GetSourceId(
-          nameof(RecordWeight),
-          record.Id,
-          record.EmployeeId,
-          record.Employee,
-          nameof(record.Employee)),
+        //EmployeeId = GetSourceId(
+        //  nameof(RecordWeight),
+        //  record.Id,
+        //  record.EmployeeId,
+        //  record.Employee,
+        //  nameof(record.Employee)),
         ProductId = GetSourceId(
           nameof(RecordWeight),
           record.Id,

@@ -41,6 +41,26 @@ namespace iSoft.Database.Repositorys
         .ToListAsync();
     }
 
+    public Task<RecordTruck?> GetDetailByIdAsync(Guid id, bool isContainDelete = false)
+    {
+      var query = Context.Set<RecordTruck>()
+        .AsNoTracking()
+        .Include(record => record.Client)
+        .Include(record => record.TypeGoods)
+        .Include(record => record.Warehouse)
+        .Include(record => record.Employee)
+        .Include(record => record.Station)
+        .Include(record => record.RecordWeights!)
+          .ThenInclude(recordWeight => recordWeight.Product)
+            .ThenInclude(product => product.ProductGroup)
+        .AsQueryable();
+
+      if (!isContainDelete)
+        query = query.Where(record => !record.DeletedFlag);
+
+      return query.FirstOrDefaultAsync(record => record.Id == id);
+    }
+
     public async Task<RecordTruck> AddOrUpdateAsync(RecordTruck recordTruck)
     {
       if (recordTruck == null)

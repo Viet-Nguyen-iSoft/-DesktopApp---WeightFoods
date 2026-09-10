@@ -27,6 +27,13 @@ namespace iSoft.Database.Service
       return await repository.GetByIdAsync(id).ConfigureAwait(false);
     }
 
+    public async Task<Connection?> GetFirstDataConnection()
+    {
+      await using var context = new PostgresDbContext();
+      var repository = new ConnectionRepository(context);
+      return await repository.GetFirstDataConnectionAsync().ConfigureAwait(false);
+    }
+
     public async Task<Connection> AddOrUpdateAsync(Connection connection)
     {
       await using var context = new PostgresDbContext();

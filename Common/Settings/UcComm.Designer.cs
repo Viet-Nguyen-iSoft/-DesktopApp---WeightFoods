@@ -30,12 +30,14 @@
     {
       tableLayoutPanel3 = new TableLayoutPanel();
       lbCommName = new Label();
+      lbInfor = new Label();
       tableLayoutPanel2 = new TableLayoutPanel();
       btnDelete = new Common.Custom.RJButton();
       btnDetail = new Common.Custom.RJButton();
-      lbInfor = new Label();
+      tableLayoutPanel1 = new TableLayoutPanel();
       tableLayoutPanel3.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
+      tableLayoutPanel1.SuspendLayout();
       SuspendLayout();
       // 
       // tableLayoutPanel3
@@ -43,9 +45,9 @@
       tableLayoutPanel3.BackColor = Color.AliceBlue;
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel3.Controls.Add(lbCommName, 0, 0);
       tableLayoutPanel3.Controls.Add(lbInfor, 0, 1);
       tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 0, 3);
+      tableLayoutPanel3.Controls.Add(tableLayoutPanel1, 0, 0);
       tableLayoutPanel3.Dock = DockStyle.Fill;
       tableLayoutPanel3.Location = new Point(0, 0);
       tableLayoutPanel3.Margin = new Padding(0);
@@ -70,10 +72,25 @@
       lbCommName.Margin = new Padding(0);
       lbCommName.Name = "lbCommName";
       lbCommName.Padding = new Padding(10, 0, 0, 0);
-      lbCommName.Size = new Size(588, 60);
+      lbCommName.Size = new Size(301, 54);
       lbCommName.TabIndex = 0;
       lbCommName.Text = "Tên kết nối";
       lbCommName.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // lbInfor
+      // 
+      lbInfor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbInfor.AutoSize = true;
+      lbInfor.BackColor = Color.Transparent;
+      lbInfor.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      lbInfor.Location = new Point(0, 60);
+      lbInfor.Margin = new Padding(0);
+      lbInfor.Name = "lbInfor";
+      lbInfor.Padding = new Padding(10, 0, 0, 0);
+      lbInfor.Size = new Size(588, 80);
+      lbInfor.TabIndex = 1;
+      lbInfor.Text = "Chuẩn kết nối";
+      lbInfor.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // tableLayoutPanel2
       // 
@@ -141,20 +158,19 @@
       btnDetail.UseVisualStyleBackColor = false;
       btnDetail.Click += btnDetail_Click;
       // 
-      // lbInfor
+      // tableLayoutPanel1
       // 
-      lbInfor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      lbInfor.AutoSize = true;
-      lbInfor.BackColor = Color.Transparent;
-      lbInfor.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      lbInfor.Location = new Point(0, 60);
-      lbInfor.Margin = new Padding(0);
-      lbInfor.Name = "lbInfor";
-      lbInfor.Padding = new Padding(10, 0, 0, 0);
-      lbInfor.Size = new Size(588, 80);
-      lbInfor.TabIndex = 1;
-      lbInfor.Text = "Chuẩn kết nối";
-      lbInfor.TextAlign = ContentAlignment.MiddleLeft;
+      tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel1.ColumnCount = 2;
+      tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 51.7182121F));
+      tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 48.2817879F));
+      tableLayoutPanel1.Controls.Add(lbCommName, 0, 0);
+      tableLayoutPanel1.Location = new Point(3, 3);
+      tableLayoutPanel1.Name = "tableLayoutPanel1";
+      tableLayoutPanel1.RowCount = 1;
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+      tableLayoutPanel1.Size = new Size(582, 54);
+      tableLayoutPanel1.TabIndex = 5;
       // 
       // UcComm
       // 
@@ -166,6 +182,8 @@
       tableLayoutPanel3.ResumeLayout(false);
       tableLayoutPanel3.PerformLayout();
       tableLayoutPanel2.ResumeLayout(false);
+      tableLayoutPanel1.ResumeLayout(false);
+      tableLayoutPanel1.PerformLayout();
       ResumeLayout(false);
     }
 
@@ -177,5 +195,6 @@
     private Custom.RJButton btnDetail;
     private Label lbInfor;
     private Custom.RJButton btnDelete;
+    private TableLayoutPanel tableLayoutPanel1;
   }
 }
