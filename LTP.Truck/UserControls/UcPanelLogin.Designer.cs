@@ -32,9 +32,9 @@
       label1 = new Label();
       tableLayoutPanel2 = new TableLayoutPanel();
       label2 = new Label();
-      rjTextBox1 = new LTP.Truck.Custom.RJTextBox();
+      txtAccount = new LTP.Truck.Custom.RJTextBox();
       tableLayoutPanel3 = new TableLayoutPanel();
-      rjTextBox2 = new LTP.Truck.Custom.RJTextBox();
+      txtPass = new LTP.Truck.Custom.RJTextBox();
       label3 = new Label();
       btnLogin = new LTP.Truck.Custom.RJButton();
       tableLayoutPanel1.SuspendLayout();
@@ -89,7 +89,7 @@
       tableLayoutPanel2.ColumnCount = 1;
       tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel2.Controls.Add(label2, 0, 0);
-      tableLayoutPanel2.Controls.Add(rjTextBox1, 0, 1);
+      tableLayoutPanel2.Controls.Add(txtAccount, 0, 1);
       tableLayoutPanel2.Dock = DockStyle.Fill;
       tableLayoutPanel2.Location = new Point(30, 130);
       tableLayoutPanel2.Margin = new Padding(0);
@@ -114,35 +114,35 @@
       label2.Text = "Tên đăng nhập";
       label2.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // rjTextBox1
+      // txtAccount
       // 
-      rjTextBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox1.BackColor = SystemColors.Window;
-      rjTextBox1.BorderColor = Color.White;
-      rjTextBox1.BorderFocusColor = Color.HotPink;
-      rjTextBox1.BorderRadius = 5;
-      rjTextBox1.BorderSize = 2;
-      rjTextBox1.Font = new Font("Roboto Condensed", 26.25F);
-      rjTextBox1.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox1.Location = new Point(4, 45);
-      rjTextBox1.Margin = new Padding(4);
-      rjTextBox1.Multiline = false;
-      rjTextBox1.Name = "rjTextBox1";
-      rjTextBox1.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox1.PasswordChar = false;
-      rjTextBox1.PlaceholderColor = Color.DarkGray;
-      rjTextBox1.PlaceholderText = "";
-      rjTextBox1.Size = new Size(582, 57);
-      rjTextBox1.TabIndex = 2;
-      rjTextBox1.Texts = "";
-      rjTextBox1.UnderlinedStyle = false;
+      txtAccount.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtAccount.BackColor = SystemColors.Window;
+      txtAccount.BorderColor = Color.White;
+      txtAccount.BorderFocusColor = Color.HotPink;
+      txtAccount.BorderRadius = 5;
+      txtAccount.BorderSize = 2;
+      txtAccount.Font = new Font("Roboto Condensed", 26.25F);
+      txtAccount.ForeColor = Color.FromArgb(64, 64, 64);
+      txtAccount.Location = new Point(4, 45);
+      txtAccount.Margin = new Padding(4);
+      txtAccount.Multiline = false;
+      txtAccount.Name = "txtAccount";
+      txtAccount.Padding = new Padding(10, 7, 10, 7);
+      txtAccount.PasswordChar = false;
+      txtAccount.PlaceholderColor = Color.DarkGray;
+      txtAccount.PlaceholderText = "";
+      txtAccount.Size = new Size(582, 57);
+      txtAccount.TabIndex = 2;
+      txtAccount.Texts = "admin";
+      txtAccount.UnderlinedStyle = false;
       // 
       // tableLayoutPanel3
       // 
       tableLayoutPanel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel3.Controls.Add(rjTextBox2, 0, 1);
+      tableLayoutPanel3.Controls.Add(txtPass, 0, 1);
       tableLayoutPanel3.Controls.Add(label3, 0, 0);
       tableLayoutPanel3.Location = new Point(30, 255);
       tableLayoutPanel3.Margin = new Padding(0);
@@ -153,28 +153,28 @@
       tableLayoutPanel3.Size = new Size(590, 110);
       tableLayoutPanel3.TabIndex = 2;
       // 
-      // rjTextBox2
+      // txtPass
       // 
-      rjTextBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox2.BackColor = SystemColors.Window;
-      rjTextBox2.BorderColor = Color.White;
-      rjTextBox2.BorderFocusColor = Color.HotPink;
-      rjTextBox2.BorderRadius = 5;
-      rjTextBox2.BorderSize = 2;
-      rjTextBox2.Font = new Font("Roboto Condensed", 26.25F);
-      rjTextBox2.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox2.Location = new Point(4, 45);
-      rjTextBox2.Margin = new Padding(4);
-      rjTextBox2.Multiline = false;
-      rjTextBox2.Name = "rjTextBox2";
-      rjTextBox2.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox2.PasswordChar = false;
-      rjTextBox2.PlaceholderColor = Color.DarkGray;
-      rjTextBox2.PlaceholderText = "";
-      rjTextBox2.Size = new Size(582, 57);
-      rjTextBox2.TabIndex = 3;
-      rjTextBox2.Texts = "";
-      rjTextBox2.UnderlinedStyle = false;
+      txtPass.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtPass.BackColor = SystemColors.Window;
+      txtPass.BorderColor = Color.White;
+      txtPass.BorderFocusColor = Color.HotPink;
+      txtPass.BorderRadius = 5;
+      txtPass.BorderSize = 2;
+      txtPass.Font = new Font("Roboto Condensed", 26.25F);
+      txtPass.ForeColor = Color.FromArgb(64, 64, 64);
+      txtPass.Location = new Point(4, 45);
+      txtPass.Margin = new Padding(4);
+      txtPass.Multiline = false;
+      txtPass.Name = "txtPass";
+      txtPass.Padding = new Padding(10, 7, 10, 7);
+      txtPass.PasswordChar = false;
+      txtPass.PlaceholderColor = Color.DarkGray;
+      txtPass.PlaceholderText = "";
+      txtPass.Size = new Size(582, 57);
+      txtPass.TabIndex = 3;
+      txtPass.Texts = "admin";
+      txtPass.UnderlinedStyle = false;
       // 
       // label3
       // 
@@ -235,8 +235,8 @@
     private Label label2;
     private TableLayoutPanel tableLayoutPanel3;
     private Label label3;
-    private Custom.RJTextBox rjTextBox1;
-    private Custom.RJTextBox rjTextBox2;
+    private Custom.RJTextBox txtAccount;
+    private Custom.RJTextBox txtPass;
     private Custom.RJButton btnLogin;
   }
 }

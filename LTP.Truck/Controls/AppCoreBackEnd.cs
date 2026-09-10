@@ -64,7 +64,8 @@ namespace LTP.Truck.Controls
     public readonly AppConfigService _appConfigService = new();
     public readonly StationService _stationService = new();
     public readonly ConnectionService _connectionService = new();
-    
+    public readonly EmployeeService _employeeService = new();
+
 
     public string _folderFileLog = Application.StartupPath + "Logs";
     public void Init()
@@ -115,12 +116,22 @@ namespace LTP.Truck.Controls
 
     public AppConfig? _appConfig { get;set; }
     public Station? _station { get;set; }
+    public List<Employee>? _employees { get;set; }
+    public Employee? _employeeCurrent { get;set; }
     public async Task LoadDataConfig()
     {
       try
       {
         _appConfig = await _appConfigService.GetAppConfigAsync();
         _station = await _stationService.GetFirstDataStation();
+        _employees = await _employeeService.GetAllAsync();
+
+        //var employees = _employees.FirstOrDefault();
+        //foreach (var item in _employees)
+        //{
+        //  var pass = HelperManager.EncoderHelper.Decrypt(item.Passwords);
+        //}
+        
       }
       catch (Exception)
       {

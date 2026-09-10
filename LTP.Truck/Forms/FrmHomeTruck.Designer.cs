@@ -387,6 +387,7 @@ namespace LTP.Truck.Forms
       btnZero.Text = "Zero";
       btnZero.TextColor = Color.White;
       btnZero.UseVisualStyleBackColor = false;
+      btnZero.Click += btnZero_Click;
       // 
       // btnBack
       // 
