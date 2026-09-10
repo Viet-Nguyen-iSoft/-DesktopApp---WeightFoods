@@ -8,13 +8,13 @@ namespace iSoft.Database.Service
   {
     public async Task<List<Station>> GetAllAsync(bool isContainDelete = false)
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new StationRepository(context);
       return await repository.GetAllAsync(isContainDelete).ConfigureAwait(false);
     }
     public async Task<Station?> GetFirstDataStation(bool isContainDelete = false)
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new StationRepository(context);
       return await repository.GetFirstDataStationAsync().ConfigureAwait(false);
     }

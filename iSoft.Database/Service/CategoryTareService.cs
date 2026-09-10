@@ -1,4 +1,4 @@
-﻿using iSoft.Database.DbContexts;
+using iSoft.Database.DbContexts;
 using iSoft.Database.Models;
 using iSoft.Database.Repositorys;
 using System;
@@ -13,7 +13,7 @@ namespace iSoft.Database.Service
   {
     public async Task<List<CategoryTare>> GetAllAsync(bool IsContainDelete = false)
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new CategoryTareRepository(context);
       return await repository.GetAllAsync(IsContainDelete).ConfigureAwait(false);
     }

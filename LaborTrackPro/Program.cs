@@ -1,4 +1,4 @@
-﻿using HelperManager;
+using HelperManager;
 using iSoft.Database.DbContexts;
 using iSoft.Database.Models;
 using LaborTrackPro.Communication;
@@ -49,7 +49,7 @@ namespace LaborTrackPro
     {
       try
       {
-        using (var db = new PostgresDbContext())
+        using (var db = new MySqlDbContext())
         {
           try
           {
@@ -72,8 +72,8 @@ namespace LaborTrackPro
                 DeletedFlag = false,
                 EnableFlag = true,
                 SyncFlag = true,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
               });
             }
 
@@ -93,8 +93,8 @@ namespace LaborTrackPro
                 DeletedFlag = false,
                 EnableFlag = true,
                 SyncFlag = true,
-                CreatedAt = DateTime.Now,
-                UpdatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
               });
             }
 

@@ -37,8 +37,8 @@ namespace iSoft.DatabaseServer.DbContexts
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.HasPostgresExtension("unaccent");
-      modelBuilder.ConfigureDateTimeProperties("timestamp with time zone");
+      base.OnModelCreating(modelBuilder);
+      modelBuilder.ConfigureDateTimeProperties("datetime(6)");
 
       //modelBuilder.Entity<MaterialEntity>()
       //      .HasMany(e => e.ProductionOrders)
@@ -173,30 +173,30 @@ namespace iSoft.DatabaseServer.DbContexts
           .OnDelete(DeleteBehavior.Restrict);
 
 
-      modelBuilder.Entity<MaterialEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
-      //modelBuilder.Entity<MaterialEntityTrans>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<MaterialEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
+      //modelBuilder.Entity<MaterialEntityTrans>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<ProductionOrderEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<ProductionOrderEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<ProductEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<ProductEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<MaterialSettingEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<MaterialSettingEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<UserGroupEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<UserGroupEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<UserEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<UserEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<LaborProductivityRecognitionEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<LaborProductivityRecognitionEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<WeightTicketEntities>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<WeightTicketEntities>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<FactoryEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<FactoryEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<MachineEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<MachineEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<ConnectionEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<ConnectionEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
-      modelBuilder.Entity<TareCategoryEntity>().Property(e => e.Id).HasDefaultValueSql("gen_random_uuid()");
+      modelBuilder.Entity<TareCategoryEntity>().Property(e => e.Id).HasDefaultValueSql("(UUID())");
 
 
 

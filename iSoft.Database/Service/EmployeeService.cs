@@ -8,7 +8,7 @@ namespace iSoft.Database.Service
   {
     public async Task<List<Employee>> GetAllAsync(bool isContainDelete = false)
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
 
       var query = context.Set<Employee>().AsQueryable();
       if (!isContainDelete)

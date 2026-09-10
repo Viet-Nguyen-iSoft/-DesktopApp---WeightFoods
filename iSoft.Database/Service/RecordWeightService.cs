@@ -10,21 +10,21 @@ namespace iSoft.Database.Service
   {
     public async Task<List<RecordWeight>> GetAllAsync(bool IsContainDelete = false)
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new RecordWeightRepository(context);
       return await repository.GetAllAsync(IsContainDelete).ConfigureAwait(false);
     }
 
     public async Task<RecordWeight> AddOrUpdateAsync(RecordWeight recordWeight)
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new RecordWeightRepository(context);
       return await repository.AddOrUpdateAsync(recordWeight).ConfigureAwait(false);
     }
 
     public async Task<double> SumNetByRecordTruckIdAsync(Guid recordTruckId)
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new RecordWeightRepository(context);
       return await repository.SumNetByRecordTruckIdAsync(recordTruckId).ConfigureAwait(false);
     }

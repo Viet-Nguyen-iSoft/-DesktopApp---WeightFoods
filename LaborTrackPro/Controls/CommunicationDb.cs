@@ -1,4 +1,4 @@
-﻿using iSoft.Database.DbContexts;
+using iSoft.Database.DbContexts;
 using iSoft.Database.Models;
 using iSoft.Database.Repositorys;
 using Microsoft.EntityFrameworkCore;
@@ -13,18 +13,18 @@ namespace LaborTrackPro.Controls
   {
     public async Task<Connection> AddConnection(Connection connection)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Connection, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Connection, MySqlDbContext>(context);
         return await repo.AddAsync(connection);
       }
     }
 
     public async Task<bool> UpdateConnection(Connection connection)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Connection, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Connection, MySqlDbContext>(context);
         return await repo.UpdateAsync(connection);
       }
     }
@@ -33,22 +33,22 @@ namespace LaborTrackPro.Controls
     {
       if (connection.Id > 0)
       {
-        connection.UpdatedAt = DateTime.Now;
+        connection.UpdatedAt = DateTime.UtcNow;
         await UpdateConnection(connection);
         return connection;
       }
       else
       {
-        connection.CreatedAt = DateTime.Now;
+        connection.CreatedAt = DateTime.UtcNow;
         return await AddConnection(connection);
       }
     }
 
     public async Task<AppConfig> GetAppConfigAsync()
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<AppConfig, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<AppConfig, MySqlDbContext>(context);
         var rs = await repo.GetAllAsync();
         if (rs != null)
         {
@@ -63,27 +63,27 @@ namespace LaborTrackPro.Controls
 
     public async Task<bool> UpdateAppConfig_Async(AppConfig appConfig)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<AppConfig, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<AppConfig, MySqlDbContext>(context);
         return await repo.UpdateAsync(appConfig);
       }
     }
 
     public async Task<Employee> AddEmployee(Employee employee)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, MySqlDbContext>(context);
         return await repo.AddAsync(employee);
       }
     }
 
     public async Task AddRangeEmployeesAsync(List<Employee> employees)
     {
-      //using (var context = new PostgresDbContext())
+      //using (var context = new MySqlDbContext())
       //{
-      //  var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, PostgresDbContext>(context);
+      //  var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, MySqlDbContext>(context);
       //  await repo.AddRangeAsync(employees);
       //}
 
@@ -91,7 +91,7 @@ namespace LaborTrackPro.Controls
       {
         foreach (var employee in employees)
         {
-          using (var context = new PostgresDbContext())
+          using (var context = new MySqlDbContext())
           {
             foreach (var rm in employee.Departments)
               context.Entry(rm).State = EntityState.Unchanged;
@@ -109,27 +109,27 @@ namespace LaborTrackPro.Controls
 
     public async Task AddRangeCategoryTaresAsync(List<CategoryTare> categoryTares)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<CategoryTare, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<CategoryTare, MySqlDbContext>(context);
         await repo.AddRangeAsync(categoryTares);
       }
     }
 
     public async Task AddRangeMaterialGroupAsync(List<ProductGroup> materialGroups)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<ProductGroup, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<ProductGroup, MySqlDbContext>(context);
         await repo.AddRangeAsync(materialGroups);
       }
     }
 
     public async Task AddRangeMachinesAsync(List<Station> machines)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Station, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Station, MySqlDbContext>(context);
         await repo.AddRangeAsync(machines);
       }
     }
@@ -137,7 +137,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<List<Employee>> GetAllEmployeeAsync(bool isContainDelete = false)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new EmployeeRepository(context);
         return await repo.GetAllAsync(isContainDelete);
@@ -146,7 +146,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<List<Employee>> GetAllEmployeeNotIncludeAsync(bool isContainDelete = false)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new EmployeeRepository(context);
         return await repo.GetAllNotIncludeAsync(isContainDelete);
@@ -155,7 +155,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<List<CategoryTare>> GetAllCategoryTareAsync(bool isContainDelete = false)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new CategoryTareRepository(context);
         return await repo.GetAllAsync(isContainDelete);
@@ -164,7 +164,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<List<ProductGroup>> GetMaterialGroupsAsync(bool isContainDelete = false)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new ProductGroupRepository(context);
         return await repo.GetAllAsync(isContainDelete);
@@ -173,7 +173,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<Employee?> FindEmployeeByAccount(string account, string password)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new EmployeeRepository(context);
         return await repo.GetEmployeeByAccount(account, password);
@@ -182,9 +182,9 @@ namespace LaborTrackPro.Controls
 
     public async Task AddRangeMaterialsAsync(List<Product> materials)
     {
-      //using (var context = new PostgresDbContext())
+      //using (var context = new MySqlDbContext())
       //{
-      //  var repo = new iSoft.Database.Repositorys.GenericRepository<Material, PostgresDbContext>(context);
+      //  var repo = new iSoft.Database.Repositorys.GenericRepository<Material, MySqlDbContext>(context);
       //  await repo.AddRangeAsync(materials);
       //}
 
@@ -192,7 +192,7 @@ namespace LaborTrackPro.Controls
       //{
       //  foreach (var mr in materials)
       //  {
-      //    using (var context = new PostgresDbContext())
+      //    using (var context = new MySqlDbContext())
       //    {
       //      foreach (var rm in mr.CategoryTares)
       //        context.Entry(rm).State = EntityState.Unchanged;
@@ -209,9 +209,9 @@ namespace LaborTrackPro.Controls
 
     public async Task UpdateRangeMaterialsAsync(List<Product> materials)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Product, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Product, MySqlDbContext>(context);
         await repo.UpdateRangeAsync(materials);
       }
     }
@@ -221,9 +221,9 @@ namespace LaborTrackPro.Controls
     {
       //try
       //{
-      //  using (var context = new PostgresDbContext())
+      //  using (var context = new MySqlDbContext())
       //  {
-      //    var repo = new iSoft.Database.Repositorys.GenericRepository<Product, PostgresDbContext>(context);
+      //    var repo = new iSoft.Database.Repositorys.GenericRepository<Product, MySqlDbContext>(context);
 
       //    // Load entity cũ từ DB kèm quan hệ
       //    var existingMaterial = await context.Materials
@@ -292,7 +292,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<List<Product>> GetMaterialsAsync(bool isContainDelete = false)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new ProductRepository(context);
         return await repo.GetAllAsync(isContainDelete);
@@ -301,7 +301,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<List<Product>> GetMaterialTaresAsync()
     {
-      //using (var context = new PostgresDbContext())
+      //using (var context = new MySqlDbContext())
       //{
       //  var repo = new ProductRepository(context);
       //  return await repo.GetMaterialTaresAsync();
@@ -316,9 +316,9 @@ namespace LaborTrackPro.Controls
 
     public async Task UpdateMaterials(Product material)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Product, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Product, MySqlDbContext>(context);
         await repo.UpdateAsync(material);
       }
     }
@@ -329,9 +329,9 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<RecordWeight, PostgresDbContext>(context);
+          var repo = new iSoft.Database.Repositorys.GenericRepository<RecordWeight, MySqlDbContext>(context);
           return await repo.AddAsync(laborProductivityRecognition);
         }
       }
@@ -345,7 +345,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.GetAllDataByTime(start, end, eTypeData);
@@ -364,7 +364,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.GetAllNotIncludeSynchronized_Fixbug();
@@ -383,7 +383,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new DepartmentRepository(context);
           return await repo.GetAllDepartment(isContainDelete);
@@ -406,7 +406,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new StationRepository(context);
           return await repo.GetAllAsync(isContainDelete);
@@ -421,9 +421,9 @@ namespace LaborTrackPro.Controls
 
     public LogAction AddLogAction(LogAction logAction)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<LogAction, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<LogAction, MySqlDbContext>(context);
         return repo.Add(logAction);
       }
     }
@@ -433,7 +433,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new LogActionRepository(context);
           var rs = await repo.GetAll_Async();
@@ -457,7 +457,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new LogActionRepository(context);
           var rs = await repo.GetLogByFillter(from, to, eAction);
@@ -480,18 +480,18 @@ namespace LaborTrackPro.Controls
 
     public async Task<Department> AddDepartmentAsync(Department department)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Department, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Department, MySqlDbContext>(context);
         return await repo.AddAsync(department);
       }
     }
 
     public async Task AddRangeDepartmentAsync(List<Department> departments)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Department, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Department, MySqlDbContext>(context);
         await repo.AddRangeAsync(departments);
       }
 
@@ -499,7 +499,7 @@ namespace LaborTrackPro.Controls
       //{
       //  foreach (var department in departments)
       //  {
-      //    using (var context = new PostgresDbContext())
+      //    using (var context = new MySqlDbContext())
       //    {
       //      foreach (var rm in department.Employees)
       //        context.Entry(rm).State = EntityState.Unchanged;
@@ -518,7 +518,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<Department> RemoveDepartment_Async(long id)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new DepartmentRepository(context);
         return await repo.UpdateFlagDeleteAsync(id);
@@ -527,25 +527,25 @@ namespace LaborTrackPro.Controls
 
     public async Task<bool> UpdateDepartmentAsync(Department department)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Department, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Department, MySqlDbContext>(context);
         return await repo.UpdateAsync(department);
       }
     }
     public async Task UpdateRangeDepartmentAsync(List<Department> department)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Department, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Department, MySqlDbContext>(context);
         await repo.UpdateRangeAsync(department);
       }
 
       //try
       //{
-      //  using (var context = new PostgresDbContext())
+      //  using (var context = new MySqlDbContext())
       //  {
-      //    var repo = new iSoft.Database.Repositorys.GenericRepository<Department, PostgresDbContext>(context);
+      //    var repo = new iSoft.Database.Repositorys.GenericRepository<Department, MySqlDbContext>(context);
 
       //    // Load entity cũ từ DB kèm quan hệ
       //    var existingDepartment = await context.Departments
@@ -591,9 +591,9 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
-          var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, PostgresDbContext>(context);
+          var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, MySqlDbContext>(context);
           return await repo.UpdateRangeAsync(employees);
         }
       }
@@ -607,9 +607,9 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        //using (var context = new PostgresDbContext())
+        //using (var context = new MySqlDbContext())
         //{
-        //  var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, PostgresDbContext>(context);
+        //  var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, MySqlDbContext>(context);
 
         //  // Load entity cũ từ DB kèm quan hệ
         //  var existingEmployee = await context.Employees
@@ -656,18 +656,18 @@ namespace LaborTrackPro.Controls
 
     public async Task<bool> UpdateRangeCategoryTareAsync(List<CategoryTare> categoryTares)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<CategoryTare, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<CategoryTare, MySqlDbContext>(context);
         return await repo.UpdateRangeAsync(categoryTares);
       }
     }
 
     public async Task<bool> UpdateRangeMaterialGroupAsync(List<ProductGroup> materialGroups)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<ProductGroup, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<ProductGroup, MySqlDbContext>(context);
         return await repo.UpdateRangeAsync(materialGroups);
       }
     }
@@ -675,7 +675,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<Department> GetDepartmentById_Async(long id)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new DepartmentRepository(context);
         return await repo.GetByIdAsync(id);
@@ -684,7 +684,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<Employee> RemoveEmployee_Async(long id)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new EmployeeRepository(context);
         return await repo.UpdateFlagDeleteAsync(id);
@@ -693,7 +693,7 @@ namespace LaborTrackPro.Controls
 
     public async Task<Employee?> GetEmployeeByIdAsync(long? id)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
         var repo = new EmployeeRepository(context);
         return await repo.GetByIdAsync(id);
@@ -704,17 +704,17 @@ namespace LaborTrackPro.Controls
 
     public async Task<bool> UpdateEmployee_Async(Employee employee)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Employee, MySqlDbContext>(context);
         return await repo.UpdateAsync(employee);
       }
     }
     public async Task<bool> UpdateRangeMachineAsync(List<Station> machines)
     {
-      using (var context = new PostgresDbContext())
+      using (var context = new MySqlDbContext())
       {
-        var repo = new iSoft.Database.Repositorys.GenericRepository<Station, PostgresDbContext>(context);
+        var repo = new iSoft.Database.Repositorys.GenericRepository<Station, MySqlDbContext>(context);
         return await repo.UpdateRangeAsync(machines);
       }
     }
@@ -724,7 +724,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.UpdateFlagDeleteAsync(id, idEmloyee);
@@ -741,7 +741,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new ConnectionRepository(context);
           return await repo.GetAllConnectionAsync();
@@ -756,7 +756,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new ConnectionRepository(context);
           return await repo.GetConnectionByIdAsync(id);
@@ -775,7 +775,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.GetRecordByPOAsync(idPO, dt, enumInternalExternalStatus, enumExportImport);
@@ -791,7 +791,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.GetRecordByRequestOtherAsync(employeeId, dt, enumInternalExternalStatus);
@@ -807,7 +807,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.GetRecordExpireAsync(dt);
@@ -823,7 +823,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.GetDatalogWeightByAsync(id);
@@ -840,7 +840,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.UpdateRangeAsync(datalogWeights);
@@ -857,7 +857,7 @@ namespace LaborTrackPro.Controls
     {
       try
       {
-        using (var context = new PostgresDbContext())
+        using (var context = new MySqlDbContext())
         {
           var repo = new RecordFoodsRepository(context);
           return await repo.UpdateData(laborProductivityRecognition, idRecordDelivery);

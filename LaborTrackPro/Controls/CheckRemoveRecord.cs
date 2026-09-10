@@ -32,13 +32,13 @@ namespace LaborTrackPro.Controls
 
     private async Task DoWorkAsync()
     {
-      DateTime dateTime = DateTime.Now.AddHours(-AppCore.Ins._delivery_permit_hour);
+      DateTime dateTime = DateTime.UtcNow.AddHours(-AppCore.Ins._delivery_permit_hour);
       var records = await AppCore.Ins.GetDataExpire(dateTime);
       if (records?.Count()>0)
       {
         records.ForEach(x => x.DeletedFlag = true);
         records.ForEach(x => x.SyncFlag = false);
-        records.ForEach(x => x.UpdatedAt = DateTime.Now);
+        records.ForEach(x => x.UpdatedAt = DateTime.UtcNow);
         await UpdateRecordAsync(records);
       }  
     }

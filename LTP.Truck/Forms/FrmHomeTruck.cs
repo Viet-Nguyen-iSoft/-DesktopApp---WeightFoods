@@ -556,7 +556,6 @@ namespace LTP.Truck.Forms
       var rs = await AppCore.Ins._recordTruckService.GetAllAsync(true);
       var filtered = rs.Where(record =>
       {
-        // Npgsql legacy timestamp mode returns local DateTime values.
         // Normalize both sides to UTC before comparing their clock values.
         var updatedAtUtc = record.UpdatedAt?.ToUniversalTime();
         return updatedAtUtc >= fromUtc && updatedAtUtc < toUtcExclusive;

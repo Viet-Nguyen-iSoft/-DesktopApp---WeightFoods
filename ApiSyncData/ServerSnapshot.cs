@@ -41,7 +41,7 @@ namespace ApiSyncData
           added.Add(local);
         }
         map(row, local);
-        // PostgreSQL lưu timestamp tới microsecond; chuẩn hóa để EF không nhận
+        // Database lưu timestamp tới microsecond; chuẩn hóa để EF không nhận
         // phần tick dư là một thay đổi mới trong mọi chu kỳ đồng bộ.
         local.CreatedAt = NormalizeTimestamp(row.CreatedAt);
         local.UpdatedAt = NormalizeTimestamp(row.UpdatedAt);
@@ -65,9 +65,14 @@ namespace ApiSyncData
         return null;
 
       const long ticksPerMicrosecond = 10;
-      var dateTime = value.Value;
-      var normalizedTicks = dateTime.Ticks - dateTime.Ticks % ticksPerMicrosecond;
-      return new DateTime(normalizedTicks, dateTime.Kind);
+      var utcDateTime = value.Value.Kind switch
+      {
+        DateTimeKind.Utc => value.Value,
+        DateTimeKind.Local => value.Value.ToUniversalTime(),
+        _ => DateTime.SpecifyKind(value.Value, DateTimeKind.Utc)
+      };
+      var normalizedTicks = utcDateTime.Ticks - utcDateTime.Ticks % ticksPerMicrosecond;
+      return new DateTime(normalizedTicks, DateTimeKind.Utc);
     }
   }
 }

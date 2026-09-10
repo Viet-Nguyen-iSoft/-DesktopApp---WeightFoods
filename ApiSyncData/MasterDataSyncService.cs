@@ -81,7 +81,7 @@ namespace ApiSyncData
 
     private static async Task<MasterDataChangedEventArgs?> SyncAsync<TSource, TEntity>(
       List<TSource>? rows, int? total, Action<TSource, TEntity> map,
-      CancellationToken token, Func<PostgresDbContext, Task>? prepare = null)
+      CancellationToken token, Func<MySqlDbContext, Task>? prepare = null)
       where TSource : IServerRecord
       where TEntity : BaseModel, new()
     {
@@ -89,7 +89,7 @@ namespace ApiSyncData
       await SyncLock.WaitAsync(token).ConfigureAwait(false);
       try
       {
-        await using var db = new PostgresDbContext();
+        await using var db = new MySqlDbContext();
         if (prepare != null)
           await prepare(db).ConfigureAwait(false);
         var locals = await db.Set<TEntity>()

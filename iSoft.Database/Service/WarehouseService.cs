@@ -1,4 +1,4 @@
-﻿using iSoft.Database.DbContexts;
+using iSoft.Database.DbContexts;
 using iSoft.Database.Models;
 using iSoft.Database.Repositorys;
 using System;
@@ -14,7 +14,7 @@ namespace iSoft.Database.Service
     public async Task<List<Warehouse>> GetAllAsync(bool IsContainDelete = false)
     {
       // Mỗi lần gọi dùng context riêng và giải phóng sau khi đọc xong.
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new WarehouseRepository(context);
       return await repository.GetAllAsync(IsContainDelete).ConfigureAwait(false);
     }

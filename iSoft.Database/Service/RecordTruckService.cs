@@ -1,4 +1,4 @@
-﻿using iSoft.Database.DbContexts;
+using iSoft.Database.DbContexts;
 using iSoft.Database.Models;
 using iSoft.Database.Repositorys;
 using System;
@@ -15,7 +15,7 @@ namespace iSoft.Database.Service
     {
       try
       {
-        await using var context = new PostgresDbContext();
+        await using var context = new MySqlDbContext();
         var repository = new RecordTruckRepository(context);
         return await repository.GetAllAsync(IsContainDelete).ConfigureAwait(false);
       }
@@ -26,14 +26,14 @@ namespace iSoft.Database.Service
     }
     public async Task<List<RecordTruck>> GetFirstWeighingRecordsAsync()
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new RecordTruckRepository(context);
       return await repository.GetFirstWeighingRecordsAsync().ConfigureAwait(false);
     }
 
     public async Task<RecordTruck?> GetDetailByIdAsync(Guid id, bool isContainDelete = false)
     {
-      await using var context = new PostgresDbContext();
+      await using var context = new MySqlDbContext();
       var repository = new RecordTruckRepository(context);
       return await repository.GetDetailByIdAsync(id, isContainDelete).ConfigureAwait(false);
     }
@@ -42,7 +42,7 @@ namespace iSoft.Database.Service
     {
       try
       {
-        await using var context = new PostgresDbContext();
+        await using var context = new MySqlDbContext();
         var repository = new RecordTruckRepository(context);
         return await repository.AddOrUpdateAsync(recordTruck);
       }

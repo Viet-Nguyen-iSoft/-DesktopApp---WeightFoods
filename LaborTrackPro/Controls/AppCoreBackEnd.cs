@@ -232,7 +232,7 @@ namespace LaborTrackPro.Controls
         LogAction logAction = new LogAction();
         logAction.Name = name;
         logAction.eAction = eAction;
-        logAction.CreatedAt = DateTime.Now;
+        logAction.CreatedAt = DateTime.UtcNow;
         AppCore.Ins.AddLogAction(logAction);
       }
       catch (Exception ex)

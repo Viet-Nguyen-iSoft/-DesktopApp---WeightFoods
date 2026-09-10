@@ -154,7 +154,7 @@ namespace ApiSyncData
     private static async Task<List<RecordTruck>> LoadPendingRecordsAsync(
       CancellationToken cancellationToken)
     {
-      await using var db = new PostgresDbContext();
+      await using var db = new MySqlDbContext();
       var records = await db.Set<RecordTruck>()
         .Where(record => !record.SyncFlag)
         .Include(record => record.Client)
@@ -183,7 +183,7 @@ namespace ApiSyncData
     private static async Task<List<RecordWeight>> LoadPendingRecordWeightsAsync(
       CancellationToken cancellationToken)
     {
-      await using var db = new PostgresDbContext();
+      await using var db = new MySqlDbContext();
       return await db.Set<RecordWeight>()
         .Where(record => !record.SyncFlag &&
           record.RecordTruckId.HasValue)
@@ -297,7 +297,7 @@ namespace ApiSyncData
       DateTime? expectedUpdatedAt,
       CancellationToken cancellationToken)
     {
-      await using var db = new PostgresDbContext();
+      await using var db = new MySqlDbContext();
       var current = await db.Set<RecordTruck>()
         .SingleOrDefaultAsync(record => record.Id == localId, cancellationToken)
         .ConfigureAwait(false);
@@ -320,7 +320,7 @@ namespace ApiSyncData
       DateTime? expectedUpdatedAt,
       CancellationToken cancellationToken)
     {
-      await using var db = new PostgresDbContext();
+      await using var db = new MySqlDbContext();
       var current = await db.Set<RecordWeight>()
         .SingleOrDefaultAsync(record => record.Id == localId, cancellationToken)
         .ConfigureAwait(false);

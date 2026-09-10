@@ -32,10 +32,8 @@ namespace iSoft.Database.DbContexts
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      modelBuilder.HasPostgresExtension("unaccent");
-      modelBuilder.ConfigureDateTimeProperties("timestamp with time zone");
-
-      AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+      base.OnModelCreating(modelBuilder);
+      modelBuilder.ConfigureDateTimeProperties("datetime(6)");
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
