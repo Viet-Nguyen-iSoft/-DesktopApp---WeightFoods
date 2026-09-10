@@ -60,9 +60,10 @@ namespace LTP.Truck.Forms
       dtpTo.Format = DateTimePickerFormat.Custom;
       dtpTo.CustomFormat = "dd/MM/yyyy";
 
-      ucItemWeight01.Title = "KL cân lần 1 (Kg)";
-      ucItemWeight02.Title = "KL cân lần 2 (Kg)";
-      ucItemWeightGoods.Title = "KL hàng (Kg)";
+      ucItemWeight01.Title = "KL cân lần 1";
+      ucItemWeight02.Title = "KL cân lần 2";
+      ucItemWeightGoods.Title = "KL hàng";
+      ucItemOffsetWeight.Title = "KL chênh lệch xe";
 
       ElipseControl elipseControl = new ElipseControl();
       elipseControl.TargetControl = tableLayoutPanel3;
@@ -377,6 +378,7 @@ namespace LTP.Truck.Forms
           break;
       }
 
+      UpdateOffsetWeight(recordTruck);
       _ = LoadWeightGoodsAsync(recordTruck.Id);
       lbWeightTrigger.Text = recordTruck.NetTimeTemp.ToString("F3");
     }
@@ -439,6 +441,7 @@ namespace LTP.Truck.Forms
       }
 
       double valueGoods = (recordTruck.NetTime02 - recordTruck.NetTime01);
+      UpdateOffsetWeight(recordTruck);
       _ = LoadWeightGoodsAsync(recordTruck.Id);
       lbWeightTrigger.Text = recordTruck.NetTimeTemp.ToString("F3");
 
@@ -468,6 +471,18 @@ namespace LTP.Truck.Forms
       txtClient.Texts = recordTruck?.Client?.Name ?? string.Empty;
       txtWareHouse.Texts = recordTruck?.Warehouse?.Name ?? string.Empty;
       txtTypeGoods.Texts = recordTruck?.TypeGoods?.Name ?? string.Empty;
+    }
+
+    private void UpdateOffsetWeight(RecordTruck recordTruck)
+    {
+      if (recordTruck.NetTime01 <= 0 || recordTruck.NetTime02 <= 0)
+      {
+        ucItemOffsetWeight.Value = "...";
+        return;
+      }
+
+      var offsetWeight = Math.Abs(recordTruck.NetTime02 - recordTruck.NetTime01);
+      ucItemOffsetWeight.Value = offsetWeight.ToString("F3");
     }
 
     private async Task LoadWeightGoodsAsync(Guid recordTruckId)

@@ -87,6 +87,7 @@ namespace LTP.Truck.Forms
       txtIdCard = new RJTextBox();
       label10 = new Label();
       tableLayoutPanel9 = new TableLayoutPanel();
+      ucItemOffsetWeight = new LTP.Truck.UserControls.UcItem();
       label14 = new Label();
       ucItemWeight01 = new LTP.Truck.UserControls.UcItem();
       ucItemWeight02 = new LTP.Truck.UserControls.UcItem();
@@ -1125,22 +1126,31 @@ namespace LTP.Truck.Forms
       tableLayoutPanel9.BackColor = Color.FromArgb(236, 236, 236);
       tableLayoutPanel9.ColumnCount = 1;
       tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel9.Controls.Add(ucItemOffsetWeight, 0, 3);
       tableLayoutPanel9.Controls.Add(label14, 0, 0);
       tableLayoutPanel9.Controls.Add(ucItemWeight01, 0, 1);
       tableLayoutPanel9.Controls.Add(ucItemWeight02, 0, 2);
-      tableLayoutPanel9.Controls.Add(ucItemWeightGoods, 0, 3);
+      tableLayoutPanel9.Controls.Add(ucItemWeightGoods, 0, 4);
       tableLayoutPanel9.Location = new Point(1324, 0);
       tableLayoutPanel9.Margin = new Padding(0);
       tableLayoutPanel9.Name = "tableLayoutPanel9";
-      tableLayoutPanel9.RowCount = 4;
+      tableLayoutPanel9.RowCount = 5;
       tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33334F));
-      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33333F));
-      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333244F));
-      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
       tableLayoutPanel9.Size = new Size(201, 414);
       tableLayoutPanel9.TabIndex = 2;
+      // 
+      // ucItemOffsetWeight
+      // 
+      ucItemOffsetWeight.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      ucItemOffsetWeight.BackColor = Color.FromArgb(223, 239, 255);
+      ucItemOffsetWeight.Location = new Point(3, 235);
+      ucItemOffsetWeight.Name = "ucItemOffsetWeight";
+      ucItemOffsetWeight.Size = new Size(195, 85);
+      ucItemOffsetWeight.TabIndex = 5;
       // 
       // label14
       // 
@@ -1162,25 +1172,25 @@ namespace LTP.Truck.Forms
       ucItemWeight01.BackColor = Color.FromArgb(223, 239, 255);
       ucItemWeight01.Location = new Point(3, 53);
       ucItemWeight01.Name = "ucItemWeight01";
-      ucItemWeight01.Size = new Size(195, 115);
+      ucItemWeight01.Size = new Size(195, 85);
       ucItemWeight01.TabIndex = 2;
       // 
       // ucItemWeight02
       // 
       ucItemWeight02.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       ucItemWeight02.BackColor = Color.FromArgb(223, 239, 255);
-      ucItemWeight02.Location = new Point(3, 174);
+      ucItemWeight02.Location = new Point(3, 144);
       ucItemWeight02.Name = "ucItemWeight02";
-      ucItemWeight02.Size = new Size(195, 115);
+      ucItemWeight02.Size = new Size(195, 85);
       ucItemWeight02.TabIndex = 3;
       // 
       // ucItemWeightGoods
       // 
       ucItemWeightGoods.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       ucItemWeightGoods.BackColor = Color.FromArgb(223, 239, 255);
-      ucItemWeightGoods.Location = new Point(3, 295);
+      ucItemWeightGoods.Location = new Point(3, 326);
       ucItemWeightGoods.Name = "ucItemWeightGoods";
-      ucItemWeightGoods.Size = new Size(195, 116);
+      ucItemWeightGoods.Size = new Size(195, 85);
       ucItemWeightGoods.TabIndex = 4;
       // 
       // tableLayoutPanel7
@@ -1569,5 +1579,6 @@ namespace LTP.Truck.Forms
     private Label label20;
     private Label labelType;
     private ComboBox cbbType;
+    private UserControls.UcItem ucItemOffsetWeight;
   }
 }

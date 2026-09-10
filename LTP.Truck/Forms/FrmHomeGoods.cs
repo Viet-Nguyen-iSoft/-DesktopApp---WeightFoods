@@ -333,7 +333,7 @@ namespace LTP.Truck.Forms
 
       if (filtered.Count == 0)
       {
-        using var popupMsg = new PopupConfirm("Không có phiếu đã cân lần 1 đang chờ cân lần 2 !",
+        using var popupMsg = new PopupConfirm("Không có dữ liệu cân lần 1 !",
           EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
         popupMsg.ShowDialog();
         return;
