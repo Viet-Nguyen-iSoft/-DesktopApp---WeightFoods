@@ -83,7 +83,7 @@
       label1.Name = "label1";
       label1.Size = new Size(534, 60);
       label1.TabIndex = 0;
-      label1.Text = "Chọn chuẩn kết nối";
+      label1.Text = "Cài đặt chuẩn kết nối TCP";
       label1.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // tableLayoutPanel1

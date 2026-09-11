@@ -231,6 +231,23 @@ namespace LTP.Truck.Forms
     private int _weightGoodsLoadVersion;
     private void btnTriggerWeight_Click(object sender, EventArgs e)
     {
+      var rs = LicensePlateHelper.IsValidVietnamLicensePlate(txtLicensePlate.Texts);
+      if (!rs.IsValid)
+      {
+        using var popupMsg = new PopupConfirm("Vui lòng nhập biển số xe. \r\nHoặc biển số xe không hợp lệ !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popupMsg.ShowDialog(this);
+        return;
+      }
+
+      if (_recordTruck.TypeGoodsId == null)
+      {
+        using var popupMsg = new PopupConfirm("Vui lòng chọn Loại hàng trước khi cân !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popupMsg.ShowDialog(this);
+        return;
+      }
+
       if (_msgDataWeight.ValueWeight <= 0)
       {
         PopupConfirm popupConfirm = new PopupConfirm("Giá trị cân ≤ 0 Kg !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
@@ -941,6 +958,16 @@ namespace LTP.Truck.Forms
       //  return;
 
       //Download(DateTime.Now, record);
+      var rs = LicensePlateHelper.IsValidVietnamLicensePlate(txtLicensePlate.Texts);
+      if (!rs.IsValid)
+      {
+        using var popupMsg = new PopupConfirm("Biển số xe không hợp lệ !",
+          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+        popupMsg.ShowDialog(this);
+        return;
+      }
+
+      txtNoLabel.Texts = rs.Plate;
     }
 
     private async void btnPrint_Click(object sender, EventArgs e)

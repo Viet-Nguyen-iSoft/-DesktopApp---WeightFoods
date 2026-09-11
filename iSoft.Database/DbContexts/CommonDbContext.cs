@@ -34,6 +34,60 @@ namespace iSoft.Database.DbContexts
     {
       base.OnModelCreating(modelBuilder);
       modelBuilder.ConfigureDateTimeProperties("datetime(6)");
+
+      foreach (var entityType in modelBuilder.Model.GetEntityTypes()
+        .Where(entityType => typeof(BaseModel).IsAssignableFrom(entityType.ClrType)))
+      {
+        modelBuilder.Entity(entityType.ClrType)
+          .HasIndex(nameof(BaseModel.IdSrc));
+      }
+
+      modelBuilder.Entity<RecordTruck>()
+        .Property(record => record.LicensePlate)
+        .HasMaxLength(20);
+
+      modelBuilder.Entity<RecordTruck>()
+        .HasIndex(record => new
+        {
+          record.DeletedFlag,
+          record.EnumTypeDataTruck,
+          record.CreatedAt,
+          record.Id
+        })
+        .HasDatabaseName("IX_RecordTrucks_FirstWeighing");
+
+      modelBuilder.Entity<RecordTruck>()
+        .HasIndex(record => new { record.SyncFlag, record.CreatedAt })
+        .HasDatabaseName("IX_RecordTrucks_PendingSync");
+
+      modelBuilder.Entity<RecordTruck>()
+        .HasIndex(record => record.LicensePlate)
+        .HasDatabaseName("IX_RecordTrucks_LicensePlate");
+
+      modelBuilder.Entity<RecordWeight>()
+        .HasIndex(record => new { record.RecordTruckId, record.DeletedFlag })
+        .HasDatabaseName("IX_RecordWeights_Truck_Deleted");
+
+      modelBuilder.Entity<RecordWeight>()
+        .HasIndex(record => new { record.SyncFlag, record.CreatedAt })
+        .HasDatabaseName("IX_RecordWeights_PendingSync");
+
+      modelBuilder.Entity<Connection>()
+        .HasIndex(connection => new
+        {
+          connection.EnumDevice,
+          connection.DeletedFlag,
+          connection.SyncFlag
+        })
+        .HasDatabaseName("IX_Connections_PendingWeight");
+
+      modelBuilder.Entity<Station>()
+        .HasIndex(station => new { station.DeletedFlag, station.EnableFlag })
+        .HasDatabaseName("IX_Stations_Active");
+
+      modelBuilder.Entity<LogAction>()
+        .HasIndex(log => new { log.CreatedAt, log.eAction })
+        .HasDatabaseName("IX_LogActions_CreatedAt_Action");
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

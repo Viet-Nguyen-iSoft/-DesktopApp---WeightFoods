@@ -40,6 +40,38 @@ namespace iSoft.DatabaseServer.DbContexts
       base.OnModelCreating(modelBuilder);
       modelBuilder.ConfigureDateTimeProperties("datetime(6)");
 
+      modelBuilder.Entity<LaborProductivityRecognitionEntity>()
+        .HasIndex(record => new
+        {
+          record.IdSrc,
+          record.DataMachineId,
+          record.DeletedFlag,
+          record.CreatedAt
+        })
+        .HasDatabaseName("IX_LPR_SourceMachineDate");
+
+      modelBuilder.Entity<LaborProductivityRecognitionEntity>()
+        .HasIndex(record => new
+        {
+          record.DeletedFlag,
+          record.WeightTicketId,
+          record.DataMachineId
+        })
+        .HasDatabaseName("IX_LPR_PendingTicket");
+
+      modelBuilder.Entity<WeightTicketEntities>()
+        .HasIndex(ticket => new
+        {
+          ticket.IdSrc,
+          ticket.DataMachineId,
+          ticket.CreatedAt
+        })
+        .HasDatabaseName("IX_WeightTickets_SourceMachineDate");
+
+      modelBuilder.Entity<WeightTicketEntities>()
+        .HasIndex(ticket => new { ticket.DataMachineId, ticket.DeletedFlag })
+        .HasDatabaseName("IX_WeightTickets_MachineActive");
+
       //modelBuilder.Entity<MaterialEntity>()
       //      .HasMany(e => e.ProductionOrders)
       //      .WithMany(e => e.Materials)
