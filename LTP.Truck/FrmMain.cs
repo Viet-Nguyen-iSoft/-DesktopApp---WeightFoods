@@ -173,7 +173,7 @@ namespace LTP.Truck
           }
         };
 
-        AppCore.Ins.ConnectWeight();
+        //AppCore.Ins.ConnectWeight();
         CheckOpenMulApp();
         ChangePage(EnumScreen.Waiting);
       }

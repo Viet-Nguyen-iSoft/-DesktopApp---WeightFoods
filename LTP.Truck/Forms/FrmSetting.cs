@@ -158,8 +158,8 @@ namespace LTP.Truck.Forms
               Information = GetConnectionInformation(connection),
               Tag = connection,
               Margin = new Padding(3),
-              Width = Math.Max(100, flowCommWeight.ClientSize.Width / 3 - 5),
-              Height = 200
+              Width = Math.Max(100, flowCommWeight.ClientSize.Width / 2 - 10),
+              Height = 225
             };
             item.OnSendDataDetail += Item_OnSendDataDetail;
             item.OnSendDelete += Item_OnSendDelete;
@@ -201,30 +201,49 @@ namespace LTP.Truck.Forms
       if (obj?.EnumCommunicationType == EnumCommunicationType.TcpClient)
       {
         PopupSettingTcpClient popupSettingTcpClient = new PopupSettingTcpClient(obj);
-        popupSettingTcpClient.OnSendConfirm += TcpClient_OnSendConfirm;
+        popupSettingTcpClient.OnSendConfirm += Connection_OnSendConfirm;
         popupSettingTcpClient.ShowDialog();
+      }
+      else if (obj?.EnumCommunicationType == EnumCommunicationType.SerialPort)
+      {
+        PopupSettingSerial popupSettingSerial = new PopupSettingSerial(obj);
+        popupSettingSerial.OnSendConfirm += Connection_OnSendConfirm;
+        popupSettingSerial.ShowDialog();
       }
     }
 
     private static string GetConnectionInformation(Connection connection)
     {
-      if (connection.EnumCommunicationType != EnumCommunicationType.TcpClient ||
-        string.IsNullOrWhiteSpace(connection.JsonStrConfig))
+      if (string.IsNullOrWhiteSpace(connection.JsonStrConfig))
       {
         return string.Empty;
       }
 
       try
       {
-        var config = JsonConvert.DeserializeObject<JsonConfigTcpClient>(
-          connection.JsonStrConfig);
-        return config == null
-          ? string.Empty
-          : $"IP: {config.Host} - Port: {config.Port}";
+        if (connection.EnumCommunicationType == EnumCommunicationType.TcpClient)
+        {
+          var config = JsonConvert.DeserializeObject<JsonConfigTcpClient>(
+            connection.JsonStrConfig);
+          return config == null
+            ? string.Empty
+            : $"IP: {config.Host} - Port: {config.Port}";
+        }
+
+        if (connection.EnumCommunicationType == EnumCommunicationType.SerialPort)
+        {
+          var config = JsonConvert.DeserializeObject<JsonConfigTcpSerial>(
+            connection.JsonStrConfig);
+          return config == null
+            ? string.Empty
+            : $"COM: {config.COM}";
+        }
+
+        return string.Empty;
       }
       catch (JsonException)
       {
-        return "Cấu hình TCP không hợp lệ";
+        return "Cấu hình kết nối không hợp lệ";
       }
     }
 
@@ -238,12 +257,21 @@ namespace LTP.Truck.Forms
 
     private void PopupChooseComm_OnSendConfirm(object? sender, Common.EnumData.EnumCommunication e)
     {
-      PopupSettingTcpClient tcpClient = new PopupSettingTcpClient();
-      tcpClient.OnSendConfirm += TcpClient_OnSendConfirm;
-      tcpClient.ShowDialog();
+      if (e == Common.EnumData.EnumCommunication.TcpClient)
+      {
+        PopupSettingTcpClient tcpClient = new PopupSettingTcpClient();
+        tcpClient.OnSendConfirm += Connection_OnSendConfirm;
+        tcpClient.ShowDialog();
+      }
+      else if (e == Common.EnumData.EnumCommunication.RS232)
+      {
+        PopupSettingSerial serial = new PopupSettingSerial();
+        serial.OnSendConfirm += Connection_OnSendConfirm;
+        serial.ShowDialog();
+      }
     }
 
-    private async void TcpClient_OnSendConfirm(object? sender, Connection e)
+    private async void Connection_OnSendConfirm(object? sender, Connection e)
     {
       e.StationId = AppCore.Ins._station?.Id;
 

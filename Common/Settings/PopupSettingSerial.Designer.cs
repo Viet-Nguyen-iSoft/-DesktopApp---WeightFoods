@@ -132,6 +132,7 @@
       btnConfirm.Text = "       Xác nhận";
       btnConfirm.TextColor = Color.White;
       btnConfirm.UseVisualStyleBackColor = false;
+      btnConfirm.Click += btnConfirm_Click;
       // 
       // btnClose
       // 
@@ -155,6 +156,7 @@
       btnClose.Text = "       Đóng";
       btnClose.TextColor = Color.White;
       btnClose.UseVisualStyleBackColor = false;
+      btnClose.Click += btnClose_Click;
       // 
       // tableLayoutPanel1
       // 
@@ -190,6 +192,7 @@
       iconAutoConnect.SizeMode = PictureBoxSizeMode.StretchImage;
       iconAutoConnect.TabIndex = 12;
       iconAutoConnect.TabStop = false;
+      iconAutoConnect.Click += iconAutoConnect_Click;
       // 
       // label2
       // 
@@ -243,6 +246,7 @@
       iconSendReq.SizeMode = PictureBoxSizeMode.StretchImage;
       iconSendReq.TabIndex = 11;
       iconSendReq.TabStop = false;
+      iconSendReq.Click += iconSendReq_Click;
       // 
       // PopupSettingSerial
       // 

@@ -22,6 +22,11 @@ namespace Common.Settings
       set => lbInfor.Text = value;
     }
 
+    public bool AutoConnect
+    {
+      set => lbAutoConnect.Text = $"Tự động kết nối: {(value ? "Bật" : "Tắt")}";
+    }
+
     public UcComm()
     {
       InitializeComponent();

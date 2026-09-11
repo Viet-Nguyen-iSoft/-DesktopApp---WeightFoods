@@ -29,12 +29,13 @@
     private void InitializeComponent()
     {
       tableLayoutPanel3 = new TableLayoutPanel();
-      lbCommName = new Label();
-      lbInfor = new Label();
+      lbAutoConnect = new Label();
       tableLayoutPanel2 = new TableLayoutPanel();
       btnDelete = new Common.Custom.RJButton();
       btnDetail = new Common.Custom.RJButton();
       tableLayoutPanel1 = new TableLayoutPanel();
+      lbCommName = new Label();
+      lbInfor = new Label();
       tableLayoutPanel3.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel1.SuspendLayout();
@@ -45,52 +46,38 @@
       tableLayoutPanel3.BackColor = Color.AliceBlue;
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel3.Controls.Add(lbInfor, 0, 1);
-      tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 0, 3);
+      tableLayoutPanel3.Controls.Add(lbAutoConnect, 0, 2);
+      tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 0, 4);
       tableLayoutPanel3.Controls.Add(tableLayoutPanel1, 0, 0);
+      tableLayoutPanel3.Controls.Add(lbInfor, 0, 1);
       tableLayoutPanel3.Dock = DockStyle.Fill;
       tableLayoutPanel3.Location = new Point(0, 0);
       tableLayoutPanel3.Margin = new Padding(0);
       tableLayoutPanel3.Name = "tableLayoutPanel3";
-      tableLayoutPanel3.RowCount = 5;
+      tableLayoutPanel3.RowCount = 6;
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+      tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 15F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel3.Size = new Size(588, 215);
+      tableLayoutPanel3.Size = new Size(588, 284);
       tableLayoutPanel3.TabIndex = 4;
       // 
-      // lbCommName
+      // lbAutoConnect
       // 
-      lbCommName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      lbCommName.AutoSize = true;
-      lbCommName.BackColor = Color.Transparent;
-      lbCommName.Font = new Font("Roboto Condensed", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      lbCommName.ForeColor = Color.Black;
-      lbCommName.Location = new Point(0, 0);
-      lbCommName.Margin = new Padding(0);
-      lbCommName.Name = "lbCommName";
-      lbCommName.Padding = new Padding(10, 0, 0, 0);
-      lbCommName.Size = new Size(301, 54);
-      lbCommName.TabIndex = 0;
-      lbCommName.Text = "Tên kết nối";
-      lbCommName.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // lbInfor
-      // 
-      lbInfor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      lbInfor.AutoSize = true;
-      lbInfor.BackColor = Color.Transparent;
-      lbInfor.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      lbInfor.Location = new Point(0, 60);
-      lbInfor.Margin = new Padding(0);
-      lbInfor.Name = "lbInfor";
-      lbInfor.Padding = new Padding(10, 0, 0, 0);
-      lbInfor.Size = new Size(588, 80);
-      lbInfor.TabIndex = 1;
-      lbInfor.Text = "Chuẩn kết nối";
-      lbInfor.TextAlign = ContentAlignment.MiddleLeft;
+      lbAutoConnect.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbAutoConnect.AutoSize = true;
+      lbAutoConnect.BackColor = Color.Transparent;
+      lbAutoConnect.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      lbAutoConnect.Location = new Point(0, 132);
+      lbAutoConnect.Margin = new Padding(0);
+      lbAutoConnect.Name = "lbAutoConnect";
+      lbAutoConnect.Padding = new Padding(10, 0, 0, 0);
+      lbAutoConnect.Size = new Size(588, 72);
+      lbAutoConnect.TabIndex = 6;
+      lbAutoConnect.Text = "Tự động kết nối: Bật";
+      lbAutoConnect.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // tableLayoutPanel2
       // 
@@ -101,7 +88,7 @@
       tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel2.Controls.Add(btnDelete, 1, 0);
       tableLayoutPanel2.Controls.Add(btnDetail, 2, 0);
-      tableLayoutPanel2.Location = new Point(5, 150);
+      tableLayoutPanel2.Location = new Point(5, 219);
       tableLayoutPanel2.Margin = new Padding(5, 0, 5, 0);
       tableLayoutPanel2.Name = "tableLayoutPanel2";
       tableLayoutPanel2.RowCount = 1;
@@ -172,13 +159,44 @@
       tableLayoutPanel1.Size = new Size(582, 54);
       tableLayoutPanel1.TabIndex = 5;
       // 
+      // lbCommName
+      // 
+      lbCommName.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbCommName.AutoSize = true;
+      lbCommName.BackColor = Color.Transparent;
+      lbCommName.Font = new Font("Roboto Condensed", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      lbCommName.ForeColor = Color.Black;
+      lbCommName.Location = new Point(0, 0);
+      lbCommName.Margin = new Padding(0);
+      lbCommName.Name = "lbCommName";
+      lbCommName.Padding = new Padding(10, 0, 0, 0);
+      lbCommName.Size = new Size(301, 54);
+      lbCommName.TabIndex = 0;
+      lbCommName.Text = "Tên kết nối";
+      lbCommName.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // lbInfor
+      // 
+      lbInfor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      lbInfor.AutoSize = true;
+      lbInfor.BackColor = Color.Transparent;
+      lbInfor.Font = new Font("Roboto Light", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      lbInfor.Location = new Point(0, 60);
+      lbInfor.Margin = new Padding(0);
+      lbInfor.Name = "lbInfor";
+      lbInfor.Padding = new Padding(10, 0, 0, 0);
+      lbInfor.Size = new Size(588, 72);
+      lbInfor.TabIndex = 1;
+      lbInfor.Text = "Chuẩn kết nối";
+      lbInfor.TextAlign = ContentAlignment.MiddleLeft;
+      // 
       // UcComm
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       Controls.Add(tableLayoutPanel3);
       Name = "UcComm";
-      Size = new Size(588, 215);
+      Size = new Size(588, 284);
       tableLayoutPanel3.ResumeLayout(false);
       tableLayoutPanel3.PerformLayout();
       tableLayoutPanel2.ResumeLayout(false);
@@ -196,5 +214,6 @@
     private Label lbInfor;
     private Custom.RJButton btnDelete;
     private TableLayoutPanel tableLayoutPanel1;
+    private Label lbAutoConnect;
   }
 }
