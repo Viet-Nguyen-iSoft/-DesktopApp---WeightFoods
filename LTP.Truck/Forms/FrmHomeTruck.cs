@@ -9,8 +9,10 @@ using iSoft.Database.Service;
 using LTP.Truck.Controls;
 using LTP.Truck.Custom;
 using LTP.Truck.Popup;
+using System;
 using System.Data;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.Threading.Tasks;
 using static Common.EnumData;
 using static iSoft.Database.EnumData;
@@ -288,7 +290,7 @@ namespace LTP.Truck.Forms
       _recordTruck.NameDriver = txtNameDriver.Texts;
       _recordTruck.LicensePlate = txtLicensePlate.Texts;
       _recordTruck.IdCard = txtIdCard.Texts;
-      _recordTruck.Document = txtDocument.Texts;
+      _recordTruck.Document = txtDocument.Text;
       _recordTruck.StationId = AppCore.Ins._station?.Id;
       _recordTruck.EmployeeId = AppCore.Ins._employeeCurrent?.Id;
       _recordTruck.CreatedAt = DateTime.UtcNow;
@@ -318,7 +320,7 @@ namespace LTP.Truck.Forms
       _recordTruck.NameDriver = txtNameDriver.Texts;
       _recordTruck.LicensePlate = txtLicensePlate.Texts;
       _recordTruck.IdCard = txtIdCard.Texts;
-      _recordTruck.Document = txtDocument.Texts;
+      _recordTruck.Document = txtDocument.Text;
       _recordTruck.StationId = AppCore.Ins._station?.Id;
       _recordTruck.EmployeeId = AppCore.Ins._employeeCurrent?.Id;
       _recordTruck.UpdatedAt = DateTime.UtcNow;
@@ -376,7 +378,7 @@ namespace LTP.Truck.Forms
         case iSoft.Database.EnumData.EnumTypeDataTruck.DoneTime01:
           btnWeightTime01.Enabled = false;
           btnWeightTime02.Enabled = true;
-          btnPrint.Enabled = false;
+          btnPrint.Enabled = true;
 
           ucItemWeight01.Value = recordTruck.NetTime01.ToString("F3");
           ucItemWeight02.Value = "...";
@@ -384,7 +386,7 @@ namespace LTP.Truck.Forms
         case iSoft.Database.EnumData.EnumTypeDataTruck.WeightedTime02:
           btnWeightTime01.Enabled = false;
           btnWeightTime02.Enabled = true;
-          btnPrint.Enabled = false;
+          btnPrint.Enabled = true;
 
           ucItemWeight01.Value = recordTruck.NetTime01.ToString("F3");
           ucItemWeight02.Value = "...";
@@ -438,7 +440,7 @@ namespace LTP.Truck.Forms
         case iSoft.Database.EnumData.EnumTypeDataTruck.DoneTime01:
           btnWeightTime01.Enabled = false;
           btnWeightTime02.Enabled = true;
-          btnPrint.Enabled = false;
+          btnPrint.Enabled = true;
 
           ucItemWeight01.Value = recordTruck.NetTime01.ToString("F3");
           ucItemWeight02.Value = "...";
@@ -446,7 +448,7 @@ namespace LTP.Truck.Forms
         case iSoft.Database.EnumData.EnumTypeDataTruck.WeightedTime02:
           btnWeightTime01.Enabled = false;
           btnWeightTime02.Enabled = true;
-          btnPrint.Enabled = false;
+          btnPrint.Enabled = true;
 
           ucItemWeight01.Value = recordTruck.NetTime01.ToString("F3");
           ucItemWeight02.Value = "...";
@@ -489,7 +491,7 @@ namespace LTP.Truck.Forms
       txtNameDriver.Texts = recordTruck?.NameDriver ?? string.Empty;
       txtLicensePlate.Texts = recordTruck?.LicensePlate ?? string.Empty;
       txtIdCard.Texts = recordTruck?.IdCard ?? string.Empty;
-      txtDocument.Texts = recordTruck?.Document ?? string.Empty;
+      txtDocument.Text = recordTruck?.Document ?? string.Empty;
 
       txtClient.Texts = recordTruck?.Client?.Name ?? string.Empty;
       txtWareHouse.Texts = recordTruck?.Warehouse?.Name ?? string.Empty;
@@ -992,6 +994,7 @@ namespace LTP.Truck.Forms
         //.ToList();
 
         await Download(DateTime.Now, record);
+        await DownloadReportTruck(DateTime.Now, record);
 
 
         PopupConfirm popupConfirm = new PopupConfirm("In phiếu giao nhận thành công.", EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
@@ -1068,6 +1071,75 @@ namespace LTP.Truck.Forms
       result = result.Replace("{table}", tableDetails);
 
       string outputPath = Path.Combine(folderOutput, $"{dt.ToString("yyMMddHHmmss")}.html");
+      File.WriteAllText(outputPath, result);
+
+      await CreateFile(outputPath);
+    }
+
+    private async Task DownloadReportTruck(DateTime dt, RecordTruck recordTruck)
+    {
+      string pathFileTemplate = Application.StartupPath + "Template\\TemplateTruck.html";
+      string folderOutput = Application.StartupPath + "Report";
+
+      string template = File.ReadAllText(pathFileTemplate);
+      string company = "Công ty TNHH BOSCH Việt Nam";
+      string address = "Đường số 8, KCN Long Thành, An Phước, T. Đồng Nai";
+      string phone = " 0251.628.0340";
+      string timePrint = dt.ToString(
+                                      "HH:mm 'Ngày' dd 'tháng' MM 'năm' yyyy",
+                                      CultureInfo.GetCultureInfo("vi-VN")
+                                    );
+
+      double firstWeight = recordTruck.NetTime01;
+      double secondWeight = recordTruck.NetTime02;
+      bool hasFirstWeight = firstWeight > 0;
+      bool hasSecondWeight = secondWeight > 0;
+
+      string gross = "...";
+      string tare = hasFirstWeight ? firstWeight.ToString("F3") : "...";
+      string net = "...";
+      string importExport = "Chưa xác định";
+      string timeTare = recordTruck.CreatedAt != null ? ((DateTime)(recordTruck.CreatedAt)).AddHours(AppCore.Ins._time).ToString("dd/MM/yyyy HH:mm") : "";
+      string timeGross = "...";
+
+      if (hasFirstWeight && hasSecondWeight)
+      {
+        // Trọng lượng xe và hàng luôn là số cân lớn hơn, trọng lượng xe là số nhỏ hơn.
+        double grossWeight = Math.Max(firstWeight, secondWeight);
+        double tareWeight = Math.Min(firstWeight, secondWeight);
+        double netWeight = grossWeight - tareWeight;
+
+        gross = grossWeight.ToString("F3");
+        tare = tareWeight.ToString("F3");
+        net = netWeight.ToString("F3");
+        importExport = secondWeight > firstWeight
+          ? "Xuất hàng"
+          : secondWeight < firstWeight
+            ? "Nhập hàng"
+            : "Chưa xác định";
+
+        timeGross = recordTruck.UpdatedAt != null ? ((DateTime)(recordTruck.UpdatedAt)).AddHours(AppCore.Ins._time).ToString("dd/MM/yyyy HH:mm") : "";
+      }
+
+      string result = template.Replace("{company}", company)
+                              .Replace("{address}", address)
+                              .Replace("{phone}", phone)
+                              .Replace("{time_print}", timePrint)
+                              .Replace("{ticket_no}", recordTruck.NoLabelAuto)
+                              .Replace("{date}", dt.ToString("dd/MM/yyyy"))
+                              .Replace("{plate}", recordTruck.LicensePlate)
+                              .Replace("{import_export}", importExport)
+                              .Replace("{client}", recordTruck.Client?.Name)
+                              .Replace("{goods}", recordTruck.TypeGoods?.Name)
+                              .Replace("{gross}", gross)
+                              .Replace("{tare}", tare)
+                              .Replace("{net}", net)
+                              .Replace("{time_tare}", timeTare)
+                              .Replace("{time_gross}", timeGross)
+                              .Replace("{note}", recordTruck.Document)
+                              ;
+    
+      string outputPath = Path.Combine(folderOutput, $"REPORT_TRUCK_{dt.ToString("yyMMddHHmmss")}.html");
       File.WriteAllText(outputPath, result);
 
       await CreateFile(outputPath);

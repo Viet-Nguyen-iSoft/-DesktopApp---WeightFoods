@@ -68,6 +68,7 @@ namespace LTP.Truck.Controls
 
 
     public string _folderFileLog = Application.StartupPath + "Logs";
+    public int _time = 7;
     public void Init()
     {
       try

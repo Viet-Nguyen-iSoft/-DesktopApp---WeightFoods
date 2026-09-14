@@ -120,6 +120,7 @@ namespace iSoft.Database
           {
             TypeGoods = e,
             No = index + 1,
+            Code = e.Code,
             Name = e.Name,
             Description = e.Description,
             UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
@@ -164,6 +165,7 @@ namespace iSoft.Database
           {
             CategoryTare = e,
             No = index + 1,
+            Code = e.Code,
             Name = e.Name,
             Description = e.Description,
             Value = (e?.Value??0.0).ToString("F3"),

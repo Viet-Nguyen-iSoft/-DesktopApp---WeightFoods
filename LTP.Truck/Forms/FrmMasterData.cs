@@ -203,6 +203,7 @@ namespace LTP.Truck.Forms
         var autoSizeColumns = new[]
         {
           nameof(TypeGoodsDTO.No),
+          nameof(TypeGoodsDTO.Code),
           nameof(TypeGoodsDTO.UpdatedAt),
         };
         foreach (var columnName in autoSizeColumns)
@@ -269,6 +270,7 @@ namespace LTP.Truck.Forms
         var autoSizeColumns = new[]
         {
           nameof(CategoryTareDTO.No),
+          nameof(CategoryTareDTO.Code),
           nameof(CategoryTareDTO.UpdatedAt),
           nameof(CategoryTareDTO.Value),
         };
