@@ -259,5 +259,10 @@ namespace LTP.Truck.Controls
 
       }
     }
+
+    public void CheckLogIn()
+    {
+      var rs = SecurityHelper.EncodePassword("Bosch", "Hsf@2026");
+    }
   }
 }
