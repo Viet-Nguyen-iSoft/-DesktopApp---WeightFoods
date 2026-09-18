@@ -1,17 +1,7 @@
 ﻿using ApiSyncData.Req;
 using Common;
 using HelperManager;
-using iSoft.Database.Models;
 using LTP.Truck.Controls;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static Common.EnumData;
 using static LTP.Truck.EnumData;
 
@@ -132,15 +122,18 @@ namespace LTP.Truck.Forms
 
     private void FrmWaiting_Load(object? sender, EventArgs e)
     {
+      ucPanelLogin1.Account = "Bosch";
+      ucPanelLogin1.Password = "Hsf@2026";
       ucPanelLogin1.OnSendLogin += UcPanelLogin1_OnSendLogin;
     }
 
-    private void UcPanelLogin1_OnSendLogin(object? sender, EventArgs e)
+    private async void UcPanelLogin1_OnSendLogin(object? sender, EventArgs e)
     {
-      if (ucPanelLogin1.Account == "admin" && ucPanelLogin1.Password == "admin")
+      AppCore.Ins._userCurrent = await AppCore.Ins._userService.CheckLogin(ucPanelLogin1.Account, ucPanelLogin1.Password);
+      if (AppCore.Ins._userCurrent != null)
       {
+        FrmOperation.Instance.LoadAccount(AppCore.Ins._userCurrent);
         FrmMain.Instance.ChangePage(EnumScreen.Operation);
-        AppCore.Ins._employeeCurrent = AppCore.Ins._employees?.Where(x => x.Account == "admin").FirstOrDefault();
       }
       else
       {
@@ -148,6 +141,18 @@ namespace LTP.Truck.Forms
           EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
         popupMsg.ShowDialog(this);
       }
+
+      //if (ucPanelLogin1.Account == "admin" && ucPanelLogin1.Password == "admin")
+      //{
+      //  FrmMain.Instance.ChangePage(EnumScreen.Operation);
+      //  AppCore.Ins._employeeCurrent = AppCore.Ins._employees?.Where(x => x.Account == "admin").FirstOrDefault();
+      //}
+      //else
+      //{
+      //  using var popupMsg = new PopupConfirm("Tài khoản hoặc mật khẩu sai. Vui lòng thử lại !",
+      //    EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+      //  popupMsg.ShowDialog(this);
+      //}
     }
 
     private async void pictureBox1_Click(object sender, EventArgs e)
@@ -190,5 +195,8 @@ namespace LTP.Truck.Forms
         throw;
       }
     }
+
+
+
   }
 }

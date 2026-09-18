@@ -56,6 +56,7 @@ namespace LTP.Truck.Forms
       lbTitlePage = new Label();
       lbTitle = new Label();
       btnLogout = new Common.Custom.RJButton();
+      ucLogin = new LTP.Truck.UserControls.UcLogin();
       panelMain = new Panel();
       tableLayoutPanel8 = new TableLayoutPanel();
       ucStatusConnectServer = new LTP.Truck.UserControls.UcStatusConnect();
@@ -478,11 +479,13 @@ namespace LTP.Truck.Forms
       // 
       tableLayoutPanel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       tableLayoutPanel4.BackColor = Color.FromArgb(236, 236, 236);
-      tableLayoutPanel4.ColumnCount = 2;
+      tableLayoutPanel4.ColumnCount = 3;
       tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 180F));
+      tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 280F));
       tableLayoutPanel4.Controls.Add(tableLayoutPanel3, 0, 0);
       tableLayoutPanel4.Controls.Add(btnLogout, 1, 0);
+      tableLayoutPanel4.Controls.Add(ucLogin, 2, 0);
       tableLayoutPanel4.Location = new Point(0, 0);
       tableLayoutPanel4.Margin = new Padding(0);
       tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -503,7 +506,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel3.RowCount = 2;
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.RowStyles.Add(new RowStyle());
-      tableLayoutPanel3.Size = new Size(827, 74);
+      tableLayoutPanel3.Size = new Size(547, 74);
       tableLayoutPanel3.TabIndex = 22;
       // 
       // lbTitlePage
@@ -514,7 +517,7 @@ namespace LTP.Truck.Forms
       lbTitlePage.Location = new Point(5, 44);
       lbTitlePage.Margin = new Padding(5, 0, 0, 0);
       lbTitlePage.Name = "lbTitlePage";
-      lbTitlePage.Size = new Size(822, 30);
+      lbTitlePage.Size = new Size(542, 30);
       lbTitlePage.TabIndex = 4;
       lbTitlePage.Text = "Trang chính";
       lbTitlePage.TextAlign = ContentAlignment.MiddleLeft;
@@ -527,7 +530,7 @@ namespace LTP.Truck.Forms
       lbTitle.Location = new Point(0, 0);
       lbTitle.Margin = new Padding(0);
       lbTitle.Name = "lbTitle";
-      lbTitle.Size = new Size(827, 44);
+      lbTitle.Size = new Size(547, 44);
       lbTitle.TabIndex = 3;
       lbTitle.Text = "HỆ THỐNG CÂN XE TẢI";
       lbTitle.TextAlign = ContentAlignment.MiddleLeft;
@@ -546,7 +549,7 @@ namespace LTP.Truck.Forms
       btnLogout.ForeColor = Color.White;
       btnLogout.Image = Properties.Resources.icon_logout;
       btnLogout.ImageAlign = ContentAlignment.MiddleLeft;
-      btnLogout.Location = new Point(836, 10);
+      btnLogout.Location = new Point(556, 10);
       btnLogout.Margin = new Padding(3, 3, 10, 3);
       btnLogout.Name = "btnLogout";
       btnLogout.Padding = new Padding(5, 0, 0, 0);
@@ -557,6 +560,14 @@ namespace LTP.Truck.Forms
       btnLogout.TextColor = Color.White;
       btnLogout.UseVisualStyleBackColor = false;
       btnLogout.Click += btnLogout_Click;
+      // 
+      // ucLogin
+      // 
+      ucLogin.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      ucLogin.Location = new Point(736, 9);
+      ucLogin.Name = "ucLogin";
+      ucLogin.Size = new Size(274, 61);
+      ucLogin.TabIndex = 24;
       // 
       // panelMain
       // 
@@ -675,5 +686,6 @@ namespace LTP.Truck.Forms
     private UserControls.UcStatusConnect ucStatusConnectWeight;
     private Label lbTime;
     private Common.Custom.RJButton btnLogout;
+    private UserControls.UcLogin ucLogin;
   }
 }

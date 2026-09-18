@@ -34,8 +34,8 @@
       label2 = new Label();
       txtAccount = new LTP.Truck.Custom.RJTextBox();
       tableLayoutPanel3 = new TableLayoutPanel();
-      txtPass = new LTP.Truck.Custom.RJTextBox();
       label3 = new Label();
+      txtPass = new LTP.Truck.Custom.RJTextBox();
       btnLogin = new LTP.Truck.Custom.RJButton();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
@@ -134,7 +134,7 @@
       txtAccount.PlaceholderText = "";
       txtAccount.Size = new Size(582, 57);
       txtAccount.TabIndex = 2;
-      txtAccount.Texts = "admin";
+      txtAccount.Texts = "";
       txtAccount.UnderlinedStyle = false;
       // 
       // tableLayoutPanel3
@@ -142,8 +142,8 @@
       tableLayoutPanel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel3.Controls.Add(txtPass, 0, 1);
       tableLayoutPanel3.Controls.Add(label3, 0, 0);
+      tableLayoutPanel3.Controls.Add(txtPass, 0, 1);
       tableLayoutPanel3.Location = new Point(30, 255);
       tableLayoutPanel3.Margin = new Padding(0);
       tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -152,6 +152,20 @@
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.Size = new Size(590, 110);
       tableLayoutPanel3.TabIndex = 2;
+      // 
+      // label3
+      // 
+      label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label3.AutoSize = true;
+      label3.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold);
+      label3.ForeColor = Color.FromArgb(255, 56, 60);
+      label3.Location = new Point(0, 0);
+      label3.Margin = new Padding(0);
+      label3.Name = "label3";
+      label3.Size = new Size(590, 37);
+      label3.TabIndex = 1;
+      label3.Text = "Mật khẩu";
+      label3.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // txtPass
       // 
@@ -173,22 +187,8 @@
       txtPass.PlaceholderText = "";
       txtPass.Size = new Size(582, 57);
       txtPass.TabIndex = 3;
-      txtPass.Texts = "admin";
+      txtPass.Texts = "";
       txtPass.UnderlinedStyle = false;
-      // 
-      // label3
-      // 
-      label3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label3.AutoSize = true;
-      label3.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold);
-      label3.ForeColor = Color.FromArgb(255, 56, 60);
-      label3.Location = new Point(0, 0);
-      label3.Margin = new Padding(0);
-      label3.Name = "label3";
-      label3.Size = new Size(590, 37);
-      label3.TabIndex = 1;
-      label3.Text = "Mật khẩu";
-      label3.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // btnLogin
       // 

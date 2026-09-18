@@ -467,7 +467,7 @@ namespace LTP.Truck.Forms
         RecordTruckId = selectedRecordTruck.Id,
         Net = _msgDataWeight.ValueWeight,
         Tare = selectedTare.Value ?? 0.0,
-        EmployeeId = AppCore.Ins._employeeCurrent?.Id,
+        EmployeeId = AppCore.Ins._userCurrent?.Id,
         StationId = AppCore.Ins._station?.Id,
         CreatedAt = DateTime.UtcNow,
         EnableFlag = true

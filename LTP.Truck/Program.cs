@@ -17,7 +17,6 @@ namespace LTP.Truck
       // see https://aka.ms/applicationconfiguration.
       ApplicationConfiguration.Initialize();
 
-      var rs = SecurityHelper.EncodePassword("Bosch", "Hsf@2026");
 
       //Khởi tạo Db
       InitDb().GetAwaiter().GetResult();

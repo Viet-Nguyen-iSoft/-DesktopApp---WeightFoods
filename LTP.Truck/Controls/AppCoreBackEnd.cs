@@ -65,6 +65,8 @@ namespace LTP.Truck.Controls
     public readonly StationService _stationService = new();
     public readonly ConnectionService _connectionService = new();
     public readonly EmployeeService _employeeService = new();
+    public readonly UserService _userService = new();
+    public readonly PermissionService _permissionService = new();
 
     public event Action<Station?>? OnChangeStation;
 
@@ -118,8 +120,9 @@ namespace LTP.Truck.Controls
     public AppConfig? _appConfig { get;set; }
     public Station? _station { get;set; }
     public List<Employee>? _employees { get;set; }
-    public Employee? _employeeCurrent { get;set; }
+    public User? _userCurrent { get;set; }
     public Connection? _connection { get;set; }
+
 
     public void ChangeStation(Station? station)
     {
@@ -135,6 +138,7 @@ namespace LTP.Truck.Controls
         _station = await _stationService.GetByCodeAsync(_appConfig?.StationId);
         _employees = await _employeeService.GetAllAsync();
         _connection = await _connectionService.GetFirstDataConnection();
+ 
         //var employees = _employees.FirstOrDefault();
         //foreach (var item in _employees)
         //{
@@ -142,7 +146,7 @@ namespace LTP.Truck.Controls
         //}
 
       }
-      catch (Exception)
+      catch (Exception ex)
       {
         throw;
       }
@@ -260,9 +264,5 @@ namespace LTP.Truck.Controls
       }
     }
 
-    public void CheckLogIn()
-    {
-      var rs = SecurityHelper.EncodePassword("Bosch", "Hsf@2026");
-    }
   }
 }

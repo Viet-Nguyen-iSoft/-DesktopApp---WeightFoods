@@ -117,6 +117,7 @@ namespace LTP.Truck.Forms
     private void FrmOperation_Load(object? sender, EventArgs e)
     {
       LoadStation(AppCore.Ins._station);
+      LoadAccount(AppCore.Ins._userCurrent);
 
       this.btnHomeTruck.Click += btnHomeTruck_Click;
       this.btnHomeTruck.PerformClick();
@@ -127,6 +128,17 @@ namespace LTP.Truck.Forms
       this.btnTare.Click += BtnTare_Click;
       this.btnGroupProduct.Click += BtnGroupProduct_Click;
       this.btnProduct.Click += BtnProduct_Click;
+    }
+
+    public void LoadAccount(User? user)
+    {
+      if (InvokeRequired)
+      {
+        BeginInvoke(new Action(() => LoadAccount(user)));
+        return;
+      }
+
+      ucLogin.Account = user?.Username ?? "Login";
     }
 
     private void FrmOperation_Shown(object? sender, EventArgs e)
@@ -409,6 +421,8 @@ namespace LTP.Truck.Forms
 
     private void btnLogout_Click(object sender, EventArgs e)
     {
+      AppCore.Ins._userCurrent = null;
+      LoadAccount(null);
       FrmMain.Instance.ChangePage(EnumScreen.Waiting);
     }
   }
