@@ -33,22 +33,6 @@ namespace LTP.Truck.Forms
 
     private void CustomUI()
     {
-      //ElipseControl elipseControl = new ElipseControl();
-      //elipseControl.TargetControl = tableLayoutPanel3;
-      //elipseControl.CornerRadius = 20;
-
-      //ElipseControl elipseControl01 = new ElipseControl();
-      //elipseControl01.TargetControl = tableLayoutPanel4;
-      //elipseControl01.CornerRadius = 20;
-
-      //ElipseControl elipseControl02 = new ElipseControl();
-      //elipseControl02.TargetControl = tableLayoutPanel7;
-      //elipseControl02.CornerRadius = 20;
-
-      //ElipseControl elipseControl03 = new ElipseControl();
-      //elipseControl03.TargetControl = tableLayoutPanel9;
-      //elipseControl03.CornerRadius = 20;
-
       dgv.EnableHeadersVisualStyles = false;
       dgv.ColumnHeadersHeight = 50;
       dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;

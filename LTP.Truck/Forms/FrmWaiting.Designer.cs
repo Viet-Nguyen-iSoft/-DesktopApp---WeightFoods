@@ -149,8 +149,10 @@
       // 
       // ucPanelLogin1
       // 
+      ucPanelLogin1.Account = "admin";
       ucPanelLogin1.Location = new Point(3, 247);
       ucPanelLogin1.Name = "ucPanelLogin1";
+      ucPanelLogin1.Password = "admin";
       ucPanelLogin1.Size = new Size(562, 490);
       ucPanelLogin1.TabIndex = 0;
       // 
@@ -184,6 +186,7 @@
       pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
       pictureBox1.TabIndex = 0;
       pictureBox1.TabStop = false;
+      pictureBox1.Click += pictureBox1_Click;
       // 
       // label2
       // 

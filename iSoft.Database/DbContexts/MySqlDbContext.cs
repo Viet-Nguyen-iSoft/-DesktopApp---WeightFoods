@@ -11,7 +11,8 @@ namespace iSoft.Database.DbContexts
   {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-      DotNetEnv.Env.Load();
+      string envPath = Path.Combine(AppContext.BaseDirectory, ".env");
+      DotNetEnv.Env.Load(envPath);
       string? host = Environment.GetEnvironmentVariable("DB_CONFIG_ADDRESS");
       string? port = Environment.GetEnvironmentVariable("DB_CONFIG_PORT");
       string? user = Environment.GetEnvironmentVariable("DB_CONFIG_USERNAME");

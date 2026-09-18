@@ -62,7 +62,6 @@ namespace ApiSyncData
       {
 
       }
-
     }
 
     private static async Task LoadAndSyncAsync<T>(Task<T> request,

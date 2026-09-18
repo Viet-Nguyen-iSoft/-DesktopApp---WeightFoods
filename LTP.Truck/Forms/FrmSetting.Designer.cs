@@ -34,6 +34,21 @@ namespace LTP.Truck.Forms
     {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSetting));
       tableLayoutPanel1 = new TableLayoutPanel();
+      tableLayoutPanel14 = new TableLayoutPanel();
+      tableLayoutPanel7 = new TableLayoutPanel();
+      tableLayoutPanel8 = new TableLayoutPanel();
+      btnSavePrint = new Common.Custom.RJButton();
+      label5 = new Label();
+      tableLayoutPanel9 = new TableLayoutPanel();
+      label6 = new Label();
+      cbbPrint = new ComboBox();
+      tableLayoutPanel11 = new TableLayoutPanel();
+      tableLayoutPanel12 = new TableLayoutPanel();
+      btnSaveStation = new Common.Custom.RJButton();
+      label8 = new Label();
+      tableLayoutPanel13 = new TableLayoutPanel();
+      label9 = new Label();
+      cbbStations = new ComboBox();
       tableLayoutPanel2 = new TableLayoutPanel();
       tableLayoutPanel3 = new TableLayoutPanel();
       tableLayoutPanel10 = new TableLayoutPanel();
@@ -45,29 +60,26 @@ namespace LTP.Truck.Forms
       btnConfirm = new Common.Custom.RJButton();
       label2 = new Label();
       tableLayoutPanel5 = new TableLayoutPanel();
-      rjTextBox2 = new Common.Custom.RJTextBox();
+      txtTimeoutServer = new Common.Custom.RJTextBox();
+      label7 = new Label();
+      txtPortServer = new Common.Custom.RJTextBox();
       label3 = new Label();
       label4 = new Label();
-      rjTextBox1 = new Common.Custom.RJTextBox();
-      tableLayoutPanel7 = new TableLayoutPanel();
-      tableLayoutPanel8 = new TableLayoutPanel();
-      btnSavePrint = new Common.Custom.RJButton();
-      label5 = new Label();
-      tableLayoutPanel9 = new TableLayoutPanel();
-      label6 = new Label();
-      cbbPrint = new ComboBox();
-      label7 = new Label();
-      rjTextBox3 = new Common.Custom.RJTextBox();
+      txtIpServer = new Common.Custom.RJTextBox();
       tableLayoutPanel1.SuspendLayout();
+      tableLayoutPanel14.SuspendLayout();
+      tableLayoutPanel7.SuspendLayout();
+      tableLayoutPanel8.SuspendLayout();
+      tableLayoutPanel9.SuspendLayout();
+      tableLayoutPanel11.SuspendLayout();
+      tableLayoutPanel12.SuspendLayout();
+      tableLayoutPanel13.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel3.SuspendLayout();
       tableLayoutPanel10.SuspendLayout();
       tableLayoutPanel4.SuspendLayout();
       tableLayoutPanel6.SuspendLayout();
       tableLayoutPanel5.SuspendLayout();
-      tableLayoutPanel7.SuspendLayout();
-      tableLayoutPanel8.SuspendLayout();
-      tableLayoutPanel9.SuspendLayout();
       SuspendLayout();
       // 
       // tableLayoutPanel1
@@ -76,19 +88,270 @@ namespace LTP.Truck.Forms
       tableLayoutPanel1.ColumnCount = 2;
       tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel1.Controls.Add(tableLayoutPanel14, 0, 2);
       tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
-      tableLayoutPanel1.Controls.Add(tableLayoutPanel7, 0, 2);
       tableLayoutPanel1.Dock = DockStyle.Fill;
       tableLayoutPanel1.Location = new Point(0, 0);
       tableLayoutPanel1.Name = "tableLayoutPanel1";
-      tableLayoutPanel1.RowCount = 5;
+      tableLayoutPanel1.RowCount = 4;
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 300F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 200F));
-      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
       tableLayoutPanel1.Size = new Size(1221, 998);
       tableLayoutPanel1.TabIndex = 2;
+      // 
+      // tableLayoutPanel14
+      // 
+      tableLayoutPanel14.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel14.ColumnCount = 3;
+      tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35F));
+      tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+      tableLayoutPanel14.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 65F));
+      tableLayoutPanel14.Controls.Add(tableLayoutPanel7, 2, 0);
+      tableLayoutPanel14.Controls.Add(tableLayoutPanel11, 0, 0);
+      tableLayoutPanel14.Location = new Point(0, 310);
+      tableLayoutPanel14.Margin = new Padding(0);
+      tableLayoutPanel14.Name = "tableLayoutPanel14";
+      tableLayoutPanel14.RowCount = 1;
+      tableLayoutPanel14.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel14.Size = new Size(1216, 200);
+      tableLayoutPanel14.TabIndex = 5;
+      // 
+      // tableLayoutPanel7
+      // 
+      tableLayoutPanel7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel7.BackColor = Color.FromArgb(236, 236, 236);
+      tableLayoutPanel7.ColumnCount = 1;
+      tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel7.Controls.Add(tableLayoutPanel8, 0, 3);
+      tableLayoutPanel7.Controls.Add(label5, 0, 0);
+      tableLayoutPanel7.Controls.Add(tableLayoutPanel9, 0, 1);
+      tableLayoutPanel7.Location = new Point(432, 0);
+      tableLayoutPanel7.Margin = new Padding(0);
+      tableLayoutPanel7.Name = "tableLayoutPanel7";
+      tableLayoutPanel7.RowCount = 5;
+      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel7.Size = new Size(784, 200);
+      tableLayoutPanel7.TabIndex = 2;
+      // 
+      // tableLayoutPanel8
+      // 
+      tableLayoutPanel8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel8.ColumnCount = 4;
+      tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel8.Controls.Add(btnSavePrint, 2, 0);
+      tableLayoutPanel8.Location = new Point(0, 135);
+      tableLayoutPanel8.Margin = new Padding(0);
+      tableLayoutPanel8.Name = "tableLayoutPanel8";
+      tableLayoutPanel8.RowCount = 1;
+      tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel8.Size = new Size(784, 60);
+      tableLayoutPanel8.TabIndex = 6;
+      // 
+      // btnSavePrint
+      // 
+      btnSavePrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnSavePrint.BackColor = Color.FromArgb(51, 108, 181);
+      btnSavePrint.BackgroundColor = Color.FromArgb(51, 108, 181);
+      btnSavePrint.BorderColor = Color.PaleVioletRed;
+      btnSavePrint.BorderRadius = 4;
+      btnSavePrint.BorderSize = 0;
+      btnSavePrint.FlatAppearance.BorderSize = 0;
+      btnSavePrint.FlatStyle = FlatStyle.Flat;
+      btnSavePrint.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
+      btnSavePrint.ForeColor = Color.White;
+      btnSavePrint.Image = Properties.Resources.icon_save;
+      btnSavePrint.ImageAlign = ContentAlignment.MiddleLeft;
+      btnSavePrint.Location = new Point(585, 3);
+      btnSavePrint.Name = "btnSavePrint";
+      btnSavePrint.Padding = new Padding(10, 0, 0, 0);
+      btnSavePrint.Size = new Size(191, 54);
+      btnSavePrint.TabIndex = 0;
+      btnSavePrint.Text = "       Lưu thay đổi";
+      btnSavePrint.TextColor = Color.White;
+      btnSavePrint.UseVisualStyleBackColor = false;
+      // 
+      // label5
+      // 
+      label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label5.AutoSize = true;
+      label5.BackColor = Color.FromArgb(199, 199, 199);
+      label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      label5.Location = new Point(0, 0);
+      label5.Margin = new Padding(0);
+      label5.Name = "label5";
+      label5.Size = new Size(784, 60);
+      label5.TabIndex = 0;
+      label5.Text = "Thông tin kết nối máy in";
+      label5.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // tableLayoutPanel9
+      // 
+      tableLayoutPanel9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel9.ColumnCount = 3;
+      tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+      tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel9.Controls.Add(label6, 0, 0);
+      tableLayoutPanel9.Controls.Add(cbbPrint, 1, 0);
+      tableLayoutPanel9.Location = new Point(3, 63);
+      tableLayoutPanel9.Name = "tableLayoutPanel9";
+      tableLayoutPanel9.RowCount = 1;
+      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel9.Size = new Size(778, 64);
+      tableLayoutPanel9.TabIndex = 7;
+      // 
+      // label6
+      // 
+      label6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label6.AutoSize = true;
+      label6.BackColor = Color.Transparent;
+      label6.Font = new Font("Segoe UI", 15.75F);
+      label6.Location = new Point(0, 0);
+      label6.Margin = new Padding(0);
+      label6.Name = "label6";
+      label6.Size = new Size(150, 64);
+      label6.TabIndex = 1;
+      label6.Text = "Máy in:";
+      label6.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // cbbPrint
+      // 
+      cbbPrint.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      cbbPrint.DropDownStyle = ComboBoxStyle.DropDownList;
+      cbbPrint.Font = new Font("Roboto", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      cbbPrint.FormattingEnabled = true;
+      cbbPrint.Location = new Point(153, 11);
+      cbbPrint.Name = "cbbPrint";
+      cbbPrint.Size = new Size(617, 41);
+      cbbPrint.TabIndex = 2;
+      // 
+      // tableLayoutPanel11
+      // 
+      tableLayoutPanel11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel11.BackColor = Color.FromArgb(236, 236, 236);
+      tableLayoutPanel11.ColumnCount = 1;
+      tableLayoutPanel11.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel11.Controls.Add(tableLayoutPanel12, 0, 3);
+      tableLayoutPanel11.Controls.Add(label8, 0, 0);
+      tableLayoutPanel11.Controls.Add(tableLayoutPanel13, 0, 1);
+      tableLayoutPanel11.Location = new Point(0, 0);
+      tableLayoutPanel11.Margin = new Padding(0);
+      tableLayoutPanel11.Name = "tableLayoutPanel11";
+      tableLayoutPanel11.RowCount = 5;
+      tableLayoutPanel11.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel11.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel11.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel11.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel11.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel11.Size = new Size(422, 200);
+      tableLayoutPanel11.TabIndex = 4;
+      // 
+      // tableLayoutPanel12
+      // 
+      tableLayoutPanel12.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel12.ColumnCount = 4;
+      tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel12.Controls.Add(btnSaveStation, 2, 0);
+      tableLayoutPanel12.Location = new Point(0, 135);
+      tableLayoutPanel12.Margin = new Padding(0);
+      tableLayoutPanel12.Name = "tableLayoutPanel12";
+      tableLayoutPanel12.RowCount = 1;
+      tableLayoutPanel12.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+      tableLayoutPanel12.Size = new Size(422, 60);
+      tableLayoutPanel12.TabIndex = 6;
+      // 
+      // btnSaveStation
+      // 
+      btnSaveStation.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnSaveStation.BackColor = Color.FromArgb(51, 108, 181);
+      btnSaveStation.BackgroundColor = Color.FromArgb(51, 108, 181);
+      btnSaveStation.BorderColor = Color.PaleVioletRed;
+      btnSaveStation.BorderRadius = 4;
+      btnSaveStation.BorderSize = 0;
+      btnSaveStation.FlatAppearance.BorderSize = 0;
+      btnSaveStation.FlatStyle = FlatStyle.Flat;
+      btnSaveStation.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
+      btnSaveStation.ForeColor = Color.White;
+      btnSaveStation.Image = Properties.Resources.icon_save;
+      btnSaveStation.ImageAlign = ContentAlignment.MiddleLeft;
+      btnSaveStation.Location = new Point(223, 3);
+      btnSaveStation.Name = "btnSaveStation";
+      btnSaveStation.Padding = new Padding(10, 0, 0, 0);
+      btnSaveStation.Size = new Size(191, 54);
+      btnSaveStation.TabIndex = 0;
+      btnSaveStation.Text = "       Lưu thay đổi";
+      btnSaveStation.TextColor = Color.White;
+      btnSaveStation.UseVisualStyleBackColor = false;
+      // 
+      // label8
+      // 
+      label8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label8.AutoSize = true;
+      label8.BackColor = Color.FromArgb(199, 199, 199);
+      label8.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+      label8.Location = new Point(0, 0);
+      label8.Margin = new Padding(0);
+      label8.Name = "label8";
+      label8.Size = new Size(422, 60);
+      label8.TabIndex = 0;
+      label8.Text = "Thông tin trạm cân";
+      label8.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // tableLayoutPanel13
+      // 
+      tableLayoutPanel13.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel13.ColumnCount = 3;
+      tableLayoutPanel13.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
+      tableLayoutPanel13.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel13.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
+      tableLayoutPanel13.Controls.Add(label9, 0, 0);
+      tableLayoutPanel13.Controls.Add(cbbStations, 1, 0);
+      tableLayoutPanel13.Location = new Point(3, 63);
+      tableLayoutPanel13.Name = "tableLayoutPanel13";
+      tableLayoutPanel13.RowCount = 1;
+      tableLayoutPanel13.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+      tableLayoutPanel13.Size = new Size(416, 64);
+      tableLayoutPanel13.TabIndex = 7;
+      // 
+      // label9
+      // 
+      label9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label9.AutoSize = true;
+      label9.BackColor = Color.Transparent;
+      label9.Font = new Font("Segoe UI", 15.75F);
+      label9.Location = new Point(0, 0);
+      label9.Margin = new Padding(0);
+      label9.Name = "label9";
+      label9.Size = new Size(150, 64);
+      label9.TabIndex = 1;
+      label9.Text = "Trạm cân:";
+      label9.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // cbbStations
+      // 
+      cbbStations.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      cbbStations.DropDownStyle = ComboBoxStyle.DropDownList;
+      cbbStations.Font = new Font("Roboto", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      cbbStations.FormattingEnabled = true;
+      cbbStations.Location = new Point(153, 11);
+      cbbStations.Name = "cbbStations";
+      cbbStations.Size = new Size(255, 41);
+      cbbStations.TabIndex = 2;
       // 
       // tableLayoutPanel2
       // 
@@ -250,6 +513,7 @@ namespace LTP.Truck.Forms
       btnConfirm.Text = "       Lưu thay đổi";
       btnConfirm.TextColor = Color.White;
       btnConfirm.UseVisualStyleBackColor = false;
+      btnConfirm.Click += btnConfirm_Click;
       // 
       // label2
       // 
@@ -271,12 +535,12 @@ namespace LTP.Truck.Forms
       tableLayoutPanel5.ColumnCount = 2;
       tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
       tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel5.Controls.Add(rjTextBox3, 1, 2);
+      tableLayoutPanel5.Controls.Add(txtTimeoutServer, 1, 2);
       tableLayoutPanel5.Controls.Add(label7, 0, 2);
-      tableLayoutPanel5.Controls.Add(rjTextBox2, 1, 1);
+      tableLayoutPanel5.Controls.Add(txtPortServer, 1, 1);
       tableLayoutPanel5.Controls.Add(label3, 0, 0);
       tableLayoutPanel5.Controls.Add(label4, 0, 1);
-      tableLayoutPanel5.Controls.Add(rjTextBox1, 1, 0);
+      tableLayoutPanel5.Controls.Add(txtIpServer, 1, 0);
       tableLayoutPanel5.Location = new Point(3, 63);
       tableLayoutPanel5.Name = "tableLayoutPanel5";
       tableLayoutPanel5.RowCount = 3;
@@ -286,28 +550,65 @@ namespace LTP.Truck.Forms
       tableLayoutPanel5.Size = new Size(416, 164);
       tableLayoutPanel5.TabIndex = 7;
       // 
-      // rjTextBox2
+      // txtTimeoutServer
       // 
-      rjTextBox2.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox2.BackColor = SystemColors.Window;
-      rjTextBox2.BorderColor = Color.Black;
-      rjTextBox2.BorderFocusColor = Color.HotPink;
-      rjTextBox2.BorderRadius = 5;
-      rjTextBox2.BorderSize = 2;
-      rjTextBox2.Font = new Font("Roboto Condensed", 15.75F);
-      rjTextBox2.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox2.Location = new Point(154, 61);
-      rjTextBox2.Margin = new Padding(4);
-      rjTextBox2.Multiline = false;
-      rjTextBox2.Name = "rjTextBox2";
-      rjTextBox2.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox2.PasswordChar = false;
-      rjTextBox2.PlaceholderColor = Color.DarkGray;
-      rjTextBox2.PlaceholderText = "";
-      rjTextBox2.Size = new Size(258, 40);
-      rjTextBox2.TabIndex = 4;
-      rjTextBox2.Texts = "";
-      rjTextBox2.UnderlinedStyle = false;
+      txtTimeoutServer.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtTimeoutServer.BackColor = SystemColors.Window;
+      txtTimeoutServer.BorderColor = Color.Black;
+      txtTimeoutServer.BorderFocusColor = Color.HotPink;
+      txtTimeoutServer.BorderRadius = 5;
+      txtTimeoutServer.BorderSize = 2;
+      txtTimeoutServer.Font = new Font("Roboto Condensed", 15.75F);
+      txtTimeoutServer.ForeColor = Color.FromArgb(64, 64, 64);
+      txtTimeoutServer.Location = new Point(154, 116);
+      txtTimeoutServer.Margin = new Padding(4);
+      txtTimeoutServer.Multiline = false;
+      txtTimeoutServer.Name = "txtTimeoutServer";
+      txtTimeoutServer.Padding = new Padding(10, 7, 10, 7);
+      txtTimeoutServer.PasswordChar = false;
+      txtTimeoutServer.PlaceholderColor = Color.DarkGray;
+      txtTimeoutServer.PlaceholderText = "";
+      txtTimeoutServer.Size = new Size(258, 40);
+      txtTimeoutServer.TabIndex = 6;
+      txtTimeoutServer.Texts = "";
+      txtTimeoutServer.UnderlinedStyle = false;
+      // 
+      // label7
+      // 
+      label7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label7.AutoSize = true;
+      label7.BackColor = Color.Transparent;
+      label7.Font = new Font("Segoe UI", 15.75F);
+      label7.Location = new Point(0, 108);
+      label7.Margin = new Padding(0);
+      label7.Name = "label7";
+      label7.Size = new Size(150, 56);
+      label7.TabIndex = 5;
+      label7.Text = "Timeout (ms):";
+      label7.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // txtPortServer
+      // 
+      txtPortServer.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtPortServer.BackColor = SystemColors.Window;
+      txtPortServer.BorderColor = Color.Black;
+      txtPortServer.BorderFocusColor = Color.HotPink;
+      txtPortServer.BorderRadius = 5;
+      txtPortServer.BorderSize = 2;
+      txtPortServer.Font = new Font("Roboto Condensed", 15.75F);
+      txtPortServer.ForeColor = Color.FromArgb(64, 64, 64);
+      txtPortServer.Location = new Point(154, 61);
+      txtPortServer.Margin = new Padding(4);
+      txtPortServer.Multiline = false;
+      txtPortServer.Name = "txtPortServer";
+      txtPortServer.Padding = new Padding(10, 7, 10, 7);
+      txtPortServer.PasswordChar = false;
+      txtPortServer.PlaceholderColor = Color.DarkGray;
+      txtPortServer.PlaceholderText = "";
+      txtPortServer.Size = new Size(258, 40);
+      txtPortServer.TabIndex = 4;
+      txtPortServer.Texts = "";
+      txtPortServer.UnderlinedStyle = false;
       // 
       // label3
       // 
@@ -337,181 +638,28 @@ namespace LTP.Truck.Forms
       label4.Text = "Port:";
       label4.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // rjTextBox1
+      // txtIpServer
       // 
-      rjTextBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox1.BackColor = SystemColors.Window;
-      rjTextBox1.BorderColor = Color.Black;
-      rjTextBox1.BorderFocusColor = Color.HotPink;
-      rjTextBox1.BorderRadius = 5;
-      rjTextBox1.BorderSize = 2;
-      rjTextBox1.Font = new Font("Roboto Condensed", 15.75F);
-      rjTextBox1.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox1.Location = new Point(154, 7);
-      rjTextBox1.Margin = new Padding(4);
-      rjTextBox1.Multiline = false;
-      rjTextBox1.Name = "rjTextBox1";
-      rjTextBox1.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox1.PasswordChar = false;
-      rjTextBox1.PlaceholderColor = Color.DarkGray;
-      rjTextBox1.PlaceholderText = "";
-      rjTextBox1.Size = new Size(258, 40);
-      rjTextBox1.TabIndex = 3;
-      rjTextBox1.Texts = "";
-      rjTextBox1.UnderlinedStyle = false;
-      // 
-      // tableLayoutPanel7
-      // 
-      tableLayoutPanel7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel7.BackColor = Color.FromArgb(236, 236, 236);
-      tableLayoutPanel7.ColumnCount = 1;
-      tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel7.Controls.Add(tableLayoutPanel8, 0, 3);
-      tableLayoutPanel7.Controls.Add(label5, 0, 0);
-      tableLayoutPanel7.Controls.Add(tableLayoutPanel9, 0, 1);
-      tableLayoutPanel7.Location = new Point(0, 310);
-      tableLayoutPanel7.Margin = new Padding(0);
-      tableLayoutPanel7.Name = "tableLayoutPanel7";
-      tableLayoutPanel7.RowCount = 5;
-      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-      tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel7.Size = new Size(1216, 200);
-      tableLayoutPanel7.TabIndex = 2;
-      // 
-      // tableLayoutPanel8
-      // 
-      tableLayoutPanel8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel8.ColumnCount = 4;
-      tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle());
-      tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle());
-      tableLayoutPanel8.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel8.Controls.Add(btnSavePrint, 2, 0);
-      tableLayoutPanel8.Location = new Point(0, 135);
-      tableLayoutPanel8.Margin = new Padding(0);
-      tableLayoutPanel8.Name = "tableLayoutPanel8";
-      tableLayoutPanel8.RowCount = 1;
-      tableLayoutPanel8.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel8.Size = new Size(1216, 60);
-      tableLayoutPanel8.TabIndex = 6;
-      // 
-      // btnSavePrint
-      // 
-      btnSavePrint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      btnSavePrint.BackColor = Color.FromArgb(51, 108, 181);
-      btnSavePrint.BackgroundColor = Color.FromArgb(51, 108, 181);
-      btnSavePrint.BorderColor = Color.PaleVioletRed;
-      btnSavePrint.BorderRadius = 4;
-      btnSavePrint.BorderSize = 0;
-      btnSavePrint.FlatAppearance.BorderSize = 0;
-      btnSavePrint.FlatStyle = FlatStyle.Flat;
-      btnSavePrint.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
-      btnSavePrint.ForeColor = Color.White;
-      btnSavePrint.Image = Properties.Resources.icon_save;
-      btnSavePrint.ImageAlign = ContentAlignment.MiddleLeft;
-      btnSavePrint.Location = new Point(1017, 3);
-      btnSavePrint.Name = "btnSavePrint";
-      btnSavePrint.Padding = new Padding(10, 0, 0, 0);
-      btnSavePrint.Size = new Size(191, 54);
-      btnSavePrint.TabIndex = 0;
-      btnSavePrint.Text = "       Lưu thay đổi";
-      btnSavePrint.TextColor = Color.White;
-      btnSavePrint.UseVisualStyleBackColor = false;
-      // 
-      // label5
-      // 
-      label5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label5.AutoSize = true;
-      label5.BackColor = Color.FromArgb(199, 199, 199);
-      label5.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-      label5.Location = new Point(0, 0);
-      label5.Margin = new Padding(0);
-      label5.Name = "label5";
-      label5.Size = new Size(1216, 60);
-      label5.TabIndex = 0;
-      label5.Text = "Thông tin kết nối máy in";
-      label5.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // tableLayoutPanel9
-      // 
-      tableLayoutPanel9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel9.ColumnCount = 3;
-      tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 150F));
-      tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel9.Controls.Add(label6, 0, 0);
-      tableLayoutPanel9.Controls.Add(cbbPrint, 1, 0);
-      tableLayoutPanel9.Location = new Point(3, 63);
-      tableLayoutPanel9.Name = "tableLayoutPanel9";
-      tableLayoutPanel9.RowCount = 1;
-      tableLayoutPanel9.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-      tableLayoutPanel9.Size = new Size(1210, 64);
-      tableLayoutPanel9.TabIndex = 7;
-      // 
-      // label6
-      // 
-      label6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label6.AutoSize = true;
-      label6.BackColor = Color.Transparent;
-      label6.Font = new Font("Segoe UI", 15.75F);
-      label6.Location = new Point(0, 0);
-      label6.Margin = new Padding(0);
-      label6.Name = "label6";
-      label6.Size = new Size(150, 64);
-      label6.TabIndex = 1;
-      label6.Text = "Máy in:";
-      label6.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // cbbPrint
-      // 
-      cbbPrint.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      cbbPrint.DropDownStyle = ComboBoxStyle.DropDownList;
-      cbbPrint.Font = new Font("Roboto", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      cbbPrint.FormattingEnabled = true;
-      cbbPrint.Location = new Point(153, 11);
-      cbbPrint.Name = "cbbPrint";
-      cbbPrint.Size = new Size(1049, 41);
-      cbbPrint.TabIndex = 2;
-      // 
-      // label7
-      // 
-      label7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label7.AutoSize = true;
-      label7.BackColor = Color.Transparent;
-      label7.Font = new Font("Segoe UI", 15.75F);
-      label7.Location = new Point(0, 108);
-      label7.Margin = new Padding(0);
-      label7.Name = "label7";
-      label7.Size = new Size(150, 56);
-      label7.TabIndex = 5;
-      label7.Text = "Timeout (ms):";
-      label7.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // rjTextBox3
-      // 
-      rjTextBox3.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox3.BackColor = SystemColors.Window;
-      rjTextBox3.BorderColor = Color.Black;
-      rjTextBox3.BorderFocusColor = Color.HotPink;
-      rjTextBox3.BorderRadius = 5;
-      rjTextBox3.BorderSize = 2;
-      rjTextBox3.Font = new Font("Roboto Condensed", 15.75F);
-      rjTextBox3.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox3.Location = new Point(154, 116);
-      rjTextBox3.Margin = new Padding(4);
-      rjTextBox3.Multiline = false;
-      rjTextBox3.Name = "rjTextBox3";
-      rjTextBox3.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox3.PasswordChar = false;
-      rjTextBox3.PlaceholderColor = Color.DarkGray;
-      rjTextBox3.PlaceholderText = "";
-      rjTextBox3.Size = new Size(258, 40);
-      rjTextBox3.TabIndex = 6;
-      rjTextBox3.Texts = "";
-      rjTextBox3.UnderlinedStyle = false;
+      txtIpServer.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtIpServer.BackColor = SystemColors.Window;
+      txtIpServer.BorderColor = Color.Black;
+      txtIpServer.BorderFocusColor = Color.HotPink;
+      txtIpServer.BorderRadius = 5;
+      txtIpServer.BorderSize = 2;
+      txtIpServer.Font = new Font("Roboto Condensed", 15.75F);
+      txtIpServer.ForeColor = Color.FromArgb(64, 64, 64);
+      txtIpServer.Location = new Point(154, 7);
+      txtIpServer.Margin = new Padding(4);
+      txtIpServer.Multiline = false;
+      txtIpServer.Name = "txtIpServer";
+      txtIpServer.Padding = new Padding(10, 7, 10, 7);
+      txtIpServer.PasswordChar = false;
+      txtIpServer.PlaceholderColor = Color.DarkGray;
+      txtIpServer.PlaceholderText = "";
+      txtIpServer.Size = new Size(258, 40);
+      txtIpServer.TabIndex = 3;
+      txtIpServer.Texts = "";
+      txtIpServer.UnderlinedStyle = false;
       // 
       // FrmSetting
       // 
@@ -522,6 +670,17 @@ namespace LTP.Truck.Forms
       Name = "FrmSetting";
       Text = "FrmSetting";
       tableLayoutPanel1.ResumeLayout(false);
+      tableLayoutPanel14.ResumeLayout(false);
+      tableLayoutPanel7.ResumeLayout(false);
+      tableLayoutPanel7.PerformLayout();
+      tableLayoutPanel8.ResumeLayout(false);
+      tableLayoutPanel9.ResumeLayout(false);
+      tableLayoutPanel9.PerformLayout();
+      tableLayoutPanel11.ResumeLayout(false);
+      tableLayoutPanel11.PerformLayout();
+      tableLayoutPanel12.ResumeLayout(false);
+      tableLayoutPanel13.ResumeLayout(false);
+      tableLayoutPanel13.PerformLayout();
       tableLayoutPanel2.ResumeLayout(false);
       tableLayoutPanel3.ResumeLayout(false);
       tableLayoutPanel10.ResumeLayout(false);
@@ -531,11 +690,6 @@ namespace LTP.Truck.Forms
       tableLayoutPanel6.ResumeLayout(false);
       tableLayoutPanel5.ResumeLayout(false);
       tableLayoutPanel5.PerformLayout();
-      tableLayoutPanel7.ResumeLayout(false);
-      tableLayoutPanel7.PerformLayout();
-      tableLayoutPanel8.ResumeLayout(false);
-      tableLayoutPanel9.ResumeLayout(false);
-      tableLayoutPanel9.PerformLayout();
       ResumeLayout(false);
     }
 
@@ -555,8 +709,8 @@ namespace LTP.Truck.Forms
     private TableLayoutPanel tableLayoutPanel5;
     private Label label3;
     private Label label4;
-    private Common.Custom.RJTextBox rjTextBox2;
-    private Common.Custom.RJTextBox rjTextBox1;
+    private Common.Custom.RJTextBox txtPortServer;
+    private Common.Custom.RJTextBox txtIpServer;
     private TableLayoutPanel tableLayoutPanel7;
     private TableLayoutPanel tableLayoutPanel8;
     private Common.Custom.RJButton btnSavePrint;
@@ -564,7 +718,15 @@ namespace LTP.Truck.Forms
     private TableLayoutPanel tableLayoutPanel9;
     private Label label6;
     private ComboBox cbbPrint;
-    private Common.Custom.RJTextBox rjTextBox3;
+    private Common.Custom.RJTextBox txtTimeoutServer;
     private Label label7;
+    private TableLayoutPanel tableLayoutPanel11;
+    private TableLayoutPanel tableLayoutPanel12;
+    private Common.Custom.RJButton btnSaveStation;
+    private Label label8;
+    private TableLayoutPanel tableLayoutPanel13;
+    private Label label9;
+    private ComboBox cbbStations;
+    private TableLayoutPanel tableLayoutPanel14;
   }
 }

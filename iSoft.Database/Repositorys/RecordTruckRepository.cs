@@ -21,6 +21,7 @@ namespace iSoft.Database.Repositorys
         .Include(x => x.Client)
         .Include(x => x.TypeGoods)
         .Include(x => x.Warehouse)
+        .Include(x => x.Station)
         .AsQueryable();
       if (!IsContainDelete)
         query = query.Where(x => !x.DeletedFlag);

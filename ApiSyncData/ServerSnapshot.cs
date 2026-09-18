@@ -21,13 +21,13 @@ namespace ApiSyncData
 
     internal static List<TEntity> Apply<TSource, TEntity>(
       List<TSource> rows, List<TEntity> locals, Action<TSource, TEntity> map,
-      CancellationToken token)
+      CancellationToken token, IEnumerable<Guid>? snapshotIds = null)
       where TSource : IServerRecord
       where TEntity : BaseModel, new()
     {
       var linked = locals.Where(x => x.IdSrc.HasValue && x.IdSrc != Guid.Empty).ToList();
       var byId = linked.ToDictionary(x => x.IdSrc!.Value);
-      var ids = new HashSet<Guid>();
+      var ids = snapshotIds?.ToHashSet() ?? new HashSet<Guid>();
       var added = new List<TEntity>();
       foreach (var row in rows)
       {

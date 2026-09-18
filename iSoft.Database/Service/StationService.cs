@@ -18,5 +18,11 @@ namespace iSoft.Database.Service
       var repository = new StationRepository(context);
       return await repository.GetFirstDataStationAsync().ConfigureAwait(false);
     }
+    public async Task<Station?> GetByCodeAsync(Guid? id)
+    {
+      await using var context = new MySqlDbContext();
+      var repository = new StationRepository(context);
+      return await repository.GetByCodeAsync(id).ConfigureAwait(false);
+    }
   }
 }

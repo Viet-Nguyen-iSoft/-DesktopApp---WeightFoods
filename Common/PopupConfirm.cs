@@ -14,7 +14,8 @@ namespace Common
 {
   public partial class PopupConfirm : Form
   {
-    public event EventHandler<EnumResponsible>? OnSendConfirm;
+    private System.Windows.Forms.Timer? _autoCloseTimer;
+    public event EventHandler<ResponMsg>? OnSendConfirm;
     public PopupConfirm()
     {
       InitializeComponent();
@@ -36,8 +37,10 @@ namespace Common
       elipseControl03.TargetControl = tableLayoutPanel2;
     }
 
-    public PopupConfirm(string title, EnumTypeMsg enumTypeMsg, EnumImageMsg eImage) : this()
+    private object? _obj {  get; set; }
+    public PopupConfirm(string title, EnumTypeMsg enumTypeMsg, EnumImageMsg eImage, object obj=null) : this()
     {
+      _obj = obj;
       this.lbInformation.Text = title;
 
       switch (enumTypeMsg)
@@ -54,6 +57,13 @@ namespace Common
           this.btnConfirm.Visible = false;
           this.btnClose.Visible = false;
           this.tableLayoutPanel3.Visible = false;
+          _autoCloseTimer = new System.Windows.Forms.Timer
+          {
+            Interval = 2000
+          };
+          _autoCloseTimer.Tick += AutoCloseTimer_Tick;
+          this.Shown += (_, _) => _autoCloseTimer?.Start();
+          this.FormClosed += (_, _) => DisposeAutoCloseTimer();
           break;
       }
       
@@ -74,16 +84,47 @@ namespace Common
       }
     }
 
+    private void AutoCloseTimer_Tick(object? sender, EventArgs e)
+    {
+      _autoCloseTimer?.Stop();
+      this.Close();
+    }
+
+    private void DisposeAutoCloseTimer()
+    {
+      _autoCloseTimer?.Stop();
+      _autoCloseTimer?.Dispose();
+      _autoCloseTimer = null;
+    }
+
     private void btnConfirm_Click(object sender, EventArgs e)
     {
-      OnSendConfirm?.Invoke(sender, EnumResponsible.Confirm);
+      ResponMsg responMsg = new ResponMsg()
+      {
+        EnumResponsible = EnumResponsible.Confirm,
+        Obj = _obj,
+      };
+
+      OnSendConfirm?.Invoke(sender, responMsg);
       this.Close();
     }
 
     private void btnClose_Click(object sender, EventArgs e)
     {
-      OnSendConfirm?.Invoke(sender, EnumResponsible.Cancel);
+      ResponMsg responMsg = new ResponMsg()
+      {
+        EnumResponsible = EnumResponsible.Cancel,
+        Obj = _obj,
+      };
+
+      OnSendConfirm?.Invoke(sender, responMsg);
       this.Close();
     }
+  }
+
+  public class ResponMsg
+  {
+    public EnumResponsible EnumResponsible { get; set; }
+    public object? Obj { get; set; }
   }
 }

@@ -72,7 +72,7 @@ public sealed class CommunicationService : ICommunicationService
   {
     IScaleConnection connection = GetRequiredConnection(id);
     connection.Connect();
-    if (connection.IsRequestGetData)
+    if (connection.IsConnected && connection.IsRequestGetData)
       connection.RequestGetData();
   }
 

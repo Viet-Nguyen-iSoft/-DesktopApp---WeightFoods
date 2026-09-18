@@ -348,7 +348,7 @@ namespace LTP.Truck.Forms
       lbWeightValue.Name = "lbWeightValue";
       lbWeightValue.Size = new Size(664, 172);
       lbWeightValue.TabIndex = 2;
-      lbWeightValue.Text = "0.000";
+      lbWeightValue.Text = "---";
       lbWeightValue.TextAlign = ContentAlignment.MiddleRight;
       // 
       // tableLayoutPanel15
@@ -485,7 +485,7 @@ namespace LTP.Truck.Forms
       lbGross.Name = "lbGross";
       lbGross.Size = new Size(216, 64);
       lbGross.TabIndex = 3;
-      lbGross.Text = "0.000";
+      lbGross.Text = "---";
       lbGross.TextAlign = ContentAlignment.MiddleRight;
       // 
       // tableLayoutPanel4

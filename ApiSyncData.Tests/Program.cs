@@ -5,7 +5,8 @@ using iSoft.Database.Models;
 var retainedId = Guid.NewGuid();
 var missingId = Guid.NewGuid();
 var newId = Guid.NewGuid();
-var retained = new Local { Id = 12, IdSrc = retainedId, DeletedFlag = true, Code = "LOCAL", Name = "old" };
+var retainedLocalId = Guid.NewGuid();
+var retained = new Local { Id = retainedLocalId, IdSrc = retainedId, DeletedFlag = true, Code = "LOCAL", Name = "old" };
 var missing = new Local { IdSrc = missingId };
 var localOnly = new Local { Name = "local only" };
 var emptyId = new Local { IdSrc = Guid.Empty };
@@ -14,7 +15,7 @@ var rows = new List<Source> { new() { Id = retainedId, Name = "updated" }, new()
 ServerSnapshot.Validate(rows, 2);
 var added = ServerSnapshot.Apply(rows, locals, (s, l) => l.Name = s.Name, default);
 Check(added.Count == 1 && added[0].IdSrc == newId, "insert");
-Check(retained.Id == 12 && retained.Code == "LOCAL" && retained.Name == "updated", "update preserves local fields");
+Check(retained.Id == retainedLocalId && retained.Code == "LOCAL" && retained.Name == "updated", "update preserves local fields");
 Check(!retained.DeletedFlag, "restore active record");
 Check(missing.DeletedFlag, "soft delete missing record");
 Check(!localOnly.DeletedFlag && !emptyId.DeletedFlag, "preserve unlinked local records");
@@ -23,6 +24,11 @@ var deletedAt = missing.UpdatedAt;
 Check(ServerSnapshot.Apply(rows, locals, (s, l) => l.Name = s.Name, default).Count == 0,
   "repeated sync does not insert duplicates");
 Check(missing.UpdatedAt == deletedAt, "repeated delete preserves timestamp");
+var skippedId = Guid.NewGuid();
+var skipped = new Local { IdSrc = skippedId, Name = "unchanged" };
+ServerSnapshot.Apply(new List<Source>(), new List<Local> { skipped },
+  (s, l) => l.Name = s.Name, default, new[] { skippedId });
+Check(!skipped.DeletedFlag && skipped.Name == "unchanged", "skipped record remains unchanged");
 ServerSnapshot.Validate(new List<Source>(), 0);
 ServerSnapshot.Apply(new List<Source>(), locals, (s, l) => l.Name = s.Name, default);
 Check(retained.DeletedFlag && added[0].DeletedFlag && !localOnly.DeletedFlag, "empty snapshot deletes linked records");
@@ -39,7 +45,7 @@ try
   throw new Exception("Cancellation was ignored");
 }
 catch (OperationCanceledException) { }
-Console.WriteLine("PASS: insert, update, restore, soft delete, local field preservation, repeat sync, empty snapshot, invalid snapshots, cancellation.");
+Console.WriteLine("PASS: insert, update, restore, soft delete, skipped record, local field preservation, repeat sync, empty snapshot, invalid snapshots, cancellation.");
 
 static void Check(bool condition, string name)
 {

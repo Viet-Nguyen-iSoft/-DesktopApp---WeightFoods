@@ -1,4 +1,5 @@
 ﻿using Accessibility;
+using ApiSyncData;
 using Common;
 using HelperManager;
 using iSoft.Communication.Interface;
@@ -109,7 +110,27 @@ namespace LTP.Truck.Forms
     {
       btnFilter.Click += BtnFilter_Click;
       AppCore.Ins.OnSendDataWeightTruck += Ins_OnSendDataWeightTruck;
+      AppCore.Ins.OnSendStatusWeightTruck += Ins_OnSendStatusWeightTruck;
+      ResetWeightDisplay();
       CheckShowStatusButton(_recordTruck);
+    }
+
+    private void Ins_OnSendStatusWeightTruck(object? sender, CommunicationStatusChangedEventArgs e)
+    {
+      if (!e.IsConnected)
+        ResetWeightDisplay();
+    }
+
+    private void ResetWeightDisplay()
+    {
+      if (InvokeRequired)
+      {
+        BeginInvoke(new Action(ResetWeightDisplay));
+        return;
+      }
+
+      _msgDataWeight = new MessageDataOutput();
+      lbWeightValue.Text = "---";
     }
 
     private void BtnFilter_Click(object? sender, EventArgs e)
@@ -233,41 +254,48 @@ namespace LTP.Truck.Forms
     private int _weightGoodsLoadVersion;
     private void btnTriggerWeight_Click(object sender, EventArgs e)
     {
-      var rs = LicensePlateHelper.IsValidVietnamLicensePlate(txtLicensePlate.Texts);
-      if (!rs.IsValid)
+      try
       {
-        using var popupMsg = new PopupConfirm("Vui lòng nhập biển số xe. \r\nHoặc biển số xe không hợp lệ !",
-          EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
-        popupMsg.ShowDialog(this);
-        return;
-      }
+        var rs = LicensePlateHelper.IsValidVietnamLicensePlate(txtLicensePlate.Texts);
+        if (!rs.IsValid)
+        {
+          using var popupMsg = new PopupConfirm("Vui lòng nhập biển số xe. \r\nHoặc biển số xe không hợp lệ !",
+            EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+          popupMsg.ShowDialog(this);
+          return;
+        }
 
-      if (_recordTruck.TypeGoodsId == null)
-      {
-        using var popupMsg = new PopupConfirm("Vui lòng chọn Loại hàng trước khi cân !",
-          EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
-        popupMsg.ShowDialog(this);
-        return;
-      }
+        if (_recordTruck.TypeGoodsId == null)
+        {
+          using var popupMsg = new PopupConfirm("Vui lòng chọn Loại hàng trước khi cân !",
+            EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+          popupMsg.ShowDialog(this);
+          return;
+        }
 
-      if (_msgDataWeight.ValueWeight <= 0)
-      {
-        PopupConfirm popupConfirm = new PopupConfirm("Giá trị cân ≤ 0 Kg !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
-        popupConfirm.ShowDialog();
-        return;
-      }
+        if (_msgDataWeight.ValueWeight <= 0)
+        {
+          PopupConfirm popupConfirm = new PopupConfirm("Giá trị cân ≤ 0 Kg !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+          popupConfirm.ShowDialog();
+          return;
+        }
 
-      _recordTruck.NetTimeTemp = _msgDataWeight.ValueWeight;
-      if (_recordTruck.EnumTypeDataTruck == EnumTypeDataTruck.None)
-      {
-        _recordTruck.EnumTypeDataTruck = EnumTypeDataTruck.WeightedTime01;
-      }
-      else if (_recordTruck.EnumTypeDataTruck == EnumTypeDataTruck.DoneTime01)
-      {
-        _recordTruck.EnumTypeDataTruck = EnumTypeDataTruck.WeightedTime02;
-      }
+        _recordTruck.NetTimeTemp = _msgDataWeight.ValueWeight;
+        if (_recordTruck.EnumTypeDataTruck == EnumTypeDataTruck.None)
+        {
+          _recordTruck.EnumTypeDataTruck = EnumTypeDataTruck.WeightedTime01;
+        }
+        else if (_recordTruck.EnumTypeDataTruck == EnumTypeDataTruck.DoneTime01)
+        {
+          _recordTruck.EnumTypeDataTruck = EnumTypeDataTruck.WeightedTime02;
+        }
 
-      CheckShowStatusButton(_recordTruck);
+        CheckShowStatusButton(_recordTruck);
+      }
+      catch (Exception ex)
+      {
+
+      }
     }
 
     private async void btnWeightTime01_Click(object sender, EventArgs e)
@@ -275,6 +303,14 @@ namespace LTP.Truck.Forms
       if (_recordTruck.NetTimeTemp <= 0)
       {
         PopupConfirm popupConfirm = new PopupConfirm("Giá trị cân ≤ 0 Kg !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popupConfirm.ShowDialog();
+        return;
+      }
+
+      var validLicense = LicensePlateHelper.IsValidVietnamLicensePlate(txtLicensePlate.Texts);
+      if (!validLicense.IsValid)
+      {
+        PopupConfirm popupConfirm = new PopupConfirm("Biển số xe không hợp lệ !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
         popupConfirm.ShowDialog();
         return;
       }
@@ -288,7 +324,7 @@ namespace LTP.Truck.Forms
       _recordTruck.NoLabelAuto = KeyHelper.CreateLabel(AppCore.Ins._appConfig?.Key);
       _recordTruck.NoLabelManual = txtNoLabel.Texts;
       _recordTruck.NameDriver = txtNameDriver.Texts;
-      _recordTruck.LicensePlate = txtLicensePlate.Texts;
+      _recordTruck.LicensePlate = validLicense.Plate;
       _recordTruck.IdCard = txtIdCard.Texts;
       _recordTruck.Document = txtDocument.Text;
       _recordTruck.StationId = AppCore.Ins._station?.Id;
@@ -298,35 +334,66 @@ namespace LTP.Truck.Forms
 
       await AppCore.Ins._recordTruckService.AddOrUpdateAsync(_recordTruck);
       await LoadHistorical();
+
+      ////POST PDF
+      RecordTruck? record = await _recordTruckService.GetDetailByIdAsync(_recordTruck.Id);
+      if (record != null)
+      {
+        var pathPdf = await DownloadReportTruck(DateTime.Now, record);
+        await (new ApiService()).UploadReportTruckPdf(record.Id, pathPdf);
+      }
     }
 
     private async void btnWeightTime02_Click(object sender, EventArgs e)
     {
-      if (_recordTruck.NetTimeTemp <= 0)
+      try
       {
-        PopupConfirm popupConfirm = new PopupConfirm("Giá trị cân ≤ 0 Kg !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
-        popupConfirm.ShowDialog();
-        return;
+        if (_recordTruck.NetTimeTemp <= 0)
+        {
+          PopupConfirm popupConfirm = new PopupConfirm("Giá trị cân ≤ 0 Kg !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+          popupConfirm.ShowDialog();
+          return;
+        }
+
+        var validLicense = LicensePlateHelper.IsValidVietnamLicensePlate(txtLicensePlate.Texts);
+        if (!validLicense.IsValid)
+        {
+          PopupConfirm popupConfirm = new PopupConfirm("Biển số xe không hợp lệ !", EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+          popupConfirm.ShowDialog();
+          return;
+        }
+
+        _recordTruck.NetTime02 = _recordTruck.NetTimeTemp;
+        _recordTruck.NetTimeTemp = 0.0;
+        _recordTruck.EnumTypeDataTruck = EnumTypeDataTruck.DoneTime02;
+        CheckShowStatusButton(_recordTruck);
+
+        //Save DB
+        _recordTruck.NoLabelAuto = DateTime.Now.ToString("yyyyMMddHHmmss");
+        _recordTruck.NoLabelManual = txtNoLabel.Texts;
+        _recordTruck.NameDriver = txtNameDriver.Texts;
+        _recordTruck.LicensePlate = validLicense.Plate;
+        _recordTruck.IdCard = txtIdCard.Texts;
+        _recordTruck.Document = txtDocument.Text;
+        _recordTruck.StationId = AppCore.Ins._station?.Id;
+        _recordTruck.EmployeeId = AppCore.Ins._employeeCurrent?.Id;
+        _recordTruck.UpdatedAt = DateTime.UtcNow;
+
+        await AppCore.Ins._recordTruckService.AddOrUpdateAsync(_recordTruck);
+        await LoadHistorical();
+
+        //POST PDF
+        RecordTruck? record = await _recordTruckService.GetDetailByIdAsync(_recordTruck.Id);
+        if (record != null)
+        {
+          var pathPdf = await DownloadReportTruck(DateTime.Now, record);
+          await (new ApiService()).UploadReportTruckPdf(record.Id, pathPdf);
+        }
       }
+      catch (Exception)
+      {
 
-      _recordTruck.NetTime02 = _recordTruck.NetTimeTemp;
-      _recordTruck.NetTimeTemp = 0.0;
-      _recordTruck.EnumTypeDataTruck = EnumTypeDataTruck.DoneTime02;
-      CheckShowStatusButton(_recordTruck);
-
-      //Save DB
-      _recordTruck.NoLabelAuto = DateTime.Now.ToString("yyyyMMddHHmmss");
-      _recordTruck.NoLabelManual = txtNoLabel.Texts;
-      _recordTruck.NameDriver = txtNameDriver.Texts;
-      _recordTruck.LicensePlate = txtLicensePlate.Texts;
-      _recordTruck.IdCard = txtIdCard.Texts;
-      _recordTruck.Document = txtDocument.Text;
-      _recordTruck.StationId = AppCore.Ins._station?.Id;
-      _recordTruck.EmployeeId = AppCore.Ins._employeeCurrent?.Id;
-      _recordTruck.UpdatedAt = DateTime.UtcNow;
-
-      await AppCore.Ins._recordTruckService.AddOrUpdateAsync(_recordTruck);
-      await LoadHistorical();
+      }
     }
 
     private void btnBack_Click(object sender, EventArgs e)
@@ -406,6 +473,7 @@ namespace LTP.Truck.Forms
       UpdateOffsetWeight(recordTruck);
       _ = LoadWeightGoodsAsync(recordTruck.Id);
       lbWeightTrigger.Text = recordTruck.NetTimeTemp.ToString("F3");
+      ApplyRecordAccess(recordTruck);
     }
 
     private void ShowDataHistorical(RecordTruck recordTruck)
@@ -485,17 +553,59 @@ namespace LTP.Truck.Forms
 
 
       //Show thông tin
-      txtNoLabelAuto.Texts = recordTruck?.NoLabelAuto ?? string.Empty;
-      txtNoLabel.Texts = recordTruck?.NoLabelManual ?? string.Empty;
+      txtNoLabelAuto.Texts = recordTruck.NoLabelAuto ?? string.Empty;
+      txtNoLabel.Texts = recordTruck.NoLabelManual ?? string.Empty;
 
-      txtNameDriver.Texts = recordTruck?.NameDriver ?? string.Empty;
-      txtLicensePlate.Texts = recordTruck?.LicensePlate ?? string.Empty;
-      txtIdCard.Texts = recordTruck?.IdCard ?? string.Empty;
-      txtDocument.Text = recordTruck?.Document ?? string.Empty;
+      txtNameDriver.Texts = recordTruck.NameDriver ?? string.Empty;
+      txtLicensePlate.Texts = recordTruck.LicensePlate ?? string.Empty;
+      txtIdCard.Texts = recordTruck.IdCard ?? string.Empty;
+      txtDocument.Text = recordTruck.Document ?? string.Empty;
 
-      txtClient.Texts = recordTruck?.Client?.Name ?? string.Empty;
-      txtWareHouse.Texts = recordTruck?.Warehouse?.Name ?? string.Empty;
-      txtTypeGoods.Texts = recordTruck?.TypeGoods?.Name ?? string.Empty;
+      txtClient.Texts = recordTruck.Client?.Name ?? string.Empty;
+      txtWareHouse.Texts = recordTruck.Warehouse?.Name ?? string.Empty;
+      txtTypeGoods.Texts = recordTruck.TypeGoods?.Name ?? string.Empty;
+
+      ApplyRecordAccess(recordTruck);
+    }
+
+    private bool CanModifyRecord(RecordTruck? recordTruck)
+    {
+      if (recordTruck == null)
+        return false;
+
+      // Phiếu mới chưa có station sẽ được gán station hiện tại khi lưu.
+      if (recordTruck.Id == Guid.Empty)
+        return true;
+
+      return AppCore.Ins._station != null &&
+        recordTruck.StationId == AppCore.Ins._station.Id;
+    }
+
+    private void ApplyRecordAccess(RecordTruck recordTruck)
+    {
+      bool canModify = CanModifyRecord(recordTruck);
+
+      // Các nút phụ thuộc trạng thái chỉ bị khóa thêm; không bật lại
+      // nếu trạng thái cân hiện tại không cho phép thao tác.
+      btnWeightTime01.Enabled &= canModify;
+      btnWeightTime02.Enabled &= canModify;
+      btnPrint.Enabled &= canModify;
+
+      btnTriggerWeight.Enabled = canModify;
+      btnBack.Enabled = canModify;
+      btnZero.Enabled = canModify;
+      btnLoadClient.Enabled = canModify;
+      btnLoadTypeGoods.Enabled = canModify;
+      btnLoadWarehouse.Enabled = canModify;
+
+      txtNoLabel.Enabled = canModify;
+      txtNameDriver.Enabled = canModify;
+      txtLicensePlate.Enabled = canModify;
+      txtIdCard.Enabled = canModify;
+      txtClient.Enabled = canModify;
+      txtTypeGoods.Enabled = canModify;
+      txtWareHouse.Enabled = canModify;
+      txtDocument.ReadOnly = !canModify;
     }
 
     private void UpdateOffsetWeight(RecordTruck recordTruck)
@@ -635,6 +745,9 @@ namespace LTP.Truck.Forms
       if (recordTruckDto.RecordTruck is not RecordTruck recordTruck)
         return;
 
+      if (!CanModifyRecord(recordTruck))
+        return;
+
       try
       {
         if (!recordTruck.DeletedFlag)
@@ -644,15 +757,20 @@ namespace LTP.Truck.Forms
             return;
           recordTruck.ReasonDelete = inputReason.Reason;
           recordTruck.DeletedFlag = true;
+
+          recordTruck.UpdatedAt = DateTime.UtcNow;
+          await AppCore.Ins._recordTruckService.AddOrUpdateAsync(recordTruck);
+          await LoadHistorical();
         }
         else
         {
-          recordTruck.DeletedFlag = false;
+          using var popup = new PopupConfirm(
+          "Có chắn chắn phục hồi dữ liệu này ?",
+          EnumTypeMsg.Confirm,
+          EnumImageMsg.Warning, recordTruck);
+          popup.OnSendConfirm += Popup_OnSendConfirm;
+          popup.ShowDialog(this);
         }
-
-        recordTruck.UpdatedAt = DateTime.UtcNow;
-        await AppCore.Ins._recordTruckService.AddOrUpdateAsync(recordTruck);
-        await LoadHistorical();
       }
       catch (Exception ex)
       {
@@ -663,6 +781,20 @@ namespace LTP.Truck.Forms
           EnumImageMsg.Warning);
         popup.ShowDialog(this);
       }
+    }
+
+    private async void Popup_OnSendConfirm(object? sender, ResponMsg e)
+    {
+      RecordTruck recordTruck = e.Obj as RecordTruck;
+      if (recordTruck != null)
+      {
+        recordTruck.ReasonDelete = string.Empty;
+        recordTruck.DeletedFlag = false;
+
+        recordTruck.UpdatedAt = DateTime.UtcNow;
+        await AppCore.Ins._recordTruckService.AddOrUpdateAsync(recordTruck);
+        await LoadHistorical();
+      }  
     }
 
     public void SetDgvHistorical(List<RecordTruckDTO> dto)
@@ -715,9 +847,15 @@ namespace LTP.Truck.Forms
         if (row.DataBoundItem is RecordTruckDTO item && item.RecordTruck != null)
         {
           var isDeleted = item.RecordTruck.DeletedFlag;
-          row.Cells["btnDelete"].Value = isDeleted
-            ? "Phục hồi"
-            : "Xóa";
+          var canModify = CanModifyRecord(item.RecordTruck);
+          row.Cells["btnDelete"].Value = !canModify
+            ? "Chỉ xem"
+            : isDeleted
+              ? "Phục hồi"
+              : "Xóa";
+          row.Cells["btnDelete"].Style.ForeColor = canModify
+            ? dgv.DefaultCellStyle.ForeColor
+            : Color.Gray;
           var rowBackColor = isDeleted
             ? Color.Tomato
             : dgv.DefaultCellStyle.BackColor;
@@ -751,7 +889,8 @@ namespace LTP.Truck.Forms
         nameof(RecordTruckDTO.NameDriver),
         nameof(RecordTruckDTO.IdCard),
         nameof(RecordTruckDTO.NetTime01),
-        nameof(RecordTruckDTO.NetTime02)
+        nameof(RecordTruckDTO.NetTime02),
+        nameof(RecordTruckDTO.NoLabelAuto),
       };
       foreach (var columnName in autoSizeColumns)
       {
@@ -841,11 +980,11 @@ namespace LTP.Truck.Forms
 
     private void btnDetail_Click(RecordTruckDTO recordTruckDto)
     {
-      if (recordTruckDto != null)
-      {
-        _recordTruck = recordTruckDto.RecordTruck;
-        ShowDataHistorical(_recordTruck);
-      }
+      if (recordTruckDto.RecordTruck is not RecordTruck recordTruck)
+        return;
+
+      _recordTruck = recordTruck;
+      ShowDataHistorical(_recordTruck);
     }
 
     private void btnCreate_Click(object sender, EventArgs e)
@@ -979,7 +1118,16 @@ namespace LTP.Truck.Forms
         RecordTruck? record = await _recordTruckService.GetDetailByIdAsync(_recordTruck.Id);
 
         if (record == null)
+        {
+          PopupConfirm popupWarning = new PopupConfirm("Không tìm thấy thông tin !", EnumTypeMsg.MessageAutoClose, EnumImageMsg.Warning);
+          popupWarning.ShowDialog();
           return;
+        }  
+          
+        var rs = await DownloadReportTruck(DateTime.Now, record);
+
+        //POST PDF
+        await (new ApiService()).UploadReportTruckPdf(record.Id, rs);
 
 
         //var recordWeightsByProduct = (record.RecordWeights ?? Enumerable.Empty<RecordWeight>())
@@ -993,11 +1141,11 @@ namespace LTP.Truck.Forms
         //})
         //.ToList();
 
-        await Download(DateTime.Now, record);
-        await DownloadReportTruck(DateTime.Now, record);
+        //await Download(DateTime.Now, record);
 
 
-        PopupConfirm popupConfirm = new PopupConfirm("In phiếu giao nhận thành công.", EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+
+        PopupConfirm popupConfirm = new PopupConfirm("In phiếu giao nhận thành công.", EnumTypeMsg.MessageAutoClose, EnumImageMsg.Information);
         popupConfirm.ShowDialog();
       }
       catch (Exception ex)
@@ -1076,87 +1224,95 @@ namespace LTP.Truck.Forms
       await CreateFile(outputPath);
     }
 
-    private async Task DownloadReportTruck(DateTime dt, RecordTruck recordTruck)
+    private async Task<string> DownloadReportTruck(DateTime dt, RecordTruck recordTruck)
     {
-      string pathFileTemplate = Application.StartupPath + "Template\\TemplateTruck.html";
-      string folderOutput = Application.StartupPath + "Report";
-
-      string template = File.ReadAllText(pathFileTemplate);
-      string company = "Công ty TNHH BOSCH Việt Nam";
-      string address = "Đường số 8, KCN Long Thành, An Phước, T. Đồng Nai";
-      string phone = " 0251.628.0340";
-      string timePrint = dt.ToString(
-                                      "HH:mm 'Ngày' dd 'tháng' MM 'năm' yyyy",
-                                      CultureInfo.GetCultureInfo("vi-VN")
-                                    );
-
-      double firstWeight = recordTruck.NetTime01;
-      double secondWeight = recordTruck.NetTime02;
-      bool hasFirstWeight = firstWeight > 0;
-      bool hasSecondWeight = secondWeight > 0;
-
-      string gross = "...";
-      string tare = hasFirstWeight ? firstWeight.ToString("F3") : "...";
-      string net = "...";
-      string importExport = "Chưa xác định";
-      string timeTare = recordTruck.CreatedAt != null ? ((DateTime)(recordTruck.CreatedAt)).AddHours(AppCore.Ins._time).ToString("dd/MM/yyyy HH:mm") : "";
-      string timeGross = "...";
-
-      if (hasFirstWeight && hasSecondWeight)
+      try
       {
-        // Trọng lượng xe và hàng luôn là số cân lớn hơn, trọng lượng xe là số nhỏ hơn.
-        double grossWeight = Math.Max(firstWeight, secondWeight);
-        double tareWeight = Math.Min(firstWeight, secondWeight);
-        double netWeight = grossWeight - tareWeight;
+        //PdfHelper.InitAsync().GetAwaiter().GetResult();
+        string pathFileTemplate = Application.StartupPath + "Template\\TemplateTruck.html";
+        string folderOutput = Application.StartupPath + "Report";
 
-        gross = grossWeight.ToString("F3");
-        tare = tareWeight.ToString("F3");
-        net = netWeight.ToString("F3");
-        importExport = secondWeight > firstWeight
-          ? "Xuất hàng"
-          : secondWeight < firstWeight
-            ? "Nhập hàng"
-            : "Chưa xác định";
+        string template = File.ReadAllText(pathFileTemplate);
+        string company = "Công ty TNHH BOSCH Việt Nam";
+        string address = "Đường số 8, KCN Long Thành, An Phước, T. Đồng Nai";
+        string phone = " 0251.628.0340";
+        string timePrint = dt.ToString(
+                                        "HH:mm 'Ngày' dd 'tháng' MM 'năm' yyyy",
+                                        CultureInfo.GetCultureInfo("vi-VN")
+                                      );
 
-        timeGross = recordTruck.UpdatedAt != null ? ((DateTime)(recordTruck.UpdatedAt)).AddHours(AppCore.Ins._time).ToString("dd/MM/yyyy HH:mm") : "";
+        double firstWeight = recordTruck.NetTime01;
+        double secondWeight = recordTruck.NetTime02;
+        bool hasFirstWeight = firstWeight > 0;
+        bool hasSecondWeight = secondWeight > 0;
+
+        string gross = "...";
+        string tare = hasFirstWeight ? firstWeight.ToString("F3") : "...";
+        string net = "...";
+        string importExport = "Chưa xác định";
+        string timeTare = recordTruck.CreatedAt != null ? ((DateTime)(recordTruck.CreatedAt)).AddHours(AppCore.Ins._time).ToString("dd/MM/yyyy HH:mm") : "";
+        string timeGross = "...";
+
+        if (hasFirstWeight && hasSecondWeight)
+        {
+          // Trọng lượng xe và hàng luôn là số cân lớn hơn, trọng lượng xe là số nhỏ hơn.
+          double grossWeight = Math.Max(firstWeight, secondWeight);
+          double tareWeight = Math.Min(firstWeight, secondWeight);
+          double netWeight = grossWeight - tareWeight;
+
+          gross = grossWeight.ToString("F3");
+          tare = tareWeight.ToString("F3");
+          net = netWeight.ToString("F3");
+          importExport = secondWeight > firstWeight
+            ? "Xuất hàng"
+            : secondWeight < firstWeight
+              ? "Nhập hàng"
+              : "Chưa xác định";
+
+          timeGross = recordTruck.UpdatedAt != null ? ((DateTime)(recordTruck.UpdatedAt)).AddHours(AppCore.Ins._time).ToString("dd/MM/yyyy HH:mm") : "";
+        }
+
+        string result = template.Replace("{company}", company)
+                                .Replace("{address}", address)
+                                .Replace("{phone}", phone)
+                                .Replace("{time_print}", timePrint)
+                                .Replace("{ticket_no}", recordTruck.NoLabelAuto)
+                                .Replace("{date}", dt.ToString("dd/MM/yyyy"))
+                                .Replace("{plate}", recordTruck.LicensePlate)
+                                .Replace("{import_export}", importExport)
+                                .Replace("{client}", recordTruck.Client?.Name)
+                                .Replace("{goods}", recordTruck.TypeGoods?.Name)
+                                .Replace("{gross}", gross)
+                                .Replace("{tare}", tare)
+                                .Replace("{net}", net)
+                                .Replace("{time_tare}", timeTare)
+                                .Replace("{time_gross}", timeGross)
+                                .Replace("{note}", recordTruck.Document)
+                                ;
+
+        string outputPath = Path.Combine(folderOutput, $"REPORT_TRUCK_{dt.ToString("yyMMddHHmmss")}.html");
+        File.WriteAllText(outputPath, result);
+
+        return await CreateFile(outputPath);
       }
-
-      string result = template.Replace("{company}", company)
-                              .Replace("{address}", address)
-                              .Replace("{phone}", phone)
-                              .Replace("{time_print}", timePrint)
-                              .Replace("{ticket_no}", recordTruck.NoLabelAuto)
-                              .Replace("{date}", dt.ToString("dd/MM/yyyy"))
-                              .Replace("{plate}", recordTruck.LicensePlate)
-                              .Replace("{import_export}", importExport)
-                              .Replace("{client}", recordTruck.Client?.Name)
-                              .Replace("{goods}", recordTruck.TypeGoods?.Name)
-                              .Replace("{gross}", gross)
-                              .Replace("{tare}", tare)
-                              .Replace("{net}", net)
-                              .Replace("{time_tare}", timeTare)
-                              .Replace("{time_gross}", timeGross)
-                              .Replace("{note}", recordTruck.Document)
-                              ;
-    
-      string outputPath = Path.Combine(folderOutput, $"REPORT_TRUCK_{dt.ToString("yyMMddHHmmss")}.html");
-      File.WriteAllText(outputPath, result);
-
-      await CreateFile(outputPath);
+      catch (Exception)
+      {
+        throw;
+      }
     }
 
 
-    private async Task<bool> CreateFile(string path)
+    private async Task<string> CreateFile(string path)
     {
       try
       {
         string pdf = path.Replace(".html", ".pdf");
         await PdfHelper.HtmlToPdfAsync(path, pdf);
-        return true;
+        return pdf;
       }
       catch (Exception)
       {
-        return false;
+        throw;
       }
     }
   }

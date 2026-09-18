@@ -98,6 +98,8 @@ namespace LTP.Truck.Forms
         FrmMain.Instance.OnChangeProduct += Instance_OnChangeProduct;
         FrmMain.Instance.OnChangeTare += Instance_OnChangeTare;
         AppCore.Ins.OnSendDataWeightGoods += Ins_OnSendDataWeightGoods;
+        AppCore.Ins.OnSendStatusWeightGoods += Ins_OnSendStatusWeightGoods;
+        ResetWeightDisplay();
       }
       catch (Exception ex)
       {
@@ -110,6 +112,26 @@ namespace LTP.Truck.Forms
       _msgDataWeight = e;
       SetDataWeight(e);
     }
+
+    private void Ins_OnSendStatusWeightGoods(object? sender, CommunicationStatusChangedEventArgs e)
+    {
+      if (!e.IsConnected)
+        ResetWeightDisplay();
+    }
+
+    private void ResetWeightDisplay()
+    {
+      if (InvokeRequired)
+      {
+        BeginInvoke(new Action(ResetWeightDisplay));
+        return;
+      }
+
+      _msgDataWeight = new MessageDataOutput();
+      lbWeightValue.Text = "---";
+      lbGross.Text = "---";
+    }
+
     private void SetDataWeight(MessageDataOutput messageData)
     {
       if (this.InvokeRequired)
@@ -481,7 +503,7 @@ namespace LTP.Truck.Forms
         if (!IsDisposed && !Disposing)
         {
           using var popupMsg = new PopupConfirm("Lưu phiếu cân thành công.",
-          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+          EnumTypeMsg.MessageAutoClose, EnumImageMsg.Information);
           popupMsg.ShowDialog(this);
         }
       }

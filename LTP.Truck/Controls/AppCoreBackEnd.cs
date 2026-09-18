@@ -66,6 +66,7 @@ namespace LTP.Truck.Controls
     public readonly ConnectionService _connectionService = new();
     public readonly EmployeeService _employeeService = new();
 
+    public event Action<Station?>? OnChangeStation;
 
     public string _folderFileLog = Application.StartupPath + "Logs";
     public int _time = 7;
@@ -74,7 +75,6 @@ namespace LTP.Truck.Controls
       try
       {
         LoadDataConfig().Wait();
-
         // _enableRabbit = (Environment.GetEnvironmentVariable("IS_ENABLE_RABBITMQ").ToLower() == "true");
 
         // _hostAPI = Environment.GetEnvironmentVariable("HOST_API");
@@ -120,12 +120,19 @@ namespace LTP.Truck.Controls
     public List<Employee>? _employees { get;set; }
     public Employee? _employeeCurrent { get;set; }
     public Connection? _connection { get;set; }
+
+    public void ChangeStation(Station? station)
+    {
+      _station = station;
+      OnChangeStation?.Invoke(station);
+    }
+
     public async Task LoadDataConfig()
     {
       try
       {
         _appConfig = await _appConfigService.GetAppConfigAsync();
-        _station = await _stationService.GetFirstDataStation();
+        _station = await _stationService.GetByCodeAsync(_appConfig?.StationId);
         _employees = await _employeeService.GetAllAsync();
         _connection = await _connectionService.GetFirstDataConnection();
         //var employees = _employees.FirstOrDefault();

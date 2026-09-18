@@ -11,6 +11,7 @@ namespace iSoft.Database
 {
   public static class DTOHelper
   {
+    public static int utc = int.Parse(Environment.GetEnvironmentVariable("UTC"));
     public static RecordTruckDTO ConvertRecordTruckDTO(RecordTruck recordTruck)
     {
       ArgumentNullException.ThrowIfNull(recordTruck);
@@ -40,7 +41,8 @@ namespace iSoft.Database
         IdCard = recordTruck.IdCard,
         LicensePlate = recordTruck.LicensePlate,
         Document = recordTruck.Document,
-        Datetime = recordTruck.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "",
+        Datetime = ((DateTime)recordTruck.UpdatedAt).AddHours(utc).ToString("dd/MM/yyyy HH:mm:ss") ?? "",
+        Station = recordTruck.Station?.Name,
       };
     }
 
@@ -100,8 +102,8 @@ namespace iSoft.Database
             No = index + 1,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (((DateTime)e?.UpdatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (((DateTime)e?.CreatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -123,8 +125,8 @@ namespace iSoft.Database
             Code = e.Code,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (((DateTime)e?.UpdatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (((DateTime)e?.CreatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -145,8 +147,8 @@ namespace iSoft.Database
             No = index + 1,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (((DateTime)e?.UpdatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (((DateTime)e?.CreatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -169,8 +171,8 @@ namespace iSoft.Database
             Name = e.Name,
             Description = e.Description,
             Value = (e?.Value??0.0).ToString("F3"),
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (((DateTime)e?.UpdatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (((DateTime)e?.CreatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -191,8 +193,8 @@ namespace iSoft.Database
             No = index + 1,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (((DateTime)e?.UpdatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (((DateTime)e?.CreatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();
@@ -215,8 +217,8 @@ namespace iSoft.Database
             Code = e.Code,
             Name = e.Name,
             Description = e.Description,
-            UpdatedAt = e?.UpdatedAt != null ? (e?.UpdatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
-                                              (e?.CreatedAt?.ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
+            UpdatedAt = e?.UpdatedAt != null ? (((DateTime)e?.UpdatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? "") :
+                                              (((DateTime)e?.CreatedAt).AddHours(utc).ToString("dd-MM-yyyy HH:mm:ss") ?? ""),
           })
           .OrderBy(e => e.Name)
           .ToList();

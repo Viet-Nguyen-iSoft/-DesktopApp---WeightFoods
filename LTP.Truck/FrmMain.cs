@@ -173,6 +173,7 @@ namespace LTP.Truck
           }
         };
 
+        AppCore.Ins.CheckConnectServer();
         AppCore.Ins.ConnectWeight();
         CheckOpenMulApp();
         ChangePage(EnumScreen.Waiting);
@@ -191,6 +192,11 @@ namespace LTP.Truck
       {
         Program.CloseApp();
       }
+    }
+
+    public void MiniTab()
+    {
+      this.WindowState = FormWindowState.Minimized;
     }
 
   }

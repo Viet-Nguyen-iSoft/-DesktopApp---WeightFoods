@@ -74,9 +74,10 @@ namespace iSoft.Communication.Serial
           if (_ports.Contains(_serialPort.PortName))
           {
             _serialPort.Open();
-            this.AutoConnect = true;
           }
         }
+
+        OnConnectionStatusChanged(_serialPort.IsOpen);
       }
       catch (Exception ex)
       {
@@ -91,7 +92,6 @@ namespace iSoft.Communication.Serial
       {
         if (_serialPort.IsOpen)
         {
-          this.AutoConnect = false;
           _serialPort.Close();
           OnConnectionStatusChanged(false);
         }

@@ -55,7 +55,7 @@ namespace Common.Settings
       popupConfirm.ShowDialog();
     }
 
-    private void PopupConfirm_OnSendConfirm(object? sender, EnumResponsible e)
+    private void PopupConfirm_OnSendConfirm(object? sender, ResponMsg e)
     {
       OnSendDelete?.Invoke(Connection);
     }

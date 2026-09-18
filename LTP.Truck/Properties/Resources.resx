@@ -121,6 +121,9 @@
   <data name="icon_back" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_back.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_back_page" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_back_page.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_btn_home" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_btn_home.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,11 +139,17 @@
   <data name="icon_confirm" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_confirm.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_connect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>C:\Users\Admin\Downloads\icon_connect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_filter" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_filter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_goods" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_goods.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,6 +163,9 @@
   <data name="icon_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_status_connect" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_status_connect.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_truck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_truck.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -162,5 +174,8 @@
   </data>
   <data name="icon_weight_log" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_weight_log.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LogoBosch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\app-logo-dark-DEvYVQHa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

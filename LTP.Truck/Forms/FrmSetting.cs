@@ -8,6 +8,8 @@ using LTP.Truck.Custom;
 using Newtonsoft.Json;
 using System.Data;
 using System.Drawing.Printing;
+using System.Threading.Tasks;
+using TestConnectPrinter;
 using static Common.EnumData;
 using static HelperManager.EnumData;
 
@@ -28,9 +30,34 @@ namespace LTP.Truck.Forms
       flowCommWeight.WrapContents = false;
       this.Load += FrmSetting_Load;
       btnSavePrint.Click += btnSavePrint_Click;
+      btnSaveStation.Click += btnSaveStation_Click;
       btnAddCommWeight.Click += btnAddCommWeight_Click;
+      txtPortServer.KeyPress += NonNegativeInteger_KeyPress;
+      txtTimeoutServer.KeyPress += NonNegativeInteger_KeyPress;
+      txtPortServer._TextChanged += NonNegativeInteger_TextChanged;
+      txtTimeoutServer._TextChanged += NonNegativeInteger_TextChanged;
 
       AppCore.Ins.OnSendDataWeightTruck += Ins_OnSendDataWeightTruck;
+    }
+
+    private static void NonNegativeInteger_KeyPress(object? sender, KeyPressEventArgs e)
+    {
+      if (!char.IsControl(e.KeyChar) && (e.KeyChar < '0' || e.KeyChar > '9'))
+        e.Handled = true;
+    }
+
+    private static void NonNegativeInteger_TextChanged(object? sender, EventArgs e)
+    {
+      if (sender is not Common.Custom.RJTextBox textBox)
+        return;
+
+      string value = textBox.Texts;
+      string sanitizedValue = new(value.Where(character =>
+        character >= '0' && character <= '9').ToArray());
+
+      // TextChanged còn bảo vệ trường hợp paste nội dung không hợp lệ.
+      if (!string.Equals(value, sanitizedValue, StringComparison.Ordinal))
+        textBox.Texts = sanitizedValue;
     }
 
     #region Instance
@@ -62,16 +89,148 @@ namespace LTP.Truck.Forms
       ElipseControl elipseControl04 = new ElipseControl();
       elipseControl04.CornerRadius = 20;
       elipseControl04.TargetControl = tableLayoutPanel7;
+
+      ElipseControl elipseControl05 = new ElipseControl();
+      elipseControl05.CornerRadius = 20;
+      elipseControl05.TargetControl = tableLayoutPanel11;
     }
 
     private async void FrmSetting_Load(object? sender, EventArgs e)
     {
       LoadInstalledPrinters();
+      LoadShowInformationServer(AppCore.Ins._appConfig);
+      await LoadStationsAsync();
       await LoadWeightConnectionsAsync();
+    }
+
+    private async Task LoadStationsAsync()
+    {
+      try
+      {
+        var stations = (await AppCore.Ins._stationService.GetAllAsync())
+          .OrderBy(station => station.Name)
+          .ThenBy(station => station.Code)
+          .ToList();
+
+        LoadShowStation(stations);
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+      }
+    }
+
+    private void LoadShowStation(List<Station> stations)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          LoadShowStation(stations);
+        }));
+        return;
+      }
+
+      cbbStations.BeginUpdate();
+      try
+      {
+        cbbStations.DataSource = null;
+        cbbStations.DisplayMember = nameof(Station.Name);
+        cbbStations.ValueMember = nameof(Station.Id);
+        cbbStations.DataSource = stations;
+
+        Guid? selectedStationId = AppCore.Ins._appConfig?.StationId ??
+          AppCore.Ins._station?.Id;
+        Station? selectedStation = selectedStationId.HasValue
+          ? stations.FirstOrDefault(station => station.Id == selectedStationId.Value)
+          : null;
+
+        if (selectedStation != null)
+          cbbStations.SelectedItem = selectedStation;
+        else
+          cbbStations.SelectedIndex = stations.Count > 0 ? 0 : -1;
+      }
+      finally
+      {
+        cbbStations.EndUpdate();
+      }
+    }
+
+    private void LoadShowInformationServer(AppConfig? appConfig)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          LoadShowInformationServer(appConfig);
+        }));
+        return;
+      }
+
+      txtIpServer.Texts = appConfig?.IpServer??string.Empty;
+      txtPortServer.Texts = appConfig?.PortServer?.ToString() ?? string.Empty;
+      txtTimeoutServer.Texts = appConfig?.TimeoutConnectServer?.ToString()?? string.Empty;
+    }
+
+    private async void btnSaveStation_Click(object? sender, EventArgs e)
+    {
+      if (cbbStations.SelectedItem is not Station selectedStation)
+      {
+        using var popupWarning = new PopupConfirm(
+          "Vui lòng chọn trạm !",
+          EnumTypeMsg.MessageManualClose,
+          EnumImageMsg.Warning);
+        popupWarning.ShowDialog(this);
+        return;
+      }
+
+      var appConfig = AppCore.Ins._appConfig;
+      if (appConfig == null)
+      {
+        using var popupWarning = new PopupConfirm(
+          "Không tìm thấy cấu hình ứng dụng !",
+          EnumTypeMsg.MessageManualClose,
+          EnumImageMsg.Warning);
+        popupWarning.ShowDialog(this);
+        return;
+      }
+
+      try
+      {
+        appConfig.StationId = selectedStation.Id;
+        appConfig.UpdatedAt = DateTime.UtcNow;
+        AppCore.Ins._appConfig = await AppCore.Ins._appConfigService
+          .AddOrUpdateAsync(appConfig);
+        AppCore.Ins.ChangeStation(selectedStation);
+
+        using var popupSuccess = new PopupConfirm(
+          "Đã lưu trạm.",
+          EnumTypeMsg.MessageManualClose,
+          EnumImageMsg.Information);
+        popupSuccess.ShowDialog(this);
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+        using var popupError = new PopupConfirm(
+          "Không thể lưu trạm. Vui lòng thử lại !",
+          EnumTypeMsg.MessageManualClose,
+          EnumImageMsg.Warning);
+        popupError.ShowDialog(this);
+      }
     }
 
     private void LoadInstalledPrinters()
     {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          LoadInstalledPrinters();
+        }));
+        return;
+      }
+
       var printerNames = PrinterSettings.InstalledPrinters
         .Cast<string>()
         .OrderBy(name => name)
@@ -156,6 +315,7 @@ namespace LTP.Truck.Forms
               Connection = connection,
               CommName = EnumHelper.GetDescription(connection.EnumCommunicationType),
               Information = GetConnectionInformation(connection),
+              AutoConnect = GetConnectionAutoConnect(connection),
               Tag = connection,
               Margin = new Padding(3),
               Width = Math.Max(100, flowCommWeight.ClientSize.Width / 2 - 10),
@@ -247,6 +407,30 @@ namespace LTP.Truck.Forms
       }
     }
 
+    private static bool GetConnectionAutoConnect(Connection connection)
+    {
+      if (string.IsNullOrWhiteSpace(connection.JsonStrConfig))
+        return false;
+
+      try
+      {
+        return connection.EnumCommunicationType switch
+        {
+          EnumCommunicationType.TcpClient =>
+            JsonConvert.DeserializeObject<JsonConfigTcpClient>(connection.JsonStrConfig)
+              ?.AutoConnect ?? false,
+          EnumCommunicationType.SerialPort =>
+            JsonConvert.DeserializeObject<JsonConfigTcpSerial>(connection.JsonStrConfig)
+              ?.AutoConnect ?? false,
+          _ => false
+        };
+      }
+      catch (JsonException)
+      {
+        return false;
+      }
+    }
+
 
     private void btnAddCommWeight_Click(object? sender, EventArgs e)
     {
@@ -283,5 +467,29 @@ namespace LTP.Truck.Forms
     {
 
     }
+
+    private async void btnConfirm_Click(object sender, EventArgs e)
+    {
+      try
+      {
+        AppCore.Ins._appConfig.IpServer = txtIpServer.Texts.Trim();
+        AppCore.Ins._appConfig.PortServer = int.Parse(txtPortServer.Texts.Trim());
+        AppCore.Ins._appConfig.TimeoutConnectServer = int.Parse(txtTimeoutServer.Texts.Trim());
+        AppCore.Ins._appConfig.UpdatedAt = DateTime.UtcNow;
+        await AppCore.Ins._appConfigService.AddOrUpdateAsync(AppCore.Ins._appConfig);
+
+        using var popupMsg = new PopupConfirm("Cập nhật thành công.",
+            EnumTypeMsg.MessageAutoClose, EnumImageMsg.Information);
+        popupMsg.ShowDialog();
+      }
+      catch (Exception ex)
+      {
+        using var popupMsg = new PopupConfirm("Lưu thất bại. Kiểm tra lại !",
+            EnumTypeMsg.MessageManualClose, EnumImageMsg.Warning);
+        popupMsg.ShowDialog();
+      }
+    }
+
+
   }
 }

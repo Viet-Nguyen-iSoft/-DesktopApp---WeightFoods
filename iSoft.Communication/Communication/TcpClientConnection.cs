@@ -1,5 +1,6 @@
 ﻿using iSoft.Communication.Interface;
 using SuperSimpleTcp;
+using System.Net.NetworkInformation;
 using System.Text;
 using static iSoft.Communication.EnumCommunication;
 using static System.Net.Mime.MediaTypeNames;
@@ -49,6 +50,12 @@ namespace iSoft.Communication.Communication
     }
     public override void Connect()
     {
+      if (!CanPingServer())
+      {
+        OnConnectionStatusChanged(false);
+        return;
+      }
+
       try
       {
         if (_Client is null)
@@ -56,18 +63,31 @@ namespace iSoft.Communication.Communication
 
         if (!_Client.IsConnected)
           _Client.Connect();
-        this.AutoConnect = true;
         IsConnected = _Client.IsConnected;
       }
-      catch (Exception ex)
+      catch (Exception)
       {
-        throw ex;
+        OnConnectionStatusChanged(false);
+      }
+    }
+
+    private bool CanPingServer()
+    {
+      try
+      {
+        using var ping = new Ping();
+        int pingTimeout = Math.Clamp(Timeout, 100, 1000);
+        PingReply reply = ping.Send(_ServerIp, pingTimeout);
+        return reply.Status == IPStatus.Success;
+      }
+      catch
+      {
+        return false;
       }
     }
 
     public override void Disconnect()
     {
-      this.AutoConnect = false;
       if (_Client!=null)
       {
         _Client.Disconnect();

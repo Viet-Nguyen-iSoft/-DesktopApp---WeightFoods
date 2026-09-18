@@ -54,5 +54,8 @@ namespace iSoft.Database.DTO
 
     [DisplayName("Thời gian")]
     public string? Datetime { get; set; }
+
+    [DisplayName("Trạm cân")]
+    public string? Station { get; set; }
   }
 }

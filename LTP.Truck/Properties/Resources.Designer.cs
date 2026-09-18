@@ -73,6 +73,16 @@ namespace LTP.Truck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_back_page {
+            get {
+                object obj = ResourceManager.GetObject("icon_back_page", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_btn_home {
             get {
                 object obj = ResourceManager.GetObject("icon_btn_home", resourceCulture);
@@ -123,6 +133,16 @@ namespace LTP.Truck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_connect {
+            get {
+                object obj = ResourceManager.GetObject("icon_connect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_filter {
             get {
                 object obj = ResourceManager.GetObject("icon_filter", resourceCulture);
@@ -136,6 +156,16 @@ namespace LTP.Truck.Properties {
         internal static System.Drawing.Bitmap icon_goods {
             get {
                 object obj = ResourceManager.GetObject("icon_goods", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_logout {
+            get {
+                object obj = ResourceManager.GetObject("icon_logout", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,6 +213,16 @@ namespace LTP.Truck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_status_connect {
+            get {
+                object obj = ResourceManager.GetObject("icon_status_connect", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_truck {
             get {
                 object obj = ResourceManager.GetObject("icon_truck", resourceCulture);
@@ -206,6 +246,16 @@ namespace LTP.Truck.Properties {
         internal static System.Drawing.Bitmap icon_weight_log {
             get {
                 object obj = ResourceManager.GetObject("icon_weight_log", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LogoBosch {
+            get {
+                object obj = ResourceManager.GetObject("LogoBosch", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

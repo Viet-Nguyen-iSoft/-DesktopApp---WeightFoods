@@ -1,15 +1,12 @@
 ﻿using HelperManager;
+using iSoft.Database.Models;
 using LTP.Truck.Controls;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using LTP.Truck.UserControls;
+using static HelperManager.EnumData;
 using static LTP.Truck.EnumData;
+using static System.Collections.Specialized.BitVector32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Button = System.Windows.Forms.Button;
 
 namespace LTP.Truck.Forms
 {
@@ -18,12 +15,22 @@ namespace LTP.Truck.Forms
     private readonly Dictionary<Button, (Color BackColor, Color ForeColor, Color MouseOverColor, Color MouseDownColor)> _menuButtonColors = new();
     private bool _masterDataExpanded;
 
+    public System.Timers.Timer _timerClock = new System.Timers.Timer();
     public FrmOperation()
     {
       InitializeComponent();
       InitializeMenuSelection();
       SetMasterDataExpanded(false);
       this.Load += FrmOperation_Load;
+      this.Shown += FrmOperation_Shown;
+      AppCore.Ins.OnChangeStation += AppCore_OnChangeStation;
+      AppCore.Ins.OnSendStatusWeight += Ins_OnSendStatusWeight;
+      AppCore.Ins.OnSendStatusServer += Ins_OnSendStatusServer;
+    }
+
+    private void AppCore_OnChangeStation(Station? station)
+    {
+      LoadStation(station);
     }
 
     private void InitializeMenuSelection()
@@ -107,13 +114,10 @@ namespace LTP.Truck.Forms
     }
     #endregion
 
-    private void btnClose_Click(object sender, EventArgs e)
-    {
-      Program.CloseApp();
-    }
-
     private void FrmOperation_Load(object? sender, EventArgs e)
     {
+      LoadStation(AppCore.Ins._station);
+
       this.btnHomeTruck.Click += btnHomeTruck_Click;
       this.btnHomeTruck.PerformClick();
 
@@ -123,6 +127,82 @@ namespace LTP.Truck.Forms
       this.btnTare.Click += BtnTare_Click;
       this.btnGroupProduct.Click += BtnGroupProduct_Click;
       this.btnProduct.Click += BtnProduct_Click;
+    }
+
+    private void FrmOperation_Shown(object? sender, EventArgs e)
+    {
+      InitClock();
+    }
+
+    private void LoadStation(Station? station)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          LoadStation(station);
+        }));
+        return;
+      }
+
+      if (station != null)
+      {
+        if (station?.Code == "1")
+        {
+          lbTitle.Text = $"HỆ THỐNG CÂN XE TẢI - {station.Name}";
+        }
+        else
+        {
+          lbTitle.Text = $"HỆ THỐNG CÂN PHẾ PHẨM - {station.Name}";
+        }
+      }
+      else
+      {
+        lbTitle.Text = $"- - - - -";
+      }
+    }
+
+    private void Ins_OnSendStatusWeight(object? sender, iSoft.Communication.Interface.CommunicationStatusChangedEventArgs e)
+    {
+      EnumStatusConnectTcp enumStatusConnectTcp = e.IsConnected ? EnumStatusConnectTcp.Connect : EnumStatusConnectTcp.Disconnect;
+      SetStatusConnect(ucStatusConnectWeight, enumStatusConnectTcp, "Cân");
+    }
+    private void Ins_OnSendStatusServer(object? sender, EnumStatusConnectTcp e)
+    {
+      SetStatusConnect(ucStatusConnectServer, e, "Server");
+    }
+
+    private void SetStatusConnect(UcStatusConnect ucStatus, EnumStatusConnectTcp status, string name)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          SetStatusConnect(ucStatus, status, name);
+        }));
+        return;
+      }
+
+      switch (status)
+      {
+        case EnumStatusConnectTcp.Connect:
+          ucStatus.Title = $"{name} - Kết nối";
+          ucStatus.StatusColor = Color.DarkGreen;
+          break;
+        case EnumStatusConnectTcp.Disconnect:
+          ucStatus.Title = $"{name} - Mất kết nối";
+          ucStatus.StatusColor = Color.Red;
+          break;
+        case EnumStatusConnectTcp.Connecting:
+          ucStatus.Title = $"{name} - Đang kết nối";
+          ucStatus.StatusColor = Color.DarkOrange;
+          break;
+        default:
+          ucStatus.Title = $"{name} - Không xác định";
+          ucStatus.StatusColor = Color.Gray;
+          break;
+      }
+
     }
 
     private async void BtnProduct_Click(object? sender, EventArgs e)
@@ -215,11 +295,36 @@ namespace LTP.Truck.Forms
             await FrmMasterData.Instance.LoadData(EnumTypeMasterData.Product);
             break;
         }
+
+        ShowPagePath(appModulSupport);
       }
       catch (Exception ex)
       {
         LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
       }
+    }
+
+    private void ShowPagePath(EnumScreen screen)
+    {
+      if (InvokeRequired)
+      {
+        BeginInvoke(new Action(() => ShowPagePath(screen)));
+        return;
+      }
+
+      lbTitlePage.Text = screen switch
+      {
+        EnumScreen.HomeTruck => "Trang chính > Cân xe tải",
+        EnumScreen.HomeGoods => "Trang chính > Cân hàng",
+        EnumScreen.Setting => "Trang chính > Cài đặt",
+        EnumScreen.MD_Client => "Trang chính > Dữ liệu gốc > Khách hàng",
+        EnumScreen.MD_TypeGoods => "Trang chính > Dữ liệu gốc > Loại hàng",
+        EnumScreen.MD_Warehouse => "Trang chính > Dữ liệu gốc > Kho hàng",
+        EnumScreen.MD_Tare => "Trang chính > Dữ liệu gốc > Nhóm Tare",
+        EnumScreen.MD_GroupProduct => "Trang chính > Dữ liệu gốc > Nhóm chất thải",
+        EnumScreen.MD_Product => "Trang chính > Dữ liệu gốc > Chất thải",
+        _ => "Trang chính"
+      };
     }
 
     private Form CurrentForm;
@@ -265,5 +370,46 @@ namespace LTP.Truck.Forms
     }
     #endregion
 
+
+    #region Clock
+    public void InitClock()
+    {
+      _timerClock.Interval = 1000;
+      _timerClock.Elapsed += _timerClock_Elapsed;
+      _timerClock.Start();
+    }
+
+    private void _timerClock_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          _timerClock_Elapsed(sender, e);
+        }));
+        return;
+      }
+
+      try
+      {
+        _timerClock.Stop();
+        DateTime dt = DateTime.Now;
+        lbTime.Text = dt.ToString("dd/MM/yyyy HH:mm:ss");
+      }
+      catch (Exception)
+      {
+
+      }
+      finally
+      {
+        _timerClock.Start();
+      }
+    }
+    #endregion
+
+    private void btnLogout_Click(object sender, EventArgs e)
+    {
+      FrmMain.Instance.ChangePage(EnumScreen.Waiting);
+    }
   }
 }

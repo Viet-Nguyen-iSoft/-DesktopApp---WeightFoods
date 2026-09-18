@@ -37,5 +37,12 @@ namespace iSoft.Database.Repositorys
           .Where(x => !x.DeletedFlag && x.EnableFlag == true)
           .FirstOrDefaultAsync();
     }
+
+    public async Task<Station?> GetByCodeAsync(Guid? id)
+    {
+      return await this.Context.Set<Station>()
+          .Where(x => !x.DeletedFlag && x.Id == id)
+          .FirstOrDefaultAsync();
+    }
   }
 }

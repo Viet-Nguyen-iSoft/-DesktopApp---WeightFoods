@@ -160,6 +160,7 @@ namespace ApiSyncData
         .Include(record => record.Client)
         .Include(record => record.TypeGoods)
         .Include(record => record.Warehouse)
+        .Include(record => record.Station)
         .OrderBy(record => record.CreatedAt)
         .ThenBy(record => record.Id)
         .ToListAsync(cancellationToken)
@@ -230,6 +231,12 @@ namespace ApiSyncData
           record.Id,
           record.WarehouseId,
           record.Warehouse,
+          nameof(record.Warehouse)),
+        StationId = GetSourceId(
+          nameof(RecordTruck),
+          record.Id,
+          record.StationId,
+          record.Station,
           nameof(record.Warehouse)),
         CreatedAt = record.CreatedAt,
         UpdatedAt = record.UpdatedAt,

@@ -56,13 +56,22 @@ namespace iSoft.Communication.Interface
     {
       Disconnect();
       Connect();
-      RequestGetData();
+      if (IsConnected && IsRequestGetData)
+        RequestGetData();
     }
 
     public virtual void Start()
     {
       TimerAutoConnect.Interval = Timeout;
-      TimerAutoConnect.Start();
+
+      // Luôn thử kết nối một lần khi khởi động. AutoConnect chỉ
+      // quyết định việc kiểm tra và kết nối lại theo chu kỳ.
+      Connect();
+      if (IsConnected && IsRequestGetData)
+        RequestGetData();
+
+      if (AutoConnect)
+        TimerAutoConnect.Start();
     }
     public virtual void Stop()
     {
@@ -88,7 +97,8 @@ namespace iSoft.Communication.Interface
       }
       finally
       {
-        this.TimerAutoConnect.Start();
+        if (AutoConnect)
+          this.TimerAutoConnect.Start();
       }
     }
 
