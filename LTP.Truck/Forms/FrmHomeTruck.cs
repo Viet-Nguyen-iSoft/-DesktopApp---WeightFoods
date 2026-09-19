@@ -328,7 +328,7 @@ namespace LTP.Truck.Forms
       _recordTruck.IdCard = txtIdCard.Texts;
       _recordTruck.Document = txtDocument.Text;
       _recordTruck.StationId = AppCore.Ins._station?.Id;
-      _recordTruck.EmployeeId = AppCore.Ins._userCurrent?.Id;
+      _recordTruck.EmployeeId = AppCore.Ins._employeeCurrent?.Id;
       _recordTruck.CreatedAt = DateTime.UtcNow;
       _recordTruck.UpdatedAt = DateTime.UtcNow;
 
@@ -376,7 +376,7 @@ namespace LTP.Truck.Forms
         _recordTruck.IdCard = txtIdCard.Texts;
         _recordTruck.Document = txtDocument.Text;
         _recordTruck.StationId = AppCore.Ins._station?.Id;
-        _recordTruck.EmployeeId = AppCore.Ins._userCurrent?.Id;
+        _recordTruck.EmployeeId = AppCore.Ins._employeeCurrent?.Id;
         _recordTruck.UpdatedAt = DateTime.UtcNow;
 
         await AppCore.Ins._recordTruckService.AddOrUpdateAsync(_recordTruck);

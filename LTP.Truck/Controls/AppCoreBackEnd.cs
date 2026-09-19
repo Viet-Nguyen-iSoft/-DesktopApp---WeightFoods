@@ -11,6 +11,7 @@ using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading.Tasks;
 using static HelperManager.EnumData;
+using static LTP.Truck.EnumData;
 using static System.Windows.Forms.AxHost;
 
 namespace LTP.Truck.Controls
@@ -120,7 +121,8 @@ namespace LTP.Truck.Controls
     public AppConfig? _appConfig { get;set; }
     public Station? _station { get;set; }
     public List<Employee>? _employees { get;set; }
-    public User? _userCurrent { get;set; }
+    //public User? _userCurrent { get;set; }
+    public Employee? _employeeCurrent { get;set; }
     public Connection? _connection { get;set; }
 
 

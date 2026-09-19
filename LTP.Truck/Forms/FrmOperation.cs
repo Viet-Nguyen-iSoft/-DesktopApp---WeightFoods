@@ -117,17 +117,54 @@ namespace LTP.Truck.Forms
     private void FrmOperation_Load(object? sender, EventArgs e)
     {
       LoadStation(AppCore.Ins._station);
-      LoadAccount(AppCore.Ins._userCurrent);
+      //LoadAccount(AppCore.Ins._userCurrent);
 
       this.btnHomeTruck.Click += btnHomeTruck_Click;
-      this.btnHomeTruck.PerformClick();
-
+      this.btnHomeGoods.Click += btnHomeGoods_Click;
+      
       this.btnClient.Click += BtnClient_Click;
       this.btnTypeGoods.Click += BtnTypeGoods_Click;
       this.btnWarehouse.Click += BtnWarehouse_Click;
       this.btnTare.Click += BtnTare_Click;
       this.btnGroupProduct.Click += BtnGroupProduct_Click;
       this.btnProduct.Click += BtnProduct_Click;
+
+      LoadConfig();
+    }
+
+    private void LoadConfig()
+    {
+      var station = Environment.GetEnvironmentVariable("STATION");
+      if (station=="1")
+      {
+        btnHomeGoods.Visible = false;
+        btnHomeTruck.Visible = true;
+
+        btnClient.Visible = true;
+        btnWarehouse.Visible = true;
+        btnTypeGoods.Visible = true;
+
+        btnGroupProduct.Visible = false;
+        btnProduct.Visible = false;
+        btnTare.Visible = false;
+
+        this.btnHomeTruck.PerformClick();
+      }
+      else
+      {
+        btnHomeGoods.Visible = true;
+        btnHomeTruck.Visible = false;
+
+        btnClient.Visible = false;
+        btnWarehouse.Visible = false;
+        btnTypeGoods.Visible = false;
+
+        btnGroupProduct.Visible = true;
+        btnProduct.Visible = true;
+        btnTare.Visible = true;
+
+        this.btnHomeGoods.PerformClick();
+      }
     }
 
     public void LoadAccount(User? user)
@@ -256,7 +293,7 @@ namespace LTP.Truck.Forms
     {
       await ChangePage(EnumScreen.HomeTruck);
     }
-    private async void btnHomeGoods_Click(object sender, EventArgs e)
+    private async void btnHomeGoods_Click(object? sender, EventArgs e)
     {
       await ChangePage(EnumScreen.HomeGoods);
     }
@@ -421,7 +458,7 @@ namespace LTP.Truck.Forms
 
     private void btnLogout_Click(object sender, EventArgs e)
     {
-      AppCore.Ins._userCurrent = null;
+      AppCore.Ins._employeeCurrent = null;
       LoadAccount(null);
       FrmMain.Instance.ChangePage(EnumScreen.Waiting);
     }

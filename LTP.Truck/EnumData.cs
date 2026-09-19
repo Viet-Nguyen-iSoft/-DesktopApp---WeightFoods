@@ -82,5 +82,11 @@ namespace LTP.Truck
       GroupProduct,
       Product,
     }
+    public enum EnumStation
+    {
+      None = 0,
+      Truck,
+      Goods,
+    }
   }
 }

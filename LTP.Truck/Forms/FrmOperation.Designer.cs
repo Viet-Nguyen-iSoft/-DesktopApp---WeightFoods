@@ -224,7 +224,6 @@ namespace LTP.Truck.Forms
       btnHomeGoods.TextAlign = ContentAlignment.MiddleLeft;
       btnHomeGoods.TextColor = Color.Black;
       btnHomeGoods.UseVisualStyleBackColor = false;
-      btnHomeGoods.Click += btnHomeGoods_Click;
       // 
       // btnSetting
       // 
