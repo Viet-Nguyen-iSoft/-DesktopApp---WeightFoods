@@ -49,7 +49,7 @@ namespace iSoft.Database.Repositorys
         .Include(record => record.Client)
         .Include(record => record.TypeGoods)
         .Include(record => record.Warehouse)
-        .Include(record => record.Employee)
+        .Include(record => record.User)
         .Include(record => record.Station)
         .Include(record => record.RecordWeights!)
           .ThenInclude(recordWeight => recordWeight.Product)

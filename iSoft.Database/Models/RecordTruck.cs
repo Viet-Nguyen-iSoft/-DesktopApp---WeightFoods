@@ -36,8 +36,8 @@ namespace iSoft.Database.Models
     public Guid? WarehouseId { get; set; }
     public Warehouse? Warehouse { get; set; }
 
-    public Guid? EmployeeId { get; set; }
-    public Employee? Employee { get; set; }
+    public Guid? UserId { get; set; }
+    public User? User { get; set; }
 
     public Guid? StationId { get; set; }
     public Station? Station { get; set; }

@@ -52,11 +52,9 @@ namespace ApiSyncData
 
         var clients = LoadAndSyncAsync(api.Client(), MasterDataSyncService.SyncClientsAsync,
           value => Clients = value, cancellationToken);
-        var users = LoadAndSyncAsync(api.User(), MasterDataSyncService.SyncEmployeesAsync,
-          value => Users = value, cancellationToken);
 
         await Task.WhenAll(stations, warehouses, typeGoods, productGroups,
-          products, categoryTares, clients, users).ConfigureAwait(false);
+          products, categoryTares, clients).ConfigureAwait(false);
       }
       catch (Exception ex)
       {

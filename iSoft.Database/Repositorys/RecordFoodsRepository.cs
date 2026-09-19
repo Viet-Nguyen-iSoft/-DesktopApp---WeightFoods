@@ -28,7 +28,7 @@ namespace iSoft.Database.Repositorys
                                   //.Include(x => x.ProductionOrder)
                                   //.Include(x=>x.Production)
                                   //.Include(x => x.Material)
-                                  .Include(x => x.Employee)
+                                  .Include(x => x.User)
                                   .ToListAsync();
       }
       else if (eTypeData == eTypeData.OnlyDelete)
@@ -168,19 +168,16 @@ namespace iSoft.Database.Repositorys
       }
     }
 
-    public async Task<List<RecordWeight>> GetRecordByRequestOtherAsync(Guid? employeeId, DateTime dateTime, EnumInternalExternalStatus enumInternalExternalStatus)
+    public async Task<List<RecordWeight>> GetRecordByRequestOtherAsync(Guid? userId, DateTime dateTime, EnumInternalExternalStatus enumInternalExternalStatus)
     {
       try
       {
         return await this.Context.Set<RecordWeight>()
-                                    .Where(x => x.EmployeeId == employeeId &&
-                                    x.DeletedFlag == false && 
-                                    x.CreatedAt > dateTime //&&
-                                    //x.DatalogDeliveryId == null && 
-                                    //x.InternalExternalStatus == enumInternalExternalStatus &&
-                                    //x.EnumTypePO == EnumTypePO.RequestOther
+                                    .Where(x => x.UserId == userId &&
+                                                x.DeletedFlag == false && 
+                                                x.CreatedAt > dateTime
                                     )
-                                   .Include(x => x.Employee)
+                                   .Include(x => x.User)
                                    .Include(x => x.Station)
                                    .ToListAsync();
       }

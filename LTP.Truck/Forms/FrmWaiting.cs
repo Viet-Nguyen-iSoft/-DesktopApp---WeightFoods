@@ -131,23 +131,11 @@ namespace LTP.Truck.Forms
 
     private async void UcPanelLogin1_OnSendLogin(object? sender, EventArgs e)
     {
-      //AppCore.Ins._userCurrent = await AppCore.Ins._userService.CheckLogin(ucPanelLogin1.Account, ucPanelLogin1.Password);
-      //if (AppCore.Ins._userCurrent != null)
-      //{
-      //  FrmOperation.Instance.LoadAccount(AppCore.Ins._userCurrent);
-      //  FrmMain.Instance.ChangePage(EnumScreen.Operation);
-      //}
-      //else
-      //{
-      //  using var popupMsg = new PopupConfirm("Tài khoản hoặc mật khẩu sai. Vui lòng thử lại !",
-      //    EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
-      //  popupMsg.ShowDialog(this);
-      //}
-
-      if (ucPanelLogin1.Account == "admin" && ucPanelLogin1.Password == "admin")
+      AppCore.Ins._userCurrent = await AppCore.Ins._userService.CheckLogin(ucPanelLogin1.Account, ucPanelLogin1.Password);
+      if (AppCore.Ins._userCurrent != null)
       {
+        FrmOperation.Instance.LoadAccount(AppCore.Ins._userCurrent);
         FrmMain.Instance.ChangePage(EnumScreen.Operation);
-        AppCore.Ins._employeeCurrent = AppCore.Ins._employees?.Where(x => x.Account == "admin").FirstOrDefault();
       }
       else
       {
@@ -155,6 +143,18 @@ namespace LTP.Truck.Forms
           EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
         popupMsg.ShowDialog(this);
       }
+
+      //if (ucPanelLogin1.Account == "admin" && ucPanelLogin1.Password == "admin")
+      //{
+      //  FrmMain.Instance.ChangePage(EnumScreen.Operation);
+      //  AppCore.Ins._employeeCurrent = AppCore.Ins._employees?.Where(x => x.Account == "admin").FirstOrDefault();
+      //}
+      //else
+      //{
+      //  using var popupMsg = new PopupConfirm("Tài khoản hoặc mật khẩu sai. Vui lòng thử lại !",
+      //    EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+      //  popupMsg.ShowDialog(this);
+      //}
     }
 
     private async void pictureBox1_Click(object sender, EventArgs e)

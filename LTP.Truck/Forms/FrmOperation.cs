@@ -458,7 +458,7 @@ namespace LTP.Truck.Forms
 
     private void btnLogout_Click(object sender, EventArgs e)
     {
-      AppCore.Ins._employeeCurrent = null;
+      AppCore.Ins._userCurrent = null;
       LoadAccount(null);
       FrmMain.Instance.ChangePage(EnumScreen.Waiting);
     }

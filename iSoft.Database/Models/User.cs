@@ -108,5 +108,8 @@ namespace iSoft.Database.Models
 
     public ICollection<Permission> Permissions { get; set; } =
       new List<Permission>();
+
+    public ICollection<RecordTruck>? RecordTrucks { get; set; }
+    public ICollection<RecordWeight>? RecordWeights { get; set; }
   }
 }

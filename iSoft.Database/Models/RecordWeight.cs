@@ -19,8 +19,8 @@ namespace iSoft.Database.Models
     public Guid? StationId { get; set; }
     public Station? Station { get; set; }
 
-    public Guid? EmployeeId { get; set; }
-    public Employee? Employee { get; set; }
+    public Guid? UserId { get; set; }
+    public User? User { get; set; }
 
     public Guid? ProductId { get; set; }
     public Product Product { get; set; } = null!;

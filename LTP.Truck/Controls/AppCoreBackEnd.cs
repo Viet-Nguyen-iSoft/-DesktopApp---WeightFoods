@@ -65,7 +65,6 @@ namespace LTP.Truck.Controls
     public readonly AppConfigService _appConfigService = new();
     public readonly StationService _stationService = new();
     public readonly ConnectionService _connectionService = new();
-    public readonly EmployeeService _employeeService = new();
     public readonly UserService _userService = new();
     public readonly PermissionService _permissionService = new();
 
@@ -120,9 +119,7 @@ namespace LTP.Truck.Controls
 
     public AppConfig? _appConfig { get;set; }
     public Station? _station { get;set; }
-    public List<Employee>? _employees { get;set; }
-    //public User? _userCurrent { get;set; }
-    public Employee? _employeeCurrent { get;set; }
+    public User? _userCurrent { get;set; }
     public Connection? _connection { get;set; }
 
 
@@ -138,7 +135,6 @@ namespace LTP.Truck.Controls
       {
         _appConfig = await _appConfigService.GetAppConfigAsync();
         _station = await _stationService.GetByCodeAsync(_appConfig?.StationId);
-        _employees = await _employeeService.GetAllAsync();
         _connection = await _connectionService.GetFirstDataConnection();
  
         //var employees = _employees.FirstOrDefault();

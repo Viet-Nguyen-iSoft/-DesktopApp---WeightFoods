@@ -189,7 +189,7 @@ namespace ApiSyncData
         .Where(record => !record.SyncFlag &&
           record.RecordTruckId.HasValue)
         .Include(record => record.Station)
-        .Include(record => record.Employee)
+        .Include(record => record.User)
         .Include(record => record.Product)
         .Include(record => record.CategoryTare)
         .Include(record => record.RecordTruck)
