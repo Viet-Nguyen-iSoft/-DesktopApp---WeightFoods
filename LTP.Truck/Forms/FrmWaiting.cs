@@ -2,6 +2,7 @@
 using Common;
 using HelperManager;
 using LTP.Truck.Controls;
+using System.Diagnostics;
 using static Common.EnumData;
 using static LTP.Truck.EnumData;
 
@@ -115,8 +116,20 @@ namespace LTP.Truck.Forms
     private void Frm_OnSendCheckUpdateVersion(object? sender, EventArgs e)
     {
       PopupApplyVersionNew popupApplyVersionNew = new PopupApplyVersionNew();
-      //popupApplyVersionNew.OnSendApply += PopupApplyVersionNew_OnSendApply;
+      popupApplyVersionNew.OnSendApply += PopupApplyVersionNew_OnSendApply;
       popupApplyVersionNew.ShowDialog();
+    }
+
+    private async void PopupApplyVersionNew_OnSendApply(object? sender, string e)
+    {
+      AppCore.Ins._appConfig.Version = e;
+      AppCore.Ins._appConfig.UpdatedAt = DateTime.UtcNow;
+      await AppCore.Ins._appConfigService.AddOrUpdateAsync(AppCore.Ins._appConfig);
+
+      string app = Path.Combine(Application.StartupPath, "Versions\\ApplyVersion\\ApplyNewVersion.exe");
+      Process.Start(app);
+
+      Application.Exit();
     }
     #endregion
 

@@ -149,6 +149,21 @@ namespace LTP.Truck.Forms
       SetStatusPermitCheckWeight(_permitCheck);
       txtValueWeightPermit.Texts = (AppCore.Ins._appConfig?.ValueCheckWeight ?? 0)
         .ToString(CultureInfo.CurrentCulture);
+
+      LoadConfig();
+    }
+
+    private void LoadConfig()
+    {
+      var station = Environment.GetEnvironmentVariable("STATION");
+      if (station == "1")
+      {
+        tableLayoutPanel16.Visible = true;
+      }
+      else
+      {
+        tableLayoutPanel16.Visible = false;
+      }
     }
 
     private async Task LoadStationsAsync()

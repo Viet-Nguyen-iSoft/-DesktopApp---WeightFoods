@@ -14,7 +14,7 @@ namespace ApiCICD
   {
     // Thay thông tin của bạn
     private const string Owner = "Viet-Nguyen-iSoft";
-    private const string Repo = "HSF.PreWeight";
+    private const string Repo = "Bosch.DesktopApp";
 
     // PAT của bạn
     //private const string Token = "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";
@@ -46,7 +46,7 @@ namespace ApiCICD
       string token = Environment.GetEnvironmentVariable("TOKEN_API_GITHUB");
       using HttpClient client = new();
 
-      client.DefaultRequestHeaders.UserAgent.ParseAdd("LaborTrackPro");
+      client.DefaultRequestHeaders.UserAgent.ParseAdd("LTP.Truck");
 
       client.DefaultRequestHeaders.Authorization =
           new AuthenticationHeaderValue("Bearer", token);
@@ -136,7 +136,7 @@ namespace ApiCICD
 
 
       client.DefaultRequestHeaders.UserAgent.ParseAdd(
-          "LaborTrackPro");
+          "LTP.Truck");
 
 
       client.DefaultRequestHeaders.Authorization =

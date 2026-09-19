@@ -59,7 +59,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Template\" />
+    <Folder Include="Versions\" />
   </ItemGroup>
 
 </Project>

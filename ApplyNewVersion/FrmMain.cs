@@ -244,7 +244,7 @@ namespace ApplyNewVersion
                     )!.FullName
                 )!.FullName;
 
-      string app = Path.Combine(folderSoftware, "LaborTrackPro.exe");
+      string app = Path.Combine(folderSoftware, "LTP.Truck.exe");
       Process.Start(app);
 
       Application.Exit();

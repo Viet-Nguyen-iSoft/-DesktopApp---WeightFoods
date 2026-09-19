@@ -41,12 +41,12 @@
       lbVersionCurrent = new Label();
       label1 = new Label();
       pictureBox2 = new PictureBox();
+      txtCommit = new TextBox();
+      progressBar1 = new ProgressBar();
       tableLayoutPanel5 = new TableLayoutPanel();
       lbVersion = new Label();
       label2 = new Label();
       pictureBox3 = new PictureBox();
-      txtCommit = new TextBox();
-      progressBar1 = new ProgressBar();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel3.SuspendLayout();
@@ -60,18 +60,20 @@
       // tableLayoutPanel1
       // 
       tableLayoutPanel1.BackColor = Color.White;
-      tableLayoutPanel1.ColumnCount = 1;
+      tableLayoutPanel1.ColumnCount = 3;
+      tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
       tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 10);
-      tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 0, 0);
-      tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 0, 2);
-      tableLayoutPanel1.Controls.Add(tableLayoutPanel5, 0, 4);
-      tableLayoutPanel1.Controls.Add(txtCommit, 0, 6);
-      tableLayoutPanel1.Controls.Add(progressBar1, 0, 8);
+      tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 10F));
+      tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 10);
+      tableLayoutPanel1.Controls.Add(tableLayoutPanel3, 1, 0);
+      tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 1, 2);
+      tableLayoutPanel1.Controls.Add(txtCommit, 1, 6);
+      tableLayoutPanel1.Controls.Add(progressBar1, 1, 8);
+      tableLayoutPanel1.Controls.Add(tableLayoutPanel5, 1, 4);
       tableLayoutPanel1.Dock = DockStyle.Fill;
       tableLayoutPanel1.Location = new Point(0, 0);
       tableLayoutPanel1.Name = "tableLayoutPanel1";
-      tableLayoutPanel1.RowCount = 11;
+      tableLayoutPanel1.RowCount = 12;
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
@@ -82,26 +84,28 @@
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
-      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-      tableLayoutPanel1.Size = new Size(610, 457);
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 65F));
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+      tableLayoutPanel1.Size = new Size(635, 590);
       tableLayoutPanel1.TabIndex = 0;
       // 
       // tableLayoutPanel2
       // 
       tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel2.ColumnCount = 3;
-      tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
-      tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-      tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-      tableLayoutPanel2.Controls.Add(btnDownload, 1, 0);
-      tableLayoutPanel2.Controls.Add(btnClose, 2, 0);
-      tableLayoutPanel2.Controls.Add(btnApply, 0, 0);
-      tableLayoutPanel2.Location = new Point(0, 397);
+      tableLayoutPanel2.ColumnCount = 4;
+      tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle());
+      tableLayoutPanel2.Controls.Add(btnDownload, 2, 0);
+      tableLayoutPanel2.Controls.Add(btnClose, 3, 0);
+      tableLayoutPanel2.Controls.Add(btnApply, 1, 0);
+      tableLayoutPanel2.Location = new Point(10, 515);
       tableLayoutPanel2.Margin = new Padding(0);
       tableLayoutPanel2.Name = "tableLayoutPanel2";
       tableLayoutPanel2.RowCount = 1;
       tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel2.Size = new Size(610, 60);
+      tableLayoutPanel2.Size = new Size(615, 65);
       tableLayoutPanel2.TabIndex = 6;
       // 
       // btnDownload
@@ -118,10 +122,10 @@
       btnDownload.ForeColor = Color.White;
       btnDownload.Image = (Image)resources.GetObject("btnDownload.Image");
       btnDownload.ImageAlign = ContentAlignment.MiddleLeft;
-      btnDownload.Location = new Point(247, 3);
+      btnDownload.Location = new Point(304, 3);
       btnDownload.Name = "btnDownload";
       btnDownload.Padding = new Padding(10, 0, 0, 0);
-      btnDownload.Size = new Size(177, 54);
+      btnDownload.Size = new Size(158, 59);
       btnDownload.TabIndex = 0;
       btnDownload.Text = "       Tải xuống";
       btnDownload.TextColor = Color.White;
@@ -142,10 +146,10 @@
       btnClose.ForeColor = Color.White;
       btnClose.Image = (Image)resources.GetObject("btnClose.Image");
       btnClose.ImageAlign = ContentAlignment.MiddleLeft;
-      btnClose.Location = new Point(430, 3);
+      btnClose.Location = new Point(468, 3);
       btnClose.Name = "btnClose";
       btnClose.Padding = new Padding(10, 0, 0, 0);
-      btnClose.Size = new Size(177, 54);
+      btnClose.Size = new Size(144, 59);
       btnClose.TabIndex = 1;
       btnClose.Text = "   Đóng";
       btnClose.TextColor = Color.White;
@@ -166,14 +170,15 @@
       btnApply.ForeColor = Color.White;
       btnApply.Image = (Image)resources.GetObject("btnApply.Image");
       btnApply.ImageAlign = ContentAlignment.MiddleLeft;
-      btnApply.Location = new Point(3, 3);
+      btnApply.Location = new Point(90, 3);
       btnApply.Name = "btnApply";
       btnApply.Padding = new Padding(10, 0, 0, 0);
-      btnApply.Size = new Size(238, 54);
+      btnApply.Size = new Size(208, 59);
       btnApply.TabIndex = 2;
       btnApply.Text = "     Cập nhật ngay";
       btnApply.TextColor = Color.White;
       btnApply.UseVisualStyleBackColor = false;
+      btnApply.Visible = false;
       btnApply.Click += btnApply_Click;
       // 
       // tableLayoutPanel3
@@ -185,12 +190,12 @@
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 11.4754095F));
       tableLayoutPanel3.Controls.Add(lbTitle, 0, 0);
       tableLayoutPanel3.Controls.Add(picLoading, 1, 0);
-      tableLayoutPanel3.Location = new Point(0, 0);
+      tableLayoutPanel3.Location = new Point(10, 0);
       tableLayoutPanel3.Margin = new Padding(0);
       tableLayoutPanel3.Name = "tableLayoutPanel3";
       tableLayoutPanel3.RowCount = 1;
       tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-      tableLayoutPanel3.Size = new Size(610, 60);
+      tableLayoutPanel3.Size = new Size(615, 60);
       tableLayoutPanel3.TabIndex = 8;
       // 
       // lbTitle
@@ -202,7 +207,7 @@
       lbTitle.Location = new Point(0, 0);
       lbTitle.Margin = new Padding(0);
       lbTitle.Name = "lbTitle";
-      lbTitle.Size = new Size(540, 60);
+      lbTitle.Size = new Size(544, 60);
       lbTitle.TabIndex = 7;
       lbTitle.Text = "Cập nhật phiên bản phần mềm";
       lbTitle.TextAlign = ContentAlignment.MiddleLeft;
@@ -211,9 +216,9 @@
       // 
       picLoading.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       picLoading.Image = Properties.Resources.Loading_icon;
-      picLoading.Location = new Point(543, 3);
+      picLoading.Location = new Point(547, 3);
       picLoading.Name = "picLoading";
-      picLoading.Size = new Size(64, 54);
+      picLoading.Size = new Size(65, 54);
       picLoading.SizeMode = PictureBoxSizeMode.StretchImage;
       picLoading.TabIndex = 8;
       picLoading.TabStop = false;
@@ -229,12 +234,12 @@
       tableLayoutPanel4.Controls.Add(lbVersionCurrent, 2, 0);
       tableLayoutPanel4.Controls.Add(label1, 1, 0);
       tableLayoutPanel4.Controls.Add(pictureBox2, 0, 0);
-      tableLayoutPanel4.Location = new Point(0, 70);
+      tableLayoutPanel4.Location = new Point(10, 70);
       tableLayoutPanel4.Margin = new Padding(0);
       tableLayoutPanel4.Name = "tableLayoutPanel4";
       tableLayoutPanel4.RowCount = 1;
       tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel4.Size = new Size(610, 60);
+      tableLayoutPanel4.Size = new Size(615, 60);
       tableLayoutPanel4.TabIndex = 9;
       // 
       // lbVersionCurrent
@@ -246,7 +251,7 @@
       lbVersionCurrent.Location = new Point(280, 0);
       lbVersionCurrent.Margin = new Padding(0);
       lbVersionCurrent.Name = "lbVersionCurrent";
-      lbVersionCurrent.Size = new Size(330, 60);
+      lbVersionCurrent.Size = new Size(335, 60);
       lbVersionCurrent.TabIndex = 9;
       lbVersionCurrent.TextAlign = ContentAlignment.MiddleLeft;
       // 
@@ -261,7 +266,7 @@
       label1.Name = "label1";
       label1.Size = new Size(220, 60);
       label1.TabIndex = 7;
-      label1.Text = "Phiên bản hiện tại:";
+      label1.Text = "   Phiên bản hiện tại:";
       label1.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // pictureBox2
@@ -275,6 +280,24 @@
       pictureBox2.TabIndex = 8;
       pictureBox2.TabStop = false;
       // 
+      // txtCommit
+      // 
+      txtCommit.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      txtCommit.Font = new Font("Roboto", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+      txtCommit.Location = new Point(13, 213);
+      txtCommit.Multiline = true;
+      txtCommit.Name = "txtCommit";
+      txtCommit.Size = new Size(609, 259);
+      txtCommit.TabIndex = 11;
+      // 
+      // progressBar1
+      // 
+      progressBar1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      progressBar1.Location = new Point(13, 488);
+      progressBar1.Name = "progressBar1";
+      progressBar1.Size = new Size(609, 14);
+      progressBar1.TabIndex = 12;
+      // 
       // tableLayoutPanel5
       // 
       tableLayoutPanel5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -286,12 +309,12 @@
       tableLayoutPanel5.Controls.Add(lbVersion, 2, 0);
       tableLayoutPanel5.Controls.Add(label2, 1, 0);
       tableLayoutPanel5.Controls.Add(pictureBox3, 0, 0);
-      tableLayoutPanel5.Location = new Point(0, 140);
+      tableLayoutPanel5.Location = new Point(10, 140);
       tableLayoutPanel5.Margin = new Padding(0);
       tableLayoutPanel5.Name = "tableLayoutPanel5";
       tableLayoutPanel5.RowCount = 1;
       tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel5.Size = new Size(610, 60);
+      tableLayoutPanel5.Size = new Size(615, 60);
       tableLayoutPanel5.TabIndex = 10;
       // 
       // lbVersion
@@ -303,7 +326,7 @@
       lbVersion.Location = new Point(280, 0);
       lbVersion.Margin = new Padding(0);
       lbVersion.Name = "lbVersion";
-      lbVersion.Size = new Size(330, 60);
+      lbVersion.Size = new Size(335, 60);
       lbVersion.TabIndex = 9;
       lbVersion.TextAlign = ContentAlignment.MiddleLeft;
       // 
@@ -318,7 +341,7 @@
       label2.Name = "label2";
       label2.Size = new Size(220, 60);
       label2.TabIndex = 7;
-      label2.Text = "Phiên bản mới nhất:";
+      label2.Text = "   Phiên bản mới nhất:";
       label2.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // pictureBox3
@@ -332,29 +355,11 @@
       pictureBox3.TabIndex = 8;
       pictureBox3.TabStop = false;
       // 
-      // txtCommit
-      // 
-      txtCommit.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      txtCommit.Font = new Font("Roboto", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-      txtCommit.Location = new Point(3, 213);
-      txtCommit.Multiline = true;
-      txtCommit.Name = "txtCommit";
-      txtCommit.Size = new Size(604, 141);
-      txtCommit.TabIndex = 11;
-      // 
-      // progressBar1
-      // 
-      progressBar1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      progressBar1.Location = new Point(3, 370);
-      progressBar1.Name = "progressBar1";
-      progressBar1.Size = new Size(604, 14);
-      progressBar1.TabIndex = 12;
-      // 
       // PopupApplyVersionNew
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(610, 457);
+      ClientSize = new Size(635, 590);
       ControlBox = false;
       Controls.Add(tableLayoutPanel1);
       Name = "PopupApplyVersionNew";
