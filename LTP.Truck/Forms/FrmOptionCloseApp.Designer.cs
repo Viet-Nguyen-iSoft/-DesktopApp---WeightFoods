@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOptionCloseApp));
       tableLayoutPanel1 = new TableLayoutPanel();
       btnMini = new Common.Custom.RJButton();
       btnRestartApp = new Common.Custom.RJButton();
@@ -63,7 +64,7 @@
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel1.Size = new Size(450, 517);
+      tableLayoutPanel1.Size = new Size(635, 651);
       tableLayoutPanel1.TabIndex = 0;
       // 
       // btnMini
@@ -78,11 +79,14 @@
       btnMini.FlatStyle = FlatStyle.Flat;
       btnMini.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
       btnMini.ForeColor = Color.White;
+      btnMini.Image = (Image)resources.GetObject("btnMini.Image");
+      btnMini.ImageAlign = ContentAlignment.MiddleLeft;
       btnMini.Location = new Point(23, 23);
       btnMini.Name = "btnMini";
-      btnMini.Size = new Size(404, 73);
+      btnMini.Padding = new Padding(50, 0, 0, 0);
+      btnMini.Size = new Size(589, 100);
       btnMini.TabIndex = 0;
-      btnMini.Text = "Thu nhỏ màn hình";
+      btnMini.Text = "THU NHỎ MÀN HÌNH";
       btnMini.TextColor = Color.White;
       btnMini.UseVisualStyleBackColor = false;
       // 
@@ -98,11 +102,14 @@
       btnRestartApp.FlatStyle = FlatStyle.Flat;
       btnRestartApp.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
       btnRestartApp.ForeColor = Color.White;
-      btnRestartApp.Location = new Point(23, 122);
+      btnRestartApp.Image = (Image)resources.GetObject("btnRestartApp.Image");
+      btnRestartApp.ImageAlign = ContentAlignment.MiddleLeft;
+      btnRestartApp.Location = new Point(23, 149);
       btnRestartApp.Name = "btnRestartApp";
-      btnRestartApp.Size = new Size(404, 73);
+      btnRestartApp.Padding = new Padding(50, 0, 0, 0);
+      btnRestartApp.Size = new Size(589, 100);
       btnRestartApp.TabIndex = 1;
-      btnRestartApp.Text = "Khởi động lại";
+      btnRestartApp.Text = "KHỞI ĐỘNG LẠI";
       btnRestartApp.TextColor = Color.White;
       btnRestartApp.UseVisualStyleBackColor = false;
       // 
@@ -118,11 +125,14 @@
       btnClose.FlatStyle = FlatStyle.Flat;
       btnClose.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
       btnClose.ForeColor = Color.White;
-      btnClose.Location = new Point(23, 221);
+      btnClose.Image = (Image)resources.GetObject("btnClose.Image");
+      btnClose.ImageAlign = ContentAlignment.MiddleLeft;
+      btnClose.Location = new Point(23, 275);
       btnClose.Name = "btnClose";
-      btnClose.Size = new Size(404, 73);
+      btnClose.Padding = new Padding(50, 0, 0, 0);
+      btnClose.Size = new Size(589, 100);
       btnClose.TabIndex = 2;
-      btnClose.Text = "Đóng chương trình";
+      btnClose.Text = "ĐÓNG CHƯƠNG TRÌNH";
       btnClose.TextColor = Color.White;
       btnClose.UseVisualStyleBackColor = false;
       // 
@@ -138,11 +148,14 @@
       btnBack.FlatStyle = FlatStyle.Flat;
       btnBack.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
       btnBack.ForeColor = Color.White;
-      btnBack.Location = new Point(23, 320);
+      btnBack.Image = (Image)resources.GetObject("btnBack.Image");
+      btnBack.ImageAlign = ContentAlignment.MiddleLeft;
+      btnBack.Location = new Point(23, 401);
       btnBack.Name = "btnBack";
-      btnBack.Size = new Size(404, 73);
+      btnBack.Padding = new Padding(50, 0, 0, 0);
+      btnBack.Size = new Size(589, 100);
       btnBack.TabIndex = 3;
-      btnBack.Text = "Quay lại";
+      btnBack.Text = "QUAY LẠI";
       btnBack.TextColor = Color.White;
       btnBack.UseVisualStyleBackColor = false;
       // 
@@ -158,11 +171,14 @@
       btnCheckVersion.FlatStyle = FlatStyle.Flat;
       btnCheckVersion.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
       btnCheckVersion.ForeColor = Color.White;
-      btnCheckVersion.Location = new Point(23, 419);
+      btnCheckVersion.Image = (Image)resources.GetObject("btnCheckVersion.Image");
+      btnCheckVersion.ImageAlign = ContentAlignment.MiddleLeft;
+      btnCheckVersion.Location = new Point(23, 527);
       btnCheckVersion.Name = "btnCheckVersion";
-      btnCheckVersion.Size = new Size(404, 73);
+      btnCheckVersion.Padding = new Padding(50, 0, 0, 0);
+      btnCheckVersion.Size = new Size(589, 100);
       btnCheckVersion.TabIndex = 4;
-      btnCheckVersion.Text = "Kiểm tra bản cập nhật";
+      btnCheckVersion.Text = "KIỂM TRA BẢN CẬP NHẬT";
       btnCheckVersion.TextColor = Color.White;
       btnCheckVersion.UseVisualStyleBackColor = false;
       // 
@@ -170,7 +186,7 @@
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
-      ClientSize = new Size(450, 517);
+      ClientSize = new Size(635, 651);
       ControlBox = false;
       Controls.Add(tableLayoutPanel1);
       Name = "FrmOptionCloseApp";

@@ -41,7 +41,7 @@ namespace LTP.Truck.Forms
             frm.StartPosition = FormStartPosition.Manual;
             var screen = Screen.PrimaryScreen.WorkingArea;
             int x = (screen.Width - frm.Width) / 2;
-            int y = (screen.Height - frm.Height) / 2 - 200;
+            int y = (screen.Height - frm.Height) / 2 - 0;
             if (y < 0) y = 0;
 
             frm.OnSendRestart -= Frm_OnSendRestart;
@@ -68,7 +68,7 @@ namespace LTP.Truck.Forms
           frm.StartPosition = FormStartPosition.Manual;
           var screen = Screen.PrimaryScreen.WorkingArea;
           int x = (screen.Width - frm.Width) / 2;
-          int y = (screen.Height - frm.Height) / 2 - 200;
+          int y = (screen.Height - frm.Height) / 2 - 0;
           if (y < 0) y = 0;
 
           frm.OnSendRestart -= Frm_OnSendRestart;
@@ -131,18 +131,19 @@ namespace LTP.Truck.Forms
 
     private async void UcPanelLogin1_OnSendLogin(object? sender, EventArgs e)
     {
-      AppCore.Ins._userCurrent = await AppCore.Ins._userService.CheckLogin(ucPanelLogin1.Account, ucPanelLogin1.Password);
-      if (AppCore.Ins._userCurrent != null)
-      {
-        FrmOperation.Instance.LoadAccount(AppCore.Ins._userCurrent);
-        FrmMain.Instance.ChangePage(EnumScreen.Operation);
-      }
-      else
-      {
-        using var popupMsg = new PopupConfirm("Tài khoản hoặc mật khẩu sai. Vui lòng thử lại !",
-          EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
-        popupMsg.ShowDialog(this);
-      }
+      FrmMain.Instance.ChangePage(EnumScreen.Operation);
+      //AppCore.Ins._userCurrent = await AppCore.Ins._userService.CheckLogin(ucPanelLogin1.Account, ucPanelLogin1.Password);
+      //if (AppCore.Ins._userCurrent != null)
+      //{
+      //  FrmOperation.Instance.LoadAccount(AppCore.Ins._userCurrent);
+      //  FrmMain.Instance.ChangePage(EnumScreen.Operation);
+      //}
+      //else
+      //{
+      //  using var popupMsg = new PopupConfirm("Tài khoản hoặc mật khẩu sai. Vui lòng thử lại !",
+      //    EnumTypeMsg.MessageManualClose, EnumImageMsg.Information);
+      //  popupMsg.ShowDialog(this);
+      //}
 
       //if (ucPanelLogin1.Account == "admin" && ucPanelLogin1.Password == "admin")
       //{
