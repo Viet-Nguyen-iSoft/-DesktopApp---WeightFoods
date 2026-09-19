@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiCICD\ApiCICD.csproj" />
     <ProjectReference Include="..\ApiSyncData\ApiSyncData.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\HelperManager\HelperManager.csproj" />
