@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+env:
+  PROJECT_PATH: LTP.Truck/LTP.Truck.csproj
+  PUBLISH_DIR: publish
+
 jobs:
   build:
     runs-on: windows-latest
@@ -24,25 +28,26 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore ${{ env.PROJECT_PATH }}
 
       - name: Build
-        run: dotnet build -c Release --no-restore
+        run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
 
       - name: Publish
-        run: dotnet publish LaborTrackPro/LTP.Truck.csproj -c Release -o publish --no-build
-
-      - name: Create Update.zip
-        shell: pwsh
-        run: |
-          Compress-Archive -Path publish\* -DestinationPath Update.zip -Force
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -o ${{ env.PUBLISH_DIR }} --no-build
 
       - name: Generate Version
         shell: pwsh
         run: |
           $version = "v1.0.${{ github.run_number }}"
-          echo "VERSION=$version" >> $env:GITHUB_ENV
-          echo "Version = $version"
+          "VERSION=$version" >> $env:GITHUB_ENV
+          Set-Content -Path version.txt -Value $version -Encoding utf8NoBOM
+          Write-Host "Version = $version"
+
+      - name: Create Update.zip
+        shell: pwsh
+        run: |
+          Compress-Archive -Path "${{ env.PUBLISH_DIR }}\*" -DestinationPath Update.zip -Force
 
       - name: Create Git Tag
         shell: pwsh
