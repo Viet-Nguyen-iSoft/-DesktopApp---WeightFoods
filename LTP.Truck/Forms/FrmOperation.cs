@@ -13,7 +13,14 @@ namespace LTP.Truck.Forms
   public partial class FrmOperation : Form
   {
     private readonly Dictionary<Button, (Color BackColor, Color ForeColor, Color MouseOverColor, Color MouseDownColor)> _menuButtonColors = new();
+    private readonly Dictionary<Button, string> _mainMenuTexts = new();
     private bool _masterDataExpanded;
+    private bool _menuCollapsed;
+
+    private const int ExpandedMenuWidth = 250;
+    private const int CollapsedMenuWidth = 80;
+    private const int ExpandedButtonWidth = 242;
+    private const int CollapsedButtonWidth = 72;
 
     public System.Timers.Timer _timerClock = new System.Timers.Timer();
     public FrmOperation()
@@ -21,6 +28,7 @@ namespace LTP.Truck.Forms
       InitializeComponent();
       InitializeMenuSelection();
       SetMasterDataExpanded(false);
+      SetMenuCollapsed(true);
       this.Load += FrmOperation_Load;
       this.Shown += FrmOperation_Shown;
       AppCore.Ins.OnChangeStation += AppCore_OnChangeStation;
@@ -47,6 +55,14 @@ namespace LTP.Truck.Forms
           button.FlatAppearance.MouseOverBackColor, button.FlatAppearance.MouseDownBackColor));
         button.Click += MenuButton_Click;
       }
+
+      foreach (Button button in GetMainMenuButtons())
+        _mainMenuTexts.Add(button, button.Text);
+    }
+
+    private Button[] GetMainMenuButtons()
+    {
+      return new[] { btnHomeTruck, btnHomeGoods, btnSetting, btnMasterData };
     }
 
     private void MenuButton_Click(object? sender, EventArgs e)
@@ -87,19 +103,73 @@ namespace LTP.Truck.Forms
     private void SetMasterDataExpanded(bool expanded)
     {
       _masterDataExpanded = expanded;
+      ApplyMasterDataVisibility();
+    }
+
+    private void ApplyMasterDataVisibility()
+    {
       flowLayoutPanel1.SuspendLayout();
       try
       {
         foreach (Button button in _menuButtonColors.Keys)
         {
           if (IsMasterDataChild(button))
-            button.Visible = expanded;
+            button.Visible = !_menuCollapsed && _masterDataExpanded && IsMasterDataChildAvailable(button);
         }
       }
       finally
       {
         flowLayoutPanel1.ResumeLayout(true);
       }
+    }
+
+    private bool IsMasterDataChildAvailable(Button button)
+    {
+      bool isTruckStation = Environment.GetEnvironmentVariable("STATION") == "1";
+      return isTruckStation
+        ? button == btnClient || button == btnWarehouse || button == btnTypeGoods
+        : button == btnGroupProduct || button == btnProduct || button == btnTare;
+    }
+
+    private void SetMenuCollapsed(bool collapsed)
+    {
+      _menuCollapsed = collapsed;
+      int menuWidth = collapsed ? CollapsedMenuWidth : ExpandedMenuWidth;
+      int buttonWidth = collapsed ? CollapsedButtonWidth : ExpandedButtonWidth;
+
+      tableLayoutPanel1.SuspendLayout();
+      flowLayoutPanel1.SuspendLayout();
+      try
+      {
+        tableLayoutPanel1.ColumnStyles[0].SizeType = SizeType.Absolute;
+        tableLayoutPanel1.ColumnStyles[0].Width = menuWidth;
+        panelMenu.Width = menuWidth;
+        tableLayoutPanel7.Visible = !collapsed;
+
+        foreach (Button button in GetMainMenuButtons())
+        {
+          button.Width = buttonWidth;
+          button.Text = collapsed ? string.Empty : _mainMenuTexts[button];
+        }
+
+        ApplyMasterDataVisibility();
+      }
+      finally
+      {
+        flowLayoutPanel1.ResumeLayout(true);
+        tableLayoutPanel1.ResumeLayout(true);
+      }
+    }
+
+    private void EnsureMenuExpanded()
+    {
+      if (_menuCollapsed)
+        SetMenuCollapsed(false);
+    }
+
+    private void btnMenu_Click(object? sender, EventArgs e)
+    {
+      SetMenuCollapsed(!_menuCollapsed);
     }
 
     #region Instance
@@ -140,14 +210,6 @@ namespace LTP.Truck.Forms
         btnHomeGoods.Visible = false;
         btnHomeTruck.Visible = true;
 
-        btnClient.Visible = true;
-        btnWarehouse.Visible = true;
-        btnTypeGoods.Visible = true;
-
-        btnGroupProduct.Visible = false;
-        btnProduct.Visible = false;
-        btnTare.Visible = false;
-
         this.btnHomeTruck.PerformClick();
       }
       else
@@ -155,16 +217,10 @@ namespace LTP.Truck.Forms
         btnHomeGoods.Visible = true;
         btnHomeTruck.Visible = false;
 
-        btnClient.Visible = false;
-        btnWarehouse.Visible = false;
-        btnTypeGoods.Visible = false;
-
-        btnGroupProduct.Visible = true;
-        btnProduct.Visible = true;
-        btnTare.Visible = true;
-
         this.btnHomeGoods.PerformClick();
       }
+
+      ApplyMasterDataVisibility();
     }
 
     public void LoadAccount(User? user)
@@ -256,35 +312,49 @@ namespace LTP.Truck.Forms
 
     private async void BtnProduct_Click(object? sender, EventArgs e)
     {
+      EnsureMenuExpanded();
       await ChangePage(EnumScreen.MD_Product);
     }
 
     private async void BtnGroupProduct_Click(object? sender, EventArgs e)
     {
+      EnsureMenuExpanded();
       await ChangePage(EnumScreen.MD_GroupProduct);
     }
 
     private async void BtnTare_Click(object? sender, EventArgs e)
     {
+      EnsureMenuExpanded();
       await ChangePage(EnumScreen.MD_Tare);
     }
 
     private async void BtnWarehouse_Click(object? sender, EventArgs e)
     {
+      EnsureMenuExpanded();
       await ChangePage(EnumScreen.MD_Warehouse);
     }
 
     private async void BtnTypeGoods_Click(object? sender, EventArgs e)
     {
+      EnsureMenuExpanded();
       await ChangePage(EnumScreen.MD_TypeGoods);
     }
     private async void BtnClient_Click(object? sender, EventArgs e)
     {
+      EnsureMenuExpanded();
       await ChangePage(EnumScreen.MD_Client);
     }
     private async void btnMasterData_Click(object sender, EventArgs e)
     {
-      SetMasterDataExpanded(!_masterDataExpanded);
+      if (_menuCollapsed)
+      {
+        SetMenuCollapsed(false);
+        SetMasterDataExpanded(true);
+      }
+      else
+      {
+        SetMasterDataExpanded(!_masterDataExpanded);
+      }
       await ChangePage(EnumScreen.MD_Client);
     }
 

@@ -30,7 +30,7 @@ jobs:
         run: dotnet build -c Release --no-restore
 
       - name: Publish
-        run: dotnet publish LaborTrackPro/LaborTrackPro.csproj -c Release -o publish --no-build
+        run: dotnet publish LaborTrackPro/LTP.Truck.csproj -c Release -o publish --no-build
 
       - name: Create Update.zip
         shell: pwsh

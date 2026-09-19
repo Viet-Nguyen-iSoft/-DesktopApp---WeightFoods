@@ -138,6 +138,7 @@ namespace LTP.Truck.Forms
       btnMenu.SizeMode = PictureBoxSizeMode.StretchImage;
       btnMenu.TabIndex = 0;
       btnMenu.TabStop = false;
+      btnMenu.Click += btnMenu_Click;
       // 
       // tableLayoutPanel6
       // 
@@ -562,6 +563,7 @@ namespace LTP.Truck.Forms
       // 
       // ucLogin
       // 
+      ucLogin.Account = "Login";
       ucLogin.Anchor = AnchorStyles.Left | AnchorStyles.Right;
       ucLogin.Location = new Point(736, 9);
       ucLogin.Name = "ucLogin";

@@ -59,5 +59,13 @@ namespace LTP.Truck.UserControls
     {
       OnSendLogin?.Invoke(this, e);
     }
+
+    private bool _hide { get; set; } = true;
+    private void btnHide_Click(object sender, EventArgs e)
+    {
+      _hide = !_hide;
+      btnHide.Image = _hide ? Properties.Resources.icon_hide : Properties.Resources.icon_unhide;
+      txtPass.PasswordChar = _hide;
+    }
   }
 }

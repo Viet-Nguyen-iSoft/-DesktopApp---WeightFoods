@@ -35,11 +35,14 @@
       txtAccount = new LTP.Truck.Custom.RJTextBox();
       tableLayoutPanel3 = new TableLayoutPanel();
       label3 = new Label();
+      tableLayoutPanel4 = new TableLayoutPanel();
       txtPass = new LTP.Truck.Custom.RJTextBox();
+      btnHide = new Common.Custom.RJButton();
       btnLogin = new LTP.Truck.Custom.RJButton();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel2.SuspendLayout();
       tableLayoutPanel3.SuspendLayout();
+      tableLayoutPanel4.SuspendLayout();
       SuspendLayout();
       // 
       // tableLayoutPanel1
@@ -143,7 +146,7 @@
       tableLayoutPanel3.ColumnCount = 1;
       tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel3.Controls.Add(label3, 0, 0);
-      tableLayoutPanel3.Controls.Add(txtPass, 0, 1);
+      tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 1);
       tableLayoutPanel3.Location = new Point(30, 255);
       tableLayoutPanel3.Margin = new Padding(0);
       tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -167,6 +170,21 @@
       label3.Text = "Mật khẩu";
       label3.TextAlign = ContentAlignment.MiddleLeft;
       // 
+      // tableLayoutPanel4
+      // 
+      tableLayoutPanel4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      tableLayoutPanel4.ColumnCount = 2;
+      tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 86.64384F));
+      tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.356164F));
+      tableLayoutPanel4.Controls.Add(txtPass, 0, 0);
+      tableLayoutPanel4.Controls.Add(btnHide, 1, 0);
+      tableLayoutPanel4.Location = new Point(3, 40);
+      tableLayoutPanel4.Name = "tableLayoutPanel4";
+      tableLayoutPanel4.RowCount = 1;
+      tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+      tableLayoutPanel4.Size = new Size(584, 67);
+      tableLayoutPanel4.TabIndex = 2;
+      // 
       // txtPass
       // 
       txtPass.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -177,18 +195,38 @@
       txtPass.BorderSize = 2;
       txtPass.Font = new Font("Roboto Condensed", 26.25F);
       txtPass.ForeColor = Color.FromArgb(64, 64, 64);
-      txtPass.Location = new Point(4, 45);
+      txtPass.Location = new Point(4, 5);
       txtPass.Margin = new Padding(4);
       txtPass.Multiline = false;
       txtPass.Name = "txtPass";
       txtPass.Padding = new Padding(10, 7, 10, 7);
-      txtPass.PasswordChar = false;
+      txtPass.PasswordChar = true;
       txtPass.PlaceholderColor = Color.DarkGray;
       txtPass.PlaceholderText = "";
-      txtPass.Size = new Size(582, 57);
+      txtPass.Size = new Size(498, 57);
       txtPass.TabIndex = 3;
       txtPass.Texts = "";
       txtPass.UnderlinedStyle = false;
+      // 
+      // btnHide
+      // 
+      btnHide.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      btnHide.BackColor = Color.FromArgb(64, 107, 177);
+      btnHide.BackgroundColor = Color.FromArgb(64, 107, 177);
+      btnHide.BorderColor = Color.PaleVioletRed;
+      btnHide.BorderRadius = 5;
+      btnHide.BorderSize = 0;
+      btnHide.FlatAppearance.BorderSize = 0;
+      btnHide.FlatStyle = FlatStyle.Flat;
+      btnHide.ForeColor = Color.White;
+      btnHide.Image = Properties.Resources.icon_hide;
+      btnHide.Location = new Point(509, 5);
+      btnHide.Name = "btnHide";
+      btnHide.Size = new Size(72, 57);
+      btnHide.TabIndex = 4;
+      btnHide.TextColor = Color.White;
+      btnHide.UseVisualStyleBackColor = false;
+      btnHide.Click += btnHide_Click;
       // 
       // btnLogin
       // 
@@ -224,6 +262,7 @@
       tableLayoutPanel2.PerformLayout();
       tableLayoutPanel3.ResumeLayout(false);
       tableLayoutPanel3.PerformLayout();
+      tableLayoutPanel4.ResumeLayout(false);
       ResumeLayout(false);
     }
 
@@ -238,5 +277,7 @@
     private Custom.RJTextBox txtAccount;
     private Custom.RJTextBox txtPass;
     private Custom.RJButton btnLogin;
+    private TableLayoutPanel tableLayoutPanel4;
+    private Common.Custom.RJButton btnHide;
   }
 }
