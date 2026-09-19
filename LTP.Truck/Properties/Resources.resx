@@ -178,11 +178,20 @@
   <data name="icon_unhide" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_unhide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_ver_new" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_ver_new.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_ver_old" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_ver_old.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_weight" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_weight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_weight_log" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_weight_log.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Loading_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Loading_icon.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LogoBosch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\app-logo-dark-DEvYVQHa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

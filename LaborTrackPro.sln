@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiSyncData", "ApiSyncData\ApiSyncData.csproj", "{3F00D960-0CA9-46B3-827C-6270283248B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCICD", "ApiCICD\ApiCICD.csproj", "{5D57C792-EA93-4BF8-9E68-8D62CF0D6D68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{3F00D960-0CA9-46B3-827C-6270283248B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F00D960-0CA9-46B3-827C-6270283248B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F00D960-0CA9-46B3-827C-6270283248B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D57C792-EA93-4BF8-9E68-8D62CF0D6D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D57C792-EA93-4BF8-9E68-8D62CF0D6D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D57C792-EA93-4BF8-9E68-8D62CF0D6D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D57C792-EA93-4BF8-9E68-8D62CF0D6D68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

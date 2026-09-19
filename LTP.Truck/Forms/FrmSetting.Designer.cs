@@ -67,14 +67,13 @@ namespace LTP.Truck.Forms
       label4 = new Label();
       txtIpServer = new Common.Custom.RJTextBox();
       tableLayoutPanel16 = new TableLayoutPanel();
-      tableLayoutPanel17 = new TableLayoutPanel();
-      rjButton1 = new Common.Custom.RJButton();
       label10 = new Label();
       tableLayoutPanel18 = new TableLayoutPanel();
-      label11 = new Label();
-      rjTextBox1 = new Common.Custom.RJTextBox();
+      btnSavePermitCheckWeight = new Common.Custom.RJButton();
       label12 = new Label();
-      pictureBox1 = new PictureBox();
+      txtValueWeightPermit = new Common.Custom.RJTextBox();
+      label11 = new Label();
+      picPermitCheckWeight = new PictureBox();
       tableLayoutPanel1.SuspendLayout();
       tableLayoutPanel14.SuspendLayout();
       tableLayoutPanel7.SuspendLayout();
@@ -91,7 +90,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel5.SuspendLayout();
       tableLayoutPanel16.SuspendLayout();
       tableLayoutPanel18.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)picPermitCheckWeight).BeginInit();
       SuspendLayout();
       // 
       // tableLayoutPanel1
@@ -110,8 +109,8 @@ namespace LTP.Truck.Forms
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 300F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 200F));
-      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 200F));
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 10F));
+      tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 135F));
       tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel1.Size = new Size(1221, 998);
       tableLayoutPanel1.TabIndex = 2;
@@ -435,7 +434,7 @@ namespace LTP.Truck.Forms
       // 
       // btnAddCommWeight
       // 
-      btnAddCommWeight.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      btnAddCommWeight.Anchor = AnchorStyles.Left | AnchorStyles.Right;
       btnAddCommWeight.BackColor = Color.FromArgb(51, 108, 181);
       btnAddCommWeight.BackgroundColor = Color.FromArgb(51, 108, 181);
       btnAddCommWeight.BorderColor = Color.PaleVioletRed;
@@ -679,59 +678,19 @@ namespace LTP.Truck.Forms
       tableLayoutPanel16.BackColor = Color.FromArgb(236, 236, 236);
       tableLayoutPanel16.ColumnCount = 1;
       tableLayoutPanel16.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel16.Controls.Add(tableLayoutPanel17, 0, 3);
       tableLayoutPanel16.Controls.Add(label10, 0, 0);
       tableLayoutPanel16.Controls.Add(tableLayoutPanel18, 0, 1);
-      tableLayoutPanel16.Location = new Point(0, 530);
+      tableLayoutPanel16.Location = new Point(0, 520);
       tableLayoutPanel16.Margin = new Padding(0);
       tableLayoutPanel16.Name = "tableLayoutPanel16";
-      tableLayoutPanel16.RowCount = 5;
+      tableLayoutPanel16.RowCount = 3;
       tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
       tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
       tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
-      tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel16.Size = new Size(1216, 200);
+      tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel16.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel16.Size = new Size(1216, 135);
       tableLayoutPanel16.TabIndex = 2;
-      // 
-      // tableLayoutPanel17
-      // 
-      tableLayoutPanel17.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      tableLayoutPanel17.ColumnCount = 4;
-      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle());
-      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle());
-      tableLayoutPanel17.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 5F));
-      tableLayoutPanel17.Location = new Point(0, 135);
-      tableLayoutPanel17.Margin = new Padding(0);
-      tableLayoutPanel17.Name = "tableLayoutPanel17";
-      tableLayoutPanel17.RowCount = 1;
-      tableLayoutPanel17.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-      tableLayoutPanel17.Size = new Size(1216, 60);
-      tableLayoutPanel17.TabIndex = 6;
-      // 
-      // rjButton1
-      // 
-      rjButton1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      rjButton1.BackColor = Color.FromArgb(51, 108, 181);
-      rjButton1.BackgroundColor = Color.FromArgb(51, 108, 181);
-      rjButton1.BorderColor = Color.PaleVioletRed;
-      rjButton1.BorderRadius = 4;
-      rjButton1.BorderSize = 0;
-      rjButton1.FlatAppearance.BorderSize = 0;
-      rjButton1.FlatStyle = FlatStyle.Flat;
-      rjButton1.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
-      rjButton1.ForeColor = Color.White;
-      rjButton1.Image = Properties.Resources.icon_save;
-      rjButton1.ImageAlign = ContentAlignment.MiddleLeft;
-      rjButton1.Location = new Point(1013, 3);
-      rjButton1.Name = "rjButton1";
-      rjButton1.Padding = new Padding(10, 0, 0, 0);
-      rjButton1.Size = new Size(194, 58);
-      rjButton1.TabIndex = 0;
-      rjButton1.Text = "       Lưu thay đổi";
-      rjButton1.TextColor = Color.White;
-      rjButton1.UseVisualStyleBackColor = false;
       // 
       // label10
       // 
@@ -753,16 +712,16 @@ namespace LTP.Truck.Forms
       tableLayoutPanel18.ColumnCount = 7;
       tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
-      tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+      tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
       tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle());
       tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-      tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+      tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
       tableLayoutPanel18.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
-      tableLayoutPanel18.Controls.Add(rjButton1, 6, 0);
+      tableLayoutPanel18.Controls.Add(btnSavePermitCheckWeight, 6, 0);
       tableLayoutPanel18.Controls.Add(label12, 0, 0);
-      tableLayoutPanel18.Controls.Add(rjTextBox1, 4, 0);
+      tableLayoutPanel18.Controls.Add(txtValueWeightPermit, 4, 0);
       tableLayoutPanel18.Controls.Add(label11, 3, 0);
-      tableLayoutPanel18.Controls.Add(pictureBox1, 1, 0);
+      tableLayoutPanel18.Controls.Add(picPermitCheckWeight, 1, 0);
       tableLayoutPanel18.Location = new Point(3, 63);
       tableLayoutPanel18.Name = "tableLayoutPanel18";
       tableLayoutPanel18.RowCount = 1;
@@ -770,42 +729,29 @@ namespace LTP.Truck.Forms
       tableLayoutPanel18.Size = new Size(1210, 64);
       tableLayoutPanel18.TabIndex = 7;
       // 
-      // label11
+      // btnSavePermitCheckWeight
       // 
-      label11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-      label11.AutoSize = true;
-      label11.BackColor = Color.Transparent;
-      label11.Font = new Font("Segoe UI", 15.75F);
-      label11.Location = new Point(478, 0);
-      label11.Margin = new Padding(0);
-      label11.Name = "label11";
-      label11.Size = new Size(312, 64);
-      label11.TabIndex = 1;
-      label11.Text = "Khối lượng sai số cho phép (Kg):";
-      label11.TextAlign = ContentAlignment.MiddleLeft;
-      // 
-      // rjTextBox1
-      // 
-      rjTextBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      rjTextBox1.BackColor = SystemColors.Window;
-      rjTextBox1.BorderColor = Color.Black;
-      rjTextBox1.BorderFocusColor = Color.HotPink;
-      rjTextBox1.BorderRadius = 5;
-      rjTextBox1.BorderSize = 2;
-      rjTextBox1.Font = new Font("Roboto Condensed", 15.75F);
-      rjTextBox1.ForeColor = Color.FromArgb(64, 64, 64);
-      rjTextBox1.Location = new Point(794, 12);
-      rjTextBox1.Margin = new Padding(4);
-      rjTextBox1.Multiline = false;
-      rjTextBox1.Name = "rjTextBox1";
-      rjTextBox1.Padding = new Padding(10, 7, 10, 7);
-      rjTextBox1.PasswordChar = false;
-      rjTextBox1.PlaceholderColor = Color.DarkGray;
-      rjTextBox1.PlaceholderText = "";
-      rjTextBox1.Size = new Size(192, 40);
-      rjTextBox1.TabIndex = 4;
-      rjTextBox1.Texts = "";
-      rjTextBox1.UnderlinedStyle = false;
+      btnSavePermitCheckWeight.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      btnSavePermitCheckWeight.BackColor = Color.FromArgb(51, 108, 181);
+      btnSavePermitCheckWeight.BackgroundColor = Color.FromArgb(51, 108, 181);
+      btnSavePermitCheckWeight.BorderColor = Color.PaleVioletRed;
+      btnSavePermitCheckWeight.BorderRadius = 4;
+      btnSavePermitCheckWeight.BorderSize = 0;
+      btnSavePermitCheckWeight.FlatAppearance.BorderSize = 0;
+      btnSavePermitCheckWeight.FlatStyle = FlatStyle.Flat;
+      btnSavePermitCheckWeight.Font = new Font("Roboto", 15.75F, FontStyle.Bold);
+      btnSavePermitCheckWeight.ForeColor = Color.White;
+      btnSavePermitCheckWeight.Image = Properties.Resources.icon_save;
+      btnSavePermitCheckWeight.ImageAlign = ContentAlignment.MiddleLeft;
+      btnSavePermitCheckWeight.Location = new Point(1013, 5);
+      btnSavePermitCheckWeight.Name = "btnSavePermitCheckWeight";
+      btnSavePermitCheckWeight.Padding = new Padding(10, 0, 0, 0);
+      btnSavePermitCheckWeight.Size = new Size(194, 54);
+      btnSavePermitCheckWeight.TabIndex = 0;
+      btnSavePermitCheckWeight.Text = "       Lưu thay đổi";
+      btnSavePermitCheckWeight.TextColor = Color.White;
+      btnSavePermitCheckWeight.UseVisualStyleBackColor = false;
+      btnSavePermitCheckWeight.Click += btnSavePermitCheckWeight_Click;
       // 
       // label12
       // 
@@ -821,16 +767,54 @@ namespace LTP.Truck.Forms
       label12.Text = "Kiểm tra bất thường:";
       label12.TextAlign = ContentAlignment.MiddleLeft;
       // 
-      // pictureBox1
+      // txtValueWeightPermit
       // 
-      pictureBox1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-      pictureBox1.Image = Properties.Resources.icon_toggle_off;
-      pictureBox1.Location = new Point(208, 3);
-      pictureBox1.Name = "pictureBox1";
-      pictureBox1.Size = new Size(94, 58);
-      pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-      pictureBox1.TabIndex = 6;
-      pictureBox1.TabStop = false;
+      txtValueWeightPermit.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      txtValueWeightPermit.BackColor = SystemColors.Window;
+      txtValueWeightPermit.BorderColor = Color.Black;
+      txtValueWeightPermit.BorderFocusColor = Color.HotPink;
+      txtValueWeightPermit.BorderRadius = 5;
+      txtValueWeightPermit.BorderSize = 2;
+      txtValueWeightPermit.Font = new Font("Roboto Condensed", 15.75F);
+      txtValueWeightPermit.ForeColor = Color.FromArgb(64, 64, 64);
+      txtValueWeightPermit.Location = new Point(721, 12);
+      txtValueWeightPermit.Margin = new Padding(4);
+      txtValueWeightPermit.Multiline = false;
+      txtValueWeightPermit.Name = "txtValueWeightPermit";
+      txtValueWeightPermit.Padding = new Padding(10, 7, 10, 7);
+      txtValueWeightPermit.PasswordChar = false;
+      txtValueWeightPermit.PlaceholderColor = Color.DarkGray;
+      txtValueWeightPermit.PlaceholderText = "";
+      txtValueWeightPermit.Size = new Size(192, 40);
+      txtValueWeightPermit.TabIndex = 4;
+      txtValueWeightPermit.Texts = "";
+      txtValueWeightPermit.UnderlinedStyle = false;
+      // 
+      // label11
+      // 
+      label11.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      label11.AutoSize = true;
+      label11.BackColor = Color.Transparent;
+      label11.Font = new Font("Segoe UI", 15.75F);
+      label11.Location = new Point(405, 0);
+      label11.Margin = new Padding(0);
+      label11.Name = "label11";
+      label11.Size = new Size(312, 64);
+      label11.TabIndex = 1;
+      label11.Text = "Khối lượng sai số cho phép (Kg):";
+      label11.TextAlign = ContentAlignment.MiddleLeft;
+      // 
+      // picPermitCheckWeight
+      // 
+      picPermitCheckWeight.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+      picPermitCheckWeight.Image = Properties.Resources.icon_toggle_off;
+      picPermitCheckWeight.Location = new Point(208, 3);
+      picPermitCheckWeight.Name = "picPermitCheckWeight";
+      picPermitCheckWeight.Size = new Size(94, 58);
+      picPermitCheckWeight.SizeMode = PictureBoxSizeMode.StretchImage;
+      picPermitCheckWeight.TabIndex = 6;
+      picPermitCheckWeight.TabStop = false;
+      picPermitCheckWeight.Click += picPermitCheckWeight_Click;
       // 
       // FrmSetting
       // 
@@ -865,7 +849,7 @@ namespace LTP.Truck.Forms
       tableLayoutPanel16.PerformLayout();
       tableLayoutPanel18.ResumeLayout(false);
       tableLayoutPanel18.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+      ((System.ComponentModel.ISupportInitialize)picPermitCheckWeight).EndInit();
       ResumeLayout(false);
     }
 
@@ -905,13 +889,12 @@ namespace LTP.Truck.Forms
     private ComboBox cbbStations;
     private TableLayoutPanel tableLayoutPanel14;
     private TableLayoutPanel tableLayoutPanel16;
-    private TableLayoutPanel tableLayoutPanel17;
-    private Common.Custom.RJButton rjButton1;
+    private Common.Custom.RJButton btnSavePermitCheckWeight;
     private Label label10;
     private TableLayoutPanel tableLayoutPanel18;
     private Label label11;
-    private Common.Custom.RJTextBox rjTextBox1;
+    private Common.Custom.RJTextBox txtValueWeightPermit;
     private Label label12;
-    private PictureBox pictureBox1;
+    private PictureBox picPermitCheckWeight;
   }
 }

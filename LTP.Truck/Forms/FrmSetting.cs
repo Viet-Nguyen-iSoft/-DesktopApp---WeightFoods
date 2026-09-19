@@ -8,6 +8,7 @@ using LTP.Truck.Custom;
 using Newtonsoft.Json;
 using System.Data;
 using System.Drawing.Printing;
+using System.Globalization;
 using System.Threading.Tasks;
 using TestConnectPrinter;
 using static Common.EnumData;
@@ -17,10 +18,7 @@ namespace LTP.Truck.Forms
 {
   public partial class FrmSetting : Form
   {
-    private readonly Color _primaryColor = Color.FromArgb(51, 108, 181);
-    private Panel? _connectionEditor;
-    private TableLayoutPanel? _settingFields;
-
+    private bool _permitCheck { get; set; }
     public FrmSetting()
     {
       InitializeComponent();
@@ -34,8 +32,10 @@ namespace LTP.Truck.Forms
       btnAddCommWeight.Click += btnAddCommWeight_Click;
       txtPortServer.KeyPress += NonNegativeInteger_KeyPress;
       txtTimeoutServer.KeyPress += NonNegativeInteger_KeyPress;
+      txtValueWeightPermit.KeyPress += NonNegativeDecimal_KeyPress;
       txtPortServer._TextChanged += NonNegativeInteger_TextChanged;
       txtTimeoutServer._TextChanged += NonNegativeInteger_TextChanged;
+      txtValueWeightPermit._TextChanged += NonNegativeDecimal_TextChanged;
 
       AppCore.Ins.OnSendDataWeightTruck += Ins_OnSendDataWeightTruck;
     }
@@ -56,6 +56,45 @@ namespace LTP.Truck.Forms
         character >= '0' && character <= '9').ToArray());
 
       // TextChanged còn bảo vệ trường hợp paste nội dung không hợp lệ.
+      if (!string.Equals(value, sanitizedValue, StringComparison.Ordinal))
+        textBox.Texts = sanitizedValue;
+    }
+
+    private static void NonNegativeDecimal_KeyPress(object? sender, KeyPressEventArgs e)
+    {
+      if (char.IsControl(e.KeyChar) || char.IsDigit(e.KeyChar))
+        return;
+
+      if ((e.KeyChar == '.' || e.KeyChar == ',') &&
+          sender is Common.Custom.RJTextBox textBox &&
+          !textBox.Texts.Contains('.') && !textBox.Texts.Contains(','))
+        return;
+
+      e.Handled = true;
+    }
+
+    private static void NonNegativeDecimal_TextChanged(object? sender, EventArgs e)
+    {
+      if (sender is not Common.Custom.RJTextBox textBox)
+        return;
+
+      string value = textBox.Texts;
+      bool hasDecimalSeparator = false;
+      string sanitizedValue = new(value.Where(character =>
+      {
+        if (char.IsDigit(character))
+          return true;
+
+        if ((character == '.' || character == ',') && !hasDecimalSeparator)
+        {
+          hasDecimalSeparator = true;
+          return true;
+        }
+
+        return false;
+      }).ToArray());
+
+      // Chặn cả nội dung không hợp lệ được dán từ clipboard.
       if (!string.Equals(value, sanitizedValue, StringComparison.Ordinal))
         textBox.Texts = sanitizedValue;
     }
@@ -93,6 +132,10 @@ namespace LTP.Truck.Forms
       ElipseControl elipseControl05 = new ElipseControl();
       elipseControl05.CornerRadius = 20;
       elipseControl05.TargetControl = tableLayoutPanel11;
+
+      ElipseControl elipseControl06 = new ElipseControl();
+      elipseControl06.CornerRadius = 20;
+      elipseControl06.TargetControl = tableLayoutPanel16;
     }
 
     private async void FrmSetting_Load(object? sender, EventArgs e)
@@ -101,6 +144,11 @@ namespace LTP.Truck.Forms
       LoadShowInformationServer(AppCore.Ins._appConfig);
       await LoadStationsAsync();
       await LoadWeightConnectionsAsync();
+
+      _permitCheck = AppCore.Ins._appConfig?.PermitCheckWeight ?? false;
+      SetStatusPermitCheckWeight(_permitCheck);
+      txtValueWeightPermit.Texts = (AppCore.Ins._appConfig?.ValueCheckWeight ?? 0)
+        .ToString(CultureInfo.CurrentCulture);
     }
 
     private async Task LoadStationsAsync()
@@ -167,9 +215,9 @@ namespace LTP.Truck.Forms
         return;
       }
 
-      txtIpServer.Texts = appConfig?.IpServer??string.Empty;
+      txtIpServer.Texts = appConfig?.IpServer ?? string.Empty;
       txtPortServer.Texts = appConfig?.PortServer?.ToString() ?? string.Empty;
-      txtTimeoutServer.Texts = appConfig?.TimeoutConnectServer?.ToString()?? string.Empty;
+      txtTimeoutServer.Texts = appConfig?.TimeoutConnectServer?.ToString() ?? string.Empty;
     }
 
     private async void btnSaveStation_Click(object? sender, EventArgs e)
@@ -491,5 +539,79 @@ namespace LTP.Truck.Forms
     }
 
 
+    private void picPermitCheckWeight_Click(object sender, EventArgs e)
+    {
+      _permitCheck = !_permitCheck;
+      SetStatusPermitCheckWeight(_permitCheck);
+    }
+
+    private void SetStatusPermitCheckWeight(bool check)
+    {
+      if (this.InvokeRequired)
+      {
+        this.Invoke(new Action(() =>
+        {
+          SetStatusPermitCheckWeight(check);
+        }));
+        return;
+      }
+
+      picPermitCheckWeight.Image = check ? Properties.Resources.icon_toggle_on : Properties.Resources.icon_toggle_off;
+    }
+
+    private async void btnSavePermitCheckWeight_Click(object sender, EventArgs e)
+    {
+      var appConfig = AppCore.Ins._appConfig;
+      if (appConfig == null)
+      {
+        using var popupWarning = new PopupConfirm(
+          "Không tìm thấy cấu hình ứng dụng !",
+          EnumTypeMsg.MessageManualClose,
+          EnumImageMsg.Warning);
+        popupWarning.ShowDialog(this);
+        return;
+      }
+
+      string input = txtValueWeightPermit.Texts.Trim().Replace(',', '.');
+      if (!double.TryParse(input, NumberStyles.AllowDecimalPoint,
+          CultureInfo.InvariantCulture, out double permittedWeight) ||
+          permittedWeight < 0)
+      {
+        using var popupWarning = new PopupConfirm(
+          "Khối lượng sai số cho phép phải là số lớn hơn hoặc bằng 0 !",
+          EnumTypeMsg.MessageManualClose,
+          EnumImageMsg.Warning);
+        popupWarning.ShowDialog(this);
+        return;
+      }
+
+      try
+      {
+        appConfig.PermitCheckWeight = _permitCheck;
+        appConfig.ValueCheckWeight = permittedWeight;
+        appConfig.UpdatedAt = DateTime.UtcNow;
+        AppCore.Ins._appConfig = await AppCore.Ins._appConfigService
+          .AddOrUpdateAsync(appConfig);
+
+        txtValueWeightPermit.Texts = permittedWeight
+          .ToString(CultureInfo.CurrentCulture);
+
+        using var popupSuccess = new PopupConfirm(
+          "Đã lưu thông tin cài đặt thành công.",
+          EnumTypeMsg.MessageAutoClose,
+          EnumImageMsg.Information);
+        popupSuccess.ShowDialog(this);
+      }
+      catch (Exception ex)
+      {
+        HelperManager.LogHelper.LogErrorToFileLog(ex, AppCore.Ins._folderFileLog);
+        using var popupError = new PopupConfirm(
+          "Không thể lưu thông tin cài đặt. Vui lòng thử lại !",
+          EnumTypeMsg.MessageManualClose,
+          EnumImageMsg.Warning);
+        popupError.ShowDialog(this);
+      }
+
+    }
   }
 }

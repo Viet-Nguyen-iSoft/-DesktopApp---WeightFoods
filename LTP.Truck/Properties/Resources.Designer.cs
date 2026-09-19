@@ -263,6 +263,26 @@ namespace LTP.Truck.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_ver_new {
+            get {
+                object obj = ResourceManager.GetObject("icon_ver_new", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_ver_old {
+            get {
+                object obj = ResourceManager.GetObject("icon_ver_old", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_weight {
             get {
                 object obj = ResourceManager.GetObject("icon_weight", resourceCulture);
@@ -276,6 +296,16 @@ namespace LTP.Truck.Properties {
         internal static System.Drawing.Bitmap icon_weight_log {
             get {
                 object obj = ResourceManager.GetObject("icon_weight_log", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Loading_icon {
+            get {
+                object obj = ResourceManager.GetObject("Loading_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

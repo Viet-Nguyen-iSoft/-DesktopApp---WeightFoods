@@ -17,5 +17,7 @@ namespace iSoft.Database.Models
 
     public string? Key { get; set; }
     public string? NamePrint { get; set; }
+    public bool PermitCheckWeight { get; set; } = false;
+    public double ValueCheckWeight { get; set; } = 0;
   }
 }

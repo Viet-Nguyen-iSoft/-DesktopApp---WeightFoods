@@ -114,9 +114,9 @@ namespace LTP.Truck.Forms
     }
     private void Frm_OnSendCheckUpdateVersion(object? sender, EventArgs e)
     {
-      //PopupApplyVersionNew popupApplyVersionNew = new PopupApplyVersionNew();
+      PopupApplyVersionNew popupApplyVersionNew = new PopupApplyVersionNew();
       //popupApplyVersionNew.OnSendApply += PopupApplyVersionNew_OnSendApply;
-      //popupApplyVersionNew.ShowDialog();
+      popupApplyVersionNew.ShowDialog();
     }
     #endregion
 
